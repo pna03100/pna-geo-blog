@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Elementor 스타일 격리 */
+.elementor-content {
+  /* Elementor 클래스가 있는 페이지의 스타일 */
+}
+
+/* 깔끔한 포스트 렌더링 스타일 */
+.clean-post-content {
+  @apply prose prose-lg prose-slate mx-auto max-w-4xl;
+}
+
+/* 전역 스타일 */
+body {
+  @apply antialiased;
+}
+
