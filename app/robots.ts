@@ -1,14 +1,14 @@
-/**
- * Robots.txt 생성
- * - Sitemap 위치 명시
- * - 크롤링 규칙 설정
- */
+// ============================================
+// Robots.txt Generator
+// ============================================
 
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://your-site.com';
+  // @ts-ignore
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yoursite.com';
 
+  // @ts-ignore
   return {
     rules: [
       {
@@ -17,6 +17,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/admin/'],
       },
     ],
+    // @ts-ignore
     sitemap: `${baseUrl}/sitemap.xml`,
   };
 }

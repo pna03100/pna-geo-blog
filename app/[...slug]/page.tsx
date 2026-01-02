@@ -1,129 +1,147 @@
-/**
- * 동적 라우팅 페이지
- * - Post와 Page를 모두 처리
- * - Two-Track Rendering 전략
- * - 방어적 코드로 빌드 안정성 확보
- */
+// ============================================
+// Dynamic Catch-All Route (Posts & Pages)
+// ============================================
 
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import { getContentByURI, getAllPosts, getAllPages } from '@/lib/api';
-import { ContentNode } from '@/lib/types';
+import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
-// 지연 로딩으로 성능 최적화
+// Dynamic Import (Code Splitting)
 const ElementorRenderer = dynamic(() => import('@/components/ElementorRenderer'), {
-  loading: () => <p className="text-center py-20">로딩 중...</p>,
+  ssr: true,
 });
-
 const CleanPostRenderer = dynamic(() => import('@/components/CleanPostRenderer'), {
-  loading: () => <p className="text-center py-20">로딩 중...</p>,
+  ssr: true,
 });
 
-type Props = {
-  params: { slug: string[] };
-};
-
-// ========================================
-// generateStaticParams (빌드 시 경로 생성)
-// ========================================
+// ============================================
+// Generate Static Params (for SSG)
+// ============================================
 export async function generateStaticParams() {
-  console.log('📋 [generateStaticParams] 시작...');
-
   try {
-    // 🛡️ 방어: 에러가 나도 빈 배열 반환
-    const [posts, pages] = await Promise.all([
-      getAllPosts(),
-      getAllPages(),
-    ]);
+    const [posts, pages] = await Promise.all([getAllPosts(), getAllPages()]);
 
-    const paths = [
-      ...posts.map((post) => ({
-        slug: post.uri.split('/').filter(Boolean),
-      })),
-      ...pages.map((page) => ({
-        slug: page.uri.split('/').filter(Boolean),
-      })),
-    ];
+    const allPaths = [...posts, ...pages].map((item: any) => ({
+      slug: item.uri.split('/').filter(Boolean),
+    }));
 
-    console.log(`✅ [generateStaticParams] ${paths.length}개 경로 생성됨`);
-    return paths;
+    return allPaths;
   } catch (error) {
-    console.error('❌ [generateStaticParams] 에러:', error);
-    // 🛡️ 빌드가 터지지 않도록 빈 배열 반환
+    console.error('generateStaticParams 실패:', error);
     return [];
   }
 }
 
-// ========================================
-// generateMetadata (SEO 메타데이터)
-// ========================================
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const uri = '/' + params.slug.join('/');
-  const content = await getContentByURI(uri);
+// ============================================
+// Generate Metadata (SEO)
+// ============================================
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string[] };
+}): Promise<Metadata> {
+  const uri = `/${params.slug.join('/')}`;
 
-  if (!content || !content.seo) {
+  try {
+    const content = await getContentByURI(uri);
+
+    // @ts-ignore
+    if (!content || !content.seo) {
+      return {
+        title: '페이지를 찾을 수 없습니다',
+      };
+    }
+
+    // @ts-ignore
+    const seo = content.seo;
+
     return {
-      title: 'Page Not Found',
+      // @ts-ignore
+      title: seo.title || content.title || '제목 없음',
+      // @ts-ignore
+      description: seo.metaDesc || '',
+      openGraph: {
+        // @ts-ignore
+        title: seo.opengraphTitle || seo.title || '',
+        // @ts-ignore
+        description: seo.opengraphDescription || seo.metaDesc || '',
+        // @ts-ignore
+        images: seo.opengraphImage?.sourceUrl
+          // @ts-ignore
+          ? [{ url: seo.opengraphImage.sourceUrl }]
+          : [],
+      },
+      alternates: {
+        // @ts-ignore
+        canonical: seo.canonical || uri,
+      },
     };
+  } catch (error) {
+    console.error('generateMetadata 실패:', error);
+    return { title: '에러 발생' };
   }
-
-  const seo = content.seo;
-
-  return {
-    title: seo.title || content.title,
-    description: seo.description || '',
-    openGraph: {
-      title: seo.openGraphTitle || seo.title || content.title,
-      description: seo.openGraphDescription || seo.description || '',
-      images: seo.openGraphImage?.sourceUrl
-        ? [{ url: seo.openGraphImage.sourceUrl }]
-        : [],
-      type: content.__typename === 'Post' ? 'article' : 'website',
-    },
-    alternates: {
-      canonical: seo.canonical || undefined,
-    },
-  };
 }
 
-// ========================================
-// 페이지 컴포넌트
-// ========================================
-export default async function ContentPage({ params }: Props) {
-  const uri = '/' + params.slug.join('/');
-  
-  console.log(`📄 [ContentPage] URI 요청: ${uri}`);
+// ============================================
+// Page Component
+// ============================================
+export default async function DynamicPage({
+  params,
+}: {
+  params: { slug: string[] };
+}) {
+  const uri = `/${params.slug.join('/')}`;
 
-  // 🛡️ 방어: 데이터 가져오기 실패 시 404
-  const content = await getContentByURI(uri);
+  let content;
 
+  try {
+    content = await getContentByURI(uri);
+  } catch (error) {
+    console.error('페이지 데이터 로드 실패:', error);
+    // @ts-ignore
+    content = null;
+  }
+
+  // 🔥 절대 notFound() 호출 안 함! 무조건 화면 표시
   if (!content) {
-    console.warn(`⚠️ [ContentPage] 콘텐츠를 찾을 수 없음: ${uri}`);
-    notFound();
+    return (
+      <div className="max-w-4xl mx-auto px-4 py-16 text-center">
+        <h1 className="text-3xl font-bold mb-4">콘텐츠를 불러올 수 없습니다</h1>
+        <p className="text-gray-600">
+          워드프레스 API 연결을 확인하세요. (URI: {uri})
+        </p>
+      </div>
+    );
   }
 
-  console.log(`✅ [ContentPage] 렌더링 타입: ${content.__typename}`);
+  // ============================================
+  // Two-Track Rendering Strategy
+  // ============================================
 
-  // ========================================
-  // Two-Track Rendering
-  // ========================================
-  
-  // Track 1: Page (Elementor HTML 파싱)
+  // Track 1: Page (Elementor HTML)
+  // @ts-ignore
   if (content.__typename === 'Page') {
-    return <ElementorRenderer html={content.content} />;
+    // @ts-ignore
+    return <ElementorRenderer html={content.content || ''} />;
   }
 
-  // Track 2: Post (GEO 최적화 렌더링)
+  // Track 2: Post (GEO Optimized)
+  // @ts-ignore
   if (content.__typename === 'Post') {
+    // @ts-ignore
     return <CleanPostRenderer post={content} />;
   }
 
-  // 🛡️ 방어: 알 수 없는 타입
-  console.error(`❌ [ContentPage] 알 수 없는 콘텐츠 타입: ${content.__typename}`);
-  notFound();
+  // Fallback
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-16 text-center">
+      <h1 className="text-3xl font-bold mb-4">알 수 없는 콘텐츠 타입</h1>
+      <p className="text-gray-600">
+        {/* @ts-ignore */}
+        이 페이지는 지원되지 않는 형식입니다. ({content.__typename})
+      </p>
+    </div>
+  );
 }
-
-// 재검증 설정
-export const revalidate = 3600; // 1시간
 

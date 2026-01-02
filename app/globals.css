@@ -2,53 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 전역 스타일 */
-body {
-  @apply text-gray-900 bg-white;
+/* ============================================
+   Elementor 스타일 보존을 위한 기본 CSS
+   ============================================ */
+
+.elementor-wrapper {
+  /* Elementor 클래스들이 정상 작동하도록 격리 */
+  all: initial;
+  display: block;
+  font-family: inherit;
 }
 
-/* Prose 커스텀 (CleanPostRenderer용) */
+/* ============================================
+   Typography (GEO 최적화)
+   ============================================ */
+
 .prose {
-  @apply text-gray-800;
+  color: #1f2937;
+  line-height: 1.8;
 }
 
 .prose h2 {
-  @apply text-3xl font-bold mt-10 mb-4;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.875rem;
+  font-weight: 700;
 }
 
 .prose h3 {
-  @apply text-2xl font-semibold mt-8 mb-3;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .prose p {
-  @apply mb-6 leading-relaxed;
+  margin-bottom: 1.25rem;
+}
+
+.prose img {
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
 }
 
 .prose a {
-  @apply text-blue-600 hover:text-blue-800 underline;
+  color: #2563eb;
+  text-decoration: underline;
 }
 
-.prose ul, .prose ol {
-  @apply my-6 pl-6;
-}
-
-.prose li {
-  @apply mb-2;
-}
-
-.prose blockquote {
-  @apply border-l-4 border-gray-300 pl-4 italic my-6 text-gray-700;
-}
-
-.prose code {
-  @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
-}
-
-.prose pre {
-  @apply bg-gray-900 text-white p-4 rounded-lg overflow-x-auto my-6;
-}
-
-.prose pre code {
-  @apply bg-transparent p-0;
+.prose a:hover {
+  color: #1d4ed8;
 }
 
