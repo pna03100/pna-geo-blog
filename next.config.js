@@ -8,7 +8,14 @@ const nextConfig = {
       },
     ],
   },
-}
+  // 빌드 시 타입 에러를 무시하지 않음 (strict mode)
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 

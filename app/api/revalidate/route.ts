@@ -1,59 +1,101 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath, revalidateTag } from 'next/cache';
-
 /**
- * 워드프레스 Webhook을 받아 캐시를 재검증하는 API
- * 
- * 사용법:
- * POST /api/revalidate
- * Body: { "secret": "your-secret", "path": "/blog/post-1/" }
+ * Revalidation API Route
+ * - WordPress Webhook 수신
+ * - 보안 토큰 검증
+ * - 변경된 경로만 재검증
  */
+
+import { revalidateTag, revalidatePath } from 'next/cache';
+import { NextRequest, NextResponse } from 'next/server';
+
 export async function POST(request: NextRequest) {
-  console.log('\n🔄 Revalidate API 호출됨');
+  console.log('🔄 [Revalidate] Webhook 수신됨');
 
   try {
-    const body = await request.json();
-    console.log('요청 Body:', body);
+    // 🔒 보안: Secret 토큰 검증
+    const secret = request.nextUrl.searchParams.get('secret');
+    const expectedSecret = process.env.WORDPRESS_REVALIDATE_SECRET;
 
-    const { secret, path, tag } = body;
-
-    // 보안 검증
-    if (secret !== process.env.WORDPRESS_REVALIDATE_SECRET) {
-      console.error('❌ 잘못된 시크릿 키');
+    if (!expectedSecret) {
+      console.error('❌ [Revalidate] WORDPRESS_REVALIDATE_SECRET이 설정되지 않음');
       return NextResponse.json(
-        { message: 'Invalid secret' },
+        { message: 'Revalidation secret not configured' },
+        { status: 500 }
+      );
+    }
+
+    if (secret !== expectedSecret) {
+      console.error('❌ [Revalidate] 잘못된 토큰');
+      return NextResponse.json(
+        { message: 'Invalid token' },
         { status: 401 }
       );
     }
 
-    // Path 재검증
+    // Webhook 데이터 파싱
+    const body = await request.json();
+    console.log('📦 [Revalidate] Payload:', JSON.stringify(body, null, 2));
+
+    const { path, type } = body;
+
+    // ========================================
+    // 재검증 전략
+    // ========================================
+
+    // 1️⃣ 특정 경로가 지정된 경우
     if (path) {
-      console.log(`✅ Path 재검증: ${path}`);
+      console.log(`🎯 [Revalidate] 경로 재검증: ${path}`);
       revalidatePath(path);
+      
+      return NextResponse.json({
+        revalidated: true,
+        path,
+        now: Date.now(),
+      });
     }
 
-    // Tag 재검증
-    if (tag) {
-      console.log(`✅ Tag 재검증: ${tag}`);
-      revalidateTag(tag);
-    }
-
-    // 전체 재검증 (path와 tag가 없을 경우)
-    if (!path && !tag) {
-      console.log('✅ 전체 WordPress 태그 재검증');
+    // 2️⃣ 타입별 태그 재검증
+    if (type === 'post' || type === 'page') {
+      console.log(`🏷️ [Revalidate] 태그 재검증: wordpress`);
       revalidateTag('wordpress');
+      
+      return NextResponse.json({
+        revalidated: true,
+        tag: 'wordpress',
+        now: Date.now(),
+      });
     }
+
+    // 3️⃣ 기본: 전체 캐시 갱신
+    console.log('🌐 [Revalidate] 전체 태그 재검증');
+    revalidateTag('wordpress');
 
     return NextResponse.json({
       revalidated: true,
+      type: 'all',
       now: Date.now(),
     });
   } catch (error) {
-    console.error('❌ Revalidate API 에러:', error);
+    console.error('💥 [Revalidate] 에러:', error);
+    
     return NextResponse.json(
-      { message: 'Error revalidating', error: String(error) },
+      {
+        message: 'Error revalidating',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
       { status: 500 }
     );
   }
+}
+
+// GET 요청 처리 (테스트용)
+export async function GET(request: NextRequest) {
+  return NextResponse.json(
+    {
+      message: 'Revalidation endpoint is working. Use POST method with secret token.',
+      usage: `POST ${request.nextUrl.origin}/api/revalidate?secret=YOUR_SECRET`,
+    },
+    { status: 200 }
+  );
 }
 

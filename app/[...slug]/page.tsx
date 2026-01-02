@@ -1,101 +1,129 @@
-import { getContentByUri } from '@/lib/api';
-import { notFound } from 'next/navigation';
-import Image from 'next/image';
-import parse, { Element } from 'html-react-parser';
+/**
+ * 동적 라우팅 페이지
+ * - Post와 Page를 모두 처리
+ * - Two-Track Rendering 전략
+ * - 방어적 코드로 빌드 안정성 확보
+ */
+
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { getContentByURI, getAllPosts, getAllPages } from '@/lib/api';
+import { ContentNode } from '@/lib/types';
+import dynamic from 'next/dynamic';
 
-// 1. 메타데이터 생성 (SEO)
-export async function generateMetadata({ params }: { params: { slug: string[] } }): Promise<Metadata> {
-  const uri = `/${params.slug.join('/')}/`;
-  const data = await getContentByUri(uri);
+// 지연 로딩으로 성능 최적화
+const ElementorRenderer = dynamic(() => import('@/components/ElementorRenderer'), {
+  loading: () => <p className="text-center py-20">로딩 중...</p>,
+});
 
-  if (!data) {
+const CleanPostRenderer = dynamic(() => import('@/components/CleanPostRenderer'), {
+  loading: () => <p className="text-center py-20">로딩 중...</p>,
+});
+
+type Props = {
+  params: { slug: string[] };
+};
+
+// ========================================
+// generateStaticParams (빌드 시 경로 생성)
+// ========================================
+export async function generateStaticParams() {
+  console.log('📋 [generateStaticParams] 시작...');
+
+  try {
+    // 🛡️ 방어: 에러가 나도 빈 배열 반환
+    const [posts, pages] = await Promise.all([
+      getAllPosts(),
+      getAllPages(),
+    ]);
+
+    const paths = [
+      ...posts.map((post) => ({
+        slug: post.uri.split('/').filter(Boolean),
+      })),
+      ...pages.map((page) => ({
+        slug: page.uri.split('/').filter(Boolean),
+      })),
+    ];
+
+    console.log(`✅ [generateStaticParams] ${paths.length}개 경로 생성됨`);
+    return paths;
+  } catch (error) {
+    console.error('❌ [generateStaticParams] 에러:', error);
+    // 🛡️ 빌드가 터지지 않도록 빈 배열 반환
+    return [];
+  }
+}
+
+// ========================================
+// generateMetadata (SEO 메타데이터)
+// ========================================
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const uri = '/' + params.slug.join('/');
+  const content = await getContentByURI(uri);
+
+  if (!content || !content.seo) {
     return {
-      title: '페이지를 찾을 수 없음',
+      title: 'Page Not Found',
     };
   }
 
-  // ★ 수정됨: metaDesc가 없으므로 기본 설명이나 빈 값으로 처리
+  const seo = content.seo;
+
   return {
-    title: data.seo?.title || data.title,
-    description: '', // 에러 방지를 위해 일단 비워둠
+    title: seo.title || content.title,
+    description: seo.description || '',
+    openGraph: {
+      title: seo.openGraphTitle || seo.title || content.title,
+      description: seo.openGraphDescription || seo.description || '',
+      images: seo.openGraphImage?.sourceUrl
+        ? [{ url: seo.openGraphImage.sourceUrl }]
+        : [],
+      type: content.__typename === 'Post' ? 'article' : 'website',
+    },
+    alternates: {
+      canonical: seo.canonical || undefined,
+    },
   };
 }
 
-// 2. 메인 페이지 컴포넌트
-export default async function DynamicPage({ params }: { params: { slug: string[] } }) {
-  const uri = `/${params.slug.join('/')}/`;
-  const data = await getContentByUri(uri);
+// ========================================
+// 페이지 컴포넌트
+// ========================================
+export default async function ContentPage({ params }: Props) {
+  const uri = '/' + params.slug.join('/');
+  
+  console.log(`📄 [ContentPage] URI 요청: ${uri}`);
 
-  if (!data) {
-    console.log(`❌ 데이터를 찾을 수 없음 (404 처리): ${uri}`);
+  // 🛡️ 방어: 데이터 가져오기 실패 시 404
+  const content = await getContentByURI(uri);
+
+  if (!content) {
+    console.warn(`⚠️ [ContentPage] 콘텐츠를 찾을 수 없음: ${uri}`);
     notFound();
   }
 
-  // A. 디자인 페이지 (Elementor 등)
-  if (data.__typename === 'Page') {
-    return (
-      <main className="elementor-page">
-        {parse(data.content || '')}
-      </main>
-    );
+  console.log(`✅ [ContentPage] 렌더링 타입: ${content.__typename}`);
+
+  // ========================================
+  // Two-Track Rendering
+  // ========================================
+  
+  // Track 1: Page (Elementor HTML 파싱)
+  if (content.__typename === 'Page') {
+    return <ElementorRenderer html={content.content} />;
   }
 
-  // B. 블로그 글 (GEO 최적화)
-  const replaceMedia = (domNode: any) => {
-    if (domNode instanceof Element && domNode.name === 'img') {
-      const { src, alt, width, height } = domNode.attribs;
-      if (src) {
-        return (
-          <Image
-            src={src}
-            alt={alt || 'Blog Image'}
-            width={parseInt(width || '800')}
-            height={parseInt(height || '600')}
-            className="w-full h-auto rounded-lg my-4"
-            sizes="(max-width: 768px) 100vw, 800px"
-          />
-        );
-      }
-    }
-  };
+  // Track 2: Post (GEO 최적화 렌더링)
+  if (content.__typename === 'Post') {
+    return <CleanPostRenderer post={content} />;
+  }
 
-  return (
-    <article className="max-w-3xl mx-auto px-4 py-12">
-      <header className="mb-8 text-center">
-        {data.categories?.nodes[0]?.name && (
-          <span className="text-blue-600 font-bold text-sm tracking-wide uppercase">
-            {data.categories.nodes[0].name}
-          </span>
-        )}
-        <h1 className="text-4xl font-extrabold text-gray-900 mt-2 mb-4 leading-tight">
-          {data.title}
-        </h1>
-        <div className="flex items-center justify-center text-gray-500 text-sm space-x-4">
-          <time dateTime={data.date}>
-            {new Date(data.date).toLocaleDateString('ko-KR')}
-          </time>
-          {data.author?.node?.name && (
-            <span>by {data.author.node.name}</span>
-          )}
-        </div>
-      </header>
-
-      {data.featuredImage?.node?.sourceUrl && (
-        <div className="relative w-full h-[400px] mb-10 rounded-xl overflow-hidden shadow-lg">
-          <Image
-            src={data.featuredImage.node.sourceUrl}
-            alt={data.title}
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-      )}
-
-      <div className="prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-img:rounded-xl">
-        {parse(data.content || '', { replace: replaceMedia })}
-      </div>
-    </article>
-  );
+  // 🛡️ 방어: 알 수 없는 타입
+  console.error(`❌ [ContentPage] 알 수 없는 콘텐츠 타입: ${content.__typename}`);
+  notFound();
 }
+
+// 재검증 설정
+export const revalidate = 3600; // 1시간
+

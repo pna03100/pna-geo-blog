@@ -1,25 +1,29 @@
-// WordPress GraphQL 타입 정의
+/**
+ * WordPress GraphQL Types
+ * WPGraphQL + Rank Math SEO 전용
+ */
 
-export interface SeoData {
-  title?: string;
-  metaDesc?: string;
-  opengraphTitle?: string;
-  opengraphDescription?: string;
-  opengraphImage?: {
+// Rank Math SEO 데이터 타입
+export interface RankMathSeo {
+  title: string;
+  description: string;
+  canonical?: string;
+  focusKeywords?: string;
+  openGraphTitle?: string;
+  openGraphDescription?: string;
+  openGraphImage?: {
     sourceUrl?: string;
   };
-  canonical?: string;
-  metaRobotsNoindex?: string;
-  metaRobotsNofollow?: string;
   schema?: {
     raw?: string;
   };
 }
 
+// Featured Image 타입
 export interface FeaturedImage {
-  node?: {
-    sourceUrl?: string;
-    altText?: string;
+  node: {
+    sourceUrl: string;
+    altText: string;
     mediaDetails?: {
       width?: number;
       height?: number;
@@ -27,63 +31,90 @@ export interface FeaturedImage {
   };
 }
 
+// Author 타입
 export interface Author {
-  node?: {
-    name?: string;
-    url?: string;
+  node: {
+    name: string;
+    description?: string;
+    avatar?: {
+      url: string;
+    };
   };
 }
 
+// Category 타입
 export interface Category {
-  nodes?: Array<{
-    name?: string;
-    uri?: string;
-  }>;
+  name: string;
+  slug: string;
 }
 
+// Post 타입 (블로그 글)
 export interface Post {
   __typename: 'Post';
   id: string;
-  title?: string;
-  content?: string;
-  date?: string;
-  modified?: string;
-  slug?: string;
-  uri?: string;
-  seo?: SeoData;
+  title: string;
+  content: string;
+  slug: string;
+  uri: string;
+  date: string;
+  modified: string;
+  excerpt?: string;
+  seo: RankMathSeo;
   featuredImage?: FeaturedImage;
   author?: Author;
-  categories?: Category;
+  categories?: {
+    nodes: Category[];
+  };
 }
 
+// Page 타입 (Elementor 페이지)
 export interface Page {
   __typename: 'Page';
   id: string;
-  title?: string;
-  content?: string;
-  slug?: string;
-  uri?: string;
-  seo?: SeoData;
+  title: string;
+  content: string;
+  slug: string;
+  uri: string;
+  date: string;
+  modified: string;
+  seo: RankMathSeo;
 }
 
+// ContentNode는 Post 또는 Page
 export type ContentNode = Post | Page;
 
-export interface ContentByUriResponse {
+// API 응답 타입
+export interface ContentNodeById {
   contentNode: ContentNode | null;
 }
 
-export interface AllUrisResponse {
+export interface AllPostsData {
   posts: {
-    nodes: Array<{
-      uri: string;
-      modified: string;
-    }>;
+    nodes: Post[];
   };
+}
+
+export interface AllPagesData {
   pages: {
-    nodes: Array<{
-      uri: string;
-      modified: string;
-    }>;
+    nodes: Page[];
+  };
+}
+
+// Menu 타입 (네비게이션)
+export interface MenuItem {
+  id: string;
+  label: string;
+  url: string;
+  path?: string;
+  target?: string;
+  cssClasses?: string[];
+}
+
+export interface MenuData {
+  menu?: {
+    menuItems?: {
+      nodes: MenuItem[];
+    };
   };
 }
 
