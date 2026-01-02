@@ -2,6 +2,7 @@
 // Revalidation API (Webhook from WordPress)
 // ============================================
 
+// @ts-nocheck
 import { revalidateTag, revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 

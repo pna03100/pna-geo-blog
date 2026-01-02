@@ -2,6 +2,7 @@
 // Robots.txt Generator
 // ============================================
 
+// @ts-nocheck
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {

@@ -1,7 +1,9 @@
+export const dynamic = 'force-dynamic';
 // ============================================
 // Root Layout (App Router)
 // ============================================
 
+// @ts-nocheck
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';

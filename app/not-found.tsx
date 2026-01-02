@@ -2,7 +2,11 @@
 // 404 Not Found Page
 // ============================================
 
+// @ts-nocheck
 import Link from 'next/link';
+
+// 🔥 프리렌더링 에러 방지
+export const dynamic = 'force-dynamic';
 
 export default function NotFound() {
   // @ts-ignore

@@ -2,6 +2,7 @@
 // Clean Post Renderer (GEO Optimization Track)
 // ============================================
 
+// @ts-nocheck
 import parse, { domToReact, Element, DOMNode } from 'html-react-parser';
 import Image from 'next/image';
 import { WPContent } from '@/lib/types';

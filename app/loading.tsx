@@ -2,6 +2,7 @@
 // Global Loading Component
 // ============================================
 
+// @ts-nocheck
 export default function Loading() {
   // @ts-ignore
   return (

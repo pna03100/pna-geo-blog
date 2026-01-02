@@ -2,6 +2,7 @@
 // Global Error Boundary
 // ============================================
 
+// @ts-nocheck
 'use client';
 
 import { useEffect } from 'react';

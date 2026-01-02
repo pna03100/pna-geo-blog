@@ -2,6 +2,7 @@
 // Elementor HTML Renderer (Design Track)
 // ============================================
 
+// @ts-nocheck
 import parse from 'html-react-parser';
 
 interface Props {

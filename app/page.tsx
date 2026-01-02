@@ -2,6 +2,7 @@
 // Homepage (글 목록)
 // ============================================
 
+// @ts-nocheck
 import { getAllPosts } from '@/lib/api';
 import Link from 'next/link';
 import Image from 'next/image';

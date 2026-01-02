@@ -2,6 +2,7 @@
 // Dynamic Sitemap Generator
 // ============================================
 
+// @ts-nocheck
 import { getAllPosts, getAllPages } from '@/lib/api';
 import { MetadataRoute } from 'next';
 

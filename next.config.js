@@ -25,10 +25,10 @@ const nextConfig = {
   },
   // 정적 페이지 생성 실패 시에도 빌드 계속 진행
   staticPageGenerationTimeout: 180,
-  // 실험적 기능 (성능 최적화)
-  experimental: {
-    optimizeCss: true,
-  },
+  // 🔥 빌드 에러 방지: CSS 최적화 끔 (critters 모듈 불필요)
+  // experimental: {
+  //   optimizeCss: true,
+  // },
 };
 
 module.exports = nextConfig;
