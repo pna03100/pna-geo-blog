@@ -22,7 +22,6 @@
     "strictPropertyInitialization": false,
     "noImplicitThis": false,
     "alwaysStrict": false,
-    "suppressImplicitAnyIndexErrors": true,
     "plugins": [
       {
         "name": "next"
