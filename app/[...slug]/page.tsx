@@ -41,7 +41,8 @@ export async function generateStaticParams() {
         // @ts-ignore
         slug: item.uri.split('/').filter(Boolean),
       }))
-      .filter((path) => path.slug.length > 0); // 🔥 루트 경로(빈 배열) 제외
+      // 🔥 루트 경로(빈 배열) 필터링 - next.config.js 리라이트 충돌 방지
+      .filter((item: any) => item.slug && item.slug.length > 0);
 
     console.log(`✅ generateStaticParams: ${allPaths.length}개 경로 생성 (루트 경로 제외)`);
     return allPaths;
