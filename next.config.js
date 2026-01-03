@@ -144,4 +144,15 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-
+// ... 기존 코드 ...
+beforeFiles: [
+  // ... 기존 사이트맵 설정들 ...
+  
+  // [추가할 코드] 랭크매스 스타일시트(XSL) 파일 연결
+  {
+    source: '/:path*.xsl', 
+    destination: 'https://cms.pnamarketing.co.kr/:path*.xsl',
+  },
+  
+  // ... 나머지 코드 ...
+]
