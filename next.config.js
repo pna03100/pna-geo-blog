@@ -32,7 +32,7 @@ const nextConfig = {
   // 🎯 Rewrites: 워드프레스 완벽 프록시 설정
   // ============================================
   async rewrites() {
-    const WP_URL = 'https://cms.pnamarketing.co.kr'; // 워드프레스 주소
+    const WP_URL = 'https://pnamarketing.co.kr'; // 워드프레스 주소
 
     return {
       // 1️⃣ beforeFiles: Next.js 라우팅보다 최우선 실행 (강제 납치)
