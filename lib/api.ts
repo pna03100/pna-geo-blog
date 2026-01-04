@@ -97,15 +97,11 @@ export async function getContentByURI(uri: string): Promise<WPContent | null> {
         uri
         databaseId
         ... on Page {
-          id
-          pageId
           slug
           title
           content
         }
         ... on Post {
-          id
-          postId
           slug
           title
           content

@@ -148,9 +148,9 @@ export default async function DynamicPage({
   // @ts-ignore
   if (content.__typename === 'Page') {
     // @ts-ignore
-    const pageId = content.pageId || content.databaseId || content.id;
+    console.log(`📄 페이지 렌더링 (${uri}) - databaseId:`, content.databaseId);
     // @ts-ignore
-    return <ElementorRenderer html={content.content || ''} postId={pageId} />;
+    return <ElementorRenderer html={content.content || ''} postId={content.databaseId} />;
   }
 
   // Track 2: Post (GEO Optimized)

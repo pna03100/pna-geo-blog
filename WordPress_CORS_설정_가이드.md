@@ -161,3 +161,4 @@ WordPress 루트 폴더의 `.htaccess` 파일에 추가:
 ```
 
 
+

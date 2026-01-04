@@ -99,9 +99,9 @@ export default async function HomePage() {
   // Elementor 페이지 렌더링
   if (content.__typename === 'Page') {
     // @ts-ignore
-    const pageId = content.pageId || content.databaseId || content.id;
+    console.log('📄 페이지 렌더링 - databaseId:', content.databaseId);
     // @ts-ignore
-    return <ElementorRenderer html={content.content || ''} postId={pageId} />;
+    return <ElementorRenderer html={content.content || ''} postId={content.databaseId} />;
   }
 
   // Post 타입이 올 경우 (일반적으로 홈은 Page지만)
