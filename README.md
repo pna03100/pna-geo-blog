@@ -1,5 +1,7 @@
 # 🚀 Next.js 14 + Headless WordPress (무조건 배포 성공 모드)
 
+> 최종 업데이트: 2026-01-04 - 환경 변수 수정 완료
+
 ## 📌 프로젝트 개요
 
 이 프로젝트는 **무조건 빌드가 성공하도록** 설계된 Next.js 14 (App Router) + Headless WordPress 블로그입니다.

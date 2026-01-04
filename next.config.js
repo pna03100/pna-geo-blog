@@ -29,15 +29,16 @@ const nextConfig = {
   staticPageGenerationTimeout: 180,
 
   // ============================================
-  // 🎯 Rewrites: 정적 리소스만 프록시 (Headless 모드)
+  // 🎯 Rewrites: Headless 모드 + Elementor CSS 지원
+  // Next.js 속도 + Elementor 디자인 완벽 조합
   // ============================================
   async rewrites() {
     const WP_URL = 'https://cms.pnamarketing.co.kr';
 
     return {
-      // [beforeFiles] SEO/정적 파일만 프록시
+      // [beforeFiles] 정적 리소스만 프록시
       beforeFiles: [
-        // 1️⃣ SEO 파일 (로봇, 사이트맵) - WordPress가 생성
+        // 1️⃣ SEO 파일
         {
           source: '/robots.txt',
           destination: `${WP_URL}/robots.txt`,
@@ -65,7 +66,7 @@ const nextConfig = {
           destination: `${WP_URL}/:path*.xsl`,
         },
 
-        // 3️⃣ 워드프레스 정적 리소스 (이미지, CSS, JS)
+        // 3️⃣ WordPress 정적 리소스 (이미지, CSS, JS)
         {
           source: '/wp-content/:path*',
           destination: `${WP_URL}/wp-content/:path*`,
@@ -84,7 +85,7 @@ const nextConfig = {
         },
       ],
       
-      // 페이지 요청은 Next.js가 처리 (GraphQL로 데이터 가져옴)
+      // 페이지 요청은 Next.js가 GraphQL로 처리 (빠른 속도)
       afterFiles: [],
       fallback: [],
     };

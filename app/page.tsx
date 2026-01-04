@@ -22,34 +22,35 @@ export async function generateMetadata(): Promise<Metadata> {
     // WordPress의 /home 페이지 데이터 가져오기
     const content = await getContentByURI('/home');
 
-    if (!content || !content.seo) {
+    if (!content) {
       return {
-        title: 'PNA Marketing',
-        description: 'PNA Marketing 홈페이지',
+        title: '주식회사 피앤에이컴퍼니 | 구글 광고 대행사',
+        description: 'SEO·GEO 기반 데이터 분석으로 광고 효율을 극대화하고, 전환 중심의 퍼포먼스 마케팅 전략을 제공합니다.',
       };
     }
 
-    const seo = content.seo;
+    // SEO 플러그인 데이터가 있으면 사용, 없으면 기본 필드 사용
+    const seo = content.seo || {};
 
     return {
-      title: seo.title || content.title || 'PNA Marketing',
-      description: seo.metaDesc || '',
+      title: seo.title || content.title || '주식회사 피앤에이컴퍼니',
+      description: seo.metaDesc || '구글 광고 대행사 피앤에이컴퍼니',
       openGraph: {
-        title: seo.opengraphTitle || seo.title || '',
-        description: seo.opengraphDescription || seo.metaDesc || '',
+        title: seo.opengraphTitle || content.title || '주식회사 피앤에이컴퍼니',
+        description: seo.opengraphDescription || '구글 광고 대행사',
         images: seo.opengraphImage?.sourceUrl
           ? [{ url: seo.opengraphImage.sourceUrl }]
           : [],
       },
       alternates: {
-        canonical: seo.canonical || '/',
+        canonical: seo.canonical || 'https://pnamarketing.co.kr/',
       },
     };
   } catch (error) {
     console.error('홈페이지 메타데이터 생성 실패:', error);
     return { 
-      title: 'PNA Marketing',
-      description: 'PNA Marketing 홈페이지',
+      title: '주식회사 피앤에이컴퍼니 | 구글 광고 대행사',
+      description: 'SEO·GEO 기반 데이터 분석 마케팅',
     };
   }
 }
@@ -63,7 +64,10 @@ export default async function HomePage() {
   let content;
 
   try {
-    // WordPress의 /home 페이지 가져오기
+    // WordPress의 메인 페이지 가져오기
+    // 주의: WordPress에 실제로 존재하는 페이지 URI를 사용하세요
+    // 현재: /home 페이지를 사용 (WordPress에 해당 슬러그의 페이지가 있어야 함)
+    // 다른 페이지를 사용하려면 URI를 변경하세요 (예: '/', '/about', '/main' 등)
     content = await getContentByURI('/home');
     console.log('✅ 홈페이지 콘텐츠 로드 성공');
   } catch (error) {
@@ -94,7 +98,10 @@ export default async function HomePage() {
 
   // Elementor 페이지 렌더링
   if (content.__typename === 'Page') {
-    return <ElementorRenderer html={content.content || ''} />;
+    // @ts-ignore
+    const pageId = content.pageId || content.databaseId || content.id;
+    // @ts-ignore
+    return <ElementorRenderer html={content.content || ''} postId={pageId} />;
   }
 
   // Post 타입이 올 경우 (일반적으로 홈은 Page지만)

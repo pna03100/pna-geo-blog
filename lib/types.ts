@@ -7,6 +7,10 @@ export interface WPContent {
   __typename: 'Page' | 'Post';
   uri: string;
   slug: string;
+  id?: string;
+  databaseId?: number;
+  pageId?: number;
+  postId?: number;
   title?: string;
   content?: string;
   date?: string;

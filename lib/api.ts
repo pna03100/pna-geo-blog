@@ -95,25 +95,17 @@ export async function getContentByURI(uri: string): Promise<WPContent | null> {
       contentNode(id: $uri, idType: URI) {
         __typename
         uri
+        databaseId
         ... on Page {
+          id
+          pageId
           slug
           title
           content
-          seo {
-            title
-            metaDesc
-            opengraphTitle
-            opengraphDescription
-            opengraphImage {
-              sourceUrl
-            }
-            canonical
-            schema {
-              raw
-            }
-          }
         }
         ... on Post {
+          id
+          postId
           slug
           title
           content
@@ -140,19 +132,6 @@ export async function getContentByURI(uri: string): Promise<WPContent | null> {
             nodes {
               name
               slug
-            }
-          }
-          seo {
-            title
-            metaDesc
-            opengraphTitle
-            opengraphDescription
-            opengraphImage {
-              sourceUrl
-            }
-            canonical
-            schema {
-              raw
             }
           }
         }
@@ -258,12 +237,12 @@ export async function getAllPages(): Promise<WPContent[]> {
 }
 
 // ============================================
-// Get Primary Menu
+// Get Primary Menu (메뉴 위치 오류 방지)
 // ============================================
 export async function getPrimaryMenu(): Promise<MenuItem[]> {
   const query = `
-    query GetPrimaryMenu {
-      menus(where: { location: PRIMARY }) {
+    query GetMenus {
+      menus(first: 1) {
         nodes {
           menuItems {
             nodes {
@@ -282,16 +261,15 @@ export async function getPrimaryMenu(): Promise<MenuItem[]> {
     const data: MenuResponse | null = await fetchAPI(query);
 
     if (!data || !data.menus || !data.menus.nodes || data.menus.nodes.length === 0) {
-      console.log('🚨 API 실패, 더미 데이터 사용함 (getPrimaryMenu)');
-      console.warn('⚠️  메뉴를 가져올 수 없습니다. (더미 메뉴 반환)');
+      console.log('🚨 메뉴 없음, 더미 데이터 사용');
       return DUMMY_MENU_ITEMS;
     }
 
     const menuItems = data.menus.nodes[0]?.menuItems?.nodes || [];
     return menuItems.length > 0 ? menuItems : DUMMY_MENU_ITEMS;
   } catch (error) {
-    console.log('🚨 API 실패, 더미 데이터 사용함 (getPrimaryMenu - catch)');
-    console.error('getPrimaryMenu 실패:', error);
+    console.log('🚨 메뉴 조회 실패, 더미 데이터 사용');
+    console.error('getPrimaryMenu 에러:', error);
     return DUMMY_MENU_ITEMS;
   }
 }
