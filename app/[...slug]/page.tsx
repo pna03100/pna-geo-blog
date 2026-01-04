@@ -67,39 +67,44 @@ export async function generateMetadata({
     const content = await getContentByURI(uri);
 
     // @ts-ignore
-    if (!content || !content.seo) {
+    if (!content) {
       return {
         title: '페이지를 찾을 수 없습니다',
       };
     }
 
+    // SEO 플러그인 데이터가 있으면 사용, 없으면 기본 필드 사용
     // @ts-ignore
-    const seo = content.seo;
+    const seo = content.seo || {};
 
     return {
       // @ts-ignore
       title: seo.title || content.title || '제목 없음',
       // @ts-ignore
-      description: seo.metaDesc || '',
+      description: seo.metaDesc || content.excerpt || '',
       openGraph: {
         // @ts-ignore
-        title: seo.opengraphTitle || seo.title || '',
+        title: seo.opengraphTitle || content.title || '',
         // @ts-ignore
-        description: seo.opengraphDescription || seo.metaDesc || '',
+        description: seo.opengraphDescription || content.excerpt || '',
         // @ts-ignore
         images: seo.opengraphImage?.sourceUrl
           // @ts-ignore
           ? [{ url: seo.opengraphImage.sourceUrl }]
+          // @ts-ignore
+          : content.featuredImage?.node?.sourceUrl
+          // @ts-ignore
+          ? [{ url: content.featuredImage.node.sourceUrl }]
           : [],
       },
       alternates: {
         // @ts-ignore
-        canonical: seo.canonical || uri,
+        canonical: seo.canonical || `https://pnamarketing.co.kr${uri}`,
       },
     };
   } catch (error) {
     console.error('generateMetadata 실패:', error);
-    return { title: '에러 발생' };
+    return { title: 'PNA Marketing' };
   }
 }
 
