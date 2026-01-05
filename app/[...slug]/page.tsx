@@ -1,10 +1,10 @@
 // ============================================
-// Dynamic Catch-All Route (Posts & Pages)
+// [Implementation] Dynamic Catch-All Route
+// Trinity Core: Type-Safe Dynamic Pages
 // ============================================
 
-// @ts-nocheck
 import { getContentByURI, getAllPosts, getAllPages } from '@/lib/api';
-import { notFound } from 'next/navigation';
+import { WPContent } from '@/lib/types';
 import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
@@ -13,6 +13,9 @@ export const dynamicParams = true; // 정의되지 않은 경로도 허용
 export const revalidate = 3600; // 1시간마다 재검증
 
 // Dynamic Import (Code Splitting)
+const ElementorIframe = dynamic(() => import('@/components/ElementorIframe'), {
+  ssr: false,
+});
 const ElementorRenderer = dynamic(() => import('@/components/ElementorRenderer'), {
   ssr: true,
 });
@@ -21,40 +24,34 @@ const CleanPostRenderer = dynamic(() => import('@/components/CleanPostRenderer')
 });
 
 // ============================================
-// Generate Static Params (for SSG)
+// [Implementation] Generate Static Params (SSG)
 // ============================================
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
   try {
-    // @ts-ignore
     const [posts, pages] = await Promise.all([getAllPosts(), getAllPages()]);
 
-    // @ts-ignore
     if (!posts || !pages) {
       console.log('🚨 generateStaticParams: 데이터 없음, 빈 배열 반환');
       return [];
     }
 
-    // @ts-ignore
     const allPaths = [...posts, ...pages]
-      .filter((item: any) => item && item.uri) // null/undefined 제거
-      .map((item: any) => ({
-        // @ts-ignore
+      .filter((item) => item && item.uri)
+      .map((item) => ({
         slug: item.uri.split('/').filter(Boolean),
       }))
-      // 🔥 루트 경로(빈 배열) 필터링 - next.config.js 리라이트 충돌 방지
-      .filter((item: any) => item.slug && item.slug.length > 0);
+      .filter((item) => item.slug && item.slug.length > 0);
 
-    console.log(`✅ generateStaticParams: ${allPaths.length}개 경로 생성 (루트 경로 제외)`);
+    console.log(`✅ generateStaticParams: ${allPaths.length}개 경로 생성`);
     return allPaths;
   } catch (error) {
     console.error('generateStaticParams 실패:', error);
-    console.log('🚨 빈 배열 반환 (빌드 계속 진행)');
     return [];
   }
 }
 
 // ============================================
-// Generate Metadata (SEO)
+// [GEO] Generate Metadata (SEO Optimization)
 // ============================================
 export async function generateMetadata({
   params,
@@ -66,40 +63,28 @@ export async function generateMetadata({
   try {
     const content = await getContentByURI(uri);
 
-    // @ts-ignore
     if (!content) {
       return {
         title: '페이지를 찾을 수 없습니다',
       };
     }
 
-    // SEO 플러그인 데이터가 있으면 사용, 없으면 기본 필드 사용
-    // @ts-ignore
-    const seo = content.seo || {};
+    const seo = content.seo;
 
     return {
-      // @ts-ignore
-      title: seo.title || content.title || '제목 없음',
-      // @ts-ignore
-      description: seo.metaDesc || content.excerpt || '',
+      title: seo?.title || content.title || '제목 없음',
+      description: seo?.metaDesc || content.excerpt || '',
       openGraph: {
-        // @ts-ignore
-        title: seo.opengraphTitle || content.title || '',
-        // @ts-ignore
-        description: seo.opengraphDescription || content.excerpt || '',
-        // @ts-ignore
-        images: seo.opengraphImage?.sourceUrl
-          // @ts-ignore
+        title: seo?.opengraphTitle || content.title || '',
+        description: seo?.opengraphDescription || content.excerpt || '',
+        images: seo?.opengraphImage?.sourceUrl
           ? [{ url: seo.opengraphImage.sourceUrl }]
-          // @ts-ignore
           : content.featuredImage?.node?.sourceUrl
-          // @ts-ignore
           ? [{ url: content.featuredImage.node.sourceUrl }]
           : [],
       },
       alternates: {
-        // @ts-ignore
-        canonical: seo.canonical || `https://pnamarketing.co.kr${uri}`,
+        canonical: seo?.canonical || `https://pnamarketing.co.kr${uri}`,
       },
     };
   } catch (error) {
@@ -109,7 +94,7 @@ export async function generateMetadata({
 }
 
 // ============================================
-// Page Component
+// [Implementation] Page Component
 // ============================================
 export default async function DynamicPage({
   params,
@@ -118,17 +103,16 @@ export default async function DynamicPage({
 }) {
   const uri = `/${params.slug.join('/')}`;
 
-  let content;
+  let content: WPContent | null = null;
 
   try {
     content = await getContentByURI(uri);
   } catch (error) {
     console.error('페이지 데이터 로드 실패:', error);
-    // @ts-ignore
     content = null;
   }
 
-  // 🔥 절대 notFound() 호출 안 함! 무조건 화면 표시
+  // [Security] 콘텐츠 없을 시 안내 페이지
   if (!content) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center">
@@ -141,22 +125,17 @@ export default async function DynamicPage({
   }
 
   // ============================================
-  // Two-Track Rendering Strategy
+  // [Implementation] Two-Track Rendering
   // ============================================
 
   // Track 1: Page (Elementor HTML)
-  // @ts-ignore
   if (content.__typename === 'Page') {
-    // @ts-ignore
     console.log(`📄 페이지 렌더링 (${uri}) - databaseId:`, content.databaseId);
-    // @ts-ignore
-    return <ElementorRenderer html={content.content || ''} postId={content.databaseId} />;
+    return <ElementorIframe postId={content.databaseId} />;
   }
 
   // Track 2: Post (GEO Optimized)
-  // @ts-ignore
   if (content.__typename === 'Post') {
-    // @ts-ignore
     return <CleanPostRenderer post={content} />;
   }
 
@@ -165,7 +144,6 @@ export default async function DynamicPage({
     <div className="max-w-4xl mx-auto px-4 py-16 text-center">
       <h1 className="text-3xl font-bold mb-4">알 수 없는 콘텐츠 타입</h1>
       <p className="text-gray-600">
-        {/* @ts-ignore */}
         이 페이지는 지원되지 않는 형식입니다. ({content.__typename})
       </p>
     </div>

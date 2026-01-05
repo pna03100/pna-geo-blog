@@ -1,13 +1,19 @@
 // ============================================
-// Homepage (루트 경로)
+// [Implementation] Homepage (루트 경로)
+// Trinity Core: Type-Safe Server Component
 // ============================================
 
-// @ts-nocheck
 import { getContentByURI } from '@/lib/api';
+import { WPContent } from '@/lib/types';
 import dynamic from 'next/dynamic';
 import { Metadata } from 'next';
 
-// Dynamic Import
+// Dynamic Import - Iframe 방식 (라이센스 불필요)
+const ElementorIframe = dynamic(() => import('@/components/ElementorIframe'), {
+  ssr: false,
+});
+
+// 기존 방식 (CSS 필요)
 const ElementorRenderer = dynamic(() => import('@/components/ElementorRenderer'), {
   ssr: true,
 });
@@ -58,16 +64,15 @@ export async function generateMetadata(): Promise<Metadata> {
 // ============================================
 // Homepage Component
 // ============================================
+// ============================================
+// [Implementation] Homepage Component
+// ============================================
 export default async function HomePage() {
   console.log('🏠 홈페이지 렌더링 시작...');
 
-  let content;
+  let content: WPContent | null = null;
 
   try {
-    // WordPress의 메인 페이지 가져오기
-    // 주의: WordPress에 실제로 존재하는 페이지 URI를 사용하세요
-    // 현재: /home 페이지를 사용 (WordPress에 해당 슬러그의 페이지가 있어야 함)
-    // 다른 페이지를 사용하려면 URI를 변경하세요 (예: '/', '/about', '/main' 등)
     content = await getContentByURI('/home');
     console.log('✅ 홈페이지 콘텐츠 로드 성공');
   } catch (error) {
@@ -75,7 +80,7 @@ export default async function HomePage() {
     content = null;
   }
 
-  // API 연결 실패 시 안내 페이지
+  // [Security] API 연결 실패 시 안내 페이지
   if (!content) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center">
@@ -96,15 +101,18 @@ export default async function HomePage() {
     );
   }
 
-  // Elementor 페이지 렌더링
+  // [Implementation] Elementor 페이지 렌더링
   if (content.__typename === 'Page') {
-    // @ts-ignore
     console.log('📄 페이지 렌더링 - databaseId:', content.databaseId);
-    // @ts-ignore
-    return <ElementorRenderer html={content.content || ''} postId={content.databaseId} />;
+    
+    // 🔥 임시 iframe 방식 (Elementor 라이센스 문제 우회)
+    return <ElementorIframe postId={content.databaseId} />;
+    
+    // 원래 방식 (CSS 파일 필요)
+    // return <ElementorRenderer html={content.content || ''} postId={content.databaseId} />;
   }
 
-  // Post 타입이 올 경우 (일반적으로 홈은 Page지만)
+  // [Implementation] Post 타입이 올 경우 (일반적으로 홈은 Page지만)
   return (
     <div className="max-w-4xl mx-auto px-4 py-16">
       <h1 className="text-4xl font-bold mb-8">{content.title || '제목 없음'}</h1>

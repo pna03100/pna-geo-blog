@@ -1,9 +1,11 @@
 // ============================================
-// Clean Post Renderer (GEO Optimization Track)
+// [GEO] Clean Post Renderer (AI Search Optimized)
+// Trinity Core: Type-Safe + Schema Injection
 // ============================================
 
-// @ts-nocheck
-import parse, { domToReact, Element, DOMNode } from 'html-react-parser';
+'use client';
+
+import parse, { Element, DOMNode, domToReact } from 'html-react-parser';
 import Image from 'next/image';
 import { WPContent } from '@/lib/types';
 
@@ -12,8 +14,7 @@ interface Props {
 }
 
 export default function CleanPostRenderer({ post }: Props) {
-  // 🔥 절대 죽지 않는 방어 코드
-  // @ts-ignore
+  // [Security] 방어 코드
   if (!post) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center">
@@ -23,16 +24,14 @@ export default function CleanPostRenderer({ post }: Props) {
     );
   }
 
-  // @ts-ignore
   const { title, content, date, author, featuredImage, categories, seo } = post;
 
   // ============================================
-  // HTML 파싱 옵션: <img> → Next.js <Image>
+  // [GEO] HTML 파싱: <img> → Next.js <Image>
   // ============================================
   const parseOptions = {
     replace: (domNode: DOMNode) => {
       if (domNode instanceof Element && domNode.name === 'img') {
-        // @ts-ignore
         const { src, alt, width, height } = domNode.attribs;
 
         if (!src) return domNode;
@@ -53,16 +52,13 @@ export default function CleanPostRenderer({ post }: Props) {
   };
 
   // ============================================
-  // JSON-LD Schema Injection
+  // [GEO] JSON-LD Schema Injection
   // ============================================
-  // @ts-ignore
-  let schemaData = null;
+  let schemaData: unknown = null;
   try {
-    // @ts-ignore
     schemaData = seo?.schema?.raw ? JSON.parse(seo.schema.raw) : null;
   } catch (error) {
     console.error('JSON-LD 파싱 실패:', error);
-    // @ts-ignore
     schemaData = null;
   }
 

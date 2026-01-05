@@ -1,0 +1,11 @@
+{
+  "buildCommand": "next build",
+  "devCommand": "next dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "env": {
+    "WORDPRESS_API_URL": "@wordpress_api_url",
+    "NEXT_PUBLIC_WORDPRESS_URL": "@next_public_wordpress_url"
+  }
+}
+

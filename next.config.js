@@ -1,14 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 🔥 1. 배포/빌드 에러 무시 설정 (일단 사이트 띄우는 게 우선)
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // ============================================
+  // [Security] Build Configuration
+  // Trinity Core: Strict Type Checking Enabled
+  // ============================================
+  
+  // ✅ TypeScript Strict Mode (에러 무시 제거)
+  // Note: tsconfig.json의 strict: true와 함께 작동
+  
+  // ✅ ESLint 활성화 (빌드 시 코드 품질 검증)
+  // Note: 필요 시 특정 룰만 비활성화
 
-  // 🔥 2. 이미지 최적화 설정
+  // 🔥 이미지 최적화 설정
   images: {
     remotePatterns: [
       {
@@ -89,6 +92,46 @@ const nextConfig = {
       afterFiles: [],
       fallback: [],
     };
+  },
+
+  // ============================================
+  // 🔐 Security Headers: Elementor iframe 통신 허용
+  // [Security] OWASP A05 (Security Misconfiguration) 준수
+  // [Architecture] Deny by Default → Allow Specific Origin Only
+  // ============================================
+  async headers() {
+    const CMS_DOMAIN = 'https://cms.pnamarketing.co.kr';
+
+    return [
+      {
+        // 모든 페이지에 적용
+        source: '/:path*',
+        headers: [
+          // 🎯 1. CSP: Iframe Embedding 허용 (Modern 브라우저)
+          {
+            key: 'Content-Security-Policy',
+            value: `frame-ancestors 'self' ${CMS_DOMAIN};`,
+          },
+          // 🎯 2. CORS: CMS에서의 리소스 접근 허용
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: CMS_DOMAIN,
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, PUT, DELETE, OPTIONS',
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'X-Requested-With, Content-Type, Authorization',
+          },
+          {
+            key: 'Access-Control-Allow-Credentials',
+            value: 'true',
+          },
+        ],
+      },
+    ];
   },
 };
 

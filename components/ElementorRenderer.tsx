@@ -1,14 +1,13 @@
 // ============================================
-// Elementor HTML Renderer with Full CSS Support
-// Next.js 속도 + Elementor 디자인 완벽 지원
+// [Implementation] Elementor HTML Renderer
+// Trinity Core: Type-Safe Client Component
 // ============================================
 
-// @ts-nocheck
 'use client';
 
 import { useEffect } from 'react';
 import parse from 'html-react-parser';
-import Head from 'next/head';
+import { env } from '@/lib/env';
 
 interface Props {
   html: string;
@@ -16,7 +15,7 @@ interface Props {
 }
 
 export default function ElementorRenderer({ html, postId }: Props) {
-  // 방어 코드
+  // [Security] 방어 코드
   if (!html || html.trim() === '') {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center">
@@ -26,16 +25,18 @@ export default function ElementorRenderer({ html, postId }: Props) {
     );
   }
 
-  // Elementor CSS 동적 로드
+  // [Implementation] Elementor CSS 동적 로드
   useEffect(() => {
+    const WP_URL = env.NEXT_PUBLIC_WORDPRESS_URL;
+    
     // 1. Elementor 글로벌 CSS 로드 (항상 필요)
     const elementorGlobalCSS = [
       // Elementor Core CSS
-      'https://cms.pnamarketing.co.kr/wp-content/plugins/elementor/assets/css/frontend-lite.min.css',
-      'https://cms.pnamarketing.co.kr/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css',
-      'https://cms.pnamarketing.co.kr/wp-content/plugins/elementor/assets/lib/animations/animations.min.css',
+      `${WP_URL}/wp-content/plugins/elementor/assets/css/frontend-lite.min.css`,
+      `${WP_URL}/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css`,
+      `${WP_URL}/wp-content/plugins/elementor/assets/lib/animations/animations.min.css`,
       // Elementor Pro CSS (Pro 사용 시)
-      'https://cms.pnamarketing.co.kr/wp-content/plugins/elementor-pro/assets/css/frontend-lite.min.css',
+      `${WP_URL}/wp-content/plugins/elementor-pro/assets/css/frontend-lite.min.css`,
     ];
 
     // CSS 링크 추가
@@ -51,7 +52,7 @@ export default function ElementorRenderer({ html, postId }: Props) {
 
     // 2. 페이지별 동적 CSS 로드 (Elementor가 각 페이지마다 생성)
     if (postId) {
-      const pageCSS = `https://cms.pnamarketing.co.kr/wp-content/uploads/elementor/css/post-${postId}.css`;
+      const pageCSS = `${WP_URL}/wp-content/uploads/elementor/css/post-${postId}.css`;
       
       if (!document.querySelector(`link[href="${pageCSS}"]`)) {
         const link = document.createElement('link');
@@ -67,7 +68,7 @@ export default function ElementorRenderer({ html, postId }: Props) {
     }
 
     // 3. 글로벌 Elementor CSS도 로드
-    const globalElementorCSS = 'https://cms.pnamarketing.co.kr/wp-content/uploads/elementor/css/global.css';
+    const globalElementorCSS = `${WP_URL}/wp-content/uploads/elementor/css/global.css`;
     if (!document.querySelector(`link[href="${globalElementorCSS}"]`)) {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
@@ -80,7 +81,7 @@ export default function ElementorRenderer({ html, postId }: Props) {
     }
 
     // 4. WordPress 테마 CSS (기본 스타일)
-    const themeCSS = 'https://cms.pnamarketing.co.kr/wp-content/themes/hello-elementor/style.min.css';
+    const themeCSS = `${WP_URL}/wp-content/themes/hello-elementor/style.min.css`;
     if (!document.querySelector(`link[href="${themeCSS}"]`)) {
       const link = document.createElement('link');
       link.rel = 'stylesheet';

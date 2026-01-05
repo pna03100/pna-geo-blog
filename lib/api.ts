@@ -1,50 +1,94 @@
-// @ts-nocheck
 // ============================================
-// WordPress GraphQL API Client (방어적 코드)
+// [Security] WordPress GraphQL API Client
+// OWASP A03 Defense: Input Validation with Zod
+// Trinity Core: Type-Safe + Validated + Defensive
 // ============================================
 
-import { WPContent, MenuItem, MenuResponse } from './types';
-
-const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || '';
-
-// 🔥 더미 데이터 (API 실패 시 사용)
-const DUMMY_POST: WPContent = {
-  __typename: 'Post',
-  uri: '/dummy-post',
-  slug: 'dummy-post',
-  title: '임시 게시글 (API 연결 실패)',
-  content: '<p>워드프레스 API에 연결할 수 없습니다. 환경변수를 확인하세요.</p>',
-  date: new Date().toISOString(),
-  author: {
-    node: {
-      name: '시스템',
-    },
-  },
-};
-
-const DUMMY_MENU_ITEMS: MenuItem[] = [
-  { id: '1', label: '홈', url: '/', path: '/' },
-];
+import { z } from 'zod';
+import { env } from './env';
+import {
+  WPContent,
+  MenuItem,
+  MenuResponse,
+  GraphQLResponse,
+} from './types';
 
 // ============================================
-// Fetch Wrapper with Extreme Error Handling
+// [Security] Zod Schema - Runtime Validation
 // ============================================
-async function fetchAPI(query: string, variables: Record<string, any> = {}) {
-  const url = WORDPRESS_API_URL;
+
+// WPContent 검증 스키마
+const WPContentSchema = z.object({
+  __typename: z.enum(['Page', 'Post']),
+  uri: z.string(),
+  slug: z.string(),
+  databaseId: z.number(),
+  title: z.string().nullable(),
+  content: z.string().nullable(),
+  date: z.string().optional(),
+  excerpt: z.string().optional(),
+  author: z.object({
+    node: z.object({
+      name: z.string(),
+      avatar: z.object({
+        url: z.string(),
+      }).nullable(),
+    }),
+  }).optional(),
+  featuredImage: z.object({
+    node: z.object({
+      sourceUrl: z.string(),
+      altText: z.string().nullable(),
+      mediaDetails: z.object({
+        width: z.number(),
+        height: z.number(),
+      }).nullable(),
+    }),
+  }).nullable().optional(),
+  categories: z.object({
+    nodes: z.array(z.object({
+      name: z.string(),
+      slug: z.string(),
+    })),
+  }).optional(),
+  seo: z.object({
+    title: z.string().nullable(),
+    metaDesc: z.string().nullable(),
+    opengraphTitle: z.string().nullable(),
+    opengraphDescription: z.string().nullable(),
+    opengraphImage: z.object({
+      sourceUrl: z.string(),
+    }).nullable(),
+    canonical: z.string().nullable(),
+    schema: z.object({
+      raw: z.string(),
+    }).nullable(),
+  }).nullable().optional(),
+});
+
+// MenuItem 검증 스키마
+const MenuItemSchema = z.object({
+  id: z.string(),
+  label: z.string(),
+  url: z.string(),
+  path: z.string().nullable(),
+});
+
+// ============================================
+// [Security] Fetch Wrapper with Validation
+// ============================================
+async function fetchAPI<T>(
+  query: string,
+  variables: Record<string, unknown> = {}
+): Promise<T | null> {
+  const url = env.WORDPRESS_API_URL;
 
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log('🚀 [API 요청 시작]');
+  console.log('🚀 [API Request]');
   console.log('📍 URL:', url);
   console.log('📝 Query:', query.substring(0, 100) + '...');
   console.log('🔧 Variables:', JSON.stringify(variables, null, 2));
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-
-  // URL 검증
-  if (!url || url === '') {
-    console.error('❌ WORDPRESS_API_URL 환경변수가 설정되지 않았습니다!');
-    console.log('⚠️  더미 데이터를 반환합니다.');
-    return null;
-  }
 
   try {
     const response = await fetch(url, {
@@ -53,38 +97,65 @@ async function fetchAPI(query: string, variables: Record<string, any> = {}) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ query, variables }),
-      next: { tags: ['wordpress'], revalidate: 3600 }, // 1시간 캐싱
+      next: { tags: ['wordpress'], revalidate: 3600 },
     });
 
-    console.log('✅ 응답 상태:', response.status, response.statusText);
+    console.log('✅ Response Status:', response.status, response.statusText);
 
     if (!response.ok) {
-      console.error('❌ HTTP 에러:', response.status);
+      console.error('❌ HTTP Error:', response.status);
       const text = await response.text();
-      console.error('📄 응답 내용:', text.substring(0, 200));
+      console.error('📄 Response:', text.substring(0, 200));
       return null;
     }
 
-    const json = await response.json();
+    const json: GraphQLResponse<T> = await response.json();
 
     if (json.errors) {
-      console.error('❌ GraphQL 에러:', JSON.stringify(json.errors, null, 2));
+      console.error('❌ GraphQL Errors:', JSON.stringify(json.errors, null, 2));
       return null;
     }
 
-    console.log('✅ 데이터 수신 성공:', Object.keys(json.data || {}));
+    console.log('✅ Data Received:', Object.keys(json.data || {}));
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
     return json.data;
-  } catch (error: any) {
-    console.error('💥 [Fetch 예외 발생]');
-    console.error('에러 타입:', error?.name);
-    console.error('에러 메시지:', error?.message);
-    console.error('스택:', error?.stack);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error('💥 [Fetch Exception]');
+      console.error('Error Type:', error.name);
+      console.error('Error Message:', error.message);
+      console.error('Stack:', error.stack);
+    } else {
+      console.error('💥 Unknown Error:', error);
+    }
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
     return null;
   }
 }
+
+// ============================================
+// [Security] Dummy Data (Fallback)
+// ============================================
+const DUMMY_POST: WPContent = {
+  __typename: 'Post',
+  uri: '/api-connection-failed',
+  slug: 'api-connection-failed',
+  databaseId: 0,
+  title: '⚠️ WordPress API 연결 실패',
+  content: '<p>환경변수를 확인하세요. WORDPRESS_API_URL이 올바르게 설정되어 있는지 확인하세요.</p>',
+  date: new Date().toISOString(),
+  author: {
+    node: {
+      name: 'System',
+      avatar: null,
+    },
+  },
+};
+
+const DUMMY_MENU_ITEMS: MenuItem[] = [
+  { id: '1', label: '홈', url: '/', path: '/' },
+];
 
 // ============================================
 // Get Content by URI (Page or Post)
@@ -136,18 +207,24 @@ export async function getContentByURI(uri: string): Promise<WPContent | null> {
   `;
 
   try {
-    const data = await fetchAPI(query, { uri });
+    const data = await fetchAPI<{ contentNode: unknown }>(query, { uri });
 
     if (!data || !data.contentNode) {
-      console.log('🚨 API 실패, 더미 데이터 사용함 (getContentByURI)');
-      console.warn(`⚠️  URI "${uri}"에 대한 콘텐츠를 찾을 수 없습니다. (더미 데이터 반환)`);
+      console.warn(`⚠️ URI "${uri}" not found. Returning dummy data.`);
       return DUMMY_POST;
     }
 
-    return data.contentNode;
+    // [Security] Zod 검증
+    const validated = WPContentSchema.safeParse(data.contentNode);
+
+    if (!validated.success) {
+      console.error('❌ [Validation Failed] contentNode:', validated.error);
+      return DUMMY_POST;
+    }
+
+    return validated.data;
   } catch (error) {
-    console.log('🚨 API 실패, 더미 데이터 사용함 (getContentByURI - catch)');
-    console.error('getContentByURI 실패:', error);
+    console.error('getContentByURI Error:', error);
     return DUMMY_POST;
   }
 }
@@ -160,8 +237,10 @@ export async function getAllPosts(): Promise<WPContent[]> {
     query GetAllPosts {
       posts(first: 100, where: { status: PUBLISH }) {
         nodes {
+          __typename
           uri
           slug
+          databaseId
           title
           date
           excerpt
@@ -183,18 +262,22 @@ export async function getAllPosts(): Promise<WPContent[]> {
   `;
 
   try {
-    const data = await fetchAPI(query);
+    const data = await fetchAPI<{ posts: { nodes: unknown[] } }>(query);
 
     if (!data || !data.posts || !data.posts.nodes) {
-      console.log('🚨 API 실패, 더미 데이터 사용함 (getAllPosts)');
-      console.warn('⚠️  게시글을 가져올 수 없습니다. (빈 배열 반환)');
+      console.warn('⚠️ No posts found. Returning empty array.');
       return [];
     }
 
-    return data.posts.nodes;
+    // [Security] 배열의 각 아이템을 Zod로 검증
+    const validated = data.posts.nodes
+      .map((node) => WPContentSchema.safeParse(node))
+      .filter((result) => result.success)
+      .map((result) => (result as z.SafeParseSuccess<WPContent>).data);
+
+    return validated;
   } catch (error) {
-    console.log('🚨 API 실패, 더미 데이터 사용함 (getAllPosts - catch)');
-    console.error('getAllPosts 실패:', error);
+    console.error('getAllPosts Error:', error);
     return [];
   }
 }
@@ -207,8 +290,10 @@ export async function getAllPages(): Promise<WPContent[]> {
     query GetAllPages {
       pages(first: 100, where: { status: PUBLISH }) {
         nodes {
+          __typename
           uri
           slug
+          databaseId
           title
         }
       }
@@ -216,24 +301,28 @@ export async function getAllPages(): Promise<WPContent[]> {
   `;
 
   try {
-    const data = await fetchAPI(query);
+    const data = await fetchAPI<{ pages: { nodes: unknown[] } }>(query);
 
     if (!data || !data.pages || !data.pages.nodes) {
-      console.log('🚨 API 실패, 더미 데이터 사용함 (getAllPages)');
-      console.warn('⚠️  페이지를 가져올 수 없습니다. (빈 배열 반환)');
+      console.warn('⚠️ No pages found. Returning empty array.');
       return [];
     }
 
-    return data.pages.nodes;
+    // [Security] 배열의 각 아이템을 Zod로 검증
+    const validated = data.pages.nodes
+      .map((node) => WPContentSchema.safeParse(node))
+      .filter((result) => result.success)
+      .map((result) => (result as z.SafeParseSuccess<WPContent>).data);
+
+    return validated;
   } catch (error) {
-    console.log('🚨 API 실패, 더미 데이터 사용함 (getAllPages - catch)');
-    console.error('getAllPages 실패:', error);
+    console.error('getAllPages Error:', error);
     return [];
   }
 }
 
 // ============================================
-// Get Primary Menu (메뉴 위치 오류 방지)
+// Get Primary Menu
 // ============================================
 export async function getPrimaryMenu(): Promise<MenuItem[]> {
   const query = `
@@ -254,19 +343,24 @@ export async function getPrimaryMenu(): Promise<MenuItem[]> {
   `;
 
   try {
-    const data: MenuResponse | null = await fetchAPI(query);
+    const data = await fetchAPI<MenuResponse>(query);
 
     if (!data || !data.menus || !data.menus.nodes || data.menus.nodes.length === 0) {
-      console.log('🚨 메뉴 없음, 더미 데이터 사용');
+      console.warn('⚠️ No menus found. Returning dummy menu.');
       return DUMMY_MENU_ITEMS;
     }
 
     const menuItems = data.menus.nodes[0]?.menuItems?.nodes || [];
-    return menuItems.length > 0 ? menuItems : DUMMY_MENU_ITEMS;
+
+    // [Security] 배열의 각 아이템을 Zod로 검증
+    const validated = menuItems
+      .map((item) => MenuItemSchema.safeParse(item))
+      .filter((result) => result.success)
+      .map((result) => (result as z.SafeParseSuccess<MenuItem>).data);
+
+    return validated.length > 0 ? validated : DUMMY_MENU_ITEMS;
   } catch (error) {
-    console.log('🚨 메뉴 조회 실패, 더미 데이터 사용');
-    console.error('getPrimaryMenu 에러:', error);
+    console.error('getPrimaryMenu Error:', error);
     return DUMMY_MENU_ITEMS;
   }
 }
-

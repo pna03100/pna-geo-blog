@@ -1,35 +1,47 @@
-export const dynamic = 'force-dynamic';
 // ============================================
-// Root Layout (App Router)
+// [Implementation] Root Layout (App Router)
+// Trinity Core: Type-Safe Server Component
 // ============================================
 
-// @ts-nocheck
+export const dynamic = 'force-dynamic';
+
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { getPrimaryMenu } from '@/lib/api';
+import { MenuItem } from '@/lib/types';
 import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
+// ============================================
+// [GEO] Metadata Configuration
+// ============================================
 export const metadata: Metadata = {
   title: 'Headless WordPress + Next.js 블로그',
   description: 'GEO 최적화와 Core Web Vitals에 집착하는 초고속 블로그',
+  openGraph: {
+    title: 'Headless WordPress + Next.js 블로그',
+    description: 'GEO 최적화와 Core Web Vitals에 집착하는 초고속 블로그',
+    type: 'website',
+  },
 };
 
+// ============================================
+// [Implementation] Root Layout Component
+// ============================================
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // @ts-ignore
-  let menuItems = [];
+  // [Security] Type-Safe Menu Loading
+  let menuItems: MenuItem[] = [];
 
   try {
     menuItems = await getPrimaryMenu();
   } catch (error) {
     console.error('메뉴 로드 실패 (Layout):', error);
-    // @ts-ignore
     menuItems = [];
   }
 
@@ -43,9 +55,7 @@ export default async function RootLayout({
               My Blog
             </Link>
             <ul className="flex gap-6">
-              {/* @ts-ignore */}
               {menuItems && menuItems.length > 0 ? (
-                // @ts-ignore
                 menuItems.map((item) => (
                   <li key={item.id}>
                     <Link

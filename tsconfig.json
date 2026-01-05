@@ -1,10 +1,17 @@
 {
   "compilerOptions": {
+    // [GEO] Code Quality = AI Crawlability
+    // [Security] Strict Mode = OWASP Defense Layer
+    // [Implementation] Next.js 14+ Production Standards
+    
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    
+    // ✅ Trinity Core: Strict Mode 활성화
+    "strict": true,
+    
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -13,16 +20,13 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noImplicitAny": false,
-    "strictNullChecks": false,
-    "strictFunctionTypes": false,
-    "strictBindCallApply": false,
-    "strictPropertyInitialization": false,
-    "noImplicitThis": false,
-    "alwaysStrict": false,
-    "suppressImplicitAnyIndexErrors": true,
+    
+    // ✅ 추가 안전 장치
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    
     "plugins": [
       {
         "name": "next"
