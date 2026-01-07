@@ -1,5 +1,6 @@
 // app/page.tsx
 import { getContentByURI } from '@/lib/api';
+import { replaceCmsUrl } from '@/lib/utils';
 import { HeroSection } from "@/components/hero-section";
 import { FeatureGrid } from "@/components/feature-grid";
 import { ServicesTabs } from "@/components/services-tabs";
@@ -16,27 +17,30 @@ export default async function HomePage() {
     return <div className="p-10 text-center">데이터를 불러오지 못했습니다.</div>;
   }
 
-  // 2. HTML 파싱 시작
-  const $ = cheerio.load(data.content);
+  // 2. [Security] CMS URL 제거 (소스코드에 노출 방지)
+  const cleanContent = replaceCmsUrl(data.content);
+  
+  // 3. HTML 파싱 시작
+  const $ = cheerio.load(cleanContent);
 
   // [Debug] 워드프레스에서 온 원본 HTML 확인 (터미널 로그 확인 필수!)
-  console.log("🔍 [Page] Raw HTML Preview:", data.content.substring(0, 200));
+  console.log("🔍 [Page] Raw HTML Preview:", cleanContent.substring(0, 200));
 
-  // 3. 데이터 추출 (Safe Extraction)
+  // 4. 데이터 추출 (Safe Extraction)
   // 데이터가 없으면 '기본값(Fallback)'을 넣어서 디자인이 깨지지 않게 방어합니다.
 
   // (A) Hero Section
-  const heroTitle = $('#hero h2').text().trim() || "구글 광고 대행사 피앤에이컴퍼니";
-  const heroDesc = $('#hero p').first().text().trim() || "데이터 & GEO 마케팅 전문 파트너";
+  const heroTitle = replaceCmsUrl($('#hero h2').text().trim()) || "구글 광고 대행사 피앤에이컴퍼니";
+  const heroDesc = replaceCmsUrl($('#hero p').first().text().trim()) || "데이터 & GEO 마케팅 전문 파트너";
   // 이미지 찾기: img 태그가 있으면 src 가져오고, 없으면 기본값
-  const heroImage = $('#hero img').attr('src') || "/placeholder.svg"; 
+  const heroImage = replaceCmsUrl($('#hero img').attr('src')) || "/placeholder.svg"; 
 
   // (B) Feature Grid
   const features: { title: string; description: string }[] = [];
   $('#features article').each((_, el) => {
     features.push({
-      title: $(el).find('h3').text().trim(),
-      description: $(el).find('p').text().trim(),
+      title: replaceCmsUrl($(el).find('h3').text().trim()),
+      description: replaceCmsUrl($(el).find('p').text().trim()),
     });
   });
 
@@ -45,8 +49,8 @@ export default async function HomePage() {
   $('#services .service-item').each((_, el) => {
     services.push({
       id: $(el).attr('data-tab') || 'unknown',
-      title: $(el).find('h3').text().trim(),
-      content: $(el).find('p').text().trim(),
+      title: replaceCmsUrl($(el).find('h3').text().trim()),
+      content: replaceCmsUrl($(el).find('p').text().trim()),
     });
   });
 
@@ -54,8 +58,8 @@ export default async function HomePage() {
   const faqs: { question: string; answer: string }[] = [];
   $('#faq article').each((_, el) => {
     faqs.push({
-      question: $(el).find('h3').text().trim(),
-      answer: $(el).find('p').text().trim(),
+      question: replaceCmsUrl($(el).find('h3').text().trim()),
+      answer: replaceCmsUrl($(el).find('p').text().trim()),
     });
   });
 
@@ -63,7 +67,7 @@ export default async function HomePage() {
   console.log("✅ [Parsed] Hero Title:", heroTitle);
   console.log("✅ [Parsed] Features Count:", features.length);
 
-  // 4. 디자인 컴포넌트 렌더링 (강제)
+  // 5. 디자인 컴포넌트 렌더링 (강제)
   // 파싱된 데이터(features 등)가 비어있어도 컴포넌트는 무조건 렌더링됩니다.
   return (
     <main className="flex min-h-screen flex-col">

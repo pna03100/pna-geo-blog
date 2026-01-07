@@ -4,6 +4,7 @@
 
 // @ts-nocheck
 import { getContentByURI, getAllPosts, getAllPages, getElementorCSSUrls } from '@/lib/api';
+import { replaceCmsUrl } from '@/lib/utils';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
@@ -76,25 +77,26 @@ export async function generateMetadata({
     // @ts-ignore
     const seo = content.seo;
 
+    // [Security] CMS URL 제거 (Metadata에서도)
     return {
       // @ts-ignore
-      title: seo.title || content.title || '제목 없음',
+      title: replaceCmsUrl(seo.title || content.title) || '제목 없음',
       // @ts-ignore
-      description: seo.metaDesc || '',
+      description: replaceCmsUrl(seo.metaDesc) || '',
       openGraph: {
         // @ts-ignore
-        title: seo.opengraphTitle || seo.title || '',
+        title: replaceCmsUrl(seo.opengraphTitle || seo.title) || '',
         // @ts-ignore
-        description: seo.opengraphDescription || seo.metaDesc || '',
+        description: replaceCmsUrl(seo.opengraphDescription || seo.metaDesc) || '',
         // @ts-ignore
         images: seo.opengraphImage?.sourceUrl
           // @ts-ignore
-          ? [{ url: seo.opengraphImage.sourceUrl }]
+          ? [{ url: replaceCmsUrl(seo.opengraphImage.sourceUrl) }]
           : [],
       },
       alternates: {
         // @ts-ignore
-        canonical: seo.canonical || uri,
+        canonical: replaceCmsUrl(seo.canonical) || uri,
       },
     };
   } catch (error) {
@@ -139,18 +141,29 @@ export default async function DynamicPage({
   // Two-Track Rendering Strategy
   // ============================================
 
+  // [Security] CMS URL 제거 (소스코드 노출 방지)
+  const cleanContent = {
+    ...content,
+    // @ts-ignore
+    content: replaceCmsUrl(content.content),
+    // @ts-ignore
+    title: replaceCmsUrl(content.title),
+    // @ts-ignore
+    excerpt: replaceCmsUrl(content.excerpt),
+  };
+
   // Track 1: Page (Elementor HTML)
   // @ts-ignore
-  if (content.__typename === 'Page') {
+  if (cleanContent.__typename === 'Page') {
     // @ts-ignore
-    return <ElementorRenderer html={content.content || ''} postId={content.databaseId} />;
+    return <ElementorRenderer html={cleanContent.content || ''} postId={cleanContent.databaseId} />;
   }
 
   // Track 2: Post (GEO Optimized)
   // @ts-ignore
-  if (content.__typename === 'Post') {
+  if (cleanContent.__typename === 'Post') {
     // @ts-ignore
-    return <CleanPostRenderer post={content} />;
+    return <CleanPostRenderer post={cleanContent} />;
   }
 
   // Fallback
