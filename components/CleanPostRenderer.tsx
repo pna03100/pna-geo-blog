@@ -8,6 +8,7 @@
 import parse, { Element, DOMNode, domToReact } from 'html-react-parser';
 import Image from 'next/image';
 import { WPContent } from '@/lib/types';
+import { replaceCMSDomain } from '@/lib/utils';
 
 interface Props {
   post: WPContent;
@@ -27,7 +28,7 @@ export default function CleanPostRenderer({ post }: Props) {
   const { title, content, date, author, featuredImage, categories, seo } = post;
 
   // ============================================
-  // [GEO] HTML 파싱: <img> → Next.js <Image>
+  // [GEO] HTML 파싱: <img> → Next.js <Image> + Domain Replace
   // ============================================
   const parseOptions = {
     replace: (domNode: DOMNode) => {
@@ -36,9 +37,12 @@ export default function CleanPostRenderer({ post }: Props) {
 
         if (!src) return domNode;
 
+        // 🔄 CMS 도메인 → 프론트엔드 도메인 변환
+        const cleanSrc = replaceCMSDomain(src);
+
         return (
           <Image
-            src={src}
+            src={cleanSrc}
             alt={alt || '이미지'}
             width={parseInt(width) || 800}
             height={parseInt(height) || 600}
@@ -47,6 +51,21 @@ export default function CleanPostRenderer({ post }: Props) {
             loading="lazy"
           />
         );
+      }
+      
+      // [GEO] <a> 태그 내부 링크 도메인 변환
+      if (domNode instanceof Element && domNode.name === 'a') {
+        const { href, ...otherAttribs } = domNode.attribs;
+        
+        if (href && href.includes('cms.pnamarketing.co.kr')) {
+          const cleanHref = replaceCMSDomain(href);
+          
+          return (
+            <a {...otherAttribs} href={cleanHref}>
+              {domToReact(domNode.children as DOMNode[], parseOptions)}
+            </a>
+          );
+        }
       }
     },
   };
@@ -76,7 +95,7 @@ export default function CleanPostRenderer({ post }: Props) {
       {featuredImage?.node?.sourceUrl && (
         <div className="mb-8">
           <Image
-            src={featuredImage.node.sourceUrl}
+            src={replaceCMSDomain(featuredImage.node.sourceUrl)}
             alt={featuredImage.node.altText || title || '대표 이미지'}
             width={featuredImage.node.mediaDetails?.width || 1200}
             height={featuredImage.node.mediaDetails?.height || 630}

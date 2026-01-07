@@ -6,8 +6,13 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   const wpUrl = process.env.WORDPRESS_API_URL;
+  const wpUrlPublic = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+  const wpFrontend = process.env.NEXT_PUBLIC_WORDPRESS_URL;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
   const secret = process.env.WORDPRESS_REVALIDATE_SECRET;
+
+  // 🔥 [DEBUG] 실제 사용될 URL 결정
+  const actualUrl = wpUrl || wpUrlPublic;
 
   // 환경 변수 상태 확인
   const diagnostics = {
@@ -21,6 +26,15 @@ export async function GET() {
         value: wpUrl || '❌ 설정되지 않음',
         isValid: wpUrl?.startsWith('https://cms.pnamarketing.co.kr'),
       },
+      NEXT_PUBLIC_WORDPRESS_API_URL: {
+        exists: !!wpUrlPublic,
+        value: wpUrlPublic || '❌ 설정되지 않음',
+        isValid: wpUrlPublic?.startsWith('https://cms.pnamarketing.co.kr'),
+      },
+      NEXT_PUBLIC_WORDPRESS_URL: {
+        exists: !!wpFrontend,
+        value: wpFrontend || '❌ 설정되지 않음',
+      },
       NEXT_PUBLIC_SITE_URL: {
         exists: !!siteUrl,
         value: siteUrl || '❌ 설정되지 않음',
@@ -29,6 +43,10 @@ export async function GET() {
         exists: !!secret,
         value: secret ? '✅ 설정됨 (보안상 숨김)' : '❌ 설정되지 않음',
       },
+      ACTUAL_URL_USED: {
+        value: actualUrl || '❌ 설정되지 않음',
+        source: wpUrl ? 'WORDPRESS_API_URL' : wpUrlPublic ? 'NEXT_PUBLIC_WORDPRESS_API_URL' : 'NONE',
+      },
     },
 
     warnings: [] as string[],
@@ -36,11 +54,11 @@ export async function GET() {
   };
 
   // 검증 및 경고/에러 수집
-  if (!wpUrl) {
-    diagnostics.errors.push('WORDPRESS_API_URL 환경 변수가 설정되지 않았습니다.');
-  } else if (!wpUrl.startsWith('https://cms.pnamarketing.co.kr')) {
+  if (!actualUrl) {
+    diagnostics.errors.push('WORDPRESS_API_URL 또는 NEXT_PUBLIC_WORDPRESS_API_URL 중 하나를 설정해야 합니다.');
+  } else if (!actualUrl.startsWith('https://cms.pnamarketing.co.kr')) {
     diagnostics.warnings.push(
-      `WORDPRESS_API_URL이 잘못된 도메인을 가리키고 있습니다: ${wpUrl}`
+      `API URL이 잘못된 도메인을 가리키고 있습니다: ${actualUrl}`
     );
     diagnostics.warnings.push('올바른 값: https://cms.pnamarketing.co.kr/graphql');
   }
@@ -50,9 +68,9 @@ export async function GET() {
   }
 
   // API 연결 테스트
-  if (wpUrl) {
+  if (actualUrl) {
     try {
-      console.log('🧪 API 연결 테스트 시작:', wpUrl);
+      console.log('🧪 API 연결 테스트 시작:', actualUrl);
       
       const testQuery = `
         query TestConnection {
@@ -63,22 +81,40 @@ export async function GET() {
         }
       `;
 
-      const response = await fetch(wpUrl, {
+      const requestBody = JSON.stringify({ query: testQuery });
+      console.log('📦 Request Body:', requestBody);
+
+      const response = await fetch(actualUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify({ query: testQuery }),
+        body: requestBody,
+        cache: 'no-store',
       });
 
-      const responseData = await response.json();
+      console.log('✅ Response Status:', response.status);
+
+      const responseText = await response.text();
+      console.log('📄 Response Text:', responseText.substring(0, 500));
+
+      let responseData;
+      try {
+        responseData = JSON.parse(responseText);
+      } catch (e) {
+        responseData = { parseError: 'Failed to parse JSON', rawText: responseText.substring(0, 200) };
+      }
 
       diagnostics['api_test'] = {
         status: response.status,
         statusText: response.statusText,
         success: response.ok && !responseData.errors,
+        requestBodyLength: requestBody.length,
+        responseBodyLength: responseText.length,
         data: response.ok ? responseData : null,
         errors: responseData.errors || null,
+        rawResponse: responseText.substring(0, 500),
       };
 
       if (!response.ok) {

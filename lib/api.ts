@@ -75,19 +75,42 @@ const MenuItemSchema = z.object({
 });
 
 // ============================================
+// [Trinity] Smart Endpoint Selection
+// Server: Direct WordPress API (성능 최적화)
+// Client: Next.js Proxy (CORS 우회)
+// ============================================
+function getGraphQLEndpoint(): string {
+  // [Server Component] Node.js 환경 → 직접 WordPress 호출
+  if (typeof window === 'undefined') {
+    return 'https://cms.pnamarketing.co.kr/graphql';
+  }
+  // [Client Component] 브라우저 환경 → Next.js Proxy 사용
+  return '/api/graphql';
+}
+
+// ============================================
 // [Security] Fetch Wrapper with Validation
 // ============================================
 async function fetchAPI<T>(
   query: string,
   variables: Record<string, unknown> = {}
 ): Promise<T | null> {
-  const url = env.WORDPRESS_API_URL;
+  // [Trinity] 환경에 따라 자동으로 엔드포인트 선택
+  const url = getGraphQLEndpoint();
+  const isServer = typeof window === 'undefined';
+
+  // [DEBUG] Body 준비
+  const requestBody = JSON.stringify({ 
+    query, 
+    variables 
+  });
 
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log('🚀 [API Request]');
+  console.log(`🚀 [API Request] ${isServer ? '🖥️ Server' : '🌐 Client'}`);
   console.log('📍 URL:', url);
   console.log('📝 Query:', query.substring(0, 100) + '...');
   console.log('🔧 Variables:', JSON.stringify(variables, null, 2));
+  console.log('📦 Request Body Length:', requestBody.length);
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
   try {
@@ -95,21 +118,37 @@ async function fetchAPI<T>(
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
-      body: JSON.stringify({ query, variables }),
-      next: { tags: ['wordpress'], revalidate: 3600 },
+      body: requestBody,
+      // [Security] Next.js 캐싱 옵션 제거 (디버깅 중)
+      cache: 'no-store',
     });
 
     console.log('✅ Response Status:', response.status, response.statusText);
+    console.log('📋 Response Headers:', Object.fromEntries(response.headers.entries()));
+
+    // [DEBUG] 응답 본문을 먼저 텍스트로 읽기
+    const responseText = await response.text();
+    console.log('📄 Response Body Length:', responseText.length);
+    console.log('📄 Response Body Preview:', responseText.substring(0, 500));
 
     if (!response.ok) {
       console.error('❌ HTTP Error:', response.status);
-      const text = await response.text();
-      console.error('📄 Response:', text.substring(0, 200));
+      console.error('📄 Full Response:', responseText);
       return null;
     }
 
-    const json: GraphQLResponse<T> = await response.json();
+    // [DEBUG] JSON 파싱
+    let json: GraphQLResponse<T>;
+    try {
+      json = JSON.parse(responseText);
+      console.log('✅ JSON Parsed Successfully');
+    } catch (parseError) {
+      console.error('❌ JSON Parse Failed:', parseError);
+      console.error('📄 Raw Text:', responseText.substring(0, 500));
+      return null;
+    }
 
     if (json.errors) {
       console.error('❌ GraphQL Errors:', JSON.stringify(json.errors, null, 2));
@@ -210,22 +249,45 @@ export async function getContentByURI(uri: string): Promise<WPContent | null> {
     const data = await fetchAPI<{ contentNode: unknown }>(query, { uri });
 
     if (!data || !data.contentNode) {
-      console.warn(`⚠️ URI "${uri}" not found. Returning dummy data.`);
-      return DUMMY_POST;
+      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      console.error('❌ [Data Not Found]');
+      console.error('📍 URI:', uri);
+      console.error('💡 Possible Causes:');
+      console.error('  1. WordPress API URL이 잘못되었습니다');
+      console.error('  2. 해당 URI의 콘텐츠가 WordPress에 존재하지 않습니다');
+      console.error('  3. WPGraphQL 플러그인이 비활성화되었습니다');
+      console.error('  4. CORS 문제로 요청이 차단되었습니다');
+      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+      return null;
     }
 
     // [Security] Zod 검증
     const validated = WPContentSchema.safeParse(data.contentNode);
 
     if (!validated.success) {
-      console.error('❌ [Validation Failed] contentNode:', validated.error);
-      return DUMMY_POST;
+      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      console.error('❌ [Validation Failed] contentNode');
+      console.error('📍 URI:', uri);
+      console.error('🔍 Validation Errors:', JSON.stringify(validated.error.errors, null, 2));
+      console.error('📦 Raw Data:', JSON.stringify(data.contentNode, null, 2).substring(0, 500));
+      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+      return null;
     }
 
     return validated.data;
   } catch (error) {
-    console.error('getContentByURI Error:', error);
-    return DUMMY_POST;
+    console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.error('💥 [getContentByURI Exception]');
+    console.error('📍 URI:', uri);
+    if (error instanceof Error) {
+      console.error('Error Name:', error.name);
+      console.error('Error Message:', error.message);
+      console.error('Stack Trace:', error.stack);
+    } else {
+      console.error('Unknown Error:', error);
+    }
+    console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+    return null;
   }
 }
 
@@ -319,6 +381,44 @@ export async function getAllPages(): Promise<WPContent[]> {
     console.error('getAllPages Error:', error);
     return [];
   }
+}
+
+// ============================================
+// [GEO Warning] Get Elementor CSS URL
+// ⚠️ This is a TEMPORARY solution for Elementor compatibility.
+// Strategic Goal: Eliminate Elementor dependency within 2 weeks.
+// ============================================
+export async function getElementorCSSUrls(postId: number): Promise<string[]> {
+  const cssUrls: string[] = [];
+  
+  const possibleFiles = [
+    // Elementor Global CSS
+    `/wp-content/uploads/elementor/css/global.css`,
+    // Post-specific CSS
+    `/wp-content/uploads/elementor/css/post-${postId}.css`,
+    // Theme CSS (Hello Elementor)
+    `/wp-content/uploads/elementor/css/style.min.css`,
+  ];
+
+  // [Security] HEAD 요청으로 파일 존재 여부만 확인
+  for (const path of possibleFiles) {
+    try {
+      const fullUrl = `${env.WORDPRESS_API_URL.replace('/graphql', '')}${path}`;
+      const response = await fetch(fullUrl, { 
+        method: 'HEAD',
+        next: { revalidate: 3600 }, // 1시간 캐싱
+      });
+      
+      if (response.ok) {
+        cssUrls.push(path); // Next.js rewrite를 통해 프록시됨
+        console.log(`✅ Elementor CSS found: ${path}`);
+      }
+    } catch (error) {
+      console.warn(`⚠️ CSS check failed for ${path}:`, error);
+    }
+  }
+
+  return cssUrls;
 }
 
 // ============================================

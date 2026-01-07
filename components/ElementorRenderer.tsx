@@ -8,6 +8,7 @@
 import { useEffect } from 'react';
 import parse from 'html-react-parser';
 import { env } from '@/lib/env';
+import { replaceCMSDomain } from '@/lib/utils';
 
 interface Props {
   html: string;
@@ -94,6 +95,9 @@ export default function ElementorRenderer({ html, postId }: Props) {
     }
   }, [postId]);
 
+  // [GEO] CMS 도메인 → 프론트엔드 도메인 변환
+  const cleanHtml = replaceCMSDomain(html);
+
   // HTML 파싱 및 렌더링
   return (
     <div 
@@ -104,7 +108,7 @@ export default function ElementorRenderer({ html, postId }: Props) {
         overflow: 'hidden',
       }}
     >
-      {parse(html || '<p>콘텐츠가 없습니다.</p>')}
+      {parse(cleanHtml || '<p>콘텐츠가 없습니다.</p>')}
       
       {/* Elementor 기본 스타일 추가 (CSS 로드 실패 대비) */}
       <style jsx global>{`

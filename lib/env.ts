@@ -8,17 +8,24 @@ import { z } from 'zod';
 
 // 환경변수 스키마 정의
 const envSchema = z.object({
-  // WordPress GraphQL API URL (필수)
+  // WordPress GraphQL API URL (선택 - lib/api.ts에서 자동 처리)
+  // [Trinity] Server: 직접 WordPress 호출, Client: /api/graphql 프록시 사용
   WORDPRESS_API_URL: z
     .string()
     .url('WORDPRESS_API_URL must be a valid URL')
-    .min(1, 'WORDPRESS_API_URL is required'),
+    .optional()
+    .default('https://cms.pnamarketing.co.kr/graphql'),
 
   // WordPress 프론트엔드 URL (선택, 기본값 제공)
   NEXT_PUBLIC_WORDPRESS_URL: z
     .string()
     .url('NEXT_PUBLIC_WORDPRESS_URL must be a valid URL')
     .default('https://cms.pnamarketing.co.kr'),
+
+  // 프론트엔드 도메인 (GEO: CMS 도메인 숨김용)
+  NEXT_PUBLIC_FRONTEND_DOMAIN: z
+    .string()
+    .default('pnamarketing.co.kr'),
 
   // Node Environment
   NODE_ENV: z
@@ -29,34 +36,46 @@ const envSchema = z.object({
 // 환경변수 검증 함수
 function validateEnv() {
   try {
+    // [Trinity] lib/api.ts에서 Server/Client 자동 분기 처리
+    // 환경변수는 선택사항이며 기본값으로 fallback
     const parsed = envSchema.parse({
-      WORDPRESS_API_URL: process.env.WORDPRESS_API_URL,
+      WORDPRESS_API_URL: process.env.WORDPRESS_API_URL || 
+                         process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
       NEXT_PUBLIC_WORDPRESS_URL: process.env.NEXT_PUBLIC_WORDPRESS_URL,
+      NEXT_PUBLIC_FRONTEND_DOMAIN: process.env.NEXT_PUBLIC_FRONTEND_DOMAIN,
       NODE_ENV: process.env.NODE_ENV,
     });
 
+    console.log('✅ [Env Validated]');
+    console.log('  - WordPress URL:', parsed.WORDPRESS_API_URL);
+    console.log('  - Frontend Domain:', parsed.NEXT_PUBLIC_FRONTEND_DOMAIN);
     return parsed;
   } catch (error) {
     if (error instanceof z.ZodError) {
-      console.error('❌ [Security] Environment Variables Validation Failed:');
+      console.error('\n❌ [Security] Environment Variables Validation Failed:');
       console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
       
+      // [Security] 안전한 에러 출력
       error.errors.forEach((err) => {
-        console.error(`  • ${err.path.join('.')}: ${err.message}`);
+        const path = err.path.join('.');
+        console.error(`  • ${path}: ${err.message}`);
       });
       
       console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      console.error('');
-      console.error('🔧 Fix: Create a .env.local file with:');
-      console.error('');
-      console.error('  WORDPRESS_API_URL=https://cms.pnamarketing.co.kr/graphql');
-      console.error('  NEXT_PUBLIC_WORDPRESS_URL=https://cms.pnamarketing.co.kr');
-      console.error('');
+      console.error('\n💡 Note: Environment variables are optional.');
+      console.error('   lib/api.ts automatically handles Server/Client routing.\n');
       
-      // [Security] Fail Fast - 환경변수 없으면 앱 시작 안 함
-      throw new Error('Invalid environment variables. Check console for details.');
+      // [Security] Fallback to defaults
+      console.warn('⚠️  Using default values\n');
+      return {
+        WORDPRESS_API_URL: 'https://cms.pnamarketing.co.kr/graphql',
+        NEXT_PUBLIC_WORDPRESS_URL: 'https://cms.pnamarketing.co.kr',
+        NEXT_PUBLIC_FRONTEND_DOMAIN: 'pnamarketing.co.kr',
+        NODE_ENV: (process.env.NODE_ENV as 'development' | 'production' | 'test') || 'development',
+      };
     }
     
+    console.error('❌ Unexpected error during environment validation:', error);
     throw error;
   }
 }

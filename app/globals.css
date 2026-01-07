@@ -3,54 +3,127 @@
 @tailwind utilities;
 
 /* ============================================
-   Elementor 스타일 보존을 위한 기본 CSS
+   [GEO] Dark Mode Design System (Linear/Vercel Style)
+   Trinity Core: Performance + Aesthetics + AI Visibility
    ============================================ */
 
-.elementor-wrapper {
-  /* Elementor 클래스들이 정상 작동하도록 격리 */
-  all: initial;
-  display: block;
-  font-family: inherit;
+@layer base {
+  :root {
+    /* Force Dark Mode by Default */
+    --background: 222 47% 1%;
+    --foreground: 0 0% 98%;
+    --card: 222 47% 4%;
+    --card-foreground: 0 0% 98%;
+    --popover: 222 47% 4%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 263 70% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 263 70% 50%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 263 70% 60%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-[#000212] text-white antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* ============================================
-   Typography (GEO 최적화)
+   [Trinity] Glassmorphism & Grid Pattern Utilities
+   Performance: GPU-accelerated transforms
+   ============================================ */
+
+@layer components {
+  .glass-panel {
+    @apply relative overflow-hidden rounded-2xl border border-white/[0.08];
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 
+      0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+      0 4px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .glass-panel::before {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+    content: '';
+    background: radial-gradient(
+      600px circle at var(--mouse-x) var(--mouse-y),
+      rgba(139, 92, 246, 0.1),
+      transparent 40%
+    );
+  }
+
+  .glass-panel:hover::before {
+    @apply opacity-100;
+  }
+
+  .grid-pattern {
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(139, 92, 246, 0.15) 1px, transparent 0);
+    background-size: 40px 40px;
+    background-position: -19px -19px;
+  }
+
+  .aurora-gradient {
+    @apply absolute inset-0 opacity-40;
+    background: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.3), transparent),
+      radial-gradient(ellipse 60% 50% at 80% 60%, rgba(139, 92, 246, 0.2), transparent);
+    filter: blur(80px);
+  }
+}
+
+/* ============================================
+   Typography (GEO 최적화 - Dark Mode)
    ============================================ */
 
 .prose {
-  color: #1f2937;
+  @apply text-gray-300;
   line-height: 1.8;
 }
 
 .prose h2 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  font-size: 1.875rem;
-  font-weight: 700;
+  @apply mt-8 mb-4 text-3xl font-bold text-white;
 }
 
 .prose h3 {
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  font-size: 1.5rem;
-  font-weight: 600;
+  @apply mt-6 mb-3 text-2xl font-semibold text-white;
 }
 
 .prose p {
-  margin-bottom: 1.25rem;
+  @apply mb-5;
 }
 
 .prose img {
-  border-radius: 0.5rem;
-  margin: 1.5rem 0;
+  @apply rounded-lg my-6;
 }
 
 .prose a {
-  color: #2563eb;
-  text-decoration: underline;
+  @apply text-violet-400 underline decoration-violet-400/30 transition-colors;
 }
 
 .prose a:hover {
-  color: #1d4ed8;
+  @apply text-violet-300 decoration-violet-300/50;
 }
 

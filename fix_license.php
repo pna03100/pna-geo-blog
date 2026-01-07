@@ -67,3 +67,8 @@ echo '<pre style="background: #f5f5f5; padding: 10px; border-radius: 5px;">rm fi
 echo '<p>또는 FTP/파일 매니저에서 수동으로 삭제하세요.</p>';
 
 
+
+
+
+
+

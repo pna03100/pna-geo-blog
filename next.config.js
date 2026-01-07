@@ -11,6 +11,18 @@ const nextConfig = {
   // ✅ ESLint 활성화 (빌드 시 코드 품질 검증)
   // Note: 필요 시 특정 룰만 비활성화
 
+  // 🔥 Turbopack 설정 (프로젝트 루트 명시)
+  experimental: {
+    turbo: {
+      resolveAlias: {
+        '@': './src',
+        '@/components': './components',
+        '@/lib': './lib',
+        '@/app': './app',
+      },
+    },
+  },
+
   // 🔥 이미지 최적화 설정
   images: {
     remotePatterns: [

@@ -201,3 +201,8 @@ mysql -h"$DB_HOST" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "DELETE FROM wp_o
 **Windows PowerShell 완전 호환**
 
 
+
+
+
+
+

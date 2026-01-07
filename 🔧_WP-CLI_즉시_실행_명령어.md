@@ -203,3 +203,8 @@ define('ELEMENTOR_SAFE_MODE', false);
 **이 명령어들은 서버에서 직접 실행해야 하며, Windows 로컬 터미널에서는 작동하지 않습니다.**
 
 
+
+
+
+
+
