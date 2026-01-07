@@ -1,3 +1,6 @@
+// [Vercel Force Update] 배포 강제 적용
+import { getContentByURI } from '@/lib/api';
+...
 // app/page.tsx
 import { getContentByURI } from '@/lib/api';
 import { replaceCmsUrl } from '@/lib/utils';
