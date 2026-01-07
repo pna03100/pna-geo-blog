@@ -1,3 +1,6 @@
+// [Final Force Update] 디자인 강제 적용 2026-01-07
+import { getContentByURI } from '@/lib/api';
+// ... (나머지 코드는 그대로)
 // [Vercel Force Update] 배포 강제 적용
 import { getContentByURI } from '@/lib/api';
 ...
