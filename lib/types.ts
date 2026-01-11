@@ -42,6 +42,12 @@ export interface RankMathSEO {
   } | null;
 }
 
+// FAQ Item (GEO Schema용)
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 // WordPress Content (Post or Page) - Union Type
 export interface WPContent {
   __typename: 'Page' | 'Post';
@@ -66,6 +72,9 @@ export interface WPContent {
   
   // SEO (RankMath/Yoast 플러그인)
   seo?: RankMathSEO | null;
+  
+  // GEO Enhancement: FAQ 데이터 (선택적)
+  faqs?: FAQItem[];
 }
 
 // Menu Item (메뉴 아이템 타입)

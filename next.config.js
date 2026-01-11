@@ -12,17 +12,32 @@ const nextConfig = {
   // 2. 이미지 도메인 허용 (워드프레스 이미지 로드)
   images: {
     remotePatterns: [
+      // [Production Fix] WordPress CMS 도메인 명시적 허용
       {
         protocol: 'https',
-        hostname: '**', // 모든 https 이미지 허용 (편의성)
+        hostname: 'cms.pnamarketing.co.kr',
+        pathname: '/**', // 모든 경로 허용
       },
+      // [Security] SVG/Placeholder 지원
       {
-        protocol: 'http',
-        hostname: '**',
+        protocol: 'https',
+        hostname: 'placehold.co',
+        pathname: '/**',
+      },
+      // [Fallback] 기타 CDN (필요시 추가)
+      {
+        protocol: 'https',
+        hostname: '*.cloudfront.net',
+        pathname: '/**',
       },
     ],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // [Performance] 이미지 최적화 설정
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
   // 3. 타임아웃 방지

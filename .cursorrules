@@ -13,9 +13,10 @@ Build a "Perfectly Indexable Revenue Engine" that is:
 3.  **AI-Visible:** Optimized for "Direct Answer" slots (ChatGPT/Google Snippets).
 
 ## 🚫 PRIME DIRECTIVE (The "No-Garbage" Rule)
-1.  **Reject "Empty" Code:** Coding without Business Strategy (GEO) and Design Integrity (CLS) is "Garbage."
+1.  **Context First:** Before coding, SCAN existing `@components` and `@lib`. NEVER reinvent existing UI components (Shadcn/UI).
 2.  **Reject "Div Soup":** NEVER use `<div>` for content wrappers. Use `<section>`, `<article>`, `<header>` to enforce the "Semantic Bone Structure."
-3.  **Enforce Standards:** You must cross-validate every request through the **3-Layer Protocol** below before outputting code.
+3.  **No Hallucinated Stats:** If real GEO stats (e.g., "+40%") are unavailable, use a explicit placeholder `[INSERT_REAL_DATA]` instead of fake numbers.
+4.  **Enforce Standards:** You must cross-validate every request through the **3-Layer Protocol** below.
 
 ---
 
@@ -29,11 +30,11 @@ Treat the following compressed knowledge blocks as your **ABSOLUTE SOURCE OF TRU
     -   **Hierarchy:** `<h1>` (Main Topic) -> `<h2>` (Key Sections).
     -   **The "Snippet Trap" (MANDATORY):** Immediately after the `<h1>`, place a **"Direct Answer Summary"** block (e.g., `<p className="lead">`). This secures Google's "Featured Snippet" and AI citations.
 2.  **GEO Logic (Authority Bias):**
-    -   Frontend text MUST include **"Statistics"** (e.g., "Efficiency +40%") and **"Expert Citations"**.
+    -   **Metadata:** ALWAYS implement `generateMetadata()` utilizing CMS data.
     -   **Schema Injection:** ALWAYS implement `JSON-LD` via `StructuredData` component. (Org, Article, Service).
 3.  **CLS Defense (Visual Stability):**
     -   All image wrappers must have `aspect-ratio` utilities and `bg-muted` placeholders.
-    -   Use `next/image` with explicit `width/height` props.
+    -   Use `next/image` with explicit `width/height` or `fill` props.
 </LAYER_1_STRATEGY_GEO_DESIGN>
 
 <LAYER_2_SECURITY_DATA_ARCH>
@@ -43,11 +44,11 @@ Treat the following compressed knowledge blocks as your **ABSOLUTE SOURCE OF TRU
     -   **Rule:** `interface PageProps { ... }` before implementation.
     -   **Validation:** STRICT **Zod** schema validation for ALL inputs and CMS data.
 2.  **OWASP Defense:**
-    -   **A01 (Access):** Implement Role-Based Access Control (RBAC) & Row Level Security (RLS).
-    -   **A03 (Injection):** Never trust client input. Use Server Actions (`'use server'`) for mutations.
+    -   **A01 (Access):** Verify permissions via Middleware/Guards.
+    -   **A03 (Injection):** Use Server Actions (`'use server'`) for mutations with `zod` validation inside the action.
 3.  **Architecture:**
     -   **DDD:** Domain-Driven Design folder structure.
-    -   **State:** Prefer URL Search Params over `useState` for shareability.
+    -   **Error Handling:** Use `notFound()` or `redirect()` for invalid states, never raw error text.
 </LAYER_2_SECURITY_DATA_ARCH>
 
 <LAYER_3_IMPLEMENTATION_STACK>
@@ -55,7 +56,7 @@ Treat the following compressed knowledge blocks as your **ABSOLUTE SOURCE OF TRU
 1.  **Stack:** Next.js 14+ (App Router), Tailwind CSS, Shadcn/UI, Headless CMS.
 2.  **Pattern:**
     -   **RSC First:** Server Components by default. `use client` ONLY for leaf interactivity.
-    -   **Data Binding:** When integrating UI code (e.g., v0.dev), replace hardcoded text with props sourced from `lib/api`.
+    -   **Component Reuse:** Always prefer importing from `@/components/ui` over creating new styles.
 </LAYER_3_IMPLEMENTATION_STACK>
 
 ---
@@ -65,18 +66,18 @@ Before generating ANY code, you must internally process the request through thes
 
 **Step 1: [Layer 1] GEO & Design Check**
 - "Is the HTML semantic (`<section>` vs `<div>`)?"
-- "Is the 'Snippet Trap' (Direct Answer + Stats) implemented for AI visibility?"
+- "Is the 'Snippet Trap' and `generateMetadata` implemented?"
 - "Is JSON-LD Schema injected?"
 
 **Step 2: [Layer 2] Security & Data Check**
 - "Are Props defined with explicit TypeScript Interfaces?"
 - "Is the input/data validated with Zod?"
-- "Is RBAC/RLS considered?"
+- "Does it handle errors gracefully (`notFound()`)?"
 
 **Step 3: [Layer 3] Implementation Check**
+- "Did I reuse existing Shadcn components?"
 - "Is this modern Next.js 14+ (App Router)?"
 - "Are images protected against CLS?"
-- "Is Shadcn/UI used correctly?"
 
 ---
 
@@ -102,6 +103,8 @@ You must structure your response in this exact format. Do not omit any section.
  * [Design] Semantic HTML & CLS Defense
  */
 
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { StructuredData } from '@/components/seo';
 import { z } from 'zod';
 
@@ -110,23 +113,35 @@ const PageSchema = z.object({
   title: z.string(),
   summary: z.string(), // For Snippet Trap
 });
-type PageProps = z.infer<typeof PageSchema>;
+type PageData = z.infer<typeof PageSchema>;
+
+// [GEO] Dynamic Metadata
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+    // ... impl ...
+}
 
 export default async function Page({ searchParams }: { searchParams: unknown }) {
   // [Security] Validate Input
   const parsed = PageSchema.safeParse(searchParams);
-  if (!parsed.success) return <div>Error</div>;
+  
+  // [Security] Pro-grade Error Handling
+  if (!parsed.success) {
+      console.error(parsed.error);
+      notFound(); // Trigger 404 page
+  }
+
+  const { data } = parsed;
 
   // [Implementation] Semantic Structure
   return (
     <section className="container space-y-8">
-      <StructuredData type="Article" data={parsed.data} />
+      <StructuredData type="Article" data={data} />
       
       <header className="space-y-4">
-        <h1 className="text-4xl font-bold">{parsed.data.title}</h1>
+        <h1 className="text-4xl font-bold tracking-tight">{data.title}</h1>
         {/* [GEO] Snippet Trap */}
         <p className="lead text-xl text-muted-foreground">
-          {parsed.data.summary} <span className="font-bold text-primary">(Efficiency +40%)</span>
+          {data.summary} <span className="font-bold text-primary">[INSERT_REAL_STAT]</span>
         </p>
       </header>
       
