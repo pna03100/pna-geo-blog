@@ -5,14 +5,13 @@
  */
 
 import type { Metadata } from 'next';
-import { BackgroundGradient } from '@/components/landing/BackgroundGradient';
-import { FloatingNav } from '@/components/landing/FloatingNav';
+import { AuroraBackground } from '@/components/ui/aurora-background';
 import { HeroSection as NewHeroSection } from '@/components/landing/HeroSection';
+import { VelocityScrollBanner } from '@/components/ui/velocity-scroll-banner';
 import { MetricsSection } from '@/components/landing/MetricsSection';
 import { BentoSection } from '@/components/landing/BentoSection';
 import { ExpertiseSection } from '@/components/landing/ExpertiseSection';
 import { CTASection } from '@/components/landing/CTASection';
-import { FooterSection } from '@/components/landing/FooterSection';
 
 // ============================================
 // [GEO] JSON-LD Structured Data
@@ -112,23 +111,18 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* [Design] Animated Background - Fixed */}
-      <BackgroundGradient />
-
-      {/* [Navigation] Floating Navbar */}
-      <FloatingNav />
+      {/* Layer 1: Aurora Background (The Atmosphere) */}
+      <AuroraBackground />
 
       {/* [Main] Page Content */}
-      <main className="relative">
+      <main className="relative overflow-hidden bg-transparent selection:bg-blue-100">
         <NewHeroSection />
+        <VelocityScrollBanner />
         <MetricsSection />
         <BentoSection />
         <ExpertiseSection />
         <CTASection />
       </main>
-
-      {/* [Footer] */}
-      <FooterSection />
     </>
   );
 }

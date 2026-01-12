@@ -14,10 +14,10 @@ const quickLinks = [
 ];
 
 const services = [
-  { label: "Google Ads", href: "#google-ads" },
+  { label: "구글 애즈", href: "#google-ads" },
   { label: "SEO & GEO", href: "#seo" },
-  { label: "WordPress", href: "#wordpress" },
-  { label: "Performance", href: "#performance" },
+  { label: "워드프레스", href: "#wordpress" },
+  { label: "퍼포먼스", href: "#performance" },
 ];
 
 export function FooterSection() {
@@ -31,11 +31,11 @@ export function FooterSection() {
             <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent">
               PNA Company
             </h3>
-            <p className="text-slate-700 leading-relaxed font-medium">
-              데이터 기반 성과 마케팅 전문
-              <br />
-              Google Ads · SEO · GEO 최적화
-            </p>
+            <div className="text-sm text-slate-700 leading-relaxed space-y-1">
+              <p className="font-bold text-slate-900">주식회사 피앤에이컴퍼니</p>
+              <p>대표자: 안태민</p>
+              <p>사업자등록번호: 845-81-02768</p>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -75,23 +75,34 @@ export function FooterSection() {
           {/* Contact */}
           <div>
             <h4 className="font-bold text-slate-950 mb-4">문의</h4>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-2 text-slate-700 font-medium">
-                <Mail className="w-4 h-4 text-blue-600" />
+            <ul className="space-y-3 text-sm">
+              <li className="flex items-start gap-2 text-slate-700">
+                <MapPin className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                <span className="leading-relaxed">
+                  경기 고양시 일산동구 백마로195<br />
+                  SK엠시티 상가동 2층 2120호
+                </span>
+              </li>
+              <li className="flex items-center gap-2 text-slate-700">
+                <Phone className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                <div className="flex flex-col">
+                  <a
+                    href="tel:070-7733-7905"
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Tel: 070-7733-7905
+                  </a>
+                  <span className="text-slate-600">Fax: 031-908-2225</span>
+                </div>
+              </li>
+              <li className="flex items-center gap-2 text-slate-700">
+                <Mail className="w-4 h-4 text-blue-600 flex-shrink-0" />
                 <a
-                  href="mailto:contact@pnamarketing.co.kr"
+                  href="mailto:pna0310@naver.com"
                   className="hover:text-blue-600 transition-colors"
                 >
-                  contact@pnamarketing.co.kr
+                  pna0310@naver.com
                 </a>
-              </li>
-              <li className="flex items-center gap-2 text-slate-700 font-medium">
-                <Phone className="w-4 h-4 text-blue-600" />
-                <span>02-1234-5678</span>
-              </li>
-              <li className="flex items-center gap-2 text-slate-700 font-medium">
-                <MapPin className="w-4 h-4 text-blue-600" />
-                <span>서울특별시 강남구</span>
               </li>
             </ul>
           </div>
@@ -104,10 +115,10 @@ export function FooterSection() {
               © {new Date().getFullYear()} PNA Company. All rights reserved.
             </p>
             <div className="flex items-center gap-6 text-sm text-slate-600">
-              <Link href="#" className="hover:text-blue-600 transition-colors font-medium">
+              <Link href="/privacy" className="hover:text-blue-600 transition-colors font-medium">
                 개인정보처리방침
               </Link>
-              <Link href="#" className="hover:text-blue-600 transition-colors font-medium">
+              <Link href="/terms" className="hover:text-blue-600 transition-colors font-medium">
                 이용약관
               </Link>
             </div>

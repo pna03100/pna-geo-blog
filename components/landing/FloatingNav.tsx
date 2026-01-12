@@ -12,11 +12,11 @@ import { cn } from "@/lib/utils";
 
 const menuItems = [
   { label: "회사 소개", href: "#about" },
-  { label: "Google Ads", href: "#google-ads" },
+  { label: "구글 애즈", href: "#google-ads" },
   { label: "SEO & GEO", href: "#seo" },
-  { label: "WordPress", href: "#wordpress" },
-  { label: "Performance", href: "#performance" },
-  { label: "Insights", href: "/blog" },
+  { label: "워드프레스", href: "#wordpress" },
+  { label: "퍼포먼스", href: "#performance" },
+  { label: "인사이트", href: "/blog" },
 ];
 
 export function FloatingNav() {
@@ -42,7 +42,7 @@ export function FloatingNav() {
     >
       <nav
         className={cn(
-          "mx-auto max-w-6xl rounded-full",
+          "mx-auto max-w-7xl rounded-full",
           "bg-white/70 backdrop-blur-lg",
           "border border-white/20",
           "shadow-lg shadow-black/5",

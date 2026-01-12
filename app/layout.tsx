@@ -8,6 +8,8 @@ export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { FloatingNav } from '@/components/landing/FloatingNav';
+import { FooterSection } from '@/components/landing/FooterSection';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -81,7 +83,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${inter.className} text-slate-950`}>
+        <FloatingNav />
         {children}
+        <FooterSection />
       </body>
     </html>
   );

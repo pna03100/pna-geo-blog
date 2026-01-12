@@ -9,13 +9,14 @@ import { motion } from "framer-motion";
 
 export function BackgroundGradient() {
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-sky-50/40">
-      {/* Animated Gradient Orbs - 더 선명한 파란색 계열 */}
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/20 to-sky-50/25">
+      {/* Animated Gradient Orbs - 더 넓게 퍼진 배치 */}
+      {/* Top Left */}
       <motion.div
-        className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/40 rounded-full blur-3xl"
+        className="absolute -top-1/4 -left-1/4 w-[48rem] h-[48rem] bg-blue-500/20 rounded-full blur-3xl"
         animate={{
-          x: [0, 100, 0],
-          y: [0, 50, 0],
+          x: [0, 150, 0],
+          y: [0, 100, 0],
           scale: [1, 1.2, 1],
         }}
         transition={{
@@ -24,11 +25,12 @@ export function BackgroundGradient() {
           ease: "easeInOut",
         }}
       />
+      {/* Top Right */}
       <motion.div
-        className="absolute top-1/4 right-1/4 w-[32rem] h-[32rem] bg-blue-600/35 rounded-full blur-3xl"
+        className="absolute -top-1/4 -right-1/4 w-[52rem] h-[52rem] bg-blue-600/18 rounded-full blur-3xl"
         animate={{
-          x: [0, -80, 0],
-          y: [0, 100, 0],
+          x: [0, -120, 0],
+          y: [0, 150, 0],
           scale: [1, 1.3, 1],
         }}
         transition={{
@@ -37,15 +39,30 @@ export function BackgroundGradient() {
           ease: "easeInOut",
         }}
       />
+      {/* Bottom Left */}
       <motion.div
-        className="absolute bottom-1/4 left-1/3 w-[28rem] h-[28rem] bg-sky-400/40 rounded-full blur-3xl"
+        className="absolute -bottom-1/4 -left-1/4 w-[44rem] h-[44rem] bg-sky-400/20 rounded-full blur-3xl"
         animate={{
-          x: [0, 120, 0],
-          y: [0, -60, 0],
+          x: [0, 180, 0],
+          y: [0, -80, 0],
           scale: [1, 1.1, 1],
         }}
         transition={{
           duration: 18,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      {/* Bottom Right */}
+      <motion.div
+        className="absolute -bottom-1/3 -right-1/3 w-[50rem] h-[50rem] bg-sky-500/15 rounded-full blur-3xl"
+        animate={{
+          x: [0, -100, 0],
+          y: [0, -120, 0],
+          scale: [1, 1.15, 1],
+        }}
+        transition={{
+          duration: 22,
           repeat: Infinity,
           ease: "easeInOut",
         }}
