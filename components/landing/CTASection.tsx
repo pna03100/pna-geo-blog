@@ -12,7 +12,7 @@ import { SectionWrapper } from "./SectionWrapper";
 
 export function CTASection() {
   return (
-    <SectionWrapper id="contact" className="py-32">
+    <SectionWrapper id="contact" className="py-16 md:py-20">
       <FadeIn>
         <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500 p-12 md:p-20">
           {/* Animated background elements */}
@@ -55,7 +55,7 @@ export function CTASection() {
             </motion.div>
 
             {/* Heading */}
-            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-relaxed md:leading-loose">
+            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight">
               지금 바로 시작하세요
             </h2>
 

@@ -80,7 +80,7 @@ export default function RootLayout({
 
   return (
     <html lang="ko">
-      <body className={`${inter.className} bg-slate-50 text-slate-950`}>
+      <body className={`${inter.className} text-slate-950`}>
         {children}
       </body>
     </html>

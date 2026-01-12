@@ -22,7 +22,7 @@ const services = [
 
 export function FooterSection() {
   return (
-    <footer className="relative py-20 mt-32">
+    <footer className="relative py-12 md:py-16 mt-0">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">

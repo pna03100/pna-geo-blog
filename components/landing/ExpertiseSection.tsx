@@ -57,7 +57,7 @@ export function ExpertiseSection() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-950 tracking-tight leading-relaxed md:!leading-[1.7]">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-950 tracking-tight leading-tight md:!leading-[1.3]">
               검증된 전문성과
               <br />
               <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
@@ -70,15 +70,15 @@ export function ExpertiseSection() {
             <GlassCard hover={false}>
               <div className="p-8">
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-500 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30">
-                    안
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center text-4xl shadow-lg">
+                    👨‍💼
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-slate-950">안태민 CEO</h3>
                     <p className="text-slate-700 font-medium">Founder & Chief Executive Officer</p>
                   </div>
                 </div>
-                <p className="text-slate-800 leading-relaxed md:!leading-[2] font-medium">
+                <p className="text-slate-800 leading-relaxed font-medium">
                   15년간 대기업 마케팅 프로젝트를 진행하며 쌓은 경험과 데이터 기반
                   접근법으로 클라이언트의 비즈니스 성장을 이끌어냅니다.
                 </p>

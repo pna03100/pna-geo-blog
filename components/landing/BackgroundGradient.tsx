@@ -9,10 +9,10 @@ import { motion } from "framer-motion";
 
 export function BackgroundGradient() {
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden bg-slate-50">
-      {/* Animated Gradient Orbs - 쨍한 파란색 계열 */}
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-sky-50/40">
+      {/* Animated Gradient Orbs - 더 선명한 파란색 계열 */}
       <motion.div
-        className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/25 rounded-full blur-3xl"
+        className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/40 rounded-full blur-3xl"
         animate={{
           x: [0, 100, 0],
           y: [0, 50, 0],
@@ -25,7 +25,7 @@ export function BackgroundGradient() {
         }}
       />
       <motion.div
-        className="absolute top-1/4 right-1/4 w-[32rem] h-[32rem] bg-blue-600/20 rounded-full blur-3xl"
+        className="absolute top-1/4 right-1/4 w-[32rem] h-[32rem] bg-blue-600/35 rounded-full blur-3xl"
         animate={{
           x: [0, -80, 0],
           y: [0, 100, 0],
@@ -38,7 +38,7 @@ export function BackgroundGradient() {
         }}
       />
       <motion.div
-        className="absolute bottom-1/4 left-1/3 w-[28rem] h-[28rem] bg-sky-400/25 rounded-full blur-3xl"
+        className="absolute bottom-1/4 left-1/3 w-[28rem] h-[28rem] bg-sky-400/40 rounded-full blur-3xl"
         animate={{
           x: [0, 120, 0],
           y: [0, -60, 0],

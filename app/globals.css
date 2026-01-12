@@ -9,26 +9,26 @@
 
 @layer base {
   :root {
-    /* Force Dark Mode by Default */
-    --background: 222 47% 1%;
-    --foreground: 0 0% 98%;
-    --card: 222 47% 4%;
-    --card-foreground: 0 0% 98%;
-    --popover: 222 47% 4%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 263 70% 60%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 263 70% 50%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 263 70% 60%;
+    /* Light Mode - Blue Theme */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
     --radius: 0.75rem;
   }
 }
@@ -39,7 +39,7 @@
   }
   
   body {
-    @apply bg-[#000212] text-white antialiased;
+    @apply antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
@@ -55,13 +55,13 @@
 
 @layer components {
   .glass-panel {
-    @apply relative overflow-hidden rounded-2xl border border-white/[0.08];
-    background: rgba(255, 255, 255, 0.03);
+    @apply relative overflow-hidden rounded-2xl border border-blue-100/50;
+    background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 
-      0 0 0 1px rgba(255, 255, 255, 0.03) inset,
-      0 4px 24px rgba(0, 0, 0, 0.4);
+      0 0 0 1px rgba(59, 130, 246, 0.05) inset,
+      0 4px 24px rgba(0, 0, 0, 0.08);
   }
 
   .glass-panel::before {
@@ -69,7 +69,7 @@
     content: '';
     background: radial-gradient(
       600px circle at var(--mouse-x) var(--mouse-y),
-      rgba(139, 92, 246, 0.1),
+      rgba(59, 130, 246, 0.08),
       transparent 40%
     );
   }
@@ -80,7 +80,7 @@
 
   .grid-pattern {
     background-image: 
-      radial-gradient(circle at 1px 1px, rgba(139, 92, 246, 0.15) 1px, transparent 0);
+      radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.1) 1px, transparent 0);
     background-size: 40px 40px;
     background-position: -19px -19px;
   }
@@ -88,27 +88,27 @@
   .aurora-gradient {
     @apply absolute inset-0 opacity-40;
     background: 
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.3), transparent),
-      radial-gradient(ellipse 60% 50% at 80% 60%, rgba(139, 92, 246, 0.2), transparent);
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.2), transparent),
+      radial-gradient(ellipse 60% 50% at 80% 60%, rgba(14, 165, 233, 0.15), transparent);
     filter: blur(80px);
   }
 }
 
 /* ============================================
-   Typography (GEO 최적화 - Dark Mode)
+   Typography (GEO 최적화 - Light Mode)
    ============================================ */
 
 .prose {
-  @apply text-gray-300;
+  @apply text-slate-700;
   line-height: 1.8;
 }
 
 .prose h2 {
-  @apply mt-8 mb-4 text-3xl font-bold text-white;
+  @apply mt-8 mb-4 text-3xl font-bold text-slate-950;
 }
 
 .prose h3 {
-  @apply mt-6 mb-3 text-2xl font-semibold text-white;
+  @apply mt-6 mb-3 text-2xl font-semibold text-slate-900;
 }
 
 .prose p {
@@ -120,10 +120,10 @@
 }
 
 .prose a {
-  @apply text-violet-400 underline decoration-violet-400/30 transition-colors;
+  @apply text-blue-600 underline decoration-blue-600/30 transition-colors;
 }
 
 .prose a:hover {
-  @apply text-violet-300 decoration-violet-300/50;
+  @apply text-blue-700 decoration-blue-700/50;
 }
 
