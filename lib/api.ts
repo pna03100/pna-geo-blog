@@ -24,7 +24,7 @@ const WPContentSchema = z.object({
   slug: z.string(),
   databaseId: z.number(),
   title: z.string().nullable(),
-  content: z.string().nullable(),
+  content: z.string().nullable().optional(),
   date: z.string().optional(),
   excerpt: z.string().optional(),
   author: z.object({
@@ -42,7 +42,7 @@ const WPContentSchema = z.object({
       mediaDetails: z.object({
         width: z.number(),
         height: z.number(),
-      }).nullable(),
+      }).nullable().optional(),
     }),
   }).nullable().optional(),
   categories: z.object({
@@ -333,10 +333,19 @@ export async function getAllPosts(): Promise<WPContent[]> {
 
     // [Security] 배열의 각 아이템을 Zod로 검증
     const validated = data.posts.nodes
-      .map((node) => WPContentSchema.safeParse(node))
+      .map((node, index) => {
+        const result = WPContentSchema.safeParse(node);
+        if (!result.success) {
+          console.error(`❌ [Validation Failed] Post #${index}`);
+          console.error('Validation Errors:', JSON.stringify(result.error.errors, null, 2));
+          console.error('Raw Data:', JSON.stringify(node, null, 2).substring(0, 500));
+        }
+        return result;
+      })
       .filter((result) => result.success)
       .map((result) => (result as z.SafeParseSuccess<WPContent>).data);
 
+    console.log(`✅ getAllPosts: ${validated.length} posts validated successfully`);
     return validated;
   } catch (error) {
     console.error('getAllPosts Error:', error);

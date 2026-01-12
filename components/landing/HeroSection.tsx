@@ -29,8 +29,8 @@ export function HeroSection() {
       </div>
 
       {/* Layer 3: Content - Alignment Fix: Match Header width */}
-      <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl pt-32 pb-32 md:pt-48 md:pb-48 bg-transparent">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl pt-40 pb-32 md:pt-52 md:pb-48 bg-transparent">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
           
           {/* Left Column: Text Content */}
           <motion.div
@@ -102,71 +102,92 @@ export function HeroSection() {
               <br className="hidden md:block" />
               광고주 평균 <strong className="text-[#2563EB]">500% ROAS</strong>를 달성합니다.
             </motion.p>
+          </motion.div>
 
-            {/* 4. Buttons */}
+          {/* Right Column: 3D Visual + Social Proof */}
+          <div className="hidden lg:flex flex-col items-center gap-6 relative -translate-y-[10%]">
+            <div className="scale-90 lg:translate-x-0">
+              <HeroVisual3D />
+            </div>
+            
+            {/* Social Proof - Below 3D Element (Centered) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-wrap gap-4 pt-2"
-            >
-              {/* Primary CTA */}
-              <motion.a
-                href="#contact"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="group relative px-8 py-4 rounded-full bg-blue-600 text-white font-bold shadow-2xl shadow-blue-900/20 hover:shadow-blue-900/30 transition-all overflow-hidden"
-              >
-                {/* Hover gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                <span className="relative flex items-center gap-2">
-                  무료 진단 신청하기 
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </motion.a>
-
-              {/* Secondary CTA */}
-              <motion.a
-                href="#cases"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 rounded-full bg-white backdrop-blur-lg border border-slate-300 text-slate-900 font-bold hover:bg-slate-50 hover:border-slate-400 transition-all shadow-lg"
-              >
-                성공 사례 보기
-              </motion.a>
-            </motion.div>
-            
-            {/* 5. Social Proof */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="flex flex-wrap gap-6 pt-2 text-sm font-semibold text-slate-600"
+              className="flex flex-col gap-3 text-sm font-semibold text-slate-600 lg:translate-x-[5%] -translate-y-[20%]"
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                 <span>15년+ 데이터 노하우</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                 <span>상위 1% 구글 파트너</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                 <span>평균 ROAS 500%</span>
               </div>
             </motion.div>
-          </motion.div>
-
-          {/* Right Column: 3D Visual */}
-          <div className="hidden lg:flex items-center lg:justify-end relative">
-            <div className="scale-90 lg:-translate-x-12">
-              <HeroVisual3D />
-            </div>
           </div>
 
         </div>
+
+        {/* Social Proof - Mobile Only (Below Text) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.65 }}
+          className="flex lg:hidden flex-col gap-3 text-sm font-semibold text-slate-600 mt-6"
+        >
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <span>15년+ 데이터 노하우</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <span>상위 1% 구글 파트너</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <span>평균 ROAS 500%</span>
+          </div>
+        </motion.div>
+
+        {/* CTA Buttons - Separate Row for Better Separation */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="flex flex-wrap gap-4 justify-start -mt-48"
+        >
+          {/* Primary CTA */}
+          <motion.a
+            href="tel:07077337905"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="group relative px-8 py-4 rounded-full bg-blue-600 text-white font-bold shadow-2xl shadow-blue-900/20 hover:shadow-blue-900/30 transition-all overflow-hidden"
+          >
+            {/* Hover gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            
+            <span className="relative flex items-center gap-2">
+              무료 상담 신청하기 
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </motion.a>
+
+          {/* Secondary CTA */}
+          <motion.a
+            href="#cases"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className="px-8 py-4 rounded-full bg-white backdrop-blur-lg border border-slate-300 text-slate-900 font-bold hover:bg-slate-50 hover:border-slate-400 transition-all shadow-lg"
+          >
+            성공 사례 보기
+          </motion.a>
+        </motion.div>
       </div>
 
       {/* Scroll Indicator */}

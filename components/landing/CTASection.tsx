@@ -14,13 +14,14 @@ export function CTASection() {
   return (
     <SectionWrapper id="contact" className="py-16 md:py-20">
       <FadeIn>
-        <div className="relative overflow-hidden rounded-[3rem] bg-[#172554] p-12 md:p-20">
+        <div className="relative overflow-hidden rounded-[3rem] bg-black p-12 md:p-20">
           {/* Animated background elements */}
           <motion.div
-            className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"
+            className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl"
+            style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}
             animate={{
               scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
+              opacity: [0.3, 0.6, 0.3],
             }}
             transition={{
               duration: 4,
@@ -29,10 +30,11 @@ export function CTASection() {
             }}
           />
           <motion.div
-            className="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"
+            className="absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl"
+            style={{ backgroundColor: 'rgba(99, 102, 241, 0.1)' }}
             animate={{
               scale: [1, 1.3, 1],
-              opacity: [0.2, 0.4, 0.2],
+              opacity: [0.2, 0.5, 0.2],
             }}
             transition={{
               duration: 5,
@@ -49,9 +51,23 @@ export function CTASection() {
               transition={{ duration: 0.5, type: "spring" }}
               className="inline-flex items-center justify-center"
             >
-              <div className="p-4 rounded-3xl bg-white/20 backdrop-blur-sm">
-                <Sparkles className="w-12 h-12 text-white" />
-              </div>
+              <motion.div 
+                className="p-4 rounded-3xl bg-blue-600/30 backdrop-blur-sm border border-blue-400/50"
+                animate={{
+                  boxShadow: [
+                    '0 0 20px rgba(59, 130, 246, 0.4)',
+                    '0 0 40px rgba(59, 130, 246, 0.6)',
+                    '0 0 20px rgba(59, 130, 246, 0.4)',
+                  ],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <Sparkles className="w-12 h-12 text-blue-300" />
+              </motion.div>
             </motion.div>
 
             {/* Heading */}
@@ -70,17 +86,40 @@ export function CTASection() {
                 href="mailto:pna0310@naver.com"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="group px-10 py-5 rounded-full bg-white text-slate-900 font-bold text-lg shadow-2xl hover:shadow-white/20 transition-all duration-300 flex items-center gap-2"
+                className="group relative px-10 py-5 rounded-full bg-blue-600 border-2 border-blue-400 text-white font-bold text-lg transition-all duration-300 flex items-center gap-2"
+                style={{
+                  boxShadow: '0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.3), inset 0 0 20px rgba(147, 197, 253, 0.2)'
+                }}
               >
-                무료 상담 신청하기
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-blue-400/20"
+                  animate={{
+                    opacity: [0.5, 0.8, 0.5],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                <span className="relative z-10 flex items-center gap-2">
+                  무료 상담 신청하기
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </span>
               </motion.a>
 
               <motion.a
                 href="tel:070-7733-7905"
-                whileHover={{ scale: 1.05, y: -2 }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  y: -2,
+                  boxShadow: '0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.1)'
+                }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-5 rounded-full bg-white/10 backdrop-blur-md border-2 border-white/30 text-white font-bold text-lg hover:bg-white/20 transition-all duration-300"
+                className="px-10 py-5 rounded-full bg-white/5 backdrop-blur-md border-2 border-white/40 text-white font-bold text-lg transition-all duration-300"
+                style={{
+                  boxShadow: '0 0 15px rgba(255, 255, 255, 0.1), inset 0 0 10px rgba(255, 255, 255, 0.05)'
+                }}
               >
                 전화 상담하기
               </motion.a>

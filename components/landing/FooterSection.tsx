@@ -15,10 +15,10 @@ const quickLinks = [
 ];
 
 const services = [
-  { label: "구글 애즈", href: "#google-ads" },
-  { label: "SEO & GEO", href: "#seo" },
-  { label: "워드프레스", href: "#wordpress" },
-  { label: "퍼포먼스", href: "#performance" },
+  { label: "구글 애즈", href: "/google-ads" },
+  { label: "워드프레스", href: "/wordpress" },
+  { label: "퍼포먼스", href: "/performance" },
+  { label: "인사이트", href: "/insights" },
 ];
 
 export function FooterSection() {

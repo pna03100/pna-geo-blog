@@ -6,26 +6,45 @@
 
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 const navItems = [
-  { name: '구글 애즈', href: '#google-ads' },
-  { name: '워드프레스', href: '#wordpress' },
-  { name: '퍼포먼스', href: '#performance' },
+  { name: '구글 애즈', href: '/google-ads' },
+  { name: '워드프레스', href: '/wordpress' },
+  { name: '퍼포먼스', href: '/performance' },
   { name: '인사이트', href: '/insights' },
 ]
 
 export function Navbar() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <header className="fixed top-6 left-0 right-0 z-50 w-full">
+    <header className={cn(
+      "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300",
+      isScrolled 
+        ? "bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-sm" 
+        : "bg-transparent"
+    )}>
       {/* Layout Container: Matches page max-width (max-w-7xl) */}
-      <div className="max-w-7xl mx-auto px-4 md:px-6 grid grid-cols-[1fr_auto_1fr] items-center h-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 grid grid-cols-[1fr_auto_1fr] items-center h-[73px]">
         
         {/* 1. Logo Zone (Left Align, No Background) */}
         <div className="flex justify-start">
@@ -36,17 +55,22 @@ export function Navbar() {
             <Image
               src="/logo.png"
               alt="PNA Company"
-              width={120}
-              height={32}
+              width={150}
+              height={40}
               priority
-              className="w-auto h-8"
+              className="w-auto h-10"
             />
           </Link>
         </div>
 
-        {/* 2. Menu Zone (Center Align, White Pill Background) */}
+        {/* 2. Menu Zone (Center Align, Dynamic Background) */}
         <nav className="hidden lg:block">
-          <ul className="flex items-center gap-1 bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-3 py-2 shadow-lg shadow-slate-200/20">
+          <ul className={cn(
+            "flex items-center gap-1 rounded-full px-3 py-2 transition-all duration-300",
+            isScrolled
+              ? "bg-transparent shadow-none border-0"
+              : "bg-white/90 backdrop-blur-md border border-slate-200 shadow-lg shadow-slate-200/20"
+          )}>
             {navItems.map((item, index) => (
               <li key={item.name} className="relative">
                 <Link
@@ -98,15 +122,15 @@ export function Navbar() {
 
         {/* 3. CTA Button Zone (Right Align) */}
         <div className="flex justify-end">
-          <Link href="#contact">
+          <a href="tel:07077337905">
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-7 py-3 rounded-full bg-blue-600 text-white font-bold text-base shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-colors"
             >
-              무료 진단 신청
+              무료 상담 신청
             </motion.button>
-          </Link>
+          </a>
         </div>
 
       </div>

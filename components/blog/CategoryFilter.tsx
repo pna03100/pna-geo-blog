@@ -1,74 +1,96 @@
 /**
- * [GEO] Category Filter Component - Client-Side Navigation
- * [Security] Type-Safe Props
- * [Design] Tailwind CSS + Shadcn/UI Badge
+ * [Filter] Category Filter Component
+ * Client-side filtering for blog posts
  */
 
-'use client';
+"use client";
 
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Badge } from '@/components/ui/badge';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { getCategoryColor } from "@/lib/category-colors";
 
-// ============================================
-// [Security] Interface for Props
-// ============================================
-interface CategoryFilterProps {
-  categories: Array<{
-    name: string;
-    slug: string;
-    count: number;
-  }>;
+interface Category {
+  slug: string;
+  name: string;
+  count: number;
 }
 
-// ============================================
-// [Implementation] CategoryFilter Component
-// ============================================
-export function CategoryFilter({ categories }: CategoryFilterProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const currentCategory = searchParams.get('category');
+interface CategoryFilterProps {
+  categories: Category[];
+  selectedCategory: string;
+  onSelectCategory: (slug: string) => void;
+  totalPosts: number;
+}
 
-  // [Implementation] Handle Category Click
-  const handleCategoryClick = (slug: string | null) => {
-    const params = new URLSearchParams(searchParams.toString());
-    
-    if (slug) {
-      params.set('category', slug);
-    } else {
-      params.delete('category');
-    }
-    
-    // Reset to page 1 when changing category
-    params.delete('page');
-    
-    const queryString = params.toString();
-    router.push(queryString ? `/blog?${queryString}` : '/blog');
-  };
-
-  if (categories.length === 0) return null;
-
+export function CategoryFilter({ categories, selectedCategory, onSelectCategory, totalPosts }: CategoryFilterProps) {
   return (
-    <div className="flex flex-wrap gap-2 mb-8">
-      {/* All Posts Badge */}
-      <Badge
-        variant={!currentCategory ? 'default' : 'outline'}
-        className="cursor-pointer transition-all hover:scale-105"
-        onClick={() => handleCategoryClick(null)}
+    <div className="flex flex-wrap items-center gap-3">
+      {/* All Button */}
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => onSelectCategory('all')}
+        className={cn(
+          "px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300",
+          selectedCategory === 'all'
+            ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
+            : "bg-white text-slate-600 border border-slate-200 hover:border-blue-600 hover:text-blue-600"
+        )}
       >
         전체
-      </Badge>
+        <span className="ml-2 text-xs opacity-70">
+          {totalPosts}
+        </span>
+      </motion.button>
 
-      {/* Category Badges */}
-      {categories.map((category) => (
-        <Badge
-          key={category.slug}
-          variant={currentCategory === category.slug ? 'default' : 'outline'}
-          className="cursor-pointer transition-all hover:scale-105"
-          onClick={() => handleCategoryClick(category.slug)}
-        >
-          {category.name} ({category.count})
-        </Badge>
-      ))}
+      {/* Category Buttons */}
+      {categories.map((category) => {
+        const colors = getCategoryColor(category.name);
+        const isSelected = selectedCategory === category.slug;
+        
+        // Extract hex color from bg class
+        const bgColorMatch = colors.hoverBg.match(/\[([#\w]+)\]/);
+        const bgColor = bgColorMatch ? bgColorMatch[1] : '#4285F4';
+        
+        return (
+          <motion.button
+            key={category.slug}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => onSelectCategory(category.slug)}
+            className={cn(
+              "px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 relative overflow-hidden group"
+            )}
+            style={
+              isSelected
+                ? {
+                    backgroundColor: bgColor,
+                    color: colors.text === 'text-white' ? 'white' : '#0f172a',
+                    boxShadow: `0 10px 25px -5px ${bgColor}40`,
+                  }
+                : {
+                    backgroundColor: 'white',
+                    border: '1px solid #e2e8f0',
+                    color: '#475569',
+                  }
+            }
+          >
+            {/* Hover overlay */}
+            {!isSelected && (
+              <span
+                className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                style={{ backgroundColor: bgColor }}
+              />
+            )}
+            
+            <span className="relative z-10">
+              {category.name}
+              <span className="ml-2 text-xs opacity-70">{category.count}</span>
+            </span>
+          </motion.button>
+        );
+      })}
     </div>
   );
 }

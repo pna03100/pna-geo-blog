@@ -11,7 +11,10 @@ import { VelocityScrollBanner } from '@/components/ui/velocity-scroll-banner';
 import { MetricsSection } from '@/components/landing/MetricsSection';
 import { BentoSection } from '@/components/landing/BentoSection';
 import { ExpertiseSection } from '@/components/landing/ExpertiseSection';
+import { InsightsSection } from '@/components/landing/InsightsSection';
+import { FAQSection } from '@/components/landing/FAQSection';
 import { CTASection } from '@/components/landing/CTASection';
+import { getAllPosts } from '@/lib/api';
 
 // ============================================
 // [GEO] JSON-LD Structured Data
@@ -100,8 +103,16 @@ export const metadata: Metadata = {
 // ============================================
 // [Main] Homepage Implementation
 // ============================================
-export default function HomePage() {
+export default async function HomePage() {
   const jsonLd = generateJsonLd();
+  
+  // Fetch latest posts from WordPress
+  let posts = await getAllPosts();
+  
+  // 개발 환경에서 데이터가 없을 경우 더미 데이터 사용 (optional)
+  // if (posts.length === 0 && process.env.NODE_ENV === 'development') {
+  //   console.log('No posts found from WordPress API');
+  // }
 
   return (
     <>
@@ -121,6 +132,8 @@ export default function HomePage() {
         <MetricsSection />
         <BentoSection />
         <ExpertiseSection />
+        <InsightsSection posts={posts} />
+        <FAQSection />
         <CTASection />
       </main>
     </>

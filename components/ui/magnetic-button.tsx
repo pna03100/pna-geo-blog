@@ -76,7 +76,7 @@ export function MagneticButton({
       {variant === "primary" ? (
         <>
           <span className="relative z-10 flex items-center gap-2">
-            {children || "무료 진단 신청하기"}
+            {children || "무료 상담 신청하기"}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </span>
           <motion.div
