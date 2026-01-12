@@ -107,22 +107,6 @@ export function CTASection() {
                   <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </motion.a>
-
-              <motion.a
-                href="tel:070-7733-7905"
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -2,
-                  boxShadow: '0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.1)'
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="px-7 py-3.5 md:px-10 md:py-5 rounded-full bg-white/5 backdrop-blur-md border-2 border-white/40 text-white font-bold text-sm md:text-lg transition-all duration-300"
-                style={{
-                  boxShadow: '0 0 15px rgba(255, 255, 255, 0.1), inset 0 0 10px rgba(255, 255, 255, 0.05)'
-                }}
-              >
-                전화 상담하기
-              </motion.a>
             </div>
 
             {/* Trust Signals */}
