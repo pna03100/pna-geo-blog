@@ -8,6 +8,7 @@
 import { motion } from "framer-motion";
 import { Trophy, ArrowRight, CheckCircle2 } from "lucide-react";
 import dynamic from "next/dynamic";
+import { GoogleShapesBackground } from "@/components/ui/google-shapes-background";
 
 // ✅ SEO Optimized: Dynamic Import
 const HeroVisual3D = dynamic(() => import("@/components/ui/hero-visual-3d"), {
@@ -22,11 +23,16 @@ const HeroVisual3D = dynamic(() => import("@/components/ui/hero-visual-3d"), {
 export function HeroSection() {
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-transparent">
+      {/* Google Ambient Background - Full Section */}
+      <div className="absolute inset-0 -z-10 opacity-60">
+        <GoogleShapesBackground />
+      </div>
+
       {/* Layer 3: Content - Alignment Fix: Match Header width */}
       <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl pt-32 pb-32 md:pt-48 md:pb-48 bg-transparent">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           
-          {/* Left Column: Text Strategy */}
+          {/* Left Column: Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -153,13 +159,13 @@ export function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: 3D Holographic Visual */}
-          <div className="hidden lg:flex items-center justify-center relative z-20">
-            {/* Spotlight Background */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 rounded-full blur-3xl -z-10 transform scale-150" />
-            <HeroVisual3D />
+          {/* Right Column: 3D Visual */}
+          <div className="hidden lg:flex items-center lg:justify-end relative">
+            <div className="scale-90 lg:-translate-x-12">
+              <HeroVisual3D />
+            </div>
           </div>
-          
+
         </div>
       </div>
 
