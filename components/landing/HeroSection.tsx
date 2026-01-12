@@ -1,115 +1,108 @@
-// ============================================
-// [GEO] Hero Section - Aurora Gradient Animation
-// [Security] Client Component (Framer Motion)
-// [Implementation] RSC-compatible, Performance-optimized
-// ============================================
+/**
+ * [Section] Hero - Main impact section
+ * [Design] Clean typography, floating elements
+ */
 
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { motion } from "framer-motion";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { FadeIn } from "./FadeIn";
+import { SectionWrapper } from "./SectionWrapper";
 
-export default function HeroSection() {
+export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
-      {/* [GEO] Aurora Background - GPU Accelerated */}
-      <div className="aurora-gradient" aria-hidden="true" />
-      <div className="grid-pattern absolute inset-0 opacity-30" aria-hidden="true" />
-
-      {/* Content Container */}
-      <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
-        {/* [GEO] New Feature Badge - AI Citation Trigger */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex justify-center"
-        >
-          <Badge 
-            variant="secondary" 
-            className="glass-panel px-4 py-2 text-sm font-medium border-violet-500/20"
+    <SectionWrapper className="pt-32 md:pt-40 pb-16 md:pb-24">
+      <div className="text-center space-y-6">
+        {/* Badge */}
+        <FadeIn delay={0.1}>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 backdrop-blur-md border border-blue-200/50 shadow-lg"
           >
-            <Sparkles className="w-4 h-4 mr-2 text-violet-400" />
-            <span className="text-white">
-              New: <span className="text-violet-400">40% 더 빠른 로딩 속도</span>
+            <Sparkles className="w-4 h-4 text-blue-600" />
+            <span className="text-sm font-semibold text-slate-900">
+              Google 공식 파트너 | AI & GEO Marketing
             </span>
-          </Badge>
-        </motion.div>
+          </motion.div>
+        </FadeIn>
 
-        {/* [GEO] H1 - Gradient Title (AI Readability) */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-5xl md:text-7xl font-bold tracking-tight"
-        >
-          <span className="bg-gradient-to-r from-white via-violet-200 to-violet-400 bg-clip-text text-transparent">
-            Beyond WordPress
-          </span>
-          <br />
-          <span className="text-white">
-            순수 엔지니어링의 미학
-          </span>
-        </motion.h1>
+        {/* Main Heading */}
+        <FadeIn delay={0.2}>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-relaxed md:leading-loose">
+            <span className="text-slate-950">구글애즈 광고 대행사,</span>
+            <br />
+            <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-sky-500 bg-clip-text text-transparent">
+              데이터로 증명하는
+            </span>
+            <br />
+            <span className="text-slate-950">피앤에이컴퍼니</span>
+          </h1>
+        </FadeIn>
 
-        {/* [GEO] Subtext with Statistics (Chen et al. Citation Pattern) */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
-        >
-          Elementor의 무거운 레거시를 벗어나{' '}
-          <span className="text-violet-400 font-semibold">
-            Next.js 14로 구축된 초고속 웹사이트
-          </span>
-          . 평균 로딩 시간 <span className="text-white font-bold">0.8초</span>, 
-          Lighthouse 점수 <span className="text-white font-bold">98점</span> 달성.
-        </motion.p>
+        {/* Subtitle */}
+        <FadeIn delay={0.3}>
+          <p className="text-lg md:text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed font-medium">
+            검색 의도 선점 타겟팅과 ROAS 최적화로
+            <br className="hidden md:block" />
+            광고주 평균 <strong className="text-blue-600 font-bold">500% ROAS</strong>를 달성합니다
+          </p>
+        </FadeIn>
 
         {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <Button 
-            size="lg" 
-            className="bg-violet-600 hover:bg-violet-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg shadow-violet-500/20 transition-all hover:shadow-violet-500/40 group"
-          >
-            프로젝트 시작하기
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <Button 
-            size="lg" 
-            variant="outline"
-            className="glass-panel border-white/10 text-white hover:bg-white/5 px-8 py-6 text-lg rounded-xl"
-          >
-            포트폴리오 보기
-          </Button>
-        </motion.div>
+        <FadeIn delay={0.4}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            {/* Primary CTA */}
+            <motion.a
+              href="#contact"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="group relative overflow-hidden px-7 py-3.5 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold text-base shadow-2xl shadow-blue-500/40 transition-all duration-300"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                무료 진단 신청하기
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-sky-600 to-blue-600"
+                initial={{ x: "100%" }}
+                whileHover={{ x: "0%" }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.a>
 
-        {/* [GEO] Trust Signal - Expert Citation */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="pt-8 text-sm text-gray-500"
-        >
-          ⚡ Trusted by <span className="text-violet-400 font-semibold">500+ 고객사</span>
-          {' '}| 평균 ROI <span className="text-white font-bold">240% 증가</span>
-        </motion.div>
+            {/* Secondary CTA */}
+            <motion.a
+              href="#cases"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-7 py-3.5 rounded-full bg-white/70 backdrop-blur-md border border-blue-200/50 text-slate-900 font-bold text-base shadow-lg hover:bg-white/90 hover:border-blue-300 transition-all duration-300"
+            >
+              성공 사례 보기
+            </motion.a>
+          </div>
+        </FadeIn>
+
+        {/* Floating Elements */}
+        <div className="relative pt-12">
+          <FadeIn delay={0.5}>
+            <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-slate-800 font-medium">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse shadow-lg shadow-blue-500/50" />
+                <span>실시간 캠페인 관리</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse shadow-lg shadow-blue-600/50" />
+                <span>GA4 정밀 분석</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-sky-500 animate-pulse shadow-lg shadow-sky-500/50" />
+                <span>AI 최적화</span>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
       </div>
-
-      {/* Decorative Gradient Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-600/20 rounded-full blur-3xl animate-pulse" aria-hidden="true" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-pulse delay-1000" aria-hidden="true" />
-    </section>
+    </SectionWrapper>
   );
 }
-
-
-

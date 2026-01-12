@@ -8,20 +8,7 @@ import { getContentByURI, getAllPosts } from '@/lib/api';
 import { replaceCmsUrl } from '@/lib/utils';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import dynamic from 'next/dynamic';
-
-// [Implementation] Dynamic Import for Code Splitting
-const CleanPostRenderer = dynamic(() => import('@/components/CleanPostRenderer'), {
-  ssr: true,
-  loading: () => (
-    <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-      <div className="animate-pulse">
-        <div className="h-8 bg-slate-200 rounded w-3/4 mx-auto mb-4"></div>
-        <div className="h-4 bg-slate-200 rounded w-1/2 mx-auto"></div>
-      </div>
-    </div>
-  ),
-});
+import SimplePostRenderer from '@/components/SimplePostRenderer';
 
 // [Performance] ISR 설정
 export const revalidate = 3600; // 1시간마다 재검증
@@ -225,7 +212,7 @@ export default async function InsightPostPage({
       )}
 
       {/* [Implementation] Render Post */}
-      <CleanPostRenderer post={cleanPost} />
+      <SimplePostRenderer post={cleanPost} />
     </>
   );
 }

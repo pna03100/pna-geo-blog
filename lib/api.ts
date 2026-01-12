@@ -383,43 +383,7 @@ export async function getAllPages(): Promise<WPContent[]> {
   }
 }
 
-// ============================================
-// [GEO Warning] Get Elementor CSS URL
-// ⚠️ This is a TEMPORARY solution for Elementor compatibility.
-// Strategic Goal: Eliminate Elementor dependency within 2 weeks.
-// ============================================
-export async function getElementorCSSUrls(postId: number): Promise<string[]> {
-  const cssUrls: string[] = [];
-  
-  const possibleFiles = [
-    // Elementor Global CSS
-    `/wp-content/uploads/elementor/css/global.css`,
-    // Post-specific CSS
-    `/wp-content/uploads/elementor/css/post-${postId}.css`,
-    // Theme CSS (Hello Elementor)
-    `/wp-content/uploads/elementor/css/style.min.css`,
-  ];
-
-  // [Security] HEAD 요청으로 파일 존재 여부만 확인
-  for (const path of possibleFiles) {
-    try {
-      const fullUrl = `${env.WORDPRESS_API_URL.replace('/graphql', '')}${path}`;
-      const response = await fetch(fullUrl, { 
-        method: 'HEAD',
-        next: { revalidate: 3600 }, // 1시간 캐싱
-      });
-      
-      if (response.ok) {
-        cssUrls.push(path); // Next.js rewrite를 통해 프록시됨
-        console.log(`✅ Elementor CSS found: ${path}`);
-      }
-    } catch (error) {
-      console.warn(`⚠️ CSS check failed for ${path}:`, error);
-    }
-  }
-
-  return cssUrls;
-}
+// Elementor 관련 함수 제거됨 (No longer using Elementor)
 
 // ============================================
 // Get Primary Menu
