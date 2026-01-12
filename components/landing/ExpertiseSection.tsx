@@ -57,7 +57,7 @@ export function ExpertiseSection() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-950 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-950 tracking-tight leading-relaxed md:!leading-[1.7]">
               검증된 전문성과
               <br />
               <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
@@ -78,7 +78,7 @@ export function ExpertiseSection() {
                     <p className="text-slate-700 font-medium">Founder & Chief Executive Officer</p>
                   </div>
                 </div>
-                <p className="text-slate-800 leading-relaxed font-medium">
+                <p className="text-slate-800 leading-relaxed md:!leading-[2] font-medium">
                   15년간 대기업 마케팅 프로젝트를 진행하며 쌓은 경험과 데이터 기반
                   접근법으로 클라이언트의 비즈니스 성장을 이끌어냅니다.
                 </p>

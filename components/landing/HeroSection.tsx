@@ -29,7 +29,7 @@ export function HeroSection() {
 
         {/* Main Heading */}
         <FadeIn delay={0.2}>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-relaxed md:leading-loose">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-loose md:!leading-[1.8]">
             <span className="text-slate-950">구글애즈 광고 대행사,</span>
             <br />
             <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-sky-500 bg-clip-text text-transparent">
@@ -42,7 +42,7 @@ export function HeroSection() {
 
         {/* Subtitle */}
         <FadeIn delay={0.3}>
-          <p className="text-lg md:text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed font-medium">
+          <p className="text-lg md:text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed md:!leading-[2] font-medium">
             검색 의도 선점 타겟팅과 ROAS 최적화로
             <br className="hidden md:block" />
             광고주 평균 <strong className="text-blue-600 font-bold">500% ROAS</strong>를 달성합니다

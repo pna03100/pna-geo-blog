@@ -55,7 +55,7 @@ export function CTASection() {
             </motion.div>
 
             {/* Heading */}
-            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight">
+            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-relaxed md:leading-loose">
               지금 바로 시작하세요
             </h2>
 

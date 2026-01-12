@@ -79,12 +79,12 @@ export function BentoSection() {
           </span>
         </FadeIn>
         <FadeIn delay={0.1}>
-          <h2 className="text-4xl md:text-6xl font-bold text-slate-950 mb-4 tracking-tight">
+          <h2 className="text-4xl md:text-6xl font-bold text-slate-950 mb-4 tracking-tight leading-relaxed md:leading-loose">
             통합 마케팅 솔루션
           </h2>
         </FadeIn>
         <FadeIn delay={0.2}>
-          <p className="text-xl text-slate-700 max-w-2xl mx-auto font-medium">
+          <p className="text-xl text-slate-700 max-w-2xl mx-auto font-medium leading-relaxed md:!leading-[2]">
             Google Ads부터 SEO, GEO, 소셜 미디어까지
             <br />
             데이터 기반 성과 마케팅의 모든 것
