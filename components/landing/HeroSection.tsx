@@ -1,6 +1,6 @@
 /**
- * [Section] Hero - 2026 Trendy SaaS Design (Refined)
- * [Design] Clean, Readable, High-Tech
+ * [Section] Hero - 2026 Trendy SaaS Design
+ * [Design] Clean, Readable, High-Tech with 3D Visual
  */
 
 "use client";
@@ -10,60 +10,68 @@ import { Trophy, ArrowRight, CheckCircle2 } from "lucide-react";
 import dynamic from "next/dynamic";
 
 // ✅ SEO Optimized: Dynamic Import
-const ParticleNetwork = dynamic(() => import("@/components/ui/particle-network"), {
+const HeroVisual3D = dynamic(() => import("@/components/ui/hero-visual-3d"), {
   ssr: false,
-  loading: () => null,
+  loading: () => (
+    <div className="w-full h-[600px] flex items-center justify-center">
+      <div className="w-[360px] md:w-[420px] aspect-[4/5] rounded-[32px] bg-gradient-to-br from-white/40 to-white/10 border border-white/50 backdrop-blur-xl animate-pulse" />
+    </div>
+  ),
 });
 
 export function HeroSection() {
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
-      {/* Layer 2: Particle Network (Strictly masked to RIGHT) */}
-      <ParticleNetwork />
-
-      {/* Layer 3: Content */}
-      <div className="container relative z-10 mx-auto px-4 md:px-6 pt-32 pb-32 md:pt-48 md:pb-48">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* Layer 3: Content - Alignment Fix: Match Header width */}
+      <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl pt-32 pb-32 md:pt-48 md:pb-48">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           
-          {/* Left Column: Clean Text Area */}
+          {/* Left Column: Text Strategy */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col items-start text-left space-y-8 max-w-2xl"
+            className="flex flex-col items-start text-left space-y-8 max-w-2xl relative z-30"
           >
-            {/* 1. Main Headline (Fixed line-height for Korean) */}
+            {/* 1. Main Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 leading-[2.5]"
+              className="text-[2.7rem] md:text-[3.375rem] lg:text-[4.05rem] font-bold tracking-tight text-slate-900 !leading-[1.27]"
             >
               구글애즈 광고 대행사,
               <br />
               <span className="relative inline-block">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-sky-500 to-purple-500">
-                  데이터로 증명하는
-                </span>
-                {/* Animated underline */}
-                <motion.div
-                  className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-blue-600 via-sky-500 to-purple-500 rounded-full"
-                  initial={{ width: 0 }}
+                {/* The Blue Highlight Box */}
+                <motion.span 
+                  className="absolute inset-y-1 inset-x-0 bg-blue-600 -z-10"
+                  initial={{ width: "0%" }}
                   animate={{ width: "100%" }}
-                  transition={{ duration: 1, delay: 1 }}
+                  transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 />
+                
+                {/* The Text (Color Transition) */}
+                <motion.span
+                  className="relative z-10 px-2"
+                  initial={{ color: "#0f172a" }}
+                  animate={{ color: "#ffffff" }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                >
+                  데이터로 증명하는
+                </motion.span>
               </span>
               <br />
               피앤에이컴퍼니
             </motion.h1>
 
-            {/* 2. Trust Badge (Moved to MIDDLE position) */}
+            {/* 2. Trust Badge (Below Title) */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              whileHover={{ scale: 1.02 }}
-              className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/60 backdrop-blur-xl border border-blue-200/60 shadow-lg relative overflow-hidden"
+              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/60 backdrop-blur-xl border border-blue-200/60 shadow-lg relative overflow-hidden cursor-default"
             >
               {/* Shimmer Effect */}
               <motion.div
@@ -95,9 +103,9 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="text-lg md:text-xl text-slate-600 font-medium leading-relaxed max-w-lg"
             >
-              AI 마케팅, 구글 광고, 데이터 분석을 하나로 연결하여
+              검색 의도 선점 타겟팅과 ROAS 최적화로
               <br className="hidden md:block" />
-              비즈니스의 확실한 성장을 설계합니다.
+              광고주 평균 <strong className="text-blue-600">500% ROAS</strong>를 달성합니다.
             </motion.p>
 
             {/* 4. Buttons */}
@@ -156,8 +164,12 @@ export function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: EMPTY SPACE (Filled by Particles) */}
-          <div className="hidden lg:block h-full min-h-[600px]" />
+          {/* Right Column: 3D Holographic Visual */}
+          <div className="hidden lg:flex items-center justify-center relative z-20">
+            {/* Spotlight Background */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 rounded-full blur-3xl -z-10 transform scale-150" />
+            <HeroVisual3D />
+          </div>
           
         </div>
       </div>

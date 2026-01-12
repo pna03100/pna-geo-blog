@@ -45,7 +45,7 @@ export function VelocityScrollBanner({
   );
 
   return (
-    <section className={`relative overflow-hidden py-8 md:py-12 ${className}`}>
+    <section className={`relative overflow-hidden py-6 md:py-8 ${className}`}>
       {/* Gradient Fade Mask */}
       <div
         className="absolute inset-0 pointer-events-none z-10"
@@ -59,7 +59,7 @@ export function VelocityScrollBanner({
       <div className="relative flex">
         <motion.div
           style={{ x }}
-          className="flex whitespace-nowrap text-6xl md:text-7xl lg:text-8xl font-bold uppercase tracking-wider"
+          className="flex whitespace-nowrap text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wider"
         >
           <div 
             className="flex text-white"
