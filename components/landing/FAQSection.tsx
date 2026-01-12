@@ -58,7 +58,7 @@ export function FAQSection() {
   };
 
   return (
-    <section className="relative py-20 md:py-24">
+    <section className="relative py-10 md:py-24">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Section Header */}
         <motion.div
@@ -66,24 +66,24 @@ export function FAQSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-blue-200 text-blue-600 text-sm font-semibold mb-6">
-            <HelpCircle className="w-4 h-4" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white border border-blue-200 text-blue-600 text-xs md:text-sm font-semibold mb-4 md:mb-6">
+            <HelpCircle className="w-3.5 h-3.5 md:w-4 md:h-4" />
             <span>FAQ</span>
           </div>
           
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4">
             자주 묻는 질문
           </h2>
           
-          <p className="text-xl text-slate-600 leading-relaxed">
+          <p className="text-sm md:text-xl text-slate-600 leading-relaxed">
             고객님들이 가장 궁금해하시는 질문들을 모았습니다
           </p>
         </motion.div>
 
         {/* FAQ List */}
-        <div className="max-w-4xl mx-auto space-y-4">
+        <div className="max-w-4xl mx-auto space-y-3 md:space-y-4">
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
@@ -91,14 +91,14 @@ export function FAQSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+              className="rounded-xl md:rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
             >
               {/* Question Button */}
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full flex items-center justify-between gap-4 p-6 text-left transition-colors duration-300 hover:bg-slate-50"
+                className="w-full flex items-center justify-between gap-3 md:gap-4 p-4 md:p-6 text-left transition-colors duration-300 hover:bg-slate-50"
               >
-                <h3 className="text-lg font-bold text-slate-900 flex-1">
+                <h3 className="text-sm md:text-lg font-bold text-slate-900 flex-1">
                   {faq.question}
                 </h3>
                 <motion.div
@@ -108,7 +108,7 @@ export function FAQSection() {
                 >
                   <ChevronDown 
                     className={cn(
-                      "w-6 h-6 transition-colors duration-300",
+                      "w-5 h-5 md:w-6 md:h-6 transition-colors duration-300",
                       openIndex === index ? "text-blue-600" : "text-slate-400"
                     )} 
                   />
@@ -125,9 +125,9 @@ export function FAQSection() {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 pt-0">
-                      <div className="pt-4 border-t border-slate-100">
-                        <p className="text-slate-600 leading-relaxed">
+                    <div className="px-4 pb-4 md:px-6 md:pb-6 pt-0">
+                      <div className="pt-3 md:pt-4 border-t border-slate-100">
+                        <p className="text-xs md:text-base text-slate-600 leading-relaxed">
                           {faq.answer}
                         </p>
                       </div>

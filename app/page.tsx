@@ -122,8 +122,15 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Grid Background */}
+      {/* Background Layers */}
       <GridBackground />
+      
+      {/* Google Shapes Background - Desktop Only */}
+      <div className="hidden md:block fixed inset-0 -z-10 opacity-40 pointer-events-none">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-50/30 via-transparent to-indigo-50/20" />
+        </div>
+      </div>
 
       {/* Main Content */}
       <main className="relative">

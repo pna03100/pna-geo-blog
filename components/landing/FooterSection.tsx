@@ -23,22 +23,22 @@ const services = [
 
 export function FooterSection() {
   return (
-    <footer className="relative py-12 md:py-16 mt-0">
+    <footer className="relative py-8 md:py-16 mt-0">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12 mb-8 md:mb-12">
           {/* Company Info */}
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             <Link href="/">
               <Image
                 src="/logo.png"
                 alt="PNA Company"
                 width={140}
                 height={40}
-                className="w-auto h-9 mb-2"
+                className="w-auto h-7 md:h-9 mb-2"
               />
             </Link>
-            <div className="text-sm text-slate-600 leading-relaxed space-y-1">
+            <div className="text-xs md:text-sm text-slate-600 leading-relaxed space-y-0.5 md:space-y-1">
               <p className="font-bold text-slate-900">주식회사 피앤에이컴퍼니</p>
               <p>대표자: 안태민</p>
               <p>사업자등록번호: 845-81-02768</p>
@@ -47,13 +47,13 @@ export function FooterSection() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-bold text-slate-900 mb-4">빠른 링크</h4>
-            <ul className="space-y-2">
+            <h4 className="font-bold text-slate-900 mb-3 md:mb-4 text-sm md:text-base">빠른 링크</h4>
+            <ul className="space-y-1.5 md:space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-slate-600 hover:text-[#2563EB] transition-colors font-medium"
+                    className="text-xs md:text-sm text-slate-600 hover:text-[#2563EB] transition-colors font-medium"
                   >
                     {link.label}
                   </Link>
@@ -64,13 +64,13 @@ export function FooterSection() {
 
           {/* Services */}
           <div>
-            <h4 className="font-bold text-slate-900 mb-4">서비스</h4>
-            <ul className="space-y-2">
+            <h4 className="font-bold text-slate-900 mb-3 md:mb-4 text-sm md:text-base">서비스</h4>
+            <ul className="space-y-1.5 md:space-y-2">
               {services.map((service) => (
                 <li key={service.href}>
                   <Link
                     href={service.href}
-                    className="text-slate-600 hover:text-[#2563EB] transition-colors font-medium"
+                    className="text-xs md:text-sm text-slate-600 hover:text-[#2563EB] transition-colors font-medium"
                   >
                     {service.label}
                   </Link>
@@ -80,18 +80,18 @@ export function FooterSection() {
           </div>
 
           {/* Contact */}
-          <div>
-            <h4 className="font-bold text-slate-900 mb-4">문의</h4>
-            <ul className="space-y-3 text-sm">
+          <div className="col-span-2 md:col-span-1">
+            <h4 className="font-bold text-slate-900 mb-3 md:mb-4 text-sm md:text-base">문의</h4>
+            <ul className="space-y-2 md:space-y-3 text-xs md:text-sm">
               <li className="flex items-start gap-2 text-slate-600">
-                <MapPin className="w-4 h-4 text-[#2563EB] mt-0.5 flex-shrink-0" />
+                <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#2563EB] mt-0.5 flex-shrink-0" />
                 <span className="leading-relaxed">
                   경기 고양시 일산동구 백마로195<br />
                   SK엠시티 상가동 2층 2120호
                 </span>
               </li>
               <li className="flex items-center gap-2 text-slate-600">
-                <Phone className="w-4 h-4 text-[#2563EB] flex-shrink-0" />
+                <Phone className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#2563EB] flex-shrink-0" />
                 <div className="flex flex-col">
                   <a
                     href="tel:070-7733-7905"
@@ -103,7 +103,7 @@ export function FooterSection() {
                 </div>
               </li>
               <li className="flex items-center gap-2 text-slate-600">
-                <Mail className="w-4 h-4 text-[#2563EB] flex-shrink-0" />
+                <Mail className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#2563EB] flex-shrink-0" />
                 <a
                   href="mailto:pna0310@naver.com"
                   className="hover:text-[#2563EB] transition-colors"
@@ -116,12 +116,12 @@ export function FooterSection() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-slate-200 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-slate-500">
+        <div className="border-t border-slate-200 pt-6 md:pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
+            <p className="text-xs md:text-sm text-slate-500">
               © {new Date().getFullYear()} PNA Company. All rights reserved.
             </p>
-            <div className="flex items-center gap-6 text-sm text-slate-600">
+            <div className="flex items-center gap-4 md:gap-6 text-xs md:text-sm text-slate-600">
               <Link href="/privacy" className="hover:text-[#2563EB] transition-colors font-medium">
                 개인정보처리방침
               </Link>

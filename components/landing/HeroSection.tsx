@@ -22,29 +22,32 @@ const HeroVisual3D = dynamic(() => import("@/components/ui/hero-visual-3d"), {
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-transparent">
-      {/* Google Ambient Background - Full Section */}
-      <div className="absolute inset-0 -z-10 opacity-60">
+    <section className="relative md:min-h-screen w-full bg-transparent">
+      {/* Google Ambient Background - Desktop Only */}
+      <div className="hidden md:block absolute inset-0 -z-10 opacity-70">
         <GoogleShapesBackground />
       </div>
+      
+      {/* Extended Background for Seamless Flow - Desktop Only */}
+      <div className="hidden md:block absolute left-0 right-0 top-full h-32 -z-10 bg-gradient-to-b from-transparent via-blue-50/20 to-transparent" />
 
       {/* Layer 3: Content - Alignment Fix: Match Header width */}
-      <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl pt-40 pb-32 md:pt-52 md:pb-48 bg-transparent">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+      <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl pt-36 pb-0 md:pt-52 md:pb-48 bg-transparent">
+        <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-start">
           
           {/* Left Column: Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col items-start text-left space-y-8 max-w-2xl relative z-30"
+            className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 md:space-y-8 max-w-2xl relative z-30"
           >
             {/* 1. Main Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-[2.7rem] md:text-[3.375rem] lg:text-[4.05rem] font-bold tracking-tight text-slate-900 !leading-[1.28]"
+              className="text-[2.4rem] md:text-[3.375rem] lg:text-[4.05rem] font-bold tracking-tight text-slate-900 !leading-[1.28]"
             >
               구글애즈 광고 대행사,
               <br />
@@ -64,7 +67,7 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 relative overflow-hidden cursor-default"
+              className="inline-flex items-center gap-2 px-3.5 py-2.5 md:gap-3 md:px-6 md:py-3 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 relative overflow-hidden cursor-default"
             >
               {/* Shimmer Effect */}
               <motion.div
@@ -80,13 +83,13 @@ export function HeroSection() {
                 }}
               />
               
-              <Trophy className="w-5 h-5 text-blue-600 relative z-10" />
+              <Trophy className="w-4 h-4 md:w-5 md:h-5 text-blue-600 relative z-10" />
               
-              <span className="text-base md:text-lg font-semibold relative z-10">
+              <span className="text-[0.72rem] md:text-lg font-semibold relative z-10 whitespace-nowrap">
                 <span className="bg-clip-text text-transparent bg-[linear-gradient(110deg,#2563EB,45%,#93C5FD,55%,#2563EB)] bg-[length:250%_100%] animate-text-shimmer">
                   구글 공식 파트너
                 </span>
-                <span className="mx-2 text-slate-300">|</span>
+                <span className="mx-1 md:mx-2 text-slate-300">|</span>
                 <span className="text-slate-900">2023 구글 선정 우수 100대 캠페인</span>
               </span>
             </motion.div>
@@ -96,11 +99,10 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-lg md:text-xl text-slate-600 font-medium leading-relaxed max-w-lg"
+              className="text-sm md:text-xl text-slate-600 font-medium leading-relaxed max-w-lg mb-4"
             >
               검색 의도 선점 타겟팅과 ROAS 최적화로
-              <br className="hidden md:block" />
-              광고주 평균 <strong className="text-[#2563EB]">500% ROAS</strong>를 달성합니다.
+              <br /> 광고주 평균 <strong className="text-[#2563EB]">500% ROAS</strong>를 달성합니다.
             </motion.p>
           </motion.div>
 
@@ -139,18 +141,18 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.65 }}
-          className="flex lg:hidden flex-col gap-3 text-sm font-semibold text-slate-600 mt-6"
+          className="flex lg:hidden flex-col gap-2.5 text-xs md:text-sm font-semibold text-slate-600 mt-6 mb-6 items-center lg:items-start"
         >
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-emerald-500" />
             <span>15년+ 데이터 노하우</span>
           </div>
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-emerald-500" />
             <span>상위 1% 구글 파트너</span>
           </div>
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-emerald-500" />
             <span>평균 ROAS 500%</span>
           </div>
         </motion.div>
@@ -160,32 +162,22 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="flex flex-wrap gap-4 justify-start -mt-48"
+          className="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-start mt-4 md:mt-8 xl:-mt-48"
         >
           {/* Primary CTA */}
           <motion.a
             href="tel:07077337905"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="group relative px-8 py-4 rounded-full bg-blue-600 text-white font-bold shadow-2xl shadow-blue-900/20 hover:shadow-blue-900/30 transition-all overflow-hidden"
+            className="group relative px-6 py-3 md:px-8 md:py-4 rounded-full bg-blue-600 text-white text-sm md:text-base font-bold shadow-2xl shadow-blue-900/20 hover:shadow-blue-900/30 transition-all overflow-hidden"
           >
             {/* Hover gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             <span className="relative flex items-center gap-2">
               무료 상담 신청하기 
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
             </span>
-          </motion.a>
-
-          {/* Secondary CTA */}
-          <motion.a
-            href="#cases"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            className="px-8 py-4 rounded-full bg-white backdrop-blur-lg border border-slate-300 text-slate-900 font-bold hover:bg-slate-50 hover:border-slate-400 transition-all shadow-lg"
-          >
-            성공 사례 보기
           </motion.a>
         </motion.div>
       </div>
@@ -200,7 +192,7 @@ export function HeroSection() {
           repeat: Infinity,
           repeatType: "reverse",
         }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10"
+        className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 z-10"
       >
         <div className="flex flex-col items-center gap-2 text-slate-400">
           <span className="text-xs font-medium">Scroll</span>

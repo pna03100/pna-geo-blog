@@ -39,13 +39,13 @@ export function VelocityScrollBanner({
 
   // Single text item with proper spacing
   const TextItem = () => (
-    <span className="inline-block whitespace-nowrap mx-16 md:mx-24">
+    <span className="inline-block whitespace-nowrap mx-8 md:mx-24">
       {text}
     </span>
   );
 
   return (
-    <section className={`relative overflow-hidden py-6 md:py-8 ${className}`}>
+    <section className={`relative overflow-hidden py-8 md:py-8 ${className}`}>
       {/* Gradient Fade Mask */}
       <div
         className="absolute inset-0 pointer-events-none z-10"
@@ -59,7 +59,7 @@ export function VelocityScrollBanner({
       <div className="relative flex">
         <motion.div
           style={{ x }}
-          className="flex whitespace-nowrap text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wider"
+          className="flex whitespace-nowrap text-2xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wider"
         >
           <div 
             className="flex text-white"

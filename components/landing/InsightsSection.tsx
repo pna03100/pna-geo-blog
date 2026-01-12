@@ -40,19 +40,19 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
   if (!posts || posts.length === 0) {
     return (
       <SectionWrapper id="insights">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <FadeIn>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 text-blue-600 text-sm font-semibold mb-6">
+            <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 text-blue-600 text-xs md:text-sm font-semibold mb-4 md:mb-6">
               Insights
             </span>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 tracking-tight leading-tight">
+            <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-3 md:mb-4 tracking-tight leading-tight">
               마케팅 인사이트
             </h2>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <p className="text-xl text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
+            <p className="text-base md:text-xl text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
               곧 유용한 마케팅 인사이트를 공유하겠습니다
             </p>
           </FadeIn>
@@ -63,26 +63,26 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
 
   return (
     <SectionWrapper id="insights">
-      <div className="text-center mb-16">
+      <div className="text-center mb-12 md:mb-16">
         <FadeIn>
-          <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 text-blue-600 text-sm font-semibold mb-6">
+          <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 text-blue-600 text-xs md:text-sm font-semibold mb-4 md:mb-6">
             Insights
           </span>
         </FadeIn>
         <FadeIn delay={0.1}>
-          <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 tracking-tight leading-tight">
+          <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-3 md:mb-4 tracking-tight leading-tight">
             마케팅 인사이트
           </h2>
         </FadeIn>
         <FadeIn delay={0.2}>
-          <p className="text-xl text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base md:text-xl text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
             데이터 기반 성과 마케팅을 위한<br />
             실무 노하우와 최신 트렌드를 공유합니다
           </p>
         </FadeIn>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
         {latestPosts.map((post, index) => {
           // 날짜 포맷팅
           const date = post.date ? new Date(post.date).toLocaleDateString('ko-KR', {
@@ -100,10 +100,10 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
             <FadeIn key={post.databaseId} delay={0.1 * index} className="h-full">
               <Link 
                 href={`/blog/${post.slug}`}
-                className="group flex flex-col h-full rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 overflow-hidden"
+                className="group flex flex-col h-full rounded-xl md:rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 overflow-hidden"
               >
                 {/* Featured Image - Always Show Container */}
-                <div className="relative w-full h-48 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
+                <div className="relative w-full h-40 md:h-48 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
                   {post.featuredImage?.node?.sourceUrl ? (
                     <>
                       <img
@@ -144,29 +144,29 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
                 </div>
 
                 {/* Content */}
-                <div className="p-6 flex flex-col">
+                <div className="p-4 md:p-6 flex flex-col">
                   {/* Date */}
                   {date && (
-                    <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
-                      <Calendar className="w-4 h-4" />
+                    <div className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-slate-500 mb-2 md:mb-3">
+                      <Calendar className="w-3 h-3 md:w-4 md:h-4" />
                       <span>{date}</span>
                     </div>
                   )}
 
                   {/* Title */}
-                  <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                  <h3 className="text-base md:text-xl font-bold text-slate-900 mb-2 md:mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
                     {decodeHTMLEntities(post.title || '')}
                   </h3>
 
                   {/* Excerpt - Fixed 3 lines */}
-                  <p className="text-slate-600 text-sm leading-relaxed mb-3 line-clamp-3">
+                  <p className="text-slate-600 text-xs md:text-sm leading-relaxed mb-2 md:mb-3 line-clamp-3">
                     {cleanExcerpt || '내용이 없습니다.'}
                   </p>
 
                   {/* Read More Link - Small Button */}
-                  <div className="flex items-center gap-1.5 text-blue-600 font-medium text-xs group-hover:gap-2 transition-all">
+                  <div className="flex items-center gap-1 md:gap-1.5 text-blue-600 font-medium text-[0.65rem] md:text-xs group-hover:gap-2 transition-all">
                     <span>자세히 보기</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3 h-3 md:w-3.5 md:h-3.5" />
                   </div>
                 </div>
               </Link>
@@ -178,13 +178,13 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
       {/* View All Link */}
       {posts.length > 3 && (
         <FadeIn delay={0.4}>
-          <div className="text-center mt-12">
+          <div className="text-center mt-8 md:mt-12">
             <Link
               href="/insights"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white border border-slate-300 text-slate-900 font-bold hover:bg-slate-50 hover:border-blue-600 hover:text-blue-600 transition-all shadow-lg"
+              className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full bg-white border border-slate-300 text-sm md:text-base text-slate-900 font-bold hover:bg-slate-50 hover:border-blue-600 hover:text-blue-600 transition-all shadow-lg"
             >
               모든 인사이트 보기
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
             </Link>
           </div>
         </FadeIn>

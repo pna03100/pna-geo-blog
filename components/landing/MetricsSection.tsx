@@ -50,32 +50,32 @@ const metrics = [
 
 export function MetricsSection() {
   return (
-    <section className="py-32 relative z-10">
+    <section className="py-10 md:py-32 relative z-10">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         
         {/* Header with Badge */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           {/* The Badge - Unified with existing Trust Badge style */}
-          <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 text-[#2563EB] text-sm font-semibold mb-6 tracking-tight">
+          <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 text-[#2563EB] text-xs md:text-sm font-semibold mb-4 md:mb-6 tracking-tight">
             Proven Results
           </span>
           
-          <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 tracking-tight leading-tight">
+          <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-3 md:mb-4 tracking-tight leading-tight">
             숫자로 증명하는 퍼포먼스
           </h2>
-          <p className="text-xl text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base md:text-xl text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
             감각에 의존하지 않습니다.<br />
             오직 <span className="text-slate-900 font-semibold">정확한 데이터</span>만이 비즈니스의 성장을 만듭니다.
           </p>
         </div>
 
         {/* Bento Grid (SEO: Description List) */}
-        <dl className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+        <dl className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-6">
           {metrics.map((stat) => (
             <div
               key={stat.id}
               className={`
-                relative overflow-hidden rounded-[2.5rem] p-10 flex flex-col justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl
+                relative overflow-hidden rounded-2xl md:rounded-[2.5rem] p-6 md:p-10 flex flex-col items-center md:items-start text-center md:text-left justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl
                 ${stat.colSpan}
                 ${stat.variant === 'primary' 
                   ? 'bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30' 
@@ -100,20 +100,20 @@ export function MetricsSection() {
               )}
 
               {/* Content */}
-              <dt className={`text-lg font-medium mb-2 ${stat.variant === 'primary' ? 'text-blue-100' : 'text-slate-500'}`}>
+              <dt className={`text-sm md:text-lg font-medium mb-1.5 md:mb-2 ${stat.variant === 'primary' ? 'text-blue-100' : 'text-slate-500'}`}>
                 {stat.label}
               </dt>
               
-              <dd className="text-6xl md:text-7xl font-bold tracking-tight mb-4 flex items-baseline gap-1">
+              <dd className="text-4xl md:text-7xl font-bold tracking-tight mb-2.5 md:mb-4 flex items-baseline gap-1">
                 <CountUpNumber
                   end={stat.value}
                   suffix=""
                   duration={2.5}
                 />
-                <span className="text-4xl opacity-80 font-medium">{stat.suffix}</span>
+                <span className="text-2xl md:text-4xl opacity-80 font-medium">{stat.suffix}</span>
               </dd>
               
-              <div className={`text-sm font-semibold px-4 py-2 rounded-full w-fit ${
+              <div className={`text-xs md:text-sm font-semibold px-3 py-1.5 md:px-4 md:py-2 rounded-full w-fit ${
                 stat.variant === 'primary' ? 'bg-white/20 text-white' : 'bg-slate-50 text-slate-600'
               }`}>
                 {stat.description}

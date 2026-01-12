@@ -12,9 +12,9 @@ import { SectionWrapper } from "./SectionWrapper";
 
 export function CTASection() {
   return (
-    <SectionWrapper id="contact" className="py-16 md:py-20">
+    <SectionWrapper id="contact" className="py-8 md:py-20">
       <FadeIn>
-        <div className="relative overflow-hidden rounded-[3rem] bg-black p-12 md:p-20">
+        <div className="relative overflow-hidden rounded-2xl md:rounded-[3rem] bg-black p-8 md:p-20">
           {/* Animated background elements */}
           <motion.div
             className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl"
@@ -71,22 +71,22 @@ export function CTASection() {
             </motion.div>
 
             {/* Heading */}
-            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight">
+            <h2 className="text-3xl md:text-6xl font-bold text-white tracking-tight leading-tight">
               지금 바로 시작하세요
             </h2>
 
             {/* Subheading */}
-            <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base md:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed">
               무료 마케팅 진단으로 우리 회사의 성장 가능성을 확인하세요
             </p>
 
             {/* CTA Button */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 pt-3 md:pt-4">
               <motion.a
                 href="mailto:pna0310@naver.com"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative px-10 py-5 rounded-full bg-blue-600 border-2 border-blue-400 text-white font-bold text-lg transition-all duration-300 flex items-center gap-2"
+                className="group relative px-7 py-3.5 md:px-10 md:py-5 rounded-full bg-blue-600 border-2 border-blue-400 text-white font-bold text-sm md:text-lg transition-all duration-300 flex items-center gap-2"
                 style={{
                   boxShadow: '0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.3), inset 0 0 20px rgba(147, 197, 253, 0.2)'
                 }}
@@ -104,7 +104,7 @@ export function CTASection() {
                 />
                 <span className="relative z-10 flex items-center gap-2">
                   무료 상담 신청하기
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </motion.a>
 
@@ -116,7 +116,7 @@ export function CTASection() {
                   boxShadow: '0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.1)'
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-5 rounded-full bg-white/5 backdrop-blur-md border-2 border-white/40 text-white font-bold text-lg transition-all duration-300"
+                className="px-7 py-3.5 md:px-10 md:py-5 rounded-full bg-white/5 backdrop-blur-md border-2 border-white/40 text-white font-bold text-sm md:text-lg transition-all duration-300"
                 style={{
                   boxShadow: '0 0 15px rgba(255, 255, 255, 0.1), inset 0 0 10px rgba(255, 255, 255, 0.05)'
                 }}

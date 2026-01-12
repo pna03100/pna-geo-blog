@@ -20,7 +20,7 @@ export function SectionWrapper({
   id,
 }: SectionWrapperProps) {
   return (
-    <section id={id} className={cn("py-24 md:py-32 relative", className)}>
+    <section id={id} className={cn("py-12 md:py-32 relative", className)}>
       <div className={cn("container mx-auto px-4 md:px-6 max-w-7xl", containerClassName)}>
         {children}
       </div>

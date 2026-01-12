@@ -57,19 +57,19 @@ const solutions = [
 export function BentoSection() {
   return (
     <SectionWrapper id="solutions">
-      <div className="text-center mb-16">
+      <div className="text-center mb-12 md:mb-16">
         <FadeIn>
-          <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 text-[#2563EB] text-sm font-semibold mb-6">
+          <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 text-[#2563EB] text-xs md:text-sm font-semibold mb-4 md:mb-6">
             Core Solutions
           </span>
         </FadeIn>
         <FadeIn delay={0.1}>
-          <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 tracking-tight leading-tight">
+          <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-3 md:mb-4 tracking-tight leading-tight">
             통합 마케팅 솔루션
           </h2>
         </FadeIn>
         <FadeIn delay={0.2}>
-          <p className="text-xl text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base md:text-xl text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
             Google Ads부터 SEO, GEO, 소셜 미디어까지
             <br />
             데이터 기반 성과 마케팅의 모든 것
@@ -77,31 +77,31 @@ export function BentoSection() {
         </FadeIn>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         {solutions.map((solution, index) => {
           return (
             <FadeIn key={solution.title} delay={index * 0.1}>
-              <div className={`group relative overflow-hidden rounded-2xl bg-white border border-slate-200 p-8 shadow-sm transition-all hover:shadow-xl hover:border-[#2563EB] ${solution.span}`}>
-                <div className="h-full flex flex-col">
+              <div className={`group relative overflow-hidden rounded-xl md:rounded-2xl bg-white border border-slate-200 p-5 md:p-8 shadow-sm transition-all hover:shadow-xl hover:border-[#2563EB] ${solution.span}`}>
+                <div className="h-full flex flex-col items-center md:items-start text-center md:text-left">
                   {/* Icon with Solid Background */}
-                  <div className="inline-flex items-center justify-center p-4 rounded-2xl bg-blue-50 mb-6 w-fit">
-                    <span className="text-4xl">{solution.icon}</span>
+                  <div className="inline-flex items-center justify-center p-3 md:p-4 rounded-xl md:rounded-2xl bg-blue-50 mb-4 md:mb-6 w-fit">
+                    <span className="text-2xl md:text-4xl">{solution.icon}</span>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                  <h3 className="text-lg md:text-2xl font-bold text-slate-900 mb-1.5 md:mb-2">
                     {solution.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-slate-500 font-medium mb-6">{solution.description}</p>
+                  <p className="text-sm md:text-base text-slate-500 font-medium mb-4 md:mb-6">{solution.description}</p>
 
                   {/* Features */}
-                  <ul className="space-y-2 mt-auto">
+                  <ul className="space-y-1.5 md:space-y-2 mt-auto w-full">
                     {solution.features.map((feature) => (
                       <li
                         key={feature}
-                        className="flex items-center gap-2 text-sm text-slate-700 font-medium"
+                        className="flex items-center justify-center md:justify-start gap-2 text-xs md:text-sm text-slate-700 font-medium"
                       >
                         <div className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" />
                         {feature}
