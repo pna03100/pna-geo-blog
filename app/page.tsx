@@ -1,12 +1,12 @@
 /**
  * [Trinity Standard] PNA Company Main Landing Page
- * [Design] Toss-like Seamless, Fluid, Interactive
+ * [Design] Clean, Professional, High-Performance
  * [GEO] SEO-Optimized with JSON-LD
  */
 
 import type { Metadata } from 'next';
-import { AuroraBackground } from '@/components/ui/aurora-background';
-import { HeroSection as NewHeroSection } from '@/components/landing/HeroSection';
+import { GridBackground } from '@/components/ui/grid-background';
+import { HeroSection } from '@/components/landing/HeroSection';
 import { VelocityScrollBanner } from '@/components/ui/velocity-scroll-banner';
 import { MetricsSection } from '@/components/landing/MetricsSection';
 import { BentoSection } from '@/components/landing/BentoSection';
@@ -35,7 +35,7 @@ function generateJsonLd() {
         "description": "데이터 기반 성과 마케팅 전문 - Google Ads, SEO, GEO 최적화로 ROI 200% 달성",
         "contactPoint": {
           "@type": "ContactPoint",
-          "email": "contact@pnamarketing.co.kr",
+          "email": "pna0310@naver.com",
           "contactType": "Customer Service",
           "areaServed": "KR",
           "availableLanguage": ["Korean"]
@@ -111,12 +111,12 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Layer 1: Aurora Background (The Atmosphere) */}
-      <AuroraBackground />
+      {/* Grid Background */}
+      <GridBackground />
 
-      {/* [Main] Page Content */}
-      <main className="relative overflow-hidden bg-transparent selection:bg-blue-100">
-        <NewHeroSection />
+      {/* Main Content */}
+      <main className="relative">
+        <HeroSection />
         <VelocityScrollBanner />
         <MetricsSection />
         <BentoSection />

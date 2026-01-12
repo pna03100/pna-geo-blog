@@ -1,83 +1,127 @@
 /**
- * [Section] Key Metrics - Trust indicators with animated numbers
+ * [Section] Key Metrics - Bento Grid Layout (Fizens Style)
+ * [Design] Asymmetric, Clean, SEO-Optimized
  * [Animation] Count-up effect on scroll
  */
 
 "use client";
 
-import { FadeIn } from "./FadeIn";
-import { SectionWrapper } from "./SectionWrapper";
 import { CountUpNumber } from "./CountUpNumber";
-import { TrendingUp, DollarSign, Award, Zap } from "lucide-react";
 
+// Define data outside component (DRY principle)
 const metrics = [
   {
-    icon: TrendingUp,
+    id: "roas",
+    label: "광고주 평균 ROAS",
     value: 500,
     suffix: "%",
-    label: "광고주 평균 ROAS",
-    color: "text-blue-600",
-    bgColor: "bg-blue-500/15",
+    description: "업계 평균 대비 3.5배 높은 성과",
+    variant: "primary", // Blue Card
+    colSpan: "lg:col-span-7",
   },
   {
-    icon: DollarSign,
+    id: "spend",
+    label: "누적 광고 집행 금액",
     value: 470,
     suffix: "억+",
-    label: "누적 광고 집행 금액",
-    color: "text-blue-700",
-    bgColor: "bg-blue-600/15",
+    description: "데이터로 검증된 집행 노하우",
+    variant: "default", // White Card
+    colSpan: "lg:col-span-5",
   },
   {
-    icon: Zap,
+    id: "budget",
+    label: "월 구글 애즈 집행 예산",
     value: 30,
     suffix: "억",
-    label: "월 구글 애즈 집행 예산",
-    color: "text-sky-600",
-    bgColor: "bg-sky-500/15",
+    description: "대규모 예산 운영 최적화",
+    variant: "default",
+    colSpan: "lg:col-span-5",
   },
   {
-    icon: Award,
+    id: "campaign",
+    label: "구글 선정 우수 캠페인",
     value: 100,
     suffix: "대",
-    label: "구글 선정 우수 캠페인",
-    color: "text-blue-500",
-    bgColor: "bg-blue-400/15",
+    description: "2023년 Google 선정",
+    variant: "default",
+    colSpan: "lg:col-span-7",
   },
 ];
 
 export function MetricsSection() {
   return (
-    <SectionWrapper className="py-16 md:py-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-        {metrics.map((metric, index) => {
-          const Icon = metric.icon;
-          return (
-            <FadeIn key={metric.label} delay={index * 0.1}>
-              <div className="relative overflow-hidden rounded-3xl bg-white/70 backdrop-blur-md border border-blue-100/50 shadow-xl p-8 hover:scale-105 hover:shadow-2xl hover:border-blue-200 transition-all duration-300">
-                {/* Icon */}
-                <div className={`inline-flex p-3 rounded-2xl ${metric.bgColor} mb-4`}>
-                  <Icon className={`w-6 h-6 ${metric.color}`} />
-                </div>
+    <section className="py-32 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        
+        {/* Header with Badge */}
+        <div className="text-center mb-16">
+          {/* The Badge - Unified with existing Trust Badge style */}
+          <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 text-[#2563EB] text-sm font-semibold mb-6 tracking-tight">
+            Proven Results
+          </span>
+          
+          <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 tracking-tight leading-tight">
+            숫자로 증명하는 퍼포먼스
+          </h2>
+          <p className="text-xl text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
+            감각에 의존하지 않습니다.<br />
+            오직 <span className="text-slate-900 font-semibold">정확한 데이터</span>만이 비즈니스의 성장을 만듭니다.
+          </p>
+        </div>
 
-                {/* Number */}
-                <div className="text-4xl md:text-5xl font-bold text-slate-950 mb-2">
-                  <CountUpNumber
-                    end={metric.value}
-                    suffix={metric.suffix}
-                    duration={2.5}
-                  />
-                </div>
+        {/* Bento Grid (SEO: Description List) */}
+        <dl className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+          {metrics.map((stat) => (
+            <div
+              key={stat.id}
+              className={`
+                relative overflow-hidden rounded-[2.5rem] p-10 flex flex-col justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl
+                ${stat.colSpan}
+                ${stat.variant === 'primary' 
+                  ? 'bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30' 
+                  : 'bg-white border border-slate-100 text-slate-900 shadow-sm hover:border-blue-200'
+                }
+              `}
+            >
+              {/* Decorative Pattern for White Cards */}
+              {stat.variant === 'default' && (
+                <div 
+                  className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+                  style={{ 
+                    backgroundImage: 'radial-gradient(#0f172a 1px, transparent 1px)', 
+                    backgroundSize: '24px 24px' 
+                  }} 
+                />
+              )}
+              
+              {/* Decorative Gradient for Blue Card */}
+              {stat.variant === 'primary' && (
+                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[80px] rounded-full -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+              )}
 
-                {/* Label */}
-                <p className="text-sm text-slate-700 font-semibold">{metric.label}</p>
-
-                {/* Decorative gradient */}
-                <div className="absolute -bottom-2 -right-2 w-24 h-24 bg-gradient-to-br from-blue-500/10 to-sky-500/10 rounded-full blur-2xl" />
+              {/* Content */}
+              <dt className={`text-lg font-medium mb-2 ${stat.variant === 'primary' ? 'text-blue-100' : 'text-slate-500'}`}>
+                {stat.label}
+              </dt>
+              
+              <dd className="text-6xl md:text-7xl font-bold tracking-tight mb-4 flex items-baseline gap-1">
+                <CountUpNumber
+                  end={stat.value}
+                  suffix=""
+                  duration={2.5}
+                />
+                <span className="text-4xl opacity-80 font-medium">{stat.suffix}</span>
+              </dd>
+              
+              <div className={`text-sm font-semibold px-4 py-2 rounded-full w-fit ${
+                stat.variant === 'primary' ? 'bg-white/20 text-white' : 'bg-slate-50 text-slate-600'
+              }`}>
+                {stat.description}
               </div>
-            </FadeIn>
-          );
-        })}
+            </div>
+          ))}
+        </dl>
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

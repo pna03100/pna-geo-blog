@@ -55,7 +55,7 @@ export default function HeroVisual3D() {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative w-[360px] md:w-[420px] aspect-[4/5] rounded-[32px] bg-gradient-to-br from-white/80 to-white/20 border border-white/60 backdrop-blur-2xl shadow-2xl shadow-blue-900/10"
+        className="relative w-[360px] md:w-[420px] aspect-[4/5] rounded-[32px] bg-white border border-slate-100 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)]"
       >
         {/* Dynamic Glare Overlay */}
         <motion.div 
@@ -66,88 +66,79 @@ export default function HeroVisual3D() {
           className="absolute inset-0 rounded-[32px] opacity-40 pointer-events-none mix-blend-overlay"
         />
 
-        {/* --- LEVEL 1: DASHBOARD BASE --- */}
-        <div className="absolute inset-6 rounded-2xl bg-white/40 border border-white/50 shadow-inner overflow-hidden flex flex-col">
+        {/* --- LEVEL 1: DASHBOARD BASE (Solid Ceramic) --- */}
+        <div className="absolute inset-6 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm overflow-hidden flex flex-col">
            {/* Header */}
-           <div className="h-14 border-b border-white/30 flex items-center px-5 gap-3">
+           <div className="h-14 border-b border-slate-100 flex items-center px-5 gap-3">
               <div className="flex gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
-                <div className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
-                <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
               </div>
-              <div className="ml-auto w-20 h-2 rounded-full bg-slate-400/20" />
+              <div className="ml-auto w-20 h-2 rounded-full bg-slate-200" />
            </div>
            
            {/* Graph Area */}
-           <div className="flex-1 p-5 relative">
-              <div className="absolute inset-x-5 top-10 bottom-5 flex items-end justify-between gap-2 opacity-30">
+           <div className="flex-1 p-5 relative bg-white">
+              <div className="absolute inset-x-5 top-10 bottom-5 flex items-end justify-between gap-2 opacity-20">
                  {[40, 65, 45, 80, 55, 90, 70].map((h, i) => (
-                    <div key={i} className="w-full bg-blue-600 rounded-t-sm" style={{ height: `${h}%` }} />
+                    <div key={i} className="w-full bg-slate-300 rounded-t-sm" style={{ height: `${h}%` }} />
                  ))}
               </div>
               
-              {/* The Rising Line */}
+              {/* The Solid Royal Blue Line (No Glow) */}
               <svg className="absolute inset-x-0 bottom-0 w-full h-48 overflow-visible" preserveAspectRatio="none">
-                 <path d="M0,150 C50,150 50,100 100,80 C150,60 150,90 200,50 C250,10 300,40 400,0" fill="none" stroke="#3b82f6" strokeWidth="4" strokeLinecap="round" filter="url(#glow)" />
-                 <defs>
-                   <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                     <feGaussianBlur stdDeviation="4" result="coloredBlur" />
-                     <feMerge>
-                       <feMergeNode in="coloredBlur" />
-                       <feMergeNode in="SourceGraphic" />
-                     </feMerge>
-                   </filter>
-                 </defs>
+                 <path d="M0,150 C50,150 50,100 100,80 C150,60 150,90 200,50 C250,10 300,40 400,0" fill="none" stroke="#2563EB" strokeWidth="3" strokeLinecap="round" />
               </svg>
            </div>
         </div>
 
         {/* --- LEVEL 2: FLOATING ELEMENTS (TranslateZ) --- */}
         
-        {/* Badge 1: Google Partner (Top Right) */}
+        {/* Badge 1: Google Partner (Top Right) - Solid White Pill */}
         <motion.div 
           style={{ transform: "translateZ(60px)" }}
-          className="absolute -top-6 -right-6 bg-white rounded-2xl p-4 shadow-xl shadow-blue-900/10 border border-white/80 flex items-center gap-3 animate-float-slow"
+          className="absolute -top-6 -right-6 bg-white rounded-2xl p-4 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-slate-100 flex items-center gap-3 animate-float-slow"
         >
-            <div className="bg-blue-50 p-2.5 rounded-xl text-blue-600">
+            <div className="bg-[#2563EB] p-2.5 rounded-xl text-white">
                 <Trophy size={20} strokeWidth={2.5} />
             </div>
             <div>
-                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Certified</div>
-                <div className="text-sm font-bold text-slate-800">Google Partner</div>
+                <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Certified</div>
+                <div className="text-sm font-bold text-slate-900">Google Partner</div>
             </div>
         </motion.div>
 
-        {/* Badge 2: AI Status (Middle Left) */}
+        {/* Badge 2: AI Status (Middle Left) - Solid White */}
         <motion.div 
           style={{ transform: "translateZ(40px)" }}
-          className="absolute top-1/3 -left-8 bg-white/90 backdrop-blur-md rounded-2xl p-3 shadow-lg border border-white/60 flex items-center gap-3"
+          className="absolute top-1/3 -left-8 bg-white rounded-2xl p-3 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.12)] border border-slate-100 flex items-center gap-3"
         >
             <div className="relative">
                 <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
                 <div className="absolute inset-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-ping opacity-75" />
             </div>
-            <div className="text-xs font-bold text-slate-700">AI Engine Active</div>
+            <div className="text-xs font-bold text-slate-800">AI Engine Active</div>
         </motion.div>
 
-        {/* Badge 3: ROAS Result (Bottom Center) */}
+        {/* Badge 3: ROAS Result (Bottom Center) - Deep Navy Solid */}
         <motion.div 
           style={{ transform: "translateZ(80px)" }}
-          className="absolute -bottom-8 left-10 right-10 bg-slate-900 text-white rounded-2xl p-4 shadow-2xl shadow-blue-600/30 flex items-center justify-between"
+          className="absolute -bottom-8 left-10 right-10 bg-slate-900 text-white rounded-2xl p-4 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.25)] flex items-center justify-between"
         >
             <div className="flex items-center gap-3">
-                <div className="bg-white/10 p-2 rounded-lg">
-                    <TrendingUp size={20} className="text-green-400" />
+                <div className="bg-green-500 p-2 rounded-lg">
+                    <TrendingUp size={20} className="text-white" strokeWidth={2.5} />
                 </div>
                 <div>
                     <div className="text-[10px] text-slate-400 font-medium uppercase">Average ROAS</div>
                     <div className="text-xl font-bold text-white tracking-tight">500% +</div>
                 </div>
             </div>
-            <div className="h-8 w-[1px] bg-white/10" />
+            <div className="h-8 w-[1px] bg-slate-700" />
             <div className="text-right">
                 <div className="text-[10px] text-slate-400 font-medium">Monthly</div>
-                <div className="text-sm font-bold text-blue-300">Target Hit</div>
+                <div className="text-sm font-bold text-[#2563EB]">Target Hit</div>
             </div>
         </motion.div>
 

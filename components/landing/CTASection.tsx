@@ -14,7 +14,7 @@ export function CTASection() {
   return (
     <SectionWrapper id="contact" className="py-16 md:py-20">
       <FadeIn>
-        <div className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500 p-12 md:p-20">
+        <div className="relative overflow-hidden rounded-[3rem] bg-[#172554] p-12 md:p-20">
           {/* Animated background elements */}
           <motion.div
             className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"
@@ -67,17 +67,17 @@ export function CTASection() {
             {/* CTA Button */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <motion.a
-                href="mailto:contact@pnamarketing.co.kr"
+                href="mailto:pna0310@naver.com"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="group px-10 py-5 rounded-full bg-white text-slate-950 font-bold text-lg shadow-2xl hover:shadow-white/20 transition-all duration-300 flex items-center gap-2"
+                className="group px-10 py-5 rounded-full bg-white text-slate-900 font-bold text-lg shadow-2xl hover:shadow-white/20 transition-all duration-300 flex items-center gap-2"
               >
                 무료 상담 신청하기
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.a>
 
               <motion.a
-                href="tel:02-1234-5678"
+                href="tel:070-7733-7905"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-10 py-5 rounded-full bg-white/10 backdrop-blur-md border-2 border-white/30 text-white font-bold text-lg hover:bg-white/20 transition-all duration-300"
