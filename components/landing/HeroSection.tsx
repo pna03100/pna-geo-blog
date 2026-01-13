@@ -36,17 +36,11 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-start">
           
           {/* Left Column: Text Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+          <div
             className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 md:space-y-8 max-w-2xl relative z-30"
           >
-            {/* 1. Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+            {/* 1. Main Headline - NO ANIMATION for LCP */}
+            <h1
               className="text-[2.4rem] md:text-[3.375rem] lg:text-[4.05rem] font-bold tracking-tight text-slate-900 !leading-[1.28]"
             >
               구글애즈 광고 대행사,
@@ -59,13 +53,10 @@ export function HeroSection() {
               </span>
               <br />
               피앤에이컴퍼니
-            </motion.h1>
+            </h1>
 
-            {/* 2. Trust Badge (Below Title) - Solid Fintech Style */}
+            {/* 2. Trust Badge (Below Title) - NO INITIAL ANIMATION for SEO */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
               whileHover={{ scale: 1.05 }}
               className="inline-flex items-center gap-2 px-3.5 py-2.5 md:gap-3 md:px-6 md:py-3 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 relative overflow-hidden cursor-default"
             >
@@ -94,17 +85,14 @@ export function HeroSection() {
               </span>
             </motion.div>
 
-            {/* 3. Subtext */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
+            {/* 3. Subtext - NO ANIMATION for immediate visibility */}
+            <p
               className="text-sm md:text-xl text-slate-600 font-medium leading-relaxed max-w-lg mb-4"
             >
               검색 의도 선점 타겟팅과 ROAS 최적화로
               <br /> 광고주 평균 <strong className="text-[#2563EB]">500% ROAS</strong>를 달성합니다.
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
           {/* Right Column: 3D Visual + Social Proof */}
           <div className="hidden lg:flex flex-col items-center gap-6 relative -translate-y-[10%]">
@@ -112,11 +100,8 @@ export function HeroSection() {
               <HeroVisual3D />
             </div>
             
-            {/* Social Proof - Below 3D Element (Centered) */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
+            {/* Social Proof - Below 3D Element (NO ANIMATION) */}
+            <div
               className="flex flex-col gap-3 text-sm font-semibold text-slate-600 lg:translate-x-[5%] -translate-y-[20%]"
             >
               <div className="flex items-center justify-center gap-2">
@@ -131,16 +116,13 @@ export function HeroSection() {
                 <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                 <span>평균 ROAS 500%</span>
               </div>
-            </motion.div>
+            </div>
           </div>
 
         </div>
 
-        {/* Social Proof - Mobile Only (Below Text) */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.65 }}
+        {/* Social Proof - Mobile Only (NO ANIMATION) */}
+        <div
           className="flex lg:hidden flex-col gap-2.5 text-xs md:text-sm font-semibold text-slate-600 mt-6 mb-6 items-center lg:items-start"
         >
           <div className="flex items-center gap-2">
@@ -155,13 +137,10 @@ export function HeroSection() {
             <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-emerald-500" />
             <span>평균 ROAS 500%</span>
           </div>
-        </motion.div>
+        </div>
 
-        {/* CTA Buttons - Separate Row for Better Separation */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
+        {/* CTA Buttons - NO INITIAL ANIMATION for immediate CTA visibility */}
+        <div
           className="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-start mt-4 md:mt-8 xl:-mt-48"
         >
           {/* Primary CTA */}
@@ -179,7 +158,7 @@ export function HeroSection() {
               <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
             </span>
           </motion.a>
-        </motion.div>
+        </div>
       </div>
 
       {/* Scroll Indicator */}

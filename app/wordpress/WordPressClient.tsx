@@ -64,7 +64,7 @@ const benefits = [
 export function WordPressClient() {
   return (
     <main className="min-h-screen pt-[73px]">
-      {/* Hero Section - Red Theme */}
+      {/* Hero Section - NO ANIMATION for LCP */}
       <section className="relative bg-gradient-to-br from-[#DB4437] via-[#DB4437] to-[#C33326] text-white py-20 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
@@ -74,12 +74,7 @@ export function WordPressClient() {
         </div>
 
         <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
-          >
+          <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 mb-6">
               <Search className="w-4 h-4" />
               <span className="text-sm font-semibold">SEO & GEO 전문</span>
@@ -93,18 +88,13 @@ export function WordPressClient() {
               검색엔진과 AI가 이해하는 웹사이트로<br className="hidden md:block" />
               자연 검색 트래픽을 200% 증가시키세요
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Services Grid */}
       <section className="container mx-auto px-4 md:px-6 max-w-7xl py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-red-50 text-red-600 text-sm font-semibold mb-4">
             Services
           </span>
@@ -114,15 +104,12 @@ export function WordPressClient() {
           <p className="text-xl text-slate-600">
             검색 노출을 극대화하는 전문 솔루션
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
               className="group p-8 rounded-2xl bg-white border border-slate-200 hover:border-red-200 hover:shadow-xl transition-all duration-300"
             >
               <div 
@@ -137,7 +124,7 @@ export function WordPressClient() {
               <p className="text-slate-600 leading-relaxed">
                 {service.description}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -146,11 +133,7 @@ export function WordPressClient() {
       <section className="bg-gradient-to-br from-slate-50 to-red-50 py-20">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+            <div>
               <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-red-200 text-red-600 text-sm font-semibold mb-4">
                 Benefits
               </span>
@@ -160,42 +143,32 @@ export function WordPressClient() {
               </h2>
               <div className="space-y-6">
                 {benefits.map((benefit, index) => (
-                  <motion.div
+                  <div
                     key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
                     className="p-6 rounded-xl bg-white border border-slate-200"
                   >
                     <h3 className="text-xl font-bold text-slate-900 mb-2">{benefit.title}</h3>
                     <p className="text-slate-600">{benefit.description}</p>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+            <div>
               <div className="space-y-4">
                 {features.map((feature, index) => (
-                  <motion.div
+                  <div
                     key={index}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: 0.1 + index * 0.05 }}
                     className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-200"
                   >
                     <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-600 flex items-center justify-center">
                       <CheckCircle2 className="w-4 h-4 text-white" />
                     </div>
                     <span className="text-lg text-slate-700">{feature}</span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -206,11 +179,7 @@ export function WordPressClient() {
       {/* CTA Section */}
       <section className="bg-gradient-to-br from-red-600 to-red-700 py-20">
         <div className="container mx-auto px-4 md:px-6 max-w-4xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <div>
             <Sparkles className="w-12 h-12 text-white mx-auto mb-6" />
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               검색 노출, 지금 바로 개선하세요
@@ -218,14 +187,16 @@ export function WordPressClient() {
             <p className="text-xl text-red-100 mb-8">
               15년 노하우로 검증된 SEO 전략을 무료로 상담받아보세요
             </p>
-            <a
+            <motion.a
               href="tel:07077337905"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-red-600 font-bold hover:bg-red-50 hover:scale-105 transition-all duration-300 shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-red-600 font-bold hover:bg-red-50 transition-all duration-300 shadow-lg"
             >
               <span>무료 상담 신청하기</span>
               <ArrowRight className="w-5 h-5" />
-            </a>
-          </motion.div>
+            </motion.a>
+          </div>
         </div>
       </section>
     </main>

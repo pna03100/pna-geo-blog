@@ -2,6 +2,7 @@
  * Google-Themed Ambient Background
  * Floating blurred shapes using Google's brand colors
  * [Performance] GPU-optimized with hardware acceleration
+ * [Optimization] No initial fade-in, passive load
  */
 
 'use client'
@@ -31,10 +32,12 @@ export function GoogleShapesBackground() {
             right: shape.right,
             bottom: shape.bottom,
             opacity: 0.25,
-            // [Performance] Force hardware acceleration
+            // [Performance] Force hardware acceleration & passive rendering
             transform: 'translate3d(0, 0, 0)',
             willChange: 'transform',
+            // [Optimization] Start visible, no fade-in
           }}
+          // [Optimization] Subtle animation only, no initial state
           animate={{
             y: [0, -40, 0],
             rotate: [0, 20, 0],

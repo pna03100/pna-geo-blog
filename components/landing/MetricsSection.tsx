@@ -7,6 +7,7 @@
 "use client";
 
 import { CountUpNumber } from "./CountUpNumber";
+import { SectionTitle } from "./SectionTitle";
 
 // Define data outside component (DRY principle)
 const metrics = [
@@ -54,20 +55,11 @@ export function MetricsSection() {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         
         {/* Header with Badge */}
-        <div className="text-center mb-12 md:mb-16">
-          {/* The Badge - Unified with existing Trust Badge style */}
-          <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 text-[#2563EB] text-xs md:text-sm font-semibold mb-4 md:mb-6 tracking-tight">
-            Proven Results
-          </span>
-          
-          <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-3 md:mb-4 tracking-tight leading-tight">
-            숫자로 증명하는 퍼포먼스
-          </h2>
-          <p className="text-base md:text-xl text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
-            감각에 의존하지 않습니다.<br />
-            오직 <span className="text-slate-900 font-semibold">정확한 데이터</span>만이 비즈니스의 성장을 만듭니다.
-          </p>
-        </div>
+        <SectionTitle
+          badge="Proven Results"
+          title="숫자로 증명하는 퍼포먼스"
+          description="감각에 의존하지 않습니다. 오직 정확한 데이터만이 비즈니스의 성장을 만듭니다."
+        />
 
         {/* Bento Grid (SEO: Description List) */}
         <dl className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-6">

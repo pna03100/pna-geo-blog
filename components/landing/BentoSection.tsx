@@ -5,9 +5,8 @@
 
 "use client";
 
-import { FadeIn } from "./FadeIn";
 import { SectionWrapper } from "./SectionWrapper";
-import { GlassCard } from "./GlassCard";
+import { SectionTitle } from "./SectionTitle";
 
 const solutions = [
   {
@@ -15,7 +14,7 @@ const solutions = [
     title: "구글 광고",
     description: "검색 의도 선점 타겟팅 및 ROAS 최적화",
     features: ["스마트 입찰 전략", "키워드 최적화", "광고 A/B 테스팅"],
-    span: "md:col-span-2",
+    span: "md:col-span-1",
   },
   {
     icon: "🤖",
@@ -57,31 +56,16 @@ const solutions = [
 export function BentoSection() {
   return (
     <SectionWrapper id="solutions">
-      <div className="text-center mb-12 md:mb-16">
-        <FadeIn>
-          <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 text-[#2563EB] text-xs md:text-sm font-semibold mb-4 md:mb-6">
-            Core Solutions
-          </span>
-        </FadeIn>
-        <FadeIn delay={0.1}>
-          <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-3 md:mb-4 tracking-tight leading-tight">
-            통합 마케팅 솔루션
-          </h2>
-        </FadeIn>
-        <FadeIn delay={0.2}>
-          <p className="text-base md:text-xl text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
-            Google Ads부터 SEO, GEO, 소셜 미디어까지
-            <br />
-            데이터 기반 성과 마케팅의 모든 것
-          </p>
-        </FadeIn>
-      </div>
+      <SectionTitle
+        badge="Core Solutions"
+        title="통합 마케팅 솔루션"
+        description="Google Ads부터 SEO, GEO, 미디어까지 데이터 기반 성과 마케팅의 모든 것"
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-        {solutions.map((solution, index) => {
+        {solutions.map((solution) => {
           return (
-            <FadeIn key={solution.title} delay={index * 0.1}>
-              <div className={`group relative overflow-hidden rounded-xl md:rounded-2xl bg-white border border-slate-200 p-5 md:p-8 shadow-sm transition-all hover:shadow-xl hover:border-[#2563EB] ${solution.span}`}>
+            <div key={solution.title} className={`group relative overflow-hidden rounded-xl md:rounded-2xl bg-white border border-slate-200 p-5 md:p-8 shadow-sm transition-all hover:shadow-xl hover:border-[#2563EB] ${solution.span}`}>
                 <div className="h-full flex flex-col items-center md:items-start text-center md:text-left">
                   {/* Icon with Solid Background */}
                   <div className="inline-flex items-center justify-center p-3 md:p-4 rounded-xl md:rounded-2xl bg-blue-50 mb-4 md:mb-6 w-fit">
@@ -110,7 +94,6 @@ export function BentoSection() {
                   </ul>
                 </div>
               </div>
-            </FadeIn>
           );
         })}
       </div>

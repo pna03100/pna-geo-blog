@@ -69,7 +69,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
 
   return (
     <main className="min-h-screen pt-[73px]">
-      {/* Hero Section - Premium Blue Theme */}
+      {/* Hero Section - NO ANIMATION for LCP */}
       <section className="relative bg-gradient-to-br from-blue-600 via-indigo-600 to-blue-700 text-white py-20 overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
@@ -81,19 +81,14 @@ export function InsightsClient({ posts }: InsightsClientProps) {
 
         {/* Content */}
         <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
-          >
+          <div className="max-w-4xl mx-auto text-center">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 mb-6">
               <Sparkles className="w-4 h-4" />
               <span className="text-sm font-semibold">Marketing Insights</span>
             </div>
 
-            {/* Heading */}
+            {/* Heading - NO ANIMATION for SEO & LCP */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               마케팅 인사이트
             </h1>
@@ -103,7 +98,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
               데이터 기반 성과 마케팅을 위한 실무 노하우와<br className="hidden md:block" />
               최신 트렌드를 공유합니다
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -123,11 +118,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
       <section className="container mx-auto px-4 md:px-6 max-w-7xl py-16">
         {filteredPosts.length === 0 ? (
           // Empty State
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-2xl mx-auto text-center py-16"
-          >
+          <div className="max-w-2xl mx-auto text-center py-16">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-50 mb-6">
               <FileText className="w-10 h-10 text-blue-600" />
             </div>
@@ -144,7 +135,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
               전체 글 보기
               <ArrowRight className="w-4 h-4" />
             </button>
-          </motion.div>
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPosts.map((post, index) => {
@@ -159,12 +150,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
                 : '';
 
               return (
-                <motion.div
-                  key={post.databaseId}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                >
+                <div key={post.databaseId}>
                   <Link
                     href={`/blog/${post.slug}`}
                     className="group block h-full rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 overflow-hidden"
@@ -235,7 +221,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
                       </div>
                     </div>
                   </Link>
-                </motion.div>
+                </div>
               );
             })}
           </div>
