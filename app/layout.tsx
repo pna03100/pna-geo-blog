@@ -10,6 +10,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/ui/navbar';
 import { FooterSection } from '@/components/landing/FooterSection';
+import { FloatingActions } from '@/components/insights/FloatingActions';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -85,6 +86,7 @@ export default function RootLayout({
       <body className={`${inter.className} text-slate-950`}>
         <Navbar />
         {children}
+        <FloatingActions />
         <FooterSection />
       </body>
     </html>

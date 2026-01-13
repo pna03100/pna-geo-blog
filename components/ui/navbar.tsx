@@ -15,6 +15,7 @@ import { cn } from '@/lib/utils'
 
 const navItems = [
   { name: '구글 애즈', href: '/google-ads' },
+  { name: 'SEO & GEO', href: '/seo-geo' },
   { name: '워드프레스', href: '/wordpress' },
   { name: '퍼포먼스', href: '/performance' },
   { name: '인사이트', href: '/insights' },

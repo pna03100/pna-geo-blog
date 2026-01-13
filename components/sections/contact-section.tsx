@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { MapPin, Mail, Phone, Award, CheckCircle2, Loader2 } from "lucide-react";
+import { MapPin, Mail, Phone, Printer, Award, CheckCircle2, Loader2 } from "lucide-react";
 
 // ============================================
 // [Security] Zod Schema
@@ -163,17 +163,27 @@ export function ContactSection() {
                   <h3 className="text-sm font-semibold text-slate-700 mb-1">
                     전화
                   </h3>
-                  <div className="space-y-1">
-                    <a
-                      href="tel:070-7733-7905"
-                      className="block text-slate-600 hover:text-blue-600 transition-colors"
-                    >
-                      Tel: 070-7733-7905
-                    </a>
-                    <p className="text-sm text-slate-500">
-                      Fax: 031-908-2225
-                    </p>
-                  </div>
+                  <a
+                    href="tel:070-7733-7905"
+                    className="text-slate-600 hover:text-blue-600 transition-colors"
+                  >
+                    Tel: 070-7733-7905
+                  </a>
+                </div>
+              </div>
+
+              {/* Fax */}
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
+                  <Printer className="w-6 h-6 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-slate-700 mb-1">
+                    팩스
+                  </h3>
+                  <p className="text-slate-600">
+                    Fax: 031-908-2225
+                  </p>
                 </div>
               </div>
             </div>

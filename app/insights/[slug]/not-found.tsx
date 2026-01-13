@@ -62,8 +62,6 @@ export default function InsightNotFound() {
         </div>
         </div>
       </div>
-      </div>
     </div>
   );
 }
-

@@ -1,6 +1,6 @@
 /**
  * [Client] Google Ads Service Page
- * Premium Blue Theme
+ * Premium Blue Theme (Brand Color: #2563EB)
  * [Animation] Scroll-triggered entrance for sections
  */
 
@@ -8,7 +8,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Target, TrendingUp, BarChart3, Zap, CheckCircle2, ArrowRight, Sparkles, Award, Shield } from "lucide-react";
+import { Target, TrendingUp, BarChart3, Zap, CheckCircle2, ArrowRight, Sparkles, Award, Shield, Brain, Layers, Activity, Users } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
 import { GoogleAdsFAQ } from "@/components/service/GoogleAdsFAQ";
 
@@ -37,6 +37,33 @@ const services = [
     description: "구글 AI 기술을 활용한 스마트 입찰로 효율을 극대화합니다.",
     color: "#0F9D58" // Google Green
   },
+];
+
+const advancedServices = [
+  {
+    icon: Brain,
+    title: "Performance Max (P-Max) 전략",
+    description: "Google의 최신 AI 캠페인으로 검색, 디스플레이, YouTube, Gmail, Discover를 통합 운영합니다. 머신러닝이 실시간으로 최적의 광고 조합을 찾아 전환율을 극대화하며, Asset Group별 세밀한 성과 분석을 제공합니다.",
+    features: ["Asset Group 최적화", "실시간 A/B 테스팅", "Cross-Channel 통합 전략"]
+  },
+  {
+    icon: Layers,
+    title: "Smart Bidding & 입찰 전략",
+    description: "Target ROAS, Maximize Conversions, Target CPA 등 비즈니스 목표에 맞는 AI 입찰 전략을 설계합니다. Bid Adjustment, Ad Schedule, Device 타겟팅을 조합하여 광고 효율을 200% 이상 개선합니다.",
+    features: ["tROAS/tCPA 최적화", "Enhanced CPC", "Portfolio Bidding"]
+  },
+  {
+    icon: Activity,
+    title: "Attribution & Conversion Tracking",
+    description: "GA4, GTM, Server-Side Tracking을 활용한 정밀한 전환 추적 시스템을 구축합니다. Data-Driven Attribution으로 각 채널의 실제 기여도를 측정하고, Offline Conversion Import로 오프라인 매출도 연동합니다.",
+    features: ["GA4 고급 설정", "Enhanced Conversions", "Offline Import"]
+  },
+  {
+    icon: Users,
+    title: "Audience & Remarketing 전략",
+    description: "Customer Match, Similar Audiences, In-Market Audiences를 조합한 고급 오디언스 타겟팅을 제공합니다. RLSA(검색 리마케팅)와 Dynamic Remarketing으로 이탈 고객을 재유입시켜 전환율을 3배 이상 향상시킵니다.",
+    features: ["Customer Match CRM 연동", "Dynamic Remarketing", "RLSA 전략"]
+  }
 ];
 
 const features = [
@@ -145,65 +172,141 @@ export function GoogleAdsClient() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="bg-gradient-to-br from-slate-50 to-blue-50 py-20">
+      {/* Advanced AI Strategy Section */}
+      <section className="bg-slate-50 py-20">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left: Text */}
-            <FadeIn delay={0.1}>
-              <div>
-                <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-blue-200 text-blue-600 text-sm font-semibold mb-4">
-                  Why Choose Us
-                </span>
-                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-                  피앤에이컴퍼니를<br />
-                  선택해야 하는 이유
-                </h2>
-                <div className="space-y-4">
-                  {features.map((feature, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-3"
-                    >
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center">
-                      <CheckCircle2 className="w-4 h-4 text-white" />
-                    </div>
-                    <span className="text-lg text-slate-700">{feature}</span>
-                  </div>
-                ))}
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* Right: Stats Card */}
-            <FadeIn delay={0.2}>
-              <div className="p-8 rounded-2xl bg-white shadow-xl border border-slate-200">
-              <div className="grid grid-cols-2 gap-6">
-                <div className="text-center p-6 rounded-xl bg-blue-50">
-                  <div className="text-4xl font-bold text-blue-600 mb-2">500%</div>
-                  <div className="text-sm text-slate-600">평균 ROAS</div>
-                </div>
-                <div className="text-center p-6 rounded-xl bg-green-50">
-                  <div className="text-4xl font-bold text-green-600 mb-2">100억+</div>
-                  <div className="text-sm text-slate-600">월 광고비 운영</div>
-                </div>
-                <div className="text-center p-6 rounded-xl bg-yellow-50">
-                  <div className="text-4xl font-bold text-yellow-600 mb-2">20억</div>
-                  <div className="text-sm text-slate-600">평균 예산 절감</div>
-                </div>
-                <div className="text-center p-6 rounded-xl bg-red-50">
-                  <div className="text-4xl font-bold text-red-600 mb-2">200+</div>
-                  <div className="text-sm text-slate-600">성공 캠페인</div>
-                </div>
-              </div>
-              </div>
-            </FadeIn>
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
+              Advanced Strategy
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+              AI 기반 고급 광고 전략
+            </h2>
+            <p className="text-xl text-slate-600">
+              Google 최신 AI 기술과 데이터 과학을 결합한 전문가 전략
+            </p>
           </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {advancedServices.map((service, index) => (
+              <FadeIn key={index} delay={index * 0.1}>
+                <div className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-xl transition-all duration-300">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center">
+                      <service.icon className="w-7 h-7 text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-slate-900 mb-2">
+                        {service.title}
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="text-slate-600 leading-relaxed mb-6">
+                    {service.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {service.features.map((feature, idx) => (
+                      <span
+                        key={idx}
+                        className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-sm font-medium"
+                      >
+                        <CheckCircle2 className="w-3 h-3 mr-1.5" />
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+
+          {/* Expert Insight Box */}
+          <FadeIn delay={0.4}>
+            <div className="mt-12 p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100">
+              <div className="max-w-4xl mx-auto">
+                <div className="flex items-start gap-4">
+                  <Sparkles className="w-8 h-8 text-blue-600 flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                      왜 Google Ads AI 전략이 필수인가?
+                    </h3>
+                    <div className="space-y-3 text-slate-700 leading-relaxed">
+                      <p>
+                        <strong className="text-slate-900">• Performance Max의 혁신:</strong> 2023년 Google은 Smart Shopping과 Local 캠페인을 P-Max로 통합했습니다. P-Max는 전환 목표만 설정하면 AI가 자동으로 최적의 광고 조합을 찾아 노출합니다. 기존 캠페인 대비 평균 전환율 18% 증가, CPA 12% 감소 효과를 보이고 있습니다.
+                      </p>
+                      <p>
+                        <strong className="text-slate-900">• Smart Bidding의 진화:</strong> Google AI는 70억 개 이상의 신호(Device, Location, Time, Browser, Past Behavior 등)를 실시간으로 분석하여 각 경매(Auction)마다 최적 입찰가를 결정합니다. 수동 입찰로는 불가능한 수준의 정밀도입니다. 특히 tROAS(Target ROAS) 전략은 광고비를 늘릴수록 효율이 개선되는 '규모의 경제' 효과를 냅니다.
+                      </p>
+                      <p>
+                        <strong className="text-slate-900">• Attribution의 중요성:</strong> 고객은 구매 전 평균 7~13개의 터치포인트를 경험합니다. Last-Click Attribution(마지막 클릭만 인정)은 중간 기여 채널을 무시하여 의사결정을 왜곡합니다. Data-Driven Attribution은 머신러닝으로 각 터치포인트의 실제 기여도를 계산하여, 광고비를 진짜 효과 있는 채널에 재분배합니다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="container mx-auto px-4 md:px-6 max-w-7xl py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Text */}
+          <FadeIn delay={0.1}>
+            <div>
+              <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-blue-200 text-blue-600 text-sm font-semibold mb-4">
+                Why Choose Us
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+                피앤에이컴퍼니를<br />
+                선택해야 하는 이유
+              </h2>
+              <div className="space-y-4">
+                {features.map((feature, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3"
+                  >
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center">
+                    <CheckCircle2 className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-lg text-slate-700">{feature}</span>
+                </div>
+              ))}
+              </div>
+            </div>
+          </FadeIn>
+
+          {/* Right: Stats Card */}
+          <FadeIn delay={0.2}>
+            <div className="p-8 rounded-2xl bg-white shadow-xl border border-slate-200">
+            <div className="grid grid-cols-2 gap-6">
+              <div className="text-center p-6 rounded-xl bg-blue-50">
+                <div className="text-4xl font-bold text-blue-600 mb-2">500%</div>
+                <div className="text-sm text-slate-600">평균 ROAS</div>
+              </div>
+              <div className="text-center p-6 rounded-xl bg-green-50">
+                <div className="text-4xl font-bold text-green-600 mb-2">100억+</div>
+                <div className="text-sm text-slate-600">월 광고비 운영</div>
+              </div>
+              <div className="text-center p-6 rounded-xl bg-yellow-50">
+                <div className="text-4xl font-bold text-yellow-600 mb-2">20억</div>
+                <div className="text-sm text-slate-600">평균 예산 절감</div>
+              </div>
+              <div className="text-center p-6 rounded-xl bg-red-50">
+                <div className="text-4xl font-bold text-red-600 mb-2">200+</div>
+                <div className="text-sm text-slate-600">성공 캠페인</div>
+              </div>
+            </div>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
       {/* Process Section */}
-      <section className="container mx-auto px-4 md:px-6 max-w-7xl py-20">
+      <section className="bg-slate-50 py-20">
+        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
             Process
@@ -235,6 +338,7 @@ export function GoogleAdsClient() {
               </div>
             </FadeIn>
           ))}
+        </div>
         </div>
       </section>
 

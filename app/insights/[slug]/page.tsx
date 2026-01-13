@@ -17,7 +17,6 @@ import { BlueprintBackground } from '@/components/ui/blueprint-background';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { sanitizeWordPressHTML, stripHtmlTags, truncateText } from '@/lib/sanitize';
 import { ReadingProgress } from '@/components/insights/ReadingProgress';
-import { FloatingActions } from '@/components/insights/FloatingActions';
 import { PopularPosts } from '@/components/insights/PopularPosts';
 import { CTACard } from '@/components/insights/CTACard';
 import { Calendar, Clock, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
@@ -136,9 +135,6 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
     <>
       {/* Reading Progress Bar */}
       <ReadingProgress />
-
-      {/* Floating Actions */}
-      <FloatingActions />
 
       {/* Background */}
       <BlueprintBackground />
