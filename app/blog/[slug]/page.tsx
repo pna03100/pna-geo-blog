@@ -236,7 +236,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
                     prose-h4:text-xl prose-h4:mt-6 prose-h4:mb-3
                     prose-p:leading-relaxed prose-p:text-slate-700 prose-p:mb-6
-                    prose-a:text-blue-600 prose-a:no-underline prose-a:font-medium hover:prose-a:underline hover:prose-a:text-blue-700
+                    prose-a:text-blue-600 prose-a:no-underline prose-a:font-medium prose-a:break-words hover:prose-a:underline hover:prose-a:text-blue-700
                     prose-strong:text-slate-900 prose-strong:font-bold
                     prose-ul:my-6 prose-ol:my-6
                     prose-li:text-slate-700 prose-li:my-2
@@ -244,9 +244,13 @@ export default async function BlogPostPage({ params }: PageProps) {
                     prose-blockquote:border-l-4 prose-blockquote:border-blue-600 prose-blockquote:bg-blue-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:my-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic
                     prose-code:text-blue-600 prose-code:bg-blue-50 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
                     prose-pre:bg-slate-900 prose-pre:text-slate-50 prose-pre:rounded-xl prose-pre:my-6 prose-pre:shadow-lg
-                    prose-table:my-8
-                    prose-th:bg-slate-100 prose-th:text-slate-900 prose-th:font-bold
-                    prose-td:text-slate-700"
+                    prose-table:my-8 prose-table:border-collapse prose-table:w-full
+                    prose-thead:border-b-2 prose-thead:border-slate-200
+                    prose-th:bg-slate-100 prose-th:text-slate-900 prose-th:font-bold prose-th:p-3 prose-th:text-left
+                    prose-td:text-slate-700 prose-td:p-3 prose-td:border-t prose-td:border-slate-200
+                    [&_table_th]:!bg-slate-100 [&_table_th]:!text-slate-900
+                    [&_table_th[style*='background']]:!text-white
+                    [&_table_a]:break-words [&_table_a]:overflow-wrap-anywhere"
                   dangerouslySetInnerHTML={{ __html: content }}
                 />
               </div>
