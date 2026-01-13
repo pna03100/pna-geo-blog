@@ -41,6 +41,20 @@ const GOOGLE_COLORS: Record<string, CategoryColor> = {
     hoverBg: 'bg-[#0F9D58]',
     borderHover: 'border-[#0F9D58]',
   },
+  'data-analytics': {
+    bg: 'bg-[#9C27B0]', // Purple (Material Design)
+    text: 'text-white',
+    hover: 'hover:bg-[#7B1FA2]',
+    hoverBg: 'bg-[#9C27B0]',
+    borderHover: 'border-[#9C27B0]',
+  },
+  'social-media-ads': {
+    bg: 'bg-[#FF6D00]', // Deep Orange
+    text: 'text-white',
+    hover: 'hover:bg-[#F4511E]',
+    hoverBg: 'bg-[#FF6D00]',
+    borderHover: 'border-[#FF6D00]',
+  },
 };
 
 // Mapping Korean category names to color keys
@@ -49,14 +63,24 @@ const CATEGORY_SLUG_MAP: Record<string, string> = {
   '구글애즈': 'google-ads',
   'google-ads': 'google-ads',
   '워드프레스 & SEO': 'wordpress-seo',
+  '워드프레스 & seo': 'wordpress-seo',
   '워드프레스': 'wordpress-seo',
   'wordpress': 'wordpress-seo',
+  'wordpress-seo': 'wordpress-seo',
   '마케팅 인사이트': 'marketing-insights',
   '마케팅': 'marketing-insights',
   'marketing': 'marketing-insights',
+  'marketing-insights': 'marketing-insights',
   'AI 마케팅 & GEO': 'ai-marketing-geo',
+  'AI 마케팅 & geo': 'ai-marketing-geo',
   'AI': 'ai-marketing-geo',
   'ai-marketing-geo': 'ai-marketing-geo',
+  '데이터 & 분석': 'data-analytics',
+  '데이터': 'data-analytics',
+  'data-analytics': 'data-analytics',
+  '소셜 미디어 광고': 'social-media-ads',
+  '소셜미디어': 'social-media-ads',
+  'social-media-ads': 'social-media-ads',
 };
 
 export function getCategoryColor(categoryName: string): CategoryColor {

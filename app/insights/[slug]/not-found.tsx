@@ -59,6 +59,7 @@ export default function InsightNotFound() {
             </a>
           </p>
         </div>
+        </div>
       </div>
     </>
   );

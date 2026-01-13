@@ -69,7 +69,7 @@ export function RelatedPosts({ posts, currentPostId }: RelatedPostsProps) {
           return (
             <Link
               key={post.databaseId}
-              href={`/blog/${post.slug}`}
+              href={`/insights/${post.slug}`}
               className="group block rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 overflow-hidden"
             >
               {/* Image */}

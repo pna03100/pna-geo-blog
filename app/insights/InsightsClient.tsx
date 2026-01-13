@@ -5,13 +5,14 @@
 
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { WPContent } from "@/lib/types";
-import { CategoryFilter } from "@/components/blog/CategoryFilter";
-import { Calendar, FileText, ArrowRight, TrendingUp, Sparkles } from "lucide-react";
+import { CategoryFilter } from "@/components/insights/CategoryFilter";
+import { Calendar, FileText, ArrowRight, Sparkles } from "lucide-react";
 import { getCategoryColor } from "@/lib/category-colors";
 
 interface InsightsClientProps {
@@ -34,38 +35,128 @@ function decodeHTMLEntities(text: string): string {
 }
 
 export function InsightsClient({ posts }: InsightsClientProps) {
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get('category');
+  const [selectedCategory, setSelectedCategory] = useState(categoryParam || 'all');
+
+  // Update selected category when URL parameter changes
+  useEffect(() => {
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+  }, [categoryParam]);
 
   // Extract categories and count
   const categories = useMemo(() => {
-    const categoryMap = new Map<string, { name: string; count: number }>();
+    // Define category display names
+    const CATEGORY_NAMES: Record<string, string> = {
+      '구글 애즈': '구글 애즈',
+      '구글애즈': '구글 애즈',
+      'google-ads': '구글 애즈',
+      '워드프레스 & SEO': '워드프레스 & SEO',
+      '워드프레스 & seo': '워드프레스 & SEO',
+      '워드프레스': '워드프레스 & SEO',
+      'wordpress': '워드프레스 & SEO',
+      'wordpress-seo': '워드프레스 & SEO',
+      'AI 마케팅 & GEO': 'AI 마케팅 & GEO',
+      'AI 마케팅 & geo': 'AI 마케팅 & GEO',
+      'AI': 'AI 마케팅 & GEO',
+      'ai-marketing-geo': 'AI 마케팅 & GEO',
+      '마케팅 인사이트': '마케팅 인사이트',
+      '마케팅': '마케팅 인사이트',
+      'marketing': '마케팅 인사이트',
+      'marketing-insights': '마케팅 인사이트',
+      '데이터 & 분석': '데이터 & 분석',
+      '데이터': '데이터 & 분석',
+      'data-analytics': '데이터 & 분석',
+      '소셜 미디어 광고': '소셜 미디어 광고',
+      '소셜미디어': '소셜 미디어 광고',
+      'social-media-ads': '소셜 미디어 광고',
+    };
+
+    // Collect all unique categories from posts
+    const categoryMap = new Map<string, { slug: string; name: string; count: number }>();
     
     posts.forEach((post) => {
       post.categories?.nodes?.forEach((cat) => {
-        const existing = categoryMap.get(cat.slug);
+        const displayName = CATEGORY_NAMES[cat.name] || cat.name;
+        const existing = categoryMap.get(displayName);
+        
         if (existing) {
           existing.count++;
         } else {
-          categoryMap.set(cat.slug, { name: cat.name, count: 1 });
+          categoryMap.set(displayName, {
+            slug: cat.slug,
+            name: displayName,
+            count: 1,
+          });
         }
       });
     });
 
-    return Array.from(categoryMap.entries()).map(([slug, data]) => ({
-      slug,
-      name: data.name,
-      count: data.count,
-    }));
+    // Add missing categories with 0 count
+    const allCategories = [
+      '구글 애즈',
+      '워드프레스 & SEO',
+      'AI 마케팅 & GEO',
+      '데이터 & 분석',
+      '소셜 미디어 광고',
+    ];
+
+    allCategories.forEach((name) => {
+      if (!categoryMap.has(name)) {
+        categoryMap.set(name, {
+          slug: name.toLowerCase().replace(/\s+/g, '-').replace(/&/g, ''),
+          name,
+          count: 0,
+        });
+      }
+    });
+
+    return Array.from(categoryMap.values());
   }, [posts]);
 
   // Filter posts
   const filteredPosts = useMemo(() => {
     if (selectedCategory === 'all') return posts;
     
+    // Find the selected category display name
+    const selectedCategoryData = categories.find(cat => cat.slug === selectedCategory);
+    if (!selectedCategoryData) return posts;
+
+    // Category name mapping for flexible matching
+    const CATEGORY_NAMES: Record<string, string> = {
+      '구글 애즈': '구글 애즈',
+      '구글애즈': '구글 애즈',
+      'google-ads': '구글 애즈',
+      '워드프레스 & SEO': '워드프레스 & SEO',
+      '워드프레스 & seo': '워드프레스 & SEO',
+      '워드프레스': '워드프레스 & SEO',
+      'wordpress': '워드프레스 & SEO',
+      'wordpress-seo': '워드프레스 & SEO',
+      'AI 마케팅 & GEO': 'AI 마케팅 & GEO',
+      'AI 마케팅 & geo': 'AI 마케팅 & GEO',
+      'AI': 'AI 마케팅 & GEO',
+      'ai-marketing-geo': 'AI 마케팅 & GEO',
+      '마케팅 인사이트': '마케팅 인사이트',
+      '마케팅': '마케팅 인사이트',
+      'marketing': '마케팅 인사이트',
+      'marketing-insights': '마케팅 인사이트',
+      '데이터 & 분석': '데이터 & 분석',
+      '데이터': '데이터 & 분석',
+      'data-analytics': '데이터 & 분석',
+      '소셜 미디어 광고': '소셜 미디어 광고',
+      '소셜미디어': '소셜 미디어 광고',
+      'social-media-ads': '소셜 미디어 광고',
+    };
+    
     return posts.filter((post) =>
-      post.categories?.nodes?.some((cat) => cat.slug === selectedCategory)
+      post.categories?.nodes?.some((cat) => {
+        const normalizedName = CATEGORY_NAMES[cat.name] || cat.name;
+        return normalizedName === selectedCategoryData.name || cat.slug === selectedCategory;
+      })
     );
-  }, [posts, selectedCategory]);
+  }, [posts, selectedCategory, categories]);
 
   return (
     <main className="min-h-screen pt-[73px]">
@@ -120,13 +211,13 @@ export function InsightsClient({ posts }: InsightsClientProps) {
           // Empty State
           <div className="max-w-2xl mx-auto text-center py-16">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-50 mb-6">
-              <FileText className="w-10 h-10 text-blue-600" />
+              <Sparkles className="w-10 h-10 text-blue-600" />
             </div>
             <h2 className="text-2xl font-bold text-slate-900 mb-2">
-              해당 카테고리에 글이 없습니다
+              곧 만나요! 새로운 인사이트를 준비 중입니다
             </h2>
-            <p className="text-slate-600 mb-6">
-              다른 카테고리를 선택하거나 전체보기를 확인해주세요.
+            <p className="text-slate-600 mb-6 whitespace-pre-line">
+              양질의 콘텐츠로 찾아뵙겠습니다.{'\n'}다른 카테고리의 인사이트를 먼저 살펴보세요 😊
             </p>
             <button
               onClick={() => setSelectedCategory('all')}
@@ -149,10 +240,15 @@ export function InsightsClient({ posts }: InsightsClientProps) {
                 ? decodeHTMLEntities(post.excerpt.replace(/<[^>]*>/g, '')).substring(0, 120) + '...'
                 : '';
 
+              // Get first category slug for back navigation
+              const categorySlug = post.categories?.nodes && post.categories.nodes.length > 0
+                ? post.categories.nodes[0].slug
+                : '';
+
               return (
                 <div key={post.databaseId}>
                   <Link
-                    href={`/blog/${post.slug}`}
+                    href={`/insights/${post.slug}${selectedCategory !== 'all' ? `?category=${selectedCategory}` : categorySlug ? `?category=${categorySlug}` : ''}`}
                     className="group block h-full rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 overflow-hidden"
                   >
                     {/* Image */}

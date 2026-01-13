@@ -74,10 +74,15 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
             ? decodeHTMLEntities(post.excerpt.replace(/<[^>]*>/g, '')).substring(0, 120) + '...'
             : '';
 
+          // Get first category slug for navigation
+          const categorySlug = post.categories?.nodes && post.categories.nodes.length > 0
+            ? post.categories.nodes[0].slug
+            : '';
+
           return (
             <FadeIn key={post.databaseId} delay={index * 0.1}>
               <Link 
-                href={`/blog/${post.slug}`}
+                href={`/insights/${post.slug}${categorySlug ? `?category=${categorySlug}` : ''}`}
                 className="group flex flex-col h-full rounded-xl md:rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 overflow-hidden"
               >
                 {/* Featured Image - Always Show Container */}

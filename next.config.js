@@ -68,6 +68,17 @@ const nextConfig = {
       ],
     };
   },
+
+  // 5. 리다이렉트 설정 (/blog/ → /insights/)
+  async redirects() {
+    return [
+      {
+        source: '/blog/:slug*',
+        destination: '/insights/:slug*',
+        permanent: true, // 301 Permanent Redirect (SEO-friendly)
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

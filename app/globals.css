@@ -121,9 +121,38 @@
 
 .prose a {
   @apply text-blue-600 underline decoration-blue-600/30 transition-colors;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .prose a:hover {
   @apply text-blue-700 decoration-blue-700/50;
 }
 
+
+/* ============================================
+   [WordPress] ???��???- ?�본 HTML ?��?
+   가로폭�?100%�??�정, ?�머지??WordPress ?�라???��???존중
+   ============================================ */
+.prose table {
+  width: 100% !important;
+  max-width: 100%;
+  border-collapse: unset;
+  margin: 1.5rem 0;
+}
+
+.prose th,
+.prose td {
+  border-collapse: unset;
+  padding: unset;
+  text-align: unset;
+  background-color: unset;
+  border: unset;
+}
+
+/* ???��? 링크???�역 벗어?��? ?�도�?*/
+.prose table a {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}

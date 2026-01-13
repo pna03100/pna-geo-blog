@@ -6,6 +6,7 @@
 
 import { getAllPosts } from '@/lib/api';
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import { InsightsClient } from './InsightsClient';
 import { BlueprintBackground } from '@/components/ui/blueprint-background';
 
@@ -32,7 +33,9 @@ export default async function InsightsPage() {
   return (
     <>
       <BlueprintBackground />
-      <InsightsClient posts={posts} />
+      <Suspense fallback={<div className="min-h-screen pt-[73px]" />}>
+        <InsightsClient posts={posts} />
+      </Suspense>
     </>
   );
 }

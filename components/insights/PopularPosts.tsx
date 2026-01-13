@@ -60,7 +60,7 @@ export function PopularPosts({ posts, currentPostId }: PopularPostsProps) {
           return (
             <Link
               key={post.databaseId}
-              href={`/blog/${post.slug}`}
+              href={`/insights/${post.slug}`}
               className="group block"
             >
               <div className="flex gap-3">
