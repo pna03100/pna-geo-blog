@@ -338,7 +338,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
               '@type': 'BlogPosting',
               headline: post.title,
               datePublished: post.date,
-              url: `https://pnamarketing.co.kr/blog/${post.slug}`,
+              url: `https://pnamarketing.co.kr/insights/${post.slug}`,
             })),
           }),
         }}
