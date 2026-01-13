@@ -8,6 +8,7 @@
 import { FadeIn } from "./FadeIn";
 import { SectionWrapper } from "./SectionWrapper";
 import Link from "next/link";
+import Image from "next/image";
 import { Calendar, ArrowRight, FileText } from "lucide-react";
 import { WPContent } from "@/lib/types";
 import { getCategoryColor } from "@/lib/category-colors";
@@ -106,10 +107,13 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
                 <div className="relative w-full h-40 md:h-48 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
                   {post.featuredImage?.node?.sourceUrl ? (
                     <>
-                      <img
+                      <Image
                         src={post.featuredImage.node.sourceUrl}
                         alt={post.featuredImage.node.altText || post.title || ''}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        priority={index === 0}
                       />
                       {/* Gradient Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />

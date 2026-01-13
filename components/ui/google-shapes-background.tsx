@@ -1,6 +1,7 @@
 /**
  * Google-Themed Ambient Background
  * Floating blurred shapes using Google's brand colors
+ * [Performance] GPU-optimized with hardware acceleration
  */
 
 'use client'
@@ -20,7 +21,7 @@ export function GoogleShapesBackground() {
       {shapes.map((shape, i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full mix-blend-multiply filter blur-3xl"
+          className="absolute rounded-full mix-blend-multiply filter blur-3xl md:blur-3xl"
           style={{
             backgroundColor: shape.color,
             width: shape.size,
@@ -30,6 +31,9 @@ export function GoogleShapesBackground() {
             right: shape.right,
             bottom: shape.bottom,
             opacity: 0.25,
+            // [Performance] Force hardware acceleration
+            transform: 'translate3d(0, 0, 0)',
+            willChange: 'transform',
           }}
           animate={{
             y: [0, -40, 0],
