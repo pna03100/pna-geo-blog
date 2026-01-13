@@ -1,6 +1,7 @@
 /**
  * [Client] Performance Marketing Service Page
  * Premium Green Theme
+ * [Animation] Scroll-triggered entrance for sections
  */
 
 "use client";
@@ -8,6 +9,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { TrendingUp, Target, BarChart3, Zap, CheckCircle2, ArrowRight, Sparkles, Award, DollarSign } from "lucide-react";
+import { FadeIn } from "@/components/ui/fade-in";
 import { PerformanceFAQ } from "@/components/service/PerformanceFAQ";
 
 const services = [
@@ -111,10 +113,10 @@ export function PerformanceClient() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {metrics.map((metric, index) => (
-            <div
-              key={index}
-              className="group p-8 rounded-2xl bg-white border border-slate-200 hover:border-green-200 hover:shadow-xl transition-all duration-300 text-center"
-            >
+            <FadeIn key={index} delay={index * 0.1}>
+              <div
+                className="group p-8 rounded-2xl bg-white border border-slate-200 hover:border-green-200 hover:shadow-xl transition-all duration-300 text-center"
+              >
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-green-50 mb-6">
                 <DollarSign className="w-7 h-7 text-green-600" />
               </div>
@@ -127,7 +129,8 @@ export function PerformanceClient() {
               <p className="text-slate-600">
                 {metric.description}
               </p>
-            </div>
+              </div>
+            </FadeIn>
           ))}
         </div>
       </section>
@@ -149,10 +152,10 @@ export function PerformanceClient() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
             {services.map((service, index) => (
-              <div
-                key={index}
-                className="group p-8 rounded-2xl bg-white border border-slate-200 hover:border-green-200 hover:shadow-xl transition-all duration-300"
-              >
+              <FadeIn key={index} delay={index * 0.1}>
+                <div
+                  className="group p-8 rounded-2xl bg-white border border-slate-200 hover:border-green-200 hover:shadow-xl transition-all duration-300"
+                >
                 <div 
                   className="inline-flex items-center justify-center w-14 h-14 rounded-xl mb-6 transition-transform duration-300 group-hover:scale-110"
                   style={{ backgroundColor: `${service.color}15` }}
@@ -165,7 +168,8 @@ export function PerformanceClient() {
                 <p className="text-slate-600 leading-relaxed">
                   {service.description}
                 </p>
-              </div>
+                </div>
+              </FadeIn>
             ))}
           </div>
 
@@ -173,15 +177,16 @@ export function PerformanceClient() {
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-200"
-                >
+                <FadeIn key={index} delay={0.4 + index * 0.05}>
+                  <div
+                    className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-200"
+                  >
                   <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-600 flex items-center justify-center">
                     <CheckCircle2 className="w-4 h-4 text-white" />
                   </div>
                   <span className="text-lg text-slate-700">{feature}</span>
-                </div>
+                  </div>
+                </FadeIn>
               ))}
             </div>
           </div>
@@ -194,7 +199,8 @@ export function PerformanceClient() {
       {/* CTA Section */}
       <section className="bg-gradient-to-br from-green-600 to-green-700 py-20">
         <div className="container mx-auto px-4 md:px-6 max-w-4xl text-center">
-          <div>
+          <FadeIn delay={0.1}>
+            <div>
             <Sparkles className="w-12 h-12 text-white mx-auto mb-6" />
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               성과 중심 광고, 지금 시작하세요
@@ -202,16 +208,18 @@ export function PerformanceClient() {
             <p className="text-xl text-green-100 mb-8">
               15년 노하우로 검증된 퍼포먼스 마케팅 전략을 무료로 상담받아보세요
             </p>
-            <motion.a
-              href="tel:07077337905"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-green-600 font-bold hover:bg-green-50 transition-all duration-300 shadow-lg"
-            >
-              <span>무료 상담 신청하기</span>
-              <ArrowRight className="w-5 h-5" />
-            </motion.a>
-          </div>
+            <Link href="/contact">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-green-600 font-bold hover:bg-green-50 transition-all duration-300 shadow-lg"
+              >
+                <span>문의하기</span>
+                <ArrowRight className="w-5 h-5" />
+              </motion.button>
+            </Link>
+            </div>
+          </FadeIn>
         </div>
       </section>
     </main>

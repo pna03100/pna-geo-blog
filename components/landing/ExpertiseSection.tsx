@@ -1,12 +1,14 @@
 /**
  * [Section] Expertise & Partners - Authority signals
  * [Layout] Asymmetric split design
+ * [Animation] Scroll-triggered entrance for cards
  */
 
 "use client";
 
 import { motion } from "framer-motion";
 import { Award, Users, Briefcase, TrendingUp } from "lucide-react";
+import { FadeIn } from "@/components/ui/fade-in";
 import { SectionWrapper } from "./SectionWrapper";
 import { SectionTitle } from "./SectionTitle";
 
@@ -50,12 +52,12 @@ export function ExpertiseSection() {
         <div className="space-y-6 md:space-y-8">
           <SectionTitle
             badge="Expertise"
-            title="검증된 전문성과 신뢰할 수 있는 파트너"
+            title={<>검증된 전문성과<br />신뢰할 수 있는 파트너</>}
             description=""
             align="left"
           />
 
-          <div>
+          <FadeIn delay={0.1}>
             <div className="rounded-xl md:rounded-2xl bg-white border border-slate-200 shadow-sm p-5 md:p-8">
               <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
                 <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-blue-50 flex items-center justify-center text-2xl md:text-4xl">
@@ -71,19 +73,21 @@ export function ExpertiseSection() {
                 접근법으로 클라이언트의 비즈니스 성장을 이끌어냅니다.
               </p>
             </div>
-          </div>
+          </FadeIn>
 
           <div className="grid grid-cols-2 gap-3 md:gap-4">
-            {expertise.map((item) => {
+            {expertise.map((item, index) => {
               const Icon = item.icon;
               return (
-                <div key={item.title} className="rounded-xl md:rounded-2xl bg-white border border-slate-200 shadow-sm p-4 md:p-6 hover:border-[#2563EB] hover:shadow-md transition-all">
+                <FadeIn key={item.title} delay={0.2 + index * 0.1}>
+                  <div className="rounded-xl md:rounded-2xl bg-white border border-slate-200 shadow-sm p-4 md:p-6 hover:border-[#2563EB] hover:shadow-md transition-all">
                     <Icon className="w-5 h-5 md:w-6 md:h-6 text-[#2563EB] mb-2 md:mb-3" />
                     <h4 className="text-sm md:text-base font-bold text-slate-900 mb-1">
                       {item.title}
                     </h4>
                     <p className="text-xs md:text-sm text-slate-500 font-medium">{item.description}</p>
                   </div>
+                </FadeIn>
               );
             })}
           </div>
@@ -91,16 +95,16 @@ export function ExpertiseSection() {
 
         {/* Right: Partners */}
         <div className="lg:mt-[106px]">
-          <div>
+          <FadeIn delay={0.1}>
             <h3 className="text-2xl md:text-3xl font-bold text-slate-950 mb-3 md:mb-4 text-center md:text-left">
               주요 파트너사
             </h3>
             <p className="text-sm md:text-base text-slate-700 mb-6 md:mb-8 font-medium text-center md:text-left">
               대기업부터 스타트업까지, 다양한 산업군의 클라이언트와 함께합니다
             </p>
-          </div>
+          </FadeIn>
 
-          <div>
+          <FadeIn delay={0.2}>
             <div className="rounded-xl md:rounded-2xl bg-white border border-slate-200 shadow-sm p-5 md:p-8">
               <div className="grid grid-cols-3 gap-4 md:gap-6">
                 {partners.map((partner, index) => (
@@ -119,9 +123,9 @@ export function ExpertiseSection() {
                 ))}
               </div>
             </div>
-          </div>
+          </FadeIn>
 
-          <div>
+          <FadeIn delay={0.3}>
             <div className="bg-blue-50 rounded-2xl p-8 border border-blue-100 mt-8">
               <div className="grid grid-cols-3 gap-6 text-center">
                 <div>
@@ -142,7 +146,7 @@ export function ExpertiseSection() {
                 </div>
               </div>
             </div>
-          </div>
+          </FadeIn>
         </div>
       </div>
     </SectionWrapper>

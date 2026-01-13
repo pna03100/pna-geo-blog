@@ -7,8 +7,19 @@
 
 import { useState } from 'react';
 
+interface GraphQLTestResult {
+  data?: {
+    generalSettings?: {
+      title: string;
+      url: string;
+      description: string;
+    };
+  };
+  errors?: Array<{ message: string }>;
+}
+
 export function GraphQLTest() {
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<GraphQLTestResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -47,10 +58,15 @@ export function GraphQLTest() {
       }
 
       setResult(data);
-      console.log('✅ GraphQL Proxy Test Success:', data);
-    } catch (err: any) {
-      setError(err.message);
-      console.error('❌ GraphQL Proxy Test Failed:', err);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('✅ GraphQL Proxy Test Success:', data);
+      }
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+      setError(errorMessage);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('❌ GraphQL Proxy Test Failed:', err);
+      }
     } finally {
       setLoading(false);
     }

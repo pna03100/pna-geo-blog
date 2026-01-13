@@ -83,7 +83,7 @@ export function FloatingNav() {
         </ul>
 
         {/* CTA Button - Desktop Only */}
-        <Link href="tel:07077337905" className="hidden lg:block">
+        <Link href="/contact" className="hidden lg:block">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -95,7 +95,7 @@ export function FloatingNav() {
               "transition-all duration-300"
             )}
           >
-            무료 상담 신청
+            문의하기
           </motion.button>
         </Link>
 
@@ -136,11 +136,11 @@ export function FloatingNav() {
               ))}
               <div className="pt-4 border-t border-slate-200/50">
                 <Link
-                  href="tel:07077337905"
+                  href="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block w-full px-4 py-3 text-center text-sm font-semibold bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-xl shadow-lg shadow-blue-500/30"
                 >
-                  무료 상담 신청
+                  문의하기
                 </Link>
               </div>
             </div>

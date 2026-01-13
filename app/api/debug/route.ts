@@ -70,7 +70,9 @@ export async function GET() {
   // API 연결 테스트
   if (actualUrl) {
     try {
-      console.log('🧪 API 연결 테스트 시작:', actualUrl);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('🧪 API 연결 테스트 시작:', actualUrl);
+      }
       
       const testQuery = `
         query TestConnection {
@@ -82,7 +84,9 @@ export async function GET() {
       `;
 
       const requestBody = JSON.stringify({ query: testQuery });
-      console.log('📦 Request Body:', requestBody);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('📦 Request Body:', requestBody);
+      }
 
       const response = await fetch(actualUrl, {
         method: 'POST',
@@ -94,10 +98,14 @@ export async function GET() {
         cache: 'no-store',
       });
 
-      console.log('✅ Response Status:', response.status);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('✅ Response Status:', response.status);
+      }
 
       const responseText = await response.text();
-      console.log('📄 Response Text:', responseText.substring(0, 500));
+      if (process.env.NODE_ENV === 'development') {
+        console.log('📄 Response Text:', responseText.substring(0, 500));
+      }
 
       let responseData;
       try {
@@ -122,13 +130,16 @@ export async function GET() {
       } else if (responseData.errors) {
         diagnostics.errors.push('GraphQL 쿼리 에러 발생');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      const errorStack = error instanceof Error ? error.stack : undefined;
+      
       diagnostics['api_test'] = {
         success: false,
-        error: error.message,
-        stack: error.stack,
+        error: errorMessage,
+        stack: errorStack,
       };
-      diagnostics.errors.push(`API 연결 예외: ${error.message}`);
+      diagnostics.errors.push(`API 연결 예외: ${errorMessage}`);
     }
   }
 

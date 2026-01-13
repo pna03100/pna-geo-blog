@@ -67,12 +67,14 @@ export default function SiteHeader() {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button
-              size="sm"
-              className="bg-violet-600 hover:bg-violet-700 text-white rounded-lg shadow-md shadow-violet-500/20 hover:shadow-violet-500/40 transition-all"
-            >
-              상담 신청
-            </Button>
+            <Link href="/contact">
+              <Button
+                size="sm"
+                className="bg-violet-600 hover:bg-violet-700 text-white rounded-lg shadow-md shadow-violet-500/20 hover:shadow-violet-500/40 transition-all"
+              >
+                문의하기
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -107,13 +109,15 @@ export default function SiteHeader() {
                 {item.name}
               </Link>
             ))}
-            <Button
-              size="sm"
-              className="w-full bg-violet-600 hover:bg-violet-700 text-white rounded-lg"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              상담 신청
-            </Button>
+            <Link href="/contact">
+              <Button
+                size="sm"
+                className="w-full bg-violet-600 hover:bg-violet-700 text-white rounded-lg"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                문의하기
+              </Button>
+            </Link>
           </div>
         )}
       </nav>

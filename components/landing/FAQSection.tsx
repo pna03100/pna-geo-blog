@@ -1,6 +1,7 @@
 /**
  * [Section] FAQ - Frequently Asked Questions
  * [Design] Accordion with Premium Corporate Blue Theme
+ * [Animation] Scroll-triggered entrance for FAQ items
  */
 
 "use client";
@@ -9,6 +10,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { FadeIn } from "@/components/ui/fade-in";
 import { SectionTitle } from "./SectionTitle";
 
 interface FAQItem {
@@ -59,7 +61,7 @@ export function FAQSection() {
   };
 
   return (
-    <section className="relative py-10 md:py-24">
+    <section className="relative py-10 md:py-20">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Section Header */}
         <SectionTitle
@@ -71,10 +73,10 @@ export function FAQSection() {
         {/* FAQ List */}
         <div className="max-w-4xl mx-auto space-y-3 md:space-y-4">
           {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="rounded-xl md:rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
-            >
+            <FadeIn key={index} delay={index * 0.05}>
+              <div
+                className="rounded-xl md:rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+              >
               {/* Question Button */}
               <button
                 onClick={() => toggleFAQ(index)}
@@ -117,7 +119,8 @@ export function FAQSection() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+              </div>
+            </FadeIn>
           ))}
         </div>
       </div>

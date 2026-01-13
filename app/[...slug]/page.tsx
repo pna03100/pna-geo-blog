@@ -20,7 +20,9 @@ export async function generateStaticParams() {
     const [posts, pages] = await Promise.all([getAllPosts(), getAllPages()]);
 
     if (!posts || !pages) {
-      console.log('⚠️ generateStaticParams: No data, returning empty array');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('⚠️ generateStaticParams: No data, returning empty array');
+      }
       return [];
     }
 
@@ -31,10 +33,14 @@ export async function generateStaticParams() {
       }))
       .filter((item) => item.slug && item.slug.length > 0);
 
-    console.log(`✅ generateStaticParams: ${allPaths.length} paths generated`);
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`✅ generateStaticParams: ${allPaths.length} paths generated`);
+    }
     return allPaths;
   } catch (error) {
-    console.error('❌ generateStaticParams failed:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('❌ generateStaticParams failed:', error);
+    }
     return [];
   }
 }
@@ -75,7 +81,9 @@ export async function generateMetadata({
       },
     };
   } catch (error) {
-    console.error('❌ generateMetadata failed:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('❌ generateMetadata failed:', error);
+    }
     return { title: '에러 발생' };
   }
 }
@@ -95,19 +103,14 @@ export default async function DynamicPage({
   try {
     content = await getContentByURI(uri);
   } catch (error) {
-    console.error('❌ Failed to load page:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('❌ Failed to load page:', error);
+    }
     content = null;
   }
 
   if (!content) {
-    return (
-      <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-        <h1 className="text-3xl font-bold text-slate-950 mb-4">콘텐츠를 불러올 수 없습니다</h1>
-        <p className="text-slate-600">
-          워드프레스 API 연결을 확인하세요. (URI: {uri})
-        </p>
-      </div>
-    );
+    notFound();
   }
 
   // Clean CMS URLs

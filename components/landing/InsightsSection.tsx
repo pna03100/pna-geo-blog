@@ -1,10 +1,12 @@
 /**
  * [Section] Insights - Latest WordPress Posts
  * [Design] Clean card layout with current design system
+ * [Animation] Scroll-triggered entrance for post cards
  */
 
 "use client";
 
+import { FadeIn } from "@/components/ui/fade-in";
 import { SectionWrapper } from "./SectionWrapper";
 import { SectionTitle } from "./SectionTitle";
 import Link from "next/link";
@@ -73,7 +75,8 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
             : '';
 
           return (
-            <Link key={post.databaseId} 
+            <FadeIn key={post.databaseId} delay={index * 0.1}>
+              <Link 
                 href={`/blog/${post.slug}`}
                 className="group flex flex-col h-full rounded-xl md:rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 overflow-hidden"
               >
@@ -148,13 +151,14 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
                   </div>
                 </div>
               </Link>
+            </FadeIn>
           );
         })}
       </div>
 
       {/* View All Link */}
       {posts.length > 3 && (
-        <div>
+        <FadeIn delay={0.4}>
           <div className="text-center mt-8 md:mt-12">
             <Link
               href="/insights"
@@ -164,7 +168,7 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
               <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
             </Link>
           </div>
-        </div>
+        </FadeIn>
       )}
     </SectionWrapper>
   );

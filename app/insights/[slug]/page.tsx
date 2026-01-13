@@ -22,7 +22,9 @@ export async function generateStaticParams() {
     const posts = await getAllPosts();
 
     if (!posts || posts.length === 0) {
-      console.warn('⚠️ [Insights] No posts found for static generation');
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('⚠️ [Insights] No posts found for static generation');
+      }
       return [];
     }
 
@@ -34,10 +36,14 @@ export async function generateStaticParams() {
       }))
       .filter((param) => param.slug); // 빈 slug 제거
 
-    console.log(`✅ [Insights] Generated ${params.length} static params`);
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`✅ [Insights] Generated ${params.length} static params`);
+    }
     return params;
   } catch (error) {
-    console.error('❌ [Insights] generateStaticParams failed:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('❌ [Insights] generateStaticParams failed:', error);
+    }
     return [];
   }
 }
@@ -127,7 +133,9 @@ export async function generateMetadata({
       },
     };
   } catch (error) {
-    console.error('❌ [Insights] generateMetadata failed:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('❌ [Insights] generateMetadata failed:', error);
+    }
     return {
       title: '에러 발생',
       description: '메타데이터를 불러올 수 없습니다.',
@@ -145,22 +153,28 @@ export default async function InsightPostPage({
 }) {
   const uri = `/insights/${params.slug}`;
 
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log('📝 [Insights] Loading Post:', uri);
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  if (process.env.NODE_ENV === 'development') {
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('📝 [Insights] Loading Post:', uri);
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  }
 
   let post;
 
   try {
     post = await getContentByURI(uri);
   } catch (error) {
-    console.error('❌ [Insights] Failed to load post:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('❌ [Insights] Failed to load post:', error);
+    }
     post = null;
   }
 
   // [Security] Post가 없거나 타입이 맞지 않으면 404
   if (!post || post.__typename !== 'Post') {
-    console.warn('⚠️ [Insights] Post not found or wrong type:', uri);
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('⚠️ [Insights] Post not found or wrong type:', uri);
+    }
     notFound();
   }
 
@@ -182,11 +196,13 @@ export default async function InsightPostPage({
       : null,
   };
 
-  console.log('✅ [Insights] Post loaded successfully');
-  console.log(`   - Title: ${cleanPost.title?.substring(0, 50)}...`);
-  console.log(`   - Has Featured Image: ${!!cleanPost.featuredImage}`);
-  console.log(`   - Categories: ${cleanPost.categories?.nodes.map((c) => c.name).join(', ')}`);
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+  if (process.env.NODE_ENV === 'development') {
+    console.log('✅ [Insights] Post loaded successfully');
+    console.log(`   - Title: ${cleanPost.title?.substring(0, 50)}...`);
+    console.log(`   - Has Featured Image: ${!!cleanPost.featuredImage}`);
+    console.log(`   - Categories: ${cleanPost.categories?.nodes.map((c) => c.name).join(', ')}`);
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+  }
 
   // [GEO] JSON-LD Schema 주입 (WordPress SEO 플러그인에서 제공)
   let schemaData = null;
@@ -197,7 +213,9 @@ export default async function InsightPostPage({
       const schemaString = replaceCmsUrl(JSON.stringify(schemaData));
       schemaData = JSON.parse(schemaString);
     } catch (error) {
-      console.error('⚠️ [Insights] Failed to parse schema:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('⚠️ [Insights] Failed to parse schema:', error);
+      }
     }
   }
 

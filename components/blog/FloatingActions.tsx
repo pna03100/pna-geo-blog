@@ -61,13 +61,13 @@ export function FloatingActions() {
         >
           {/* CTA Button */}
           <Link
-            href="/#contact"
+            href="/contact"
             className="group flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/30 hover:shadow-xl hover:shadow-blue-600/40 hover:scale-110 transition-all duration-300"
-            title="무료 상담 신청"
+            title="문의하기"
           >
             <Phone className="w-5 h-5" />
             <span className="absolute right-16 px-3 py-1.5 rounded-lg bg-slate-900 text-white text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-              무료 상담 신청
+              문의하기
             </span>
           </Link>
 

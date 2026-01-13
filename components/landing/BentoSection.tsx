@@ -1,10 +1,10 @@
 /**
  * [Section] Bento Grid - Core Solutions
  * [Layout] Masonry-like grid with varying sizes
+ * [Animation] Subtle scroll-triggered entrance
  */
 
-"use client";
-
+import { FadeIn } from "@/components/ui/fade-in";
 import { SectionWrapper } from "./SectionWrapper";
 import { SectionTitle } from "./SectionTitle";
 
@@ -63,9 +63,12 @@ export function BentoSection() {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-        {solutions.map((solution) => {
+        {solutions.map((solution, index) => {
           return (
-            <div key={solution.title} className={`group relative overflow-hidden rounded-xl md:rounded-2xl bg-white border border-slate-200 p-5 md:p-8 shadow-sm transition-all hover:shadow-xl hover:border-[#2563EB] ${solution.span}`}>
+            <FadeIn key={solution.title} delay={index * 0.1} className={solution.span}>
+              <div 
+                className="group relative overflow-hidden rounded-xl md:rounded-2xl bg-white border border-slate-200 p-5 md:p-8 shadow-sm transition-all hover:shadow-xl hover:border-[#2563EB]"
+              >
                 <div className="h-full flex flex-col items-center md:items-start text-center md:text-left">
                   {/* Icon with Solid Background */}
                   <div className="inline-flex items-center justify-center p-3 md:p-4 rounded-xl md:rounded-2xl bg-blue-50 mb-4 md:mb-6 w-fit">
@@ -94,6 +97,7 @@ export function BentoSection() {
                   </ul>
                 </div>
               </div>
+            </FadeIn>
           );
         })}
       </div>

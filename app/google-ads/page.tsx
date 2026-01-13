@@ -5,7 +5,7 @@
 
 import { Metadata } from 'next';
 import { GoogleAdsClient } from './GoogleAdsClient';
-import { GridBackground } from '@/components/ui/grid-background';
+import { BlueprintBackground } from '@/components/ui/blueprint-background';
 
 export const metadata: Metadata = {
   title: '구글 애즈 광고 대행',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function GoogleAdsPage() {
   return (
     <>
-      <GridBackground />
+      <BlueprintBackground />
       <GoogleAdsClient />
     </>
   );

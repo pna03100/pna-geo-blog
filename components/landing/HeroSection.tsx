@@ -8,7 +8,6 @@
 import { motion } from "framer-motion";
 import { Trophy, ArrowRight, CheckCircle2 } from "lucide-react";
 import dynamic from "next/dynamic";
-import { GoogleShapesBackground } from "@/components/ui/google-shapes-background";
 
 // ✅ SEO Optimized: Dynamic Import
 const HeroVisual3D = dynamic(() => import("@/components/ui/hero-visual-3d"), {
@@ -23,16 +22,31 @@ const HeroVisual3D = dynamic(() => import("@/components/ui/hero-visual-3d"), {
 export function HeroSection() {
   return (
     <section className="relative md:min-h-screen w-full bg-transparent">
-      {/* Google Ambient Background - Desktop Only */}
-      <div className="hidden md:block absolute inset-0 -z-10 opacity-70">
-        <GoogleShapesBackground />
+      {/* Google Multi-Color Background - Hero Only (Natural Scattered) */}
+      <div className="absolute inset-0 -z-10 overflow-visible">
+        {/* Blue Blobs */}
+        <div className="absolute top-[10%] left-[5%] w-[420px] h-[420px] bg-blue-100 rounded-full blur-[100px] opacity-45" />
+        <div className="absolute top-[60%] right-[10%] w-[320px] h-[320px] bg-blue-200 rounded-full blur-[80px] opacity-30" />
+        
+        {/* Blue/Cyan Blobs */}
+        <div className="absolute top-[20%] right-[15%] w-[380px] h-[380px] bg-cyan-100 rounded-full blur-[90px] opacity-38" />
+        <div className="absolute bottom-[5%] left-[30%] w-[300px] h-[300px] bg-sky-100 rounded-full blur-[70px] opacity-32" />
+        
+        {/* Yellow/Red Blobs */}
+        <div className="absolute top-[45%] left-[15%] w-[340px] h-[340px] bg-red-100 rounded-full blur-[85px] opacity-35" />
+        <div className="absolute bottom-[30%] right-[35%] w-[280px] h-[280px] bg-amber-100 rounded-full blur-[75px] opacity-28" />
+        
+        {/* Red Blobs */}
+        <div className="absolute top-[35%] right-[8%] w-[350px] h-[350px] bg-red-100 rounded-full blur-[90px] opacity-35" />
+        <div className="absolute bottom-[20%] left-[8%] w-[290px] h-[290px] bg-rose-100 rounded-full blur-[80px] opacity-30" />
+        
+        {/* Orange/Pink Blobs */}
+        <div className="absolute bottom-[15%] right-[20%] w-[360px] h-[360px] bg-orange-100 rounded-full blur-[95px] opacity-32" />
+        <div className="absolute top-[55%] left-[45%] w-[260px] h-[260px] bg-pink-100 rounded-full blur-[70px] opacity-25" />
       </div>
-      
-      {/* Extended Background for Seamless Flow - Desktop Only */}
-      <div className="hidden md:block absolute left-0 right-0 top-full h-32 -z-10 bg-gradient-to-b from-transparent via-blue-50/20 to-transparent" />
 
       {/* Layer 3: Content - Alignment Fix: Match Header width */}
-      <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl pt-36 pb-0 md:pt-52 md:pb-48 bg-transparent">
+      <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl pt-36 pb-0 md:pt-48 md:pb-32 bg-transparent">
         <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-start">
           
           {/* Left Column: Text Content */}
@@ -54,6 +68,13 @@ export function HeroSection() {
               <br />
               피앤에이컴퍼니
             </h1>
+
+            {/* [GEO] Snippet Trap - Direct Answer Summary for Featured Snippet */}
+            <p className="text-base md:text-lg font-semibold text-slate-700 mt-4 mb-2 leading-relaxed">
+              데이터 기반 성과 마케팅 전문
+              <br />
+              Google Ads, SEO, GEO 최적화로 평균 ROAS 500% 달성
+            </p>
 
             {/* 2. Trust Badge (Below Title) - NO INITIAL ANIMATION for SEO */}
             <motion.div
@@ -85,13 +106,6 @@ export function HeroSection() {
               </span>
             </motion.div>
 
-            {/* 3. Subtext - NO ANIMATION for immediate visibility */}
-            <p
-              className="text-sm md:text-xl text-slate-600 font-medium leading-relaxed max-w-lg mb-4"
-            >
-              검색 의도 선점 타겟팅과 ROAS 최적화로
-              <br /> 광고주 평균 <strong className="text-[#2563EB]">500% ROAS</strong>를 달성합니다.
-            </p>
           </div>
 
           {/* Right Column: 3D Visual + Social Proof */}
@@ -145,16 +159,23 @@ export function HeroSection() {
         >
           {/* Primary CTA */}
           <motion.a
-            href="tel:07077337905"
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="group relative px-6 py-3 md:px-8 md:py-4 rounded-full bg-blue-600 text-white text-sm md:text-base font-bold shadow-2xl shadow-blue-900/20 hover:shadow-blue-900/30 transition-all overflow-hidden"
+            className="group relative px-6 py-3 md:px-8 md:py-4 rounded-full bg-blue-600 text-white text-sm md:text-base font-bold shadow-2xl shadow-blue-900/20 hover:shadow-blue-900/30 transition-all overflow-hidden cursor-pointer"
           >
             {/* Hover gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             <span className="relative flex items-center gap-2">
-              무료 상담 신청하기 
+              문의하기 
               <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
             </span>
           </motion.a>

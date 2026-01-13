@@ -115,7 +115,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
       </section>
 
       {/* Posts Grid */}
-      <section className="container mx-auto px-4 md:px-6 max-w-7xl py-16">
+      <section className="container mx-auto px-4 md:px-6 max-w-7xl pt-16 pb-32">
         {filteredPosts.length === 0 ? (
           // Empty State
           <div className="max-w-2xl mx-auto text-center py-16">

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PerformanceClient } from "./PerformanceClient";
-import { GridBackground } from "@/components/ui/grid-background";
+import { BlueprintBackground } from "@/components/ui/blueprint-background";
 
 export const metadata: Metadata = {
   title: "퍼포먼스 마케팅 | PNA Company",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function PerformancePage() {
   return (
     <>
-      <GridBackground />
+      <BlueprintBackground />
       <PerformanceClient />
     </>
   );

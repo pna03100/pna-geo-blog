@@ -1,11 +1,12 @@
 /**
  * [Section] Key Metrics - Bento Grid Layout (Fizens Style)
  * [Design] Asymmetric, Clean, SEO-Optimized
- * [Animation] Count-up effect on scroll
+ * [Animation] Count-up effect on scroll + Subtle entrance animation
  */
 
 "use client";
 
+import { FadeIn } from "@/components/ui/fade-in";
 import { CountUpNumber } from "./CountUpNumber";
 import { SectionTitle } from "./SectionTitle";
 
@@ -51,7 +52,7 @@ const metrics = [
 
 export function MetricsSection() {
   return (
-    <section className="py-10 md:py-32 relative z-10">
+    <section className="py-8 md:py-20 relative z-10">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         
         {/* Header with Badge */}
@@ -63,12 +64,11 @@ export function MetricsSection() {
 
         {/* Bento Grid (SEO: Description List) */}
         <dl className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-6">
-          {metrics.map((stat) => (
-            <div
-              key={stat.id}
-              className={`
+          {metrics.map((stat, index) => (
+            <FadeIn key={stat.id} delay={index * 0.1} className={stat.colSpan}>
+              <div
+                className={`
                 relative overflow-hidden rounded-2xl md:rounded-[2.5rem] p-6 md:p-10 flex flex-col items-center md:items-start text-center md:text-left justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl
-                ${stat.colSpan}
                 ${stat.variant === 'primary' 
                   ? 'bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30' 
                   : 'bg-white border border-slate-100 text-slate-900 shadow-sm hover:border-blue-200'
@@ -100,7 +100,6 @@ export function MetricsSection() {
                 <CountUpNumber
                   end={stat.value}
                   suffix=""
-                  duration={2.5}
                 />
                 <span className="text-2xl md:text-4xl opacity-80 font-medium">{stat.suffix}</span>
               </dd>
@@ -110,7 +109,8 @@ export function MetricsSection() {
               }`}>
                 {stat.description}
               </div>
-            </div>
+              </div>
+            </FadeIn>
           ))}
         </dl>
       </div>

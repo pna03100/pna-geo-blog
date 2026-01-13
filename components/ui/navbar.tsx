@@ -60,7 +60,8 @@ export function Navbar() {
             <div className="flex justify-start">
               <Link 
                 href="/" 
-                className="flex items-center hover:opacity-80 transition-opacity shrink-0"
+                className="flex items-center shrink-0"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 <Image
                   src="/logo.png"
@@ -68,7 +69,16 @@ export function Navbar() {
                   width={150}
                   height={40}
                   priority
-                  className="w-auto h-8 md:h-10"
+                  className="w-auto h-8 md:h-10 transition-all duration-300"
+                  style={{
+                    filter: 'brightness(1)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(2542%) hue-rotate(216deg) brightness(102%) contrast(91%)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.filter = 'brightness(1)';
+                  }}
                 />
               </Link>
             </div>
@@ -132,15 +142,15 @@ export function Navbar() {
 
             {/* 3. CTA Button Zone (Right Align) */}
             <div className="flex justify-end">
-              <a href="tel:07077337905">
+              <Link href="/contact">
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-7 py-3 rounded-full bg-blue-600 text-white font-bold text-base shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-colors"
                 >
-                  무료 상담 신청
+                  문의하기
                 </motion.button>
-              </a>
+              </Link>
             </div>
 
           </div>
@@ -151,7 +161,8 @@ export function Navbar() {
             {/* Logo */}
             <Link 
               href="/" 
-              className="flex items-center hover:opacity-80 transition-opacity shrink-0"
+              className="flex items-center shrink-0"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               <Image
                 src="/logo.png"
@@ -159,7 +170,16 @@ export function Navbar() {
                 width={150}
                 height={40}
                 priority
-                className="w-auto h-8"
+                className="w-auto h-8 transition-all duration-300"
+                style={{
+                  filter: 'brightness(1)',
+                }}
+                onTouchStart={(e) => {
+                  e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(2542%) hue-rotate(216deg) brightness(102%) contrast(91%)';
+                }}
+                onTouchEnd={(e) => {
+                  e.currentTarget.style.filter = 'brightness(1)';
+                }}
               />
             </Link>
 
@@ -223,14 +243,14 @@ export function Navbar() {
                   </Link>
                 ))}
                 <div className="pt-3 border-t border-slate-200/50">
-                  <motion.a
-                    href="tel:07077337905"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    whileTap={{ scale: 0.97 }}
-                    className="block w-full px-3 py-2.5 text-center text-sm font-bold bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-shadow"
-                  >
-                    무료 상담 신청
-                  </motion.a>
+                  <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                    <motion.button
+                      whileTap={{ scale: 0.97 }}
+                      className="block w-full px-3 py-2.5 text-center text-sm font-bold bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-shadow"
+                    >
+                      문의하기
+                    </motion.button>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -5,7 +5,7 @@
  */
 
 import type { Metadata } from 'next';
-import { GridBackground } from '@/components/ui/grid-background';
+import { BlueprintBackground } from '@/components/ui/blueprint-background';
 import { HeroSection } from '@/components/landing/HeroSection';
 import { VelocityScrollBanner } from '@/components/ui/velocity-scroll-banner';
 import { MetricsSection } from '@/components/landing/MetricsSection';
@@ -13,7 +13,7 @@ import { BentoSection } from '@/components/landing/BentoSection';
 import { ExpertiseSection } from '@/components/landing/ExpertiseSection';
 import { InsightsSection } from '@/components/landing/InsightsSection';
 import { FAQSection } from '@/components/landing/FAQSection';
-import { CTASection } from '@/components/landing/CTASection';
+import { ContactSection } from '@/components/sections/contact-section';
 import { getAllPosts } from '@/lib/api';
 
 // ============================================
@@ -38,10 +38,18 @@ function generateJsonLd() {
         "description": "데이터 기반 성과 마케팅 전문 - Google Ads, SEO, GEO 최적화로 ROI 200% 달성",
         "contactPoint": {
           "@type": "ContactPoint",
+          "telephone": "+82-70-7733-7905",
           "email": "pna0310@naver.com",
           "contactType": "Customer Service",
           "areaServed": "KR",
           "availableLanguage": ["Korean"]
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "백마로195, SK엠시티 상가동 2층 2120호",
+          "addressLocality": "일산동구",
+          "addressRegion": "고양시",
+          "addressCountry": "KR"
         },
       },
       {
@@ -123,14 +131,7 @@ export default async function HomePage() {
       />
 
       {/* Background Layers */}
-      <GridBackground />
-      
-      {/* Google Shapes Background - Desktop Only */}
-      <div className="hidden md:block fixed inset-0 -z-10 opacity-40 pointer-events-none">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-50/30 via-transparent to-indigo-50/20" />
-        </div>
-      </div>
+      <BlueprintBackground />
 
       {/* Main Content */}
       <main className="relative">
@@ -141,7 +142,7 @@ export default async function HomePage() {
         <ExpertiseSection />
         <InsightsSection posts={posts} />
         <FAQSection />
-        <CTASection />
+        <ContactSection />
       </main>
     </>
   );

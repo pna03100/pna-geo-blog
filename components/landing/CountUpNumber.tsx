@@ -18,7 +18,7 @@ interface CountUpNumberProps {
 
 export function CountUpNumber({
   end,
-  duration = 2,
+  duration = 0.8,
   suffix = "",
   prefix = "",
   className = "",
@@ -37,9 +37,8 @@ export function CountUpNumber({
       if (startTime === null) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
 
-      // Easing function (ease-out)
-      const easeOut = 1 - Math.pow(1 - progress, 3);
-      const currentCount = Math.floor(easeOut * (end - startValue) + startValue);
+      // Linear animation (constant speed)
+      const currentCount = Math.floor(progress * (end - startValue) + startValue);
 
       setCount(currentCount);
 

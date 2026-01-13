@@ -31,13 +31,13 @@ export function CTACard() {
 
       <div>
         {/* CTA Button */}
-        <a
-          href="tel:07077337905"
+        <Link
+          href="/contact"
           className="group inline-flex items-center justify-center w-full gap-2 px-6 py-3 rounded-full bg-white text-blue-600 font-bold hover:bg-blue-50 hover:scale-105 transition-all duration-300 shadow-lg mb-4"
         >
-          <span>무료 상담 신청하기</span>
+          <span>문의하기</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </a>
+        </Link>
 
         {/* Trust Badge */}
         <div className="pt-4 border-t border-white/20 flex items-center justify-center gap-2 text-xs text-blue-100">

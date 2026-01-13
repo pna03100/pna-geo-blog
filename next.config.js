@@ -1,12 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // [CTO Emergency Strategy]
-  // 1. 빌드 에러 무시 (TypeScript & ESLint) -> 일단 배포 성공이 최우선
+  // ============================================
+  // [CRITICAL] Build Configuration
+  // ============================================
+  // ⚠️ WARNING: ignoreBuildErrors는 개발 편의를 위한 설정입니다.
+  // 프로덕션 배포 전에는 반드시 false로 변경하여 모든 타입 오류를 수정하세요.
+  // 런타임 에러를 방지하기 위해 배포 전 체크리스트:
+  // 1. typescript.ignoreBuildErrors = false
+  // 2. eslint.ignoreDuringBuilds = false
+  // 3. npm run build 성공 확인
+  // ============================================
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true, // TODO: 프로덕션 배포 전 false로 변경
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true, // TODO: 프로덕션 배포 전 false로 변경
   },
 
   // 2. 이미지 도메인 허용 (워드프레스 이미지 로드)

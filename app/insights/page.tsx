@@ -7,7 +7,7 @@
 import { getAllPosts } from '@/lib/api';
 import { Metadata } from 'next';
 import { InsightsClient } from './InsightsClient';
-import { GridBackground } from '@/components/ui/grid-background';
+import { BlueprintBackground } from '@/components/ui/blueprint-background';
 
 // [GEO] Metadata
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ export default async function InsightsPage() {
 
   return (
     <>
-      <GridBackground />
+      <BlueprintBackground />
       <InsightsClient posts={posts} />
     </>
   );

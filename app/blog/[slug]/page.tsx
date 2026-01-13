@@ -13,6 +13,7 @@ import { WPContent } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
+import { BlueprintBackground } from '@/components/ui/blueprint-background';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { sanitizeWordPressHTML, stripHtmlTags, truncateText } from '@/lib/sanitize';
 import { ReadingProgress } from '@/components/blog/ReadingProgress';
@@ -127,7 +128,10 @@ export default async function BlogPostPage({ params }: PageProps) {
       {/* Floating Actions */}
       <FloatingActions />
 
-      <div className="min-h-screen bg-slate-50 pt-[73px]">
+      {/* Background */}
+      <BlueprintBackground />
+
+      <div className="min-h-screen relative pt-[73px]">
         <article className="container mx-auto px-4 pt-8 pb-16 max-w-7xl">
           {/* [GEO] JSON-LD Schema for Article */}
           <StructuredData

@@ -12,7 +12,7 @@ import { SectionWrapper } from "./SectionWrapper";
 
 export function CTASection() {
   return (
-    <SectionWrapper id="contact" className="py-8 md:py-20">
+    <SectionWrapper id="contact" className="py-8 md:py-16">
       <FadeIn>
         <div className="relative overflow-hidden rounded-2xl md:rounded-[3rem] bg-black p-8 md:p-20">
           {/* Animated background elements */}
@@ -103,7 +103,7 @@ export function CTASection() {
                   }}
                 />
                 <span className="relative z-10 flex items-center gap-2">
-                  무료 상담 신청하기
+                  문의하기
                   <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </motion.a>

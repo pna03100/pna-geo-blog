@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { WordPressClient } from "./WordPressClient";
-import { GridBackground } from "@/components/ui/grid-background";
+import { BlueprintBackground } from "@/components/ui/blueprint-background";
 
 export const metadata: Metadata = {
   title: "워드프레스 & SEO 최적화 | PNA Company",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function WordPressPage() {
   return (
     <>
-      <GridBackground />
+      <BlueprintBackground />
       <WordPressClient />
     </>
   );

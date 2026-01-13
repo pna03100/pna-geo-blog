@@ -6,6 +6,7 @@
 
 import type { Metadata } from "next";
 import { Shield, Clock } from "lucide-react";
+import { BlueprintBackground } from "@/components/ui/blueprint-background";
 
 // ============================================
 // [GEO] Metadata
@@ -26,16 +27,8 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      {/* Background - Same as main page */}
-      <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/20 to-sky-50/25">
-        {/* Gradient Orbs */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-1/4 right-1/4 w-[32rem] h-[32rem] bg-blue-600/8 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-1/3 w-[28rem] h-[28rem] bg-sky-400/10 rounded-full blur-3xl" />
-
-        {/* Noise Texture */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')] opacity-30" />
-      </div>
+      {/* Standard BlueprintBackground */}
+      <BlueprintBackground />
 
       {/* Main Content */}
       <main className="relative min-h-screen py-24 md:py-32 px-4 md:px-6">
@@ -55,7 +48,7 @@ export default function PrivacyPage() {
               </p>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-200 text-sm text-blue-700 font-semibold">
                 <Clock className="w-4 h-4" />
-                시행일자: 2025년 12월 29일
+                시행일자: 2026년 1월 14일
               </div>
             </header>
 
@@ -346,10 +339,10 @@ export default function PrivacyPage() {
             {/* Footer */}
             <footer className="mt-12 pt-8 border-t border-slate-200 text-center">
               <p className="text-sm text-slate-600">
-                본 개인정보 처리방침은 2025년 12월 29일부터 적용됩니다.
+                본 개인정보 처리방침은 2026년 1월 14일부터 적용됩니다.
               </p>
               <p className="text-sm text-slate-600 mt-2">
-                © 2025 주식회사 피앤에이컴퍼니. All rights reserved.
+                © 2026 주식회사 피앤에이컴퍼니. All rights reserved.
               </p>
             </footer>
           </article>

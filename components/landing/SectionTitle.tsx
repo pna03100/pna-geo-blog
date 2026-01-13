@@ -4,9 +4,11 @@
  * No animation effects for better performance
  */
 
+import React from 'react';
+
 interface SectionTitleProps {
   badge: string;
-  title: string;
+  title: string | React.ReactNode;
   description: string;
   align?: 'center' | 'left';
 }
@@ -27,7 +29,7 @@ export function SectionTitle({
       </span>
       
       {/* Title */}
-      <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight leading-snug" style={{ letterSpacing: '-1.5px' }}>
+      <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1.5px', lineHeight: '1.3' }}>
         {title}
       </h2>
       

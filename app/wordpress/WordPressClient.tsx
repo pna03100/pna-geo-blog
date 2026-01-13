@@ -1,6 +1,7 @@
 /**
  * [Client] WordPress & SEO Service Page
  * Premium Red Theme
+ * [Animation] Scroll-triggered entrance for sections
  */
 
 "use client";
@@ -8,6 +9,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Code, Search, Zap, Globe, CheckCircle2, ArrowRight, Sparkles, Award, LineChart } from "lucide-react";
+import { FadeIn } from "@/components/ui/fade-in";
 import { WordPressFAQ } from "@/components/service/WordPressFAQ";
 
 const services = [
@@ -108,10 +110,10 @@ export function WordPressClient() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service, index) => (
-            <div
-              key={index}
-              className="group p-8 rounded-2xl bg-white border border-slate-200 hover:border-red-200 hover:shadow-xl transition-all duration-300"
-            >
+            <FadeIn key={index} delay={index * 0.1}>
+              <div
+                className="group p-8 rounded-2xl bg-white border border-slate-200 hover:border-red-200 hover:shadow-xl transition-all duration-300"
+              >
               <div 
                 className="inline-flex items-center justify-center w-14 h-14 rounded-xl mb-6 transition-transform duration-300 group-hover:scale-110"
                 style={{ backgroundColor: `${service.color}15` }}
@@ -124,7 +126,8 @@ export function WordPressClient() {
               <p className="text-slate-600 leading-relaxed">
                 {service.description}
               </p>
-            </div>
+              </div>
+            </FadeIn>
           ))}
         </div>
       </section>
@@ -133,42 +136,46 @@ export function WordPressClient() {
       <section className="bg-gradient-to-br from-slate-50 to-red-50 py-20">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-red-200 text-red-600 text-sm font-semibold mb-4">
-                Benefits
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-                검색 최적화로<br />
-                얻을 수 있는 효과
-              </h2>
-              <div className="space-y-6">
-                {benefits.map((benefit, index) => (
-                  <div
-                    key={index}
-                    className="p-6 rounded-xl bg-white border border-slate-200"
-                  >
+            <FadeIn delay={0.1}>
+              <div>
+                <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-red-200 text-red-600 text-sm font-semibold mb-4">
+                  Benefits
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+                  검색 최적화로<br />
+                  얻을 수 있는 효과
+                </h2>
+                <div className="space-y-6">
+                  {benefits.map((benefit, index) => (
+                    <div
+                      key={index}
+                      className="p-6 rounded-xl bg-white border border-slate-200"
+                    >
                     <h3 className="text-xl font-bold text-slate-900 mb-2">{benefit.title}</h3>
                     <p className="text-slate-600">{benefit.description}</p>
                   </div>
                 ))}
+                </div>
               </div>
-            </div>
+            </FadeIn>
 
-            <div>
-              <div className="space-y-4">
-                {features.map((feature, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-200"
-                  >
+            <FadeIn delay={0.2}>
+              <div>
+                <div className="space-y-4">
+                  {features.map((feature, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-200"
+                    >
                     <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-600 flex items-center justify-center">
                       <CheckCircle2 className="w-4 h-4 text-white" />
                     </div>
                     <span className="text-lg text-slate-700">{feature}</span>
                   </div>
                 ))}
+                </div>
               </div>
-            </div>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -179,7 +186,8 @@ export function WordPressClient() {
       {/* CTA Section */}
       <section className="bg-gradient-to-br from-red-600 to-red-700 py-20">
         <div className="container mx-auto px-4 md:px-6 max-w-4xl text-center">
-          <div>
+          <FadeIn delay={0.1}>
+            <div>
             <Sparkles className="w-12 h-12 text-white mx-auto mb-6" />
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               검색 노출, 지금 바로 개선하세요
@@ -187,16 +195,18 @@ export function WordPressClient() {
             <p className="text-xl text-red-100 mb-8">
               15년 노하우로 검증된 SEO 전략을 무료로 상담받아보세요
             </p>
-            <motion.a
-              href="tel:07077337905"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-red-600 font-bold hover:bg-red-50 transition-all duration-300 shadow-lg"
-            >
-              <span>무료 상담 신청하기</span>
-              <ArrowRight className="w-5 h-5" />
-            </motion.a>
-          </div>
+            <Link href="/contact">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-red-600 font-bold hover:bg-red-50 transition-all duration-300 shadow-lg"
+              >
+                <span>문의하기</span>
+                <ArrowRight className="w-5 h-5" />
+              </motion.button>
+            </Link>
+            </div>
+          </FadeIn>
         </div>
       </section>
     </main>
