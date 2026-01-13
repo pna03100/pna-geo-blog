@@ -64,7 +64,7 @@ export function PostCard({ post, priority = false }: PostCardProps) {
   }) : '';
 
   return (
-    <Link href={`/blog/${post.slug}`} className="group block h-full">
+    <Link href={`/insights/${post.slug}`} className="group block h-full">
       <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/50 hover:-translate-y-1">
         {/* [GEO] Featured Image with CLS Defense - Always Show Container */}
         <div className="relative aspect-video bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden">
