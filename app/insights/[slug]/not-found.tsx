@@ -3,13 +3,14 @@
 // [Design] 브랜드 컬러 준수 - Purple 제거, Blue 사용
 // ============================================
 
+import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { BlueprintBackground } from '@/components/ui/blueprint-background';
 
 export default function InsightNotFound() {
   return (
-    <>
+    <div className="relative">
       <BlueprintBackground />
       
       <div className="min-h-screen relative flex items-center justify-center px-4 pt-[73px]">
@@ -60,7 +61,8 @@ export default function InsightNotFound() {
           </p>
         </div>
       </div>
-    </>
+      </div>
+    </div>
   );
 }
 

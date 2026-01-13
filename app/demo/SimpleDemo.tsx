@@ -5,12 +5,13 @@
 
 "use client";
 
+import React from "react";
 import { MouseTextEffectSimple } from "@/components/ui/mouse-text-effect-simple";
 import { BlueprintBackground } from "@/components/ui/blueprint-background";
 
 export default function SimpleDemo() {
   return (
-    <>
+    <div className="relative">
       <BlueprintBackground />
       
       <div className="min-h-screen relative pt-[73px] p-12">
@@ -89,6 +90,7 @@ export default function SimpleDemo() {
           </div>
         </section>
       </div>
-    </>
+      </div>
+    </div>
   );
 }
