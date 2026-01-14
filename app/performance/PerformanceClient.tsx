@@ -107,7 +107,7 @@ export function PerformanceClient() {
 
         <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-[1.35]">
               퍼포먼스 마케팅
             </h1>
 
@@ -125,7 +125,7 @@ export function PerformanceClient() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
             Proven Results
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-[1.4]">
             데이터로 증명하는 성과
           </h2>
           <p className="text-xl text-slate-600">
@@ -164,7 +164,7 @@ export function PerformanceClient() {
             <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
               Services
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-[1.4]">
               핵심 서비스
             </h2>
             <p className="text-xl text-slate-600">
@@ -184,7 +184,7 @@ export function PerformanceClient() {
                 >
                   <service.icon className="w-7 h-7" style={{ color: service.color }} />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 leading-[1.4]">
                   {service.title}
                 </h3>
                 <p className="text-slate-600 leading-relaxed">
@@ -221,7 +221,7 @@ export function PerformanceClient() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
             Advanced Analytics
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-[1.4]">
             데이터 과학 기반 마케팅
           </h2>
           <p className="text-xl text-slate-600">
@@ -238,7 +238,7 @@ export function PerformanceClient() {
                     <service.icon className="w-7 h-7 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">
+                    <h3 className="text-xl font-bold text-slate-900 mb-2 leading-[1.4]">
                       {service.title}
                     </h3>
                   </div>
@@ -299,7 +299,7 @@ export function PerformanceClient() {
           <FadeIn delay={0.1}>
             <div>
             <Sparkles className="w-12 h-12 text-white mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-[1.4]">
               성과 중심 광고, 지금 시작하세요
             </h2>
             <p className="text-xl text-blue-100 mb-8">

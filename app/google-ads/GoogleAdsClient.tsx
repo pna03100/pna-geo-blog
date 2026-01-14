@@ -115,7 +115,7 @@ export function GoogleAdsClient() {
         <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl">
           <div className="max-w-4xl mx-auto text-center">
             {/* Heading - NO ANIMATION for SEO & LCP */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-[1.35]">
               구글 애즈 광고 대행
             </h1>
 
@@ -134,7 +134,7 @@ export function GoogleAdsClient() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
             Services
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-[1.4]">
             핵심 서비스
           </h2>
           <p className="text-xl text-slate-600">
@@ -154,7 +154,7 @@ export function GoogleAdsClient() {
               >
                 <service.icon className="w-7 h-7" style={{ color: service.color }} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">
+              <h3 className="text-xl font-bold text-slate-900 mb-3 leading-[1.4]">
                 {service.title}
               </h3>
               <p className="text-slate-600 leading-relaxed">
@@ -173,7 +173,7 @@ export function GoogleAdsClient() {
             <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
               Advanced Strategy
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-[1.4]">
               AI 기반 고급 광고 전략
             </h2>
             <p className="text-xl text-slate-600">
@@ -190,7 +190,7 @@ export function GoogleAdsClient() {
                       <service.icon className="w-7 h-7 text-blue-600" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-slate-900 mb-2">
+                      <h3 className="text-xl font-bold text-slate-900 mb-2 leading-[1.4]">
                         {service.title}
                       </h3>
                     </div>
@@ -252,7 +252,7 @@ export function GoogleAdsClient() {
               <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-blue-200 text-blue-600 text-sm font-semibold mb-4">
                 Why Choose Us
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6" style={{ lineHeight: '1.35' }}>
                 피앤에이컴퍼니를<br />
                 선택해야 하는 이유
               </h2>
@@ -305,7 +305,7 @@ export function GoogleAdsClient() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
             Process
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-[1.4]">
             광고 운영 프로세스
           </h2>
           <p className="text-xl text-slate-600">
@@ -320,7 +320,7 @@ export function GoogleAdsClient() {
                 className="relative p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-lg transition-all duration-300"
               >
               <div className="text-6xl font-bold text-blue-100 mb-4">{item.step}</div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 leading-[1.4]">{item.title}</h3>
               <p className="text-slate-600 leading-relaxed">{item.description}</p>
               
               {/* Connector Arrow (except last) */}
@@ -345,7 +345,7 @@ export function GoogleAdsClient() {
           <FadeIn delay={0.1}>
             <div>
             <Sparkles className="w-12 h-12 text-white mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-[1.4]">
               지금 바로 광고 효율을 개선하세요
             </h2>
             <p className="text-xl text-blue-100 mb-8">

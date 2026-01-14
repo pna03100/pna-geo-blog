@@ -180,7 +180,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
             </div>
 
             {/* Heading - NO ANIMATION for SEO & LCP */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-[1.35]">
               마케팅 인사이트
             </h1>
 

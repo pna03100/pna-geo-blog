@@ -131,7 +131,7 @@ export function ExpertiseSection() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-xl md:text-3xl font-bold text-slate-900">안태민 CEO</h3>
+                    <h3 className="text-xl md:text-3xl font-bold text-slate-900 leading-[1.4]">안태민 CEO</h3>
                     <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
                   </div>
                   <p className="text-sm md:text-base text-slate-600 font-semibold mb-2">Founder & Chief Executive Officer</p>

@@ -84,7 +84,7 @@ export function BentoSection() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-lg md:text-2xl font-bold text-slate-900 mb-1.5 md:mb-2 group-hover:text-[#2563EB] transition-colors">
+                    <h3 className="text-lg md:text-2xl font-bold text-slate-900 mb-1.5 md:mb-2 group-hover:text-[#2563EB] transition-colors leading-[1.4]">
                       {solution.title}
                     </h3>
 

@@ -121,7 +121,7 @@ export function SEOGEOClient() {
 
         <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-[1.35]">
               SEO & GEO 최적화
             </h1>
 
@@ -139,7 +139,7 @@ export function SEOGEOClient() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
             Why SEO & GEO
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-[1.4]">
             왜 SEO & GEO가 필요한가?
           </h2>
           <p className="text-xl text-slate-600">
@@ -154,7 +154,7 @@ export function SEOGEOClient() {
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-blue-50 mb-6">
                   <benefit.icon className="w-7 h-7 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 leading-[1.4]">
                   {benefit.title}
                 </h3>
                 <p className="text-slate-600 leading-relaxed">
@@ -173,7 +173,7 @@ export function SEOGEOClient() {
             <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
               Services
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-[1.4]">
               핵심 서비스
             </h2>
             <p className="text-xl text-slate-600">
@@ -196,7 +196,7 @@ export function SEOGEOClient() {
                     style={{ color: service.color }}
                   />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 leading-[1.4]">
                   {service.title}
                 </h3>
                 <p className="text-slate-600 leading-relaxed">
@@ -215,7 +215,7 @@ export function SEOGEOClient() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
             AI & SaaS Specialized
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-[1.4]">
             AI & SaaS 전문 SEO
           </h2>
           <p className="text-xl text-slate-600">
@@ -291,7 +291,7 @@ export function SEOGEOClient() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
             Process
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-[1.4]">
             진행 프로세스
           </h2>
           <p className="text-xl text-slate-600">
@@ -328,7 +328,7 @@ export function SEOGEOClient() {
           <FadeIn delay={0.1}>
             <div>
             <Sparkles className="w-12 h-12 text-white mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-[1.4]">
               지금 바로 무료 SEO 진단을 받아보세요
             </h2>
             <p className="text-xl text-blue-100 mb-8">

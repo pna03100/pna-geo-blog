@@ -55,7 +55,7 @@ export function HeroSection() {
           >
             {/* 1. Main Headline - NO ANIMATION for LCP */}
             <h1
-              className="text-[2.4rem] md:text-[3.375rem] lg:text-[4.05rem] font-bold tracking-tight text-slate-900 !leading-[1.28]"
+              className="text-[2.4rem] md:text-[3.375rem] lg:text-[4.05rem] font-bold tracking-tight text-slate-900 !leading-[1.35]"
             >
               구글애즈 광고 대행사,
               <br />

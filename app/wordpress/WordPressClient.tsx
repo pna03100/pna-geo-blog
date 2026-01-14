@@ -104,7 +104,7 @@ export function WordPressClient() {
 
         <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-[1.35]">
               워드프레스 웹사이트 제작
             </h1>
 
@@ -122,7 +122,7 @@ export function WordPressClient() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
             Services
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-[1.4]">
             핵심 서비스
           </h2>
           <p className="text-xl text-slate-600">
@@ -142,7 +142,7 @@ export function WordPressClient() {
               >
                 <service.icon className="w-7 h-7" style={{ color: service.color }} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">
+              <h3 className="text-xl font-bold text-slate-900 mb-3 leading-[1.4]">
                 {service.title}
               </h3>
               <p className="text-slate-600 leading-relaxed">
@@ -161,7 +161,7 @@ export function WordPressClient() {
             <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-4">
               Advanced Development
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-[1.4]">
               고급 개발 & 커스터마이징
             </h2>
             <p className="text-xl text-slate-600">
@@ -178,7 +178,7 @@ export function WordPressClient() {
                       <service.icon className="w-7 h-7 text-blue-600" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-slate-900 mb-2">
+                      <h3 className="text-xl font-bold text-slate-900 mb-2 leading-[1.4]">
                         {service.title}
                       </h3>
                     </div>
@@ -239,7 +239,7 @@ export function WordPressClient() {
               <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-blue-200 text-blue-600 text-sm font-semibold mb-4">
                 Benefits
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6" style={{ lineHeight: '1.35' }}>
                 워드프레스를 선택하는<br />
                 이유
               </h2>
@@ -249,7 +249,7 @@ export function WordPressClient() {
                     key={index}
                     className="p-6 rounded-xl bg-white border border-slate-200"
                   >
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">{benefit.title}</h3>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2 leading-[1.4]">{benefit.title}</h3>
                   <p className="text-slate-600">{benefit.description}</p>
                 </div>
               ))}
@@ -286,7 +286,7 @@ export function WordPressClient() {
           <FadeIn delay={0.1}>
             <div>
             <Sparkles className="w-12 h-12 text-white mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-[1.4]">
               프리미엄 워드프레스 웹사이트를 만나보세요
             </h2>
             <p className="text-xl text-blue-100 mb-8">

@@ -140,7 +140,7 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
                   )}
 
                   {/* Title */}
-                  <h3 className="text-base md:text-xl font-bold text-slate-900 mb-2 md:mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                  <h3 className="text-base md:text-xl font-bold text-slate-900 mb-2 md:mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-[1.4]">
                     {decodeHTMLEntities(post.title || '')}
                   </h3>
 

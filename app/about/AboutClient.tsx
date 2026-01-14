@@ -118,7 +118,7 @@ export function AboutClient() {
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-[1.35]">
                 데이터가 말하고,<br />
                 <span className="text-blue-600">성과가 증명합니다</span>
               </h1>
@@ -190,7 +190,7 @@ export function AboutClient() {
                   >
                     <div className="flex items-center justify-center gap-4 md:gap-6 mb-3">
                       <span className="text-4xl md:text-5xl lg:text-6xl">🏆</span>
-                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.35]">
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 whitespace-nowrap">
                           2023 구글 선정
                         </span>
@@ -294,7 +294,7 @@ export function AboutClient() {
                 <div className="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 text-sm font-semibold rounded-full mb-6">
                   Company Story
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6" style={{ lineHeight: '1.35' }}>
                   피앤에이컴퍼니는<br />
                   <span className="text-blue-600">데이터기반 마케팅을</span><br />
                   선도하는 기업입니다
@@ -377,7 +377,7 @@ export function AboutClient() {
               </div>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 leading-[1.4]">
                 회사 연혁
               </h2>
               <p className="text-lg text-slate-600">
@@ -415,7 +415,7 @@ export function AboutClient() {
               </div>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 leading-[1.4]">
                 우리의 핵심 가치
               </h2>
               <p className="text-lg text-slate-600">
@@ -435,7 +435,7 @@ export function AboutClient() {
                       <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${value.color} flex items-center justify-center mb-6 shadow-lg`}>
                         <Icon className="w-7 h-7 text-white" />
                       </div>
-                      <h3 className="text-xl font-bold text-slate-900 mb-3">
+                      <h3 className="text-xl font-bold text-slate-900 mb-3 leading-[1.4]">
                         {value.title}
                       </h3>
                       <p className="text-slate-600 leading-relaxed">
@@ -460,7 +460,7 @@ export function AboutClient() {
               </div>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 leading-[1.4]">
                 주요 파트너사
               </h2>
               <p className="text-lg text-slate-600">
@@ -500,7 +500,7 @@ export function AboutClient() {
           <FadeIn delay={0.1}>
             <div>
             <Sparkles className="w-12 h-12 text-white mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-[1.4]">
               함께 성장할 준비가 되셨나요?
             </h2>
             <p className="text-lg md:text-xl text-blue-100 mb-8">
