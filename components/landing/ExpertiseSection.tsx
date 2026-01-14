@@ -79,139 +79,129 @@ export function ExpertiseSection() {
         align="center"
       />
 
-      {/* CEO & Certifications - Split Layout */}
-      <div className="grid lg:grid-cols-2 gap-8 md:gap-12 mb-16 md:mb-20">
-        {/* Left: CEO Profile - Premium Edition */}
-        <FadeIn delay={0.2}>
-          <div className="relative rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border-2 border-slate-700/50 p-8 md:p-10 text-white overflow-hidden group hover:border-slate-600 transition-all duration-500">
-            {/* Sophisticated Pattern */}
-            <div className="absolute inset-0 opacity-[0.03]" style={{
-              backgroundImage: 'radial-gradient(circle at 2px 2px, rgb(59 130 246) 1px, transparent 0)',
-              backgroundSize: '32px 32px'
-            }} />
-            
-            {/* Blue Glow Accents */}
-            <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-blue-500/15 to-indigo-500/10 rounded-full blur-3xl group-hover:opacity-100 opacity-75 transition-opacity duration-500" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-blue-600/10 to-transparent rounded-full blur-2xl" />
-            
-            <div className="relative">
-              {/* Header with Enhanced Avatar */}
-              <div className="flex items-start gap-5 mb-8">
-                {/* Premium Avatar */}
-                <div className="relative flex-shrink-0">
-                  {/* Glow Ring */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
-                  
-                  <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-5xl shadow-2xl border-2 border-blue-400/30">
-                    👨‍💼
-                  </div>
-                </div>
+      {/* CEO Profile - Full Width */}
+      <FadeIn delay={0.2}>
+        <div className="rounded-2xl overflow-hidden mb-12 shadow-xl">
+          <div className="grid md:grid-cols-[300px,1fr] gap-0">
+            {/* Left: Avatar Only - Full Height */}
+            <div className="bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-8xl md:text-9xl p-12 md:p-16">
+              👨‍💼
+            </div>
 
-                <div className="flex-1">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-2 text-white" style={{ lineHeight: '1.3' }}>
-                    안태민 CEO
-                  </h3>
-                  <p className="text-blue-300 font-semibold text-sm md:text-base mb-3">
-                    Founder & Chief Executive Officer
-                  </p>
-                  
-                  {/* Status Badge */}
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600/20 border border-blue-500/30">
-                    <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-                    <span className="text-xs font-bold text-blue-300">Active Leader</span>
-                  </div>
+            {/* Right: Info + Achievements */}
+            <div className="p-8 md:p-10 text-white space-y-6 bg-gradient-to-br from-slate-800 via-slate-900 to-blue-950">
+              {/* Header Section */}
+              <div className="space-y-4 pb-6 border-b border-slate-600">
+                {/* Name */}
+                <h3 className="text-3xl md:text-4xl font-bold" style={{ lineHeight: '1.3' }}>
+                  안태민
+                </h3>
+
+                {/* Slogan */}
+                <p className="text-slate-200 text-base md:text-lg">
+                  Founder & CEO
+                </p>
+
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-bold">
+                  <span>✨</span>
+                  <span>AI · SEO · GEO 전문 컨설턴트</span>
                 </div>
               </div>
 
-              {/* Achievements with Modern Icons */}
-              <div className="space-y-4">
-                <div className="flex items-start gap-4 group/item">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center group-hover/item:bg-blue-600/30 transition-colors">
-                    <CheckCircle2 className="w-5 h-5 text-blue-400" />
-                  </div>
-                  <p className="text-sm md:text-base font-medium text-slate-200 leading-relaxed pt-2">
-                    <span className="text-blue-400 font-bold">AI · SEO · GEO</span> 전문 컨설턴트
-                  </p>
-                </div>
-
-                <div className="flex items-start gap-4 group/item">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center group-hover/item:bg-blue-600/30 transition-colors">
-                    <CheckCircle2 className="w-5 h-5 text-blue-400" />
-                  </div>
-                  <p className="text-sm md:text-base font-medium text-slate-200 leading-relaxed pt-2">
-                    <span className="text-blue-400 font-bold">15년</span> 퍼포먼스 마케터 - 구글 애즈 및 GA4 전문
-                  </p>
-                </div>
-
-                <div className="flex items-start gap-4 group/item">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center group-hover/item:bg-blue-600/30 transition-colors">
-                    <CheckCircle2 className="w-5 h-5 text-blue-400" />
-                  </div>
-                  <p className="text-sm md:text-base font-medium text-slate-200 leading-relaxed pt-2">
-                    <span className="text-blue-400 font-bold">2023년</span> 구글 코리아 공식 포럼 초청 인사
-                  </p>
-                </div>
-
-                <div className="flex items-start gap-4 group/item">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center group-hover/item:bg-blue-600/30 transition-colors">
-                    <CheckCircle2 className="w-5 h-5 text-blue-400" />
-                  </div>
-                  <p className="text-sm md:text-base font-medium text-slate-200 leading-relaxed pt-2">
-                    한화시스템 · 대보건설 태양광 프로젝트 마케팅 총괄 CFO
-                  </p>
-                </div>
+              {/* Friendly Introduction - Extended */}
+              <div className="space-y-3">
+                <p className="text-base md:text-lg text-slate-200 leading-relaxed">
+                  데이터 기반의 과학적 마케팅으로 고객사의 성공을 함께 만들어갑니다.
+                </p>
+                <p className="text-sm md:text-base text-slate-300 leading-relaxed">
+                  15년간 대기업부터 스타트업까지 다양한 비즈니스와 함께하며 쌓아온 경험과 노하우를 바탕으로, 
+                  데이터에 기반한 전략적 마케팅 솔루션을 제공합니다. 
+                  고객사의 지속 가능한 성장과 성공이 저희의 가장 큰 목표입니다.
+                </p>
               </div>
 
-              {/* Bottom Accent Line */}
-              <div className="mt-8 h-1 bg-gradient-to-r from-blue-500/50 via-indigo-500/50 to-transparent rounded-full" />
+              {/* Achievements - 2x2 Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm md:text-base text-white font-bold leading-relaxed">
+                      15년 퍼포먼스 마케터
+                    </p>
+                    <p className="text-xs md:text-sm text-slate-300">
+                      구글 애즈 및 GA4 전문가
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm md:text-base text-white font-bold leading-relaxed">
+                      구글 우수 100대 캠페인
+                    </p>
+                    <p className="text-xs md:text-sm text-slate-300">
+                      2023년 공식 선정
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm md:text-base text-white font-bold leading-relaxed">
+                      한화시스템 · 대보건설
+                    </p>
+                    <p className="text-xs md:text-sm text-slate-300">
+                      마케팅 총괄 CFO
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm md:text-base text-white font-bold leading-relaxed">
+                      광고 법인 15년 운영
+                    </p>
+                    <p className="text-xs md:text-sm text-slate-300">
+                      500+ 성공 프로젝트
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </FadeIn>
-
-        {/* Right: Certifications - Premium Style */}
-        <div className="grid gap-6">
-          {certifications.map((cert, index) => {
-            const Icon = cert.icon;
-            return (
-              <FadeIn key={cert.title} delay={0.3 + index * 0.1}>
-                <div className="relative rounded-2xl bg-gradient-to-br from-slate-50 to-blue-50/20 border-2 border-slate-100 p-6 md:p-8 hover:border-blue-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group overflow-hidden">
-                  {/* Subtle Background Pattern */}
-                  <div className="absolute inset-0 opacity-[0.02]" style={{
-                    backgroundImage: 'radial-gradient(circle at 2px 2px, rgb(37 99 235) 1px, transparent 0)',
-                    backgroundSize: '24px 24px'
-                  }} />
-                  
-                  {/* Badge with Glow */}
-                  <div className="absolute top-6 right-6 px-3 py-1 rounded-full bg-blue-600 text-white text-xs font-bold shadow-lg shadow-blue-600/30">
-                    {cert.badge}
-                  </div>
-                  
-                  <div className="relative flex items-start gap-4">
-                    {/* Icon with Enhanced Glow */}
-                    <div className="relative flex-shrink-0">
-                      {/* Glow Effect */}
-                      <div className="absolute inset-0 bg-blue-500 rounded-xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-                      
-                      <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 border-2 border-blue-300 flex items-center justify-center group-hover:scale-110 group-hover:border-blue-400 transition-all duration-300">
-                        <Icon className="w-7 h-7 text-[#2563EB]" />
-                      </div>
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="flex-1">
-                      <h4 className="text-lg md:text-xl font-bold text-slate-900 mb-1 group-hover:text-blue-600 transition-colors duration-300" style={{ lineHeight: '1.4' }}>
-                        {cert.title}
-                      </h4>
-                      <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                        {cert.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </FadeIn>
-            );
-          })}
         </div>
+      </FadeIn>
+
+      {/* Certifications - Centered Below */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:divide-x md:divide-slate-200 max-w-4xl mx-auto">
+        {certifications.map((cert, index) => {
+          const Icon = cert.icon;
+          return (
+            <FadeIn key={cert.title} delay={0.3 + index * 0.1}>
+              <div className="px-8 py-6 md:py-0 text-center">
+                {/* Badge */}
+                <div className="inline-block px-3 py-1 rounded-full bg-blue-600 text-white text-xs font-bold mb-6">
+                  {cert.badge}
+                </div>
+                
+                {/* Icon */}
+                <Icon className="w-12 h-12 text-blue-600 mx-auto mb-5" />
+                
+                {/* Content */}
+                <h4 className="text-lg font-bold text-slate-900 mb-2" style={{ lineHeight: '1.35' }}>
+                  {cert.title}
+                </h4>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  {cert.description}
+                </p>
+              </div>
+            </FadeIn>
+          );
+        })}
       </div>
 
     </SectionWrapper>

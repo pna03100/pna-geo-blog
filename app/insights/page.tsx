@@ -8,7 +8,7 @@ import { getAllPosts } from '@/lib/api';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { InsightsClient } from './InsightsClient';
-import { BlueprintBackground } from '@/components/ui/blueprint-background';
+import { SubPageBackground } from '@/components/ui/sub-page-background';
 
 // [GEO] Metadata
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default async function InsightsPage() {
 
   return (
     <>
-      <BlueprintBackground />
+      <SubPageBackground />
       <Suspense fallback={<div className="min-h-screen pt-[73px]" />}>
         <InsightsClient posts={posts} />
       </Suspense>

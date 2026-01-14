@@ -124,11 +124,11 @@ export function ContactSection() {
             </div>
 
             {/* Contact Info */}
-            <div className="space-y-5">
+            <div className="space-y-6">
               {/* Address */}
-              <div className="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all duration-300">
-                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <MapPin className="w-6 h-6 text-blue-600" />
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center">
+                  <MapPin className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-slate-900 mb-2">
@@ -142,9 +142,9 @@ export function ContactSection() {
               </div>
 
               {/* Email */}
-              <div className="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all duration-300">
-                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Mail className="w-6 h-6 text-blue-600" />
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center">
+                  <Mail className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-slate-900 mb-2">
@@ -160,9 +160,9 @@ export function ContactSection() {
               </div>
 
               {/* Phone */}
-              <div className="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all duration-300">
-                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Phone className="w-6 h-6 text-blue-600" />
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center">
+                  <Phone className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-slate-900 mb-2">
@@ -178,9 +178,9 @@ export function ContactSection() {
               </div>
 
               {/* Fax */}
-              <div className="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all duration-300">
-                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Printer className="w-6 h-6 text-blue-600" />
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center">
+                  <Printer className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-slate-900 mb-2">

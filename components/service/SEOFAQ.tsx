@@ -48,21 +48,12 @@ export function SEOFAQ() {
   return (
     <section className="relative py-20 md:py-24">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-        {/* Section Title - 이미지 스타일 */}
+        {/* Section Header */}
         <div className="text-center mb-16">
-          {/* 상단 배지 */}
-          <div className="inline-block mb-4">
-            <span className="px-4 py-1.5 bg-blue-50 text-blue-600 text-sm font-semibold rounded-full">
-              FAQ
-            </span>
-          </div>
-          
-          {/* 메인 타이틀 */}
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             자주 묻는 질문
           </h2>
           
-          {/* 서브 설명 */}
           <p className="text-lg text-slate-600">
             SEO & GEO 최적화에 대한 궁금증을 해결해드립니다
           </p>

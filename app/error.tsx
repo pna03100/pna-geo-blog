@@ -45,8 +45,9 @@ export default function Error({
           </div>
           
           {/* Title */}
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.3' }}>
-            시스템에 일시적인<br />오류가 발생했습니다
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">
+            <div className="mb-2">시스템에 일시적인</div>
+            <div>오류가 발생했습니다</div>
           </h2>
           
           {/* Description */}

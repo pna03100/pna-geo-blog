@@ -50,12 +50,6 @@ export function PerformanceFAQ() {
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="inline-block mb-4">
-            <span className="px-4 py-1.5 bg-blue-50 text-blue-600 text-sm font-semibold rounded-full">
-              FAQ
-            </span>
-          </div>
-          
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             자주 묻는 질문
           </h2>

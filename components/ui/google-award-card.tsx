@@ -61,10 +61,10 @@ export function GoogleAwardCard() {
                 </div>
                 
                 <h4 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3" style={{ lineHeight: '1.3' }}>
-                  2023 구글 코리아 선정
+                  구글 우수 100대 캠페인
                 </h4>
                 <p className="text-lg md:text-xl text-slate-600 font-medium" style={{ lineHeight: '1.5' }}>
-                  우수 100대 캠페인 중 선정 🇰🇷
+                  2023년 공식 선정 🇰🇷
                 </p>
 
                 {/* Trust Badge */}

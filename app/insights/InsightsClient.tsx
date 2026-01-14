@@ -1,16 +1,19 @@
 /**
- * [Client] Insights Page - Premium Blue Theme
- * [Design] Matching Main Page tone & manner
+ * [Client] Insights Page - Neo-Tech 2026 Edition
+ * [Design] Clean White Hero + Magnetic Segmented Controls
+ * [Performance] Keep tab logic, upgrade UI only
  */
 
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { WPContent } from "@/lib/types";
-import { CategoryFilter } from "@/components/insights/CategoryFilter";
 import { PostCard } from "@/components/insights/PostCard";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
+import { TextReveal } from "@/components/ui/text-reveal";
 
 interface InsightsClientProps {
   posts: WPContent[];
@@ -141,57 +144,115 @@ export function InsightsClient({ posts }: InsightsClientProps) {
   }, [posts, selectedCategory, categories]);
 
   return (
-    <main className="min-h-screen pt-[73px]">
-      {/* Hero Section - NO ANIMATION for LCP */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-indigo-600 to-blue-700 text-white py-20 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-            backgroundSize: '40px 40px'
-          }} />
+    <main className="min-h-screen pt-[73px] relative">
+      {/* HERO SECTION */}
+      <section className="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
+        {/* 1. Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero/insights-hero-bg.jpg.jpg"
+            alt="Marketing Insights Background"
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* 2. Dark Overlay */}
+          <div className="absolute inset-0 bg-black/60" />
         </div>
 
-        {/* Content */}
-        <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl">
-          <div className="max-w-4xl mx-auto text-center">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 mb-6">
-              <Sparkles className="w-4 h-4" />
-              <span className="text-sm font-semibold">Marketing Insights</span>
+        {/* 3. Content */}
+        <div className="relative z-10 container mx-auto px-4 md:px-6 max-w-7xl text-center">
+          {/* Badge */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8"
+          >
+            <Sparkles className="w-4 h-4 text-white" />
+            <span className="text-sm font-bold text-white">Marketing Insights</span>
+          </motion.div>
+
+          {/* Kinetic Typography Heading */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ lineHeight: '1.35' }}>
+            마케팅 인사이트
+          </h1>
+
+          {/* Description */}
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto"
+          >
+            데이터 기반 성과 마케팅을 위한 실무 노하우와 최신 트렌드
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Magnetic Segmented Controls */}
+      <section className="sticky top-[73px] z-30 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 shadow-sm">
+        <div className="container mx-auto px-4 md:px-6 max-w-7xl py-6">
+          <div className="flex items-center justify-center">
+            <div className="inline-flex bg-slate-100 rounded-full p-1.5">
+              {/* All Tab */}
+              <motion.button
+                onClick={() => setSelectedCategory('all')}
+                className={`
+                  relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300
+                  ${selectedCategory === 'all' 
+                    ? 'text-blue-600' 
+                    : 'text-slate-600 hover:text-slate-900'
+                  }
+                `}
+              >
+                {selectedCategory === 'all' && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 bg-white rounded-full shadow-md"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">전체 ({posts.length})</span>
+              </motion.button>
+
+              {/* Category Tabs */}
+              {categories.map((category) => (
+                <motion.button
+                  key={category.slug}
+                  onClick={() => setSelectedCategory(category.slug)}
+                  className={`
+                    relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300
+                    ${selectedCategory === category.slug 
+                      ? 'text-blue-600' 
+                      : 'text-slate-600 hover:text-slate-900'
+                    }
+                  `}
+                >
+                  {selectedCategory === category.slug && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute inset-0 bg-white rounded-full shadow-md"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{category.name} ({category.count})</span>
+                </motion.button>
+              ))}
             </div>
-
-            {/* Heading - NO ANIMATION for SEO & LCP */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-[1.35]">
-              마케팅 인사이트
-            </h1>
-
-            {/* Description */}
-            <p className="text-xl text-blue-100 leading-relaxed">
-              데이터 기반 성과 마케팅을 위한 실무 노하우와<br className="hidden md:block" />
-              최신 트렌드를 공유합니다
-            </p>
           </div>
         </div>
       </section>
 
-      {/* Category Filter */}
-      <section className="sticky top-[73px] z-30 bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-sm">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl py-6">
-          <CategoryFilter
-            categories={categories}
-            selectedCategory={selectedCategory}
-            onSelectCategory={setSelectedCategory}
-            totalPosts={posts.length}
-          />
-        </div>
-      </section>
-
-      {/* Posts Grid */}
+      {/* Posts Grid with Glass Cards */}
       <section className="container mx-auto px-4 md:px-6 max-w-7xl pt-16 pb-32">
         {filteredPosts.length === 0 ? (
           // Empty State
-          <div className="max-w-2xl mx-auto text-center py-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-2xl mx-auto text-center py-16"
+          >
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-50 mb-6">
               <Sparkles className="w-10 h-10 text-blue-600" />
             </div>
@@ -208,11 +269,18 @@ export function InsightsClient({ posts }: InsightsClientProps) {
               전체 글 보기
               <ArrowRight className="w-4 h-4" />
             </button>
-          </div>
+          </motion.div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPosts.map((post, index) => (
-              <PostCard key={post.databaseId || post.slug || index} post={post} priority={index < 3} />
+              <motion.div
+                key={post.databaseId || post.slug || index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.4 }}
+              >
+                <PostCard post={post} priority={index < 3} />
+              </motion.div>
             ))}
           </div>
         )}

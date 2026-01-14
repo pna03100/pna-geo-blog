@@ -32,11 +32,11 @@ export function HeroSection() {
           </motion.div>
 
           {/* Main Headline - Kinetic Typography */}
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             <TextReveal 
               className="text-slate-900" 
               staggerDelay={0.05}
-              style={{ lineHeight: '1.2', marginBottom: '0.5rem' }}
+              style={{ lineHeight: '1.15', marginBottom: '0.5rem' }}
             >
               구글애즈 광고 대행사,
             </TextReveal>
@@ -44,7 +44,7 @@ export function HeroSection() {
               className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700"
               delay={0.3}
               staggerDelay={0.1}
-              style={{ lineHeight: '1.2', marginBottom: '0.5rem' }}
+              style={{ lineHeight: '1.15', marginBottom: '0.5rem' }}
             >
               데이터로 증명하는
             </TextReveal>
@@ -52,7 +52,7 @@ export function HeroSection() {
               className="text-slate-900"
               delay={0.6}
               staggerDelay={0.08}
-              style={{ lineHeight: '1.2' }}
+              style={{ lineHeight: '1.15' }}
             >
               피앤에이컴퍼니
             </TextReveal>
