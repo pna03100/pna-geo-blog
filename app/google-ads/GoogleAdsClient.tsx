@@ -435,7 +435,9 @@ export function GoogleAdsClient() {
             alt="Google Ads Background"
             fill
             className="object-cover"
+            quality={75}
             priority
+            sizes="100vw"
           />
           {/* 2. Dark Overlay */}
           <div className="absolute inset-0 bg-black/60" />
