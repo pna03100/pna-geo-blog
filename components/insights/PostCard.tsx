@@ -1,42 +1,24 @@
 /**
- * [GEO] Blog Post Card Component - Semantic & Accessible
+ * [Component] Post Card - Original Insights Page Design
+ * [Design] Clean rounded card with category badge
  * [Security] Type-Safe Props
- * [Design] Tailwind CSS + Shadcn/UI
  */
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { WPContent } from '@/lib/types';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { FileText } from 'lucide-react';
+import { Calendar, ArrowRight, FileText } from 'lucide-react';
+import { getCategoryColor } from '@/lib/category-colors';
 
-// ============================================
-// [Security] Interface for Props
-// ============================================
 interface PostCardProps {
   post: WPContent;
   priority?: boolean;
 }
 
-// ============================================
-// [Utility] HTML Entity Decoder & Tag Stripper
-// ============================================
-function decodeAndStripHTML(html: string): string {
-  if (!html) return '';
+function decodeHTMLEntities(text: string): string {
+  if (!text) return '';
   
-  // HTML 태그 제거
-  const withoutTags = html.replace(/<[^>]*>/g, '');
-  
-  // HTML 엔티티 디코딩
-  const textarea = typeof document !== 'undefined' ? document.createElement('textarea') : null;
-  if (textarea) {
-    textarea.innerHTML = withoutTags;
-    return textarea.value;
-  }
-  
-  // 서버 사이드에서는 기본 엔티티만 디코딩
-  return withoutTags
+  return text
     .replace(/&#8220;/g, '"')
     .replace(/&#8221;/g, '"')
     .replace(/&#8216;/g, "'")
@@ -48,80 +30,95 @@ function decodeAndStripHTML(html: string): string {
     .replace(/&#8230;/g, '…');
 }
 
-// ============================================
-// [Implementation] PostCard Component
-// ============================================
 export function PostCard({ post, priority = false }: PostCardProps) {
-  // [Security] Safe Fallbacks
-  const title = post.title || '제목 없음';
-  const excerpt = decodeAndStripHTML(post.excerpt || '');
-  const featuredImageUrl = post.featuredImage?.node?.sourceUrl || null;
-  const categories = post.categories?.nodes || [];
   const date = post.date ? new Date(post.date).toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric',
+    day: 'numeric'
   }) : '';
 
+  const excerpt = post.excerpt
+    ? decodeHTMLEntities(post.excerpt.replace(/<[^>]*>/g, '')).substring(0, 120) + '...'
+    : '';
+
+  const categorySlug = post.categories?.nodes && post.categories.nodes.length > 0
+    ? post.categories.nodes[0].slug
+    : '';
+
+  const categoryName = post.categories?.nodes && post.categories.nodes.length > 0
+    ? post.categories.nodes[0].name
+    : '';
+
+  const categoryColors = getCategoryColor(categoryName || categorySlug);
+
+  // Extract color from Tailwind class
+  const bgColorMatch = categoryColors.bg.match(/\[([#\w]+)\]/);
+  const bgColor = bgColorMatch ? bgColorMatch[1] : '#4285F4';
+
   return (
-    <Link href={`/insights/${post.slug}`} className="group block h-full">
-      <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/50 hover:-translate-y-1">
-        {/* [GEO] Featured Image with CLS Defense - Always Show Container */}
-        <div className="relative aspect-video bg-gradient-to-br from-slate-100 to-slate-200 overflow-hidden">
-          {featuredImageUrl ? (
-            <Image
-              src={featuredImageUrl}
-              alt={post.featuredImage?.node?.altText || title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-110"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority={priority}
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <FileText className="w-16 h-16 text-slate-400" strokeWidth={1.5} />
-            </div>
-          )}
-        </div>
-
-        <CardHeader className="space-y-3">
-          {/* [GEO] Categories as Badges */}
-          {categories.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {categories.slice(0, 2).map((category) => (
-                <Badge 
-                  key={category.slug} 
-                  variant="secondary" 
-                  className="text-xs font-medium"
-                >
-                  {category.name}
-                </Badge>
-              ))}
-            </div>
-          )}
-
-          {/* [GEO] Semantic Title */}
-          <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">
-            {title}
-          </CardTitle>
-
-          {/* [Design] Date */}
-          {date && (
-            <CardDescription className="text-xs">
-              {date}
-            </CardDescription>
-          )}
-        </CardHeader>
-
-        {/* [GEO] Excerpt for Snippet */}
-        {excerpt && (
-          <CardContent>
-            <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
-              {excerpt}
-            </p>
-          </CardContent>
+    <Link
+      href={`/insights/${post.slug}${categorySlug ? `?category=${categorySlug}` : ''}`}
+      className="group block h-full rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 overflow-hidden"
+    >
+      {/* Image */}
+      <div className="relative w-full h-48 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
+        {post.featuredImage?.node?.sourceUrl ? (
+          <Image
+            src={post.featuredImage.node.sourceUrl}
+            alt={post.featuredImage.node.altText || post.title || ''}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 768px) 100vw, 33vw"
+            priority={priority}
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <FileText className="w-16 h-16 text-slate-400" strokeWidth={1.5} />
+          </div>
         )}
-      </Card>
+        
+        {/* Category Badge - Top Left */}
+        {categoryName && (
+          <div className="absolute top-3 left-3 flex gap-2 z-10">
+            <span 
+              className="px-3 py-1 rounded-full text-xs font-semibold shadow-lg"
+              style={{
+                backgroundColor: bgColor,
+                color: categoryColors.text === 'text-white' ? 'white' : '#0f172a'
+              }}
+            >
+              {categoryName}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Content */}
+      <div className="p-6 flex flex-col">
+        {/* Date */}
+        {date && (
+          <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <Calendar className="w-4 h-4" />
+            <span>{date}</span>
+          </div>
+        )}
+
+        {/* Title */}
+        <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-3">
+          {decodeHTMLEntities(post.title || '')}
+        </h3>
+
+        {/* Excerpt */}
+        <p className="text-slate-600 text-sm line-clamp-3 mb-4 flex-grow">
+          {excerpt || '내용이 없습니다.'}
+        </p>
+
+        {/* Read More */}
+        <div className="flex items-center gap-1.5 text-blue-600 font-medium text-sm group-hover:gap-2 transition-all">
+          <span>자세히 보기</span>
+          <ArrowRight className="w-4 h-4" />
+        </div>
+      </div>
     </Link>
   );
 }

@@ -1,7 +1,7 @@
 /**
- * [Section] FAQ - Frequently Asked Questions
- * [Design] Accordion with Premium Corporate Blue Theme
- * [Animation] Scroll-triggered entrance for FAQ items
+ * [Section] FAQ - Clean Accordion (Card Diet)
+ * [Design] Remove card borders, use simple border-bottom style
+ * [Animation] Smooth expand/collapse
  */
 
 "use client";
@@ -9,7 +9,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { FadeIn } from "@/components/ui/fade-in";
 import { SectionTitle } from "./SectionTitle";
 
@@ -43,14 +42,6 @@ const faqs: FAQItem[] = [
     question: "소규모 예산으로도 광고 대행이 가능한가요?",
     answer: "네, 가능합니다. 최소 월 광고비 300만원부터 대행 서비스를 제공하며, 예산에 맞는 최적의 전략을 수립해드립니다. 소규모 예산이라도 효율적인 타겟팅과 정밀한 관리를 통해 높은 ROAS를 달성할 수 있습니다."
   },
-  {
-    question: "타 대행사에서 진행 중인 광고도 이관 가능한가요?",
-    answer: "네, 가능합니다. 기존 광고 계정을 분석하여 개선점을 찾아드리며, 안전하게 계정 이관을 진행합니다. 현재 광고 성과, 계정 구조, 키워드 전략 등을 무료로 진단해드리니 부담 없이 상담 신청해주세요."
-  },
-  {
-    question: "계약 기간 중 해지가 가능한가요?",
-    answer: "최소 계약 기간(3개월) 이후에는 1개월 전 사전 통보를 통해 해지가 가능합니다. 다만, 초기 셋업 비용과 진행된 작업에 대한 비용은 정산이 필요할 수 있습니다. 계약서에 명시된 조건에 따라 투명하게 처리됩니다."
-  }
 ];
 
 export function FAQSection() {
@@ -61,8 +52,14 @@ export function FAQSection() {
   };
 
   return (
-    <section className="relative py-10 md:py-20">
-      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+    <section className="relative py-16 md:py-24 bg-slate-50">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: 'linear-gradient(to right, rgb(15 23 42) 1px, transparent 1px), linear-gradient(to bottom, rgb(15 23 42) 1px, transparent 1px)',
+        backgroundSize: '40px 40px'
+      }} />
+      
+      <div className="container relative mx-auto px-4 md:px-6 max-w-7xl">
         {/* Section Header */}
         <SectionTitle
           badge="FAQ"
@@ -70,55 +67,90 @@ export function FAQSection() {
           description="고객님들이 가장 궁금해하시는 질문들을 모았습니다"
         />
 
-        {/* FAQ List */}
-        <div className="max-w-4xl mx-auto space-y-3 md:space-y-4">
+        {/* FAQ List - Premium Card Style */}
+        <div className="max-w-4xl mx-auto mt-12 md:mt-16 space-y-4">
           {faqs.map((faq, index) => (
             <FadeIn key={index} delay={index * 0.05}>
-              <div
-                className="rounded-xl md:rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+              <div 
+                className={`
+                  relative rounded-2xl bg-white border-2 overflow-hidden
+                  transition-all duration-300
+                  ${openIndex === index 
+                    ? 'border-blue-500 shadow-xl shadow-blue-500/10' 
+                    : 'border-slate-200 hover:border-blue-300 hover:shadow-lg'
+                  }
+                `}
               >
-              {/* Question Button */}
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="w-full flex items-center justify-between gap-3 md:gap-4 p-4 md:p-6 text-left transition-colors duration-300 hover:bg-slate-50"
-              >
-                <h3 className="text-sm md:text-lg font-bold text-slate-900 flex-1">
-                  {faq.question}
-                </h3>
-                <motion.div
-                  animate={{ rotate: openIndex === index ? 180 : 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="flex-shrink-0"
+                {/* Question Button */}
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full py-6 md:py-8 px-6 flex items-center justify-between gap-4 text-left group"
+                  aria-expanded={openIndex === index}
+                  aria-controls={`faq-answer-${index}`}
                 >
-                  <ChevronDown 
-                    className={cn(
-                      "w-5 h-5 md:w-6 md:h-6 transition-colors duration-300",
-                      openIndex === index ? "text-blue-600" : "text-slate-400"
-                    )} 
-                  />
-                </motion.div>
-              </button>
+                  {/* Number Badge */}
+                  <div className={`
+                    flex-shrink-0 w-10 h-10 rounded-full 
+                    flex items-center justify-center font-bold text-sm
+                    transition-all duration-300
+                    ${openIndex === index
+                      ? 'bg-blue-600 text-white scale-110'
+                      : 'bg-slate-100 text-slate-400'
+                    }
+                  `}>
+                    {String(index + 1).padStart(2, '0')}
+                  </div>
 
-              {/* Answer */}
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-4 pb-4 md:px-6 md:pb-6 pt-0">
-                      <div className="pt-3 md:pt-4 border-t border-slate-100">
-                        <p className="text-xs md:text-base text-slate-600 leading-relaxed">
-                          {faq.answer}
-                        </p>
+                  <h3 className={`
+                    text-base md:text-xl font-bold leading-[1.4] flex-1 px-4
+                    transition-colors duration-300
+                    ${openIndex === index ? 'text-blue-600' : 'text-slate-900'}
+                  `}>
+                    {faq.question}
+                  </h3>
+                  
+                  <div className={`
+                    flex-shrink-0 w-10 h-10 rounded-full 
+                    flex items-center justify-center
+                    transition-all duration-300
+                    ${openIndex === index 
+                      ? 'bg-blue-100 rotate-180' 
+                      : 'bg-slate-100 group-hover:bg-blue-50'
+                    }
+                  `}>
+                    <ChevronDown className={`
+                      w-5 h-5
+                      transition-colors duration-300
+                      ${openIndex === index ? 'text-blue-600' : 'text-slate-600'}
+                    `} />
+                  </div>
+                </button>
+
+                {/* Answer */}
+                <AnimatePresence initial={false}>
+                  {openIndex === index && (
+                    <motion.div
+                      id={`faq-answer-${index}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      {/* Blue Accent Line */}
+                      <div className="mx-6 h-px bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200" />
+                      
+                      <div className="px-6 py-6 md:py-8 bg-gradient-to-br from-blue-50/50 to-transparent">
+                        {/* Answer with proper left margin to align with question text */}
+                        <div className="ml-14">
+                          <p className="text-sm md:text-base text-slate-700 leading-relaxed">
+                            {faq.answer}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </FadeIn>
           ))}

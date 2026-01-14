@@ -1,7 +1,7 @@
 /**
- * [UI] Magnetic Button - Button with magnetic hover effect
- * [Effect] Button moves slightly towards cursor before clicking
- * [Performance] GPU-accelerated transforms
+ * [Component] Magnetic Button - Physical Interaction
+ * [Design] Cursor-attracted with shining sheen effect
+ * [Behavior] Neo-Tech 2026 Standard
  */
 
 "use client";
@@ -11,37 +11,42 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 interface MagneticButtonProps {
-  href: string;
-  children?: React.ReactNode;
+  children: React.ReactNode;
+  href?: string;
+  onClick?: () => void;
   variant?: "primary" | "secondary";
   className?: string;
 }
 
-export function MagneticButton({
-  href,
-  children,
+export function MagneticButton({ 
+  children, 
+  href, 
+  onClick, 
   variant = "primary",
-  className = "",
+  className = "" 
 }: MagneticButtonProps) {
-  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!buttonRef.current) return;
-
+    
     const rect = buttonRef.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-
+    
     // Calculate distance from center
     const deltaX = e.clientX - centerX;
     const deltaY = e.clientY - centerY;
-
-    // Apply magnetic effect (max 15px movement)
-    const magnetStrength = 0.3;
+    
+    // Magnetic pull (max 12px)
+    const maxPull = 12;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    const pullStrength = Math.min(distance / 100, 1);
+    
     setPosition({
-      x: deltaX * magnetStrength,
-      y: deltaY * magnetStrength,
+      x: deltaX * pullStrength * 0.3,
+      y: deltaY * pullStrength * 0.3,
     });
   };
 
@@ -49,46 +54,38 @@ export function MagneticButton({
     setPosition({ x: 0, y: 0 });
   };
 
-  const baseStyles =
-    variant === "primary"
-      ? "group relative overflow-hidden px-7 py-3.5 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold text-base shadow-2xl shadow-blue-500/40"
-      : "px-7 py-3.5 rounded-full bg-white/70 backdrop-blur-md border border-blue-200/50 text-slate-900 font-bold text-base shadow-lg hover:bg-white/90 hover:border-blue-300";
+  const baseStyles = variant === "primary" 
+    ? "bg-blue-600 text-white shadow-2xl shadow-blue-600/30 hover:shadow-blue-600/50 border-2 border-blue-600"
+    : "bg-white text-slate-900 border-2 border-slate-300 hover:border-slate-400";
 
-  return (
-    <motion.a
+  const content = (
+    <motion.div
       ref={buttonRef}
-      href={href}
-      className={`${baseStyles} transition-all duration-300 ${className}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      animate={{
-        x: position.x,
-        y: position.y,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 150,
-        damping: 15,
-        mass: 0.1,
-      }}
-      whileTap={{ scale: 0.95 }}
+      animate={{ x: position.x, y: position.y }}
+      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+      className={`group relative inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-lg overflow-hidden cursor-pointer ${baseStyles} ${className}`}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.98 }}
     >
-      {variant === "primary" ? (
-        <>
-          <span className="relative z-10 flex items-center gap-2">
-            {children || "문의하기"}
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </span>
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-sky-600 to-blue-600"
-            initial={{ x: "100%" }}
-            whileHover={{ x: "0%" }}
-            transition={{ duration: 0.3 }}
-          />
-        </>
-      ) : (
-        children || "성공 사례 보기"
-      )}
-    </motion.a>
+      {/* Shining Sheen Effect */}
+      <motion.div
+        className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+        style={{
+          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)",
+        }}
+      />
+      
+      {/* Content */}
+      <span className="relative z-10">{children}</span>
+      <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+    </motion.div>
   );
+
+  if (href) {
+    return <a href={href} onClick={onClick}>{content}</a>;
+  }
+
+  return <div onClick={onClick}>{content}</div>;
 }

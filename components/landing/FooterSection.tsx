@@ -23,8 +23,28 @@ const services = [
 
 export function FooterSection() {
   return (
-    <footer className="relative bg-slate-900 border-t border-slate-800 pt-8 md:pt-16 pb-8 md:pb-16 mt-0">
-      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+    <footer className="relative bg-[#0B0C10] overflow-hidden pt-8 md:pt-16 pb-8 md:pb-16 mt-0">
+      {/* Glowing Gradient Top Border - Electric Blue */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#2563EB] to-transparent opacity-70" />
+      
+      {/* Cyber Grid Pattern */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: 'linear-gradient(to right, #2563EB 1px, transparent 1px), linear-gradient(to bottom, #2563EB 1px, transparent 1px)',
+        backgroundSize: '80px 80px'
+      }} />
+      
+      {/* Giant Brand Typography Background - Electric Blue Glow */}
+      <div 
+        className="absolute bottom-[-2rem] left-0 text-[8rem] md:text-[12rem] lg:text-[16rem] font-black text-blue-600/5 leading-none pointer-events-none select-none z-0 whitespace-nowrap overflow-hidden"
+        style={{ 
+          textShadow: '0 0 80px rgba(37, 99, 235, 0.15)',
+          letterSpacing: '-0.05em'
+        }}
+      >
+        PNA GROWTH
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 md:gap-8 mb-8 md:mb-12">
           {/* Company Info */}

@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { MapPin, Mail, Phone, Printer, Award, CheckCircle2, Loader2 } from "lucide-react";
+import { MapPin, Mail, Phone, Printer, Award, CheckCircle2, Loader2, ArrowRight } from "lucide-react";
 
 // ============================================
 // [Security] Zod Schema
@@ -101,35 +101,40 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-16 md:py-24 bg-slate-50">
+    <section id="contact" className="relative py-20 md:py-32 bg-white">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* Left Column: Info */}
-          <div className="space-y-8">
+          <div className="space-y-10">
             {/* Title */}
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-6">
+                <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+                <span className="text-sm font-semibold text-blue-700">Contact Us</span>
+              </div>
+              
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight leading-[1.35]">
                 프로젝트 문의하기
               </h2>
-              <p className="text-lg text-slate-600 leading-relaxed">
+              <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
                 성장을 위한 파트너, PNA 컴퍼니입니다.
                 <br />
-                문의 남겨주시면 담당자가 24시간 이내에 연락드립니다.
+                문의 남겨주시면 담당자가 <span className="font-semibold text-blue-600">24시간 이내</span>에 연락드립니다.
               </p>
             </div>
 
             {/* Contact Info */}
-            <div className="space-y-6">
+            <div className="space-y-5">
               {/* Address */}
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
+              <div className="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all duration-300">
+                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center group-hover:scale-110 transition-transform">
                   <MapPin className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-700 mb-1">
+                  <h3 className="text-sm font-bold text-slate-900 mb-2">
                     주소
                   </h3>
-                  <p className="text-slate-600 leading-relaxed">
+                  <p className="text-slate-600 leading-relaxed text-sm">
                     경기 고양시 일산동구 백마로195<br />
                     SK엠시티 상가동 2층 2120호
                   </p>
@@ -137,17 +142,17 @@ export function ContactSection() {
               </div>
 
               {/* Email */}
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
+              <div className="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all duration-300">
+                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Mail className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-700 mb-1">
+                  <h3 className="text-sm font-bold text-slate-900 mb-2">
                     이메일
                   </h3>
                   <a
                     href="mailto:pna0310@naver.com"
-                    className="text-slate-600 hover:text-blue-600 transition-colors"
+                    className="text-slate-600 hover:text-blue-600 transition-colors font-medium text-sm"
                   >
                     pna0310@naver.com
                   </a>
@@ -155,74 +160,79 @@ export function ContactSection() {
               </div>
 
               {/* Phone */}
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
+              <div className="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all duration-300">
+                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Phone className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-700 mb-1">
+                  <h3 className="text-sm font-bold text-slate-900 mb-2">
                     전화
                   </h3>
                   <a
                     href="tel:070-7733-7905"
-                    className="text-slate-600 hover:text-blue-600 transition-colors"
+                    className="text-slate-600 hover:text-blue-600 transition-colors font-medium text-sm"
                   >
-                    Tel: 070-7733-7905
+                    070-7733-7905
                   </a>
                 </div>
               </div>
 
               {/* Fax */}
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
+              <div className="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all duration-300">
+                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Printer className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-700 mb-1">
+                  <h3 className="text-sm font-bold text-slate-900 mb-2">
                     팩스
                   </h3>
-                  <p className="text-slate-600">
-                    Fax: 031-908-2225
+                  <p className="text-slate-600 font-medium text-sm">
+                    031-908-2225
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Trust Badge */}
-            <div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
-              <Award className="w-8 h-8 text-blue-600" />
+            <div className="inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 shadow-lg">
+              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white flex items-center justify-center">
+                <Award className="w-7 h-7 text-blue-600" />
+              </div>
               <div>
-                <p className="text-sm font-bold text-slate-900">
+                <p className="text-base font-bold text-slate-900">
                   Google 공식 파트너
                 </p>
-                <p className="text-xs text-slate-500">Partner Badge Certified</p>
+                <p className="text-xs text-slate-600 font-medium">Partner Badge Certified</p>
               </div>
             </div>
           </div>
 
           {/* Right Column: Form */}
-          <div className="bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100">
+          <div className="relative bg-white p-8 md:p-12 rounded-3xl shadow-2xl shadow-blue-600/5 border-2 border-slate-100 hover:border-blue-200 transition-all duration-300">
+            {/* Decorative Element */}
+            <div className="absolute -top-px -right-px w-32 h-32 bg-gradient-to-br from-blue-100 to-transparent rounded-br-3xl rounded-tl-3xl opacity-20 pointer-events-none" />
+            
             {/* Success Message */}
             {isSuccess && (
-              <div className="mb-6 p-4 rounded-xl bg-green-50 border border-green-200 flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+              <div className="relative mb-8 p-5 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 flex items-start gap-3 shadow-lg">
+                <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm font-semibold text-green-900">
+                  <p className="text-sm font-bold text-green-900">
                     문의가 성공적으로 전송되었습니다!
                   </p>
-                  <p className="text-xs text-green-700 mt-1">
+                  <p className="text-xs text-green-700 mt-1 font-medium">
                     빠른 시일 내에 연락드리겠습니다.
                   </p>
                 </div>
               </div>
             )}
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="relative space-y-6">
               {/* Company/Name */}
               <div>
                 <label
                   htmlFor="company"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold text-slate-900 mb-3"
                 >
                   회사명 / 성함 <span className="text-red-500">*</span>
                 </label>
@@ -230,11 +240,11 @@ export function ContactSection() {
                   {...register("company")}
                   type="text"
                   id="company"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition-all text-slate-900"
+                  className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium placeholder:text-slate-400 bg-slate-50 focus:bg-white"
                   placeholder="예: 피앤에이컴퍼니"
                 />
                 {errors.company && (
-                  <p className="mt-1 text-xs text-red-600">
+                  <p className="mt-2 text-xs text-red-600 font-semibold">
                     {errors.company.message}
                   </p>
                 )}
@@ -244,7 +254,7 @@ export function ContactSection() {
               <div>
                 <label
                   htmlFor="contact"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold text-slate-900 mb-3"
                 >
                   연락처 <span className="text-red-500">*</span>
                 </label>
@@ -252,11 +262,11 @@ export function ContactSection() {
                   {...register("contact")}
                   type="tel"
                   id="contact"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition-all text-slate-900"
+                  className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium placeholder:text-slate-400 bg-slate-50 focus:bg-white"
                   placeholder="010-1234-5678"
                 />
                 {errors.contact && (
-                  <p className="mt-1 text-xs text-red-600">
+                  <p className="mt-2 text-xs text-red-600 font-semibold">
                     {errors.contact.message}
                   </p>
                 )}
@@ -266,7 +276,7 @@ export function ContactSection() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold text-slate-900 mb-3"
                 >
                   이메일 <span className="text-red-500">*</span>
                 </label>
@@ -274,30 +284,30 @@ export function ContactSection() {
                   {...register("email")}
                   type="email"
                   id="email"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition-all text-slate-900"
+                  className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium placeholder:text-slate-400 bg-slate-50 focus:bg-white"
                   placeholder="example@company.com"
                 />
                 {errors.email && (
-                  <p className="mt-1 text-xs text-red-600">
+                  <p className="mt-2 text-xs text-red-600 font-semibold">
                     {errors.email.message}
                   </p>
                 )}
               </div>
 
               {/* Service Type & Budget (2 Column) */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Service Type */}
                 <div>
                   <label
                     htmlFor="serviceType"
-                    className="block text-sm font-semibold text-slate-700 mb-2"
+                    className="block text-sm font-bold text-slate-900 mb-3"
                   >
                     서비스 유형 <span className="text-red-500">*</span>
                   </label>
                   <select
                     {...register("serviceType")}
                     id="serviceType"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition-all text-slate-900"
+                    className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium bg-slate-50 focus:bg-white cursor-pointer"
                   >
                     {serviceOptions.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -306,7 +316,7 @@ export function ContactSection() {
                     ))}
                   </select>
                   {errors.serviceType && (
-                    <p className="mt-1 text-xs text-red-600">
+                    <p className="mt-2 text-xs text-red-600 font-semibold">
                       {errors.serviceType.message}
                     </p>
                   )}
@@ -316,14 +326,14 @@ export function ContactSection() {
                 <div>
                   <label
                     htmlFor="budget"
-                    className="block text-sm font-semibold text-slate-700 mb-2"
+                    className="block text-sm font-bold text-slate-900 mb-3"
                   >
                     예산 범위 <span className="text-red-500">*</span>
                   </label>
                   <select
                     {...register("budget")}
                     id="budget"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition-all text-slate-900"
+                    className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium bg-slate-50 focus:bg-white cursor-pointer"
                   >
                     {budgetOptions.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -332,7 +342,7 @@ export function ContactSection() {
                     ))}
                   </select>
                   {errors.budget && (
-                    <p className="mt-1 text-xs text-red-600">
+                    <p className="mt-2 text-xs text-red-600 font-semibold">
                       {errors.budget.message}
                     </p>
                   )}
@@ -343,38 +353,38 @@ export function ContactSection() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold text-slate-900 mb-3"
                 >
                   문의 내용 <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   {...register("message")}
                   id="message"
-                  rows={5}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition-all text-slate-900 resize-none"
+                  rows={6}
+                  className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium placeholder:text-slate-400 bg-slate-50 focus:bg-white resize-none"
                   placeholder="프로젝트에 대해 자세히 알려주세요..."
                 />
                 {errors.message && (
-                  <p className="mt-1 text-xs text-red-600">
+                  <p className="mt-2 text-xs text-red-600 font-semibold">
                     {errors.message.message}
                   </p>
                 )}
               </div>
 
               {/* Privacy Checkbox */}
-              <div>
-                <label className="flex items-start gap-3 cursor-pointer group">
+              <div className="pt-2">
+                <label className="flex items-start gap-3 cursor-pointer group p-4 rounded-xl hover:bg-slate-50 transition-colors">
                   <input
                     {...register("privacy")}
                     type="checkbox"
-                    className="mt-1 w-5 h-5 rounded border-slate-300 text-blue-600 focus:ring-2 focus:ring-blue-600/20 cursor-pointer"
+                    className="mt-1 w-5 h-5 rounded-md border-2 border-slate-300 text-blue-600 focus:ring-4 focus:ring-blue-600/20 cursor-pointer"
                   />
-                  <span className="text-sm text-slate-600 group-hover:text-slate-900 transition-colors">
-                    <span className="text-red-500">*</span>{" "}
+                  <span className="text-sm text-slate-600 group-hover:text-slate-900 transition-colors font-medium">
+                    <span className="text-red-500 font-bold">*</span>{" "}
                     <a
                       href="/privacy"
                       target="_blank"
-                      className="underline hover:text-blue-600"
+                      className="underline hover:text-blue-600 font-semibold"
                     >
                       개인정보 처리방침
                     </a>
@@ -382,7 +392,7 @@ export function ContactSection() {
                   </span>
                 </label>
                 {errors.privacy && (
-                  <p className="mt-1 text-xs text-red-600">
+                  <p className="mt-2 ml-4 text-xs text-red-600 font-semibold">
                     {errors.privacy.message}
                   </p>
                 )}
@@ -392,7 +402,7 @@ export function ContactSection() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-8 py-4 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 focus:ring-4 focus:ring-blue-600/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full px-8 py-5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg hover:from-blue-700 hover:to-indigo-700 hover:shadow-2xl hover:shadow-blue-600/30 hover:-translate-y-0.5 focus:ring-4 focus:ring-blue-600/30 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-2 group"
               >
                 {isSubmitting ? (
                   <>
@@ -400,7 +410,10 @@ export function ContactSection() {
                     <span>전송 중...</span>
                   </>
                 ) : (
-                  <span>문의하기</span>
+                  <>
+                    <span>문의하기</span>
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </>
                 )}
               </button>
             </form>

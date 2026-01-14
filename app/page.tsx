@@ -1,16 +1,20 @@
 /**
- * [Trinity Standard] PNA Company Main Landing Page
- * [Design] Clean, Professional, High-Performance
+ * [TOTAL RECONSTRUCTION] PNA Company Main Landing Page
+ * [Architecture] Strategic Section Hierarchy for B2B Tech Agency
+ * [Design] High-End, Rhythmic, Data-Driven
  * [GEO] SEO-Optimized with JSON-LD
  */
 
 import type { Metadata } from 'next';
-import { BlueprintBackground } from '@/components/ui/blueprint-background';
+import { SpotlightBackground } from '@/components/ui/spotlight-background';
 import { HeroSection } from '@/components/landing/HeroSection';
-import { VelocityScrollBanner } from '@/components/ui/velocity-scroll-banner';
+import { GoogleAwardCard } from '@/components/ui/google-award-card';
+import { KeywordTicker } from '@/components/ui/keyword-ticker';
 import { MetricsSection } from '@/components/landing/MetricsSection';
 import { BentoSection } from '@/components/landing/BentoSection';
+import { PhilosophySection } from '@/components/landing/PhilosophySection';
 import { ExpertiseSection } from '@/components/landing/ExpertiseSection';
+import { LogoMarquee } from '@/components/ui/logo-marquee';
 import { InsightsSection } from '@/components/landing/InsightsSection';
 import { FAQSection } from '@/components/landing/FAQSection';
 import { ContactSection } from '@/components/sections/contact-section';
@@ -109,18 +113,13 @@ export const metadata: Metadata = {
 };
 
 // ============================================
-// [Main] Homepage Implementation
+// [MAIN] Homepage - Strategic Layout
 // ============================================
 export default async function HomePage() {
   const jsonLd = generateJsonLd();
   
   // Fetch latest posts from WordPress
   let posts = await getAllPosts();
-  
-  // 개발 환경에서 데이터가 없을 경우 더미 데이터 사용 (optional)
-  // if (posts.length === 0 && process.env.NODE_ENV === 'development') {
-  //   console.log('No posts found from WordPress API');
-  // }
 
   return (
     <>
@@ -130,18 +129,75 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Background Layers */}
-      <BlueprintBackground />
+      {/* 🎨 Fixed Background Layer - Spotlight Grid */}
+      <SpotlightBackground />
 
-      {/* Main Content */}
+      {/* 📐 Strategic Content Hierarchy */}
       <main className="relative">
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        {/* SECTION 1: HERO - The Hook & Authority                        */}
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <HeroSection />
-        <VelocityScrollBanner />
+        
+        {/* ✨ CENTERPIECE: Golden Award Badge (Primary Trust Signal) */}
+        <div className="px-4 md:px-6">
+          <GoogleAwardCard />
+          
+          {/* 🎞️ VISUAL SEPARATOR: Subtle Keyword Rolling (Below Card) */}
+          <KeywordTicker />
+        </div>
+
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        {/* SECTION 2: STATS - The Proof (Open Financial Layout)          */}
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <MetricsSection />
+
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        {/* SECTION 3: SERVICES - Core Offering (Asymmetrical Bento)      */}
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <BentoSection />
+
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        {/* SECTION 4: PHILOSOPHY - How We Work (Open Air)                */}
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        <PhilosophySection />
+
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        {/* SECTION 5: TRUST - Credibility (Glassmorphism + Marquee)      */}
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <ExpertiseSection />
+        
+        {/* 🎞️ Partners Section with Marquee */}
+        <section className="relative py-12 md:py-16 bg-white border-t border-slate-200">
+          <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+            {/* Title */}
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3" style={{ lineHeight: '1.4' }}>
+                주요 파트너사
+              </h2>
+              <p className="text-base md:text-lg text-slate-600 leading-relaxed">
+                대한민국 대표 기업들과 함께합니다
+              </p>
+            </div>
+          </div>
+          
+          {/* Logo Marquee */}
+          <LogoMarquee />
+        </section>
+
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        {/* SECTION 6: INSIGHTS - Thought Leadership                      */}
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <InsightsSection posts={posts} />
+
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        {/* SECTION 7: FAQ - Objection Handling (Minimalist Accordion)    */}
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <FAQSection />
+
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+        {/* SECTION 8: CONTACT - Conversion (Split Panel)                 */}
+        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <ContactSection />
       </main>
     </>
