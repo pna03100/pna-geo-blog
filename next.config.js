@@ -46,6 +46,9 @@ const nextConfig = {
     minimumCacheTTL: 60,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // [Hero Images] 로딩 최적화
+    unoptimized: false,
+    loader: 'default',
   },
 
   // 3. 타임아웃 방지
