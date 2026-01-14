@@ -7,7 +7,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FAQItem {
@@ -50,43 +50,47 @@ export function WordPressFAQ() {
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-blue-200 text-blue-600 text-sm font-semibold mb-6">
-            <HelpCircle className="w-4 h-4" />
-            <span>FAQ</span>
+          <div className="inline-block mb-4">
+            <span className="px-4 py-1.5 bg-blue-50 text-blue-600 text-sm font-semibold rounded-full">
+              FAQ
+            </span>
           </div>
           
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             자주 묻는 질문
           </h2>
           
-          <p className="text-xl text-slate-600 leading-relaxed">
-            워드프레스 제작 관련 궁금한 점을 확인하세요
+          <p className="text-lg text-slate-600">
+            워드프레스 제작에 대한 궁금증을 해결해드립니다
           </p>
         </div>
 
         {/* FAQ List */}
         <div className="max-w-4xl mx-auto space-y-4">
           {faqs.map((faq, index) => (
-            <div
+            <motion.div
               key={index}
-              className="rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
+              className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow"
             >
-              {/* Question Button */}
+              {/* Question */}
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full flex items-center justify-between gap-4 p-6 text-left transition-colors duration-300 hover:bg-slate-50"
+                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-blue-50/50 transition-colors group"
               >
-                <h3 className="text-lg font-bold text-slate-900 flex-1">
+                <span className="text-lg font-bold text-slate-900 pr-4 group-hover:text-blue-600 transition-colors">
                   {faq.question}
-                </h3>
+                </span>
                 <motion.div
                   animate={{ rotate: openIndex === index ? 180 : 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="flex-shrink-0"
+                  transition={{ duration: 0.2 }}
                 >
                   <ChevronDown 
                     className={cn(
-                      "w-6 h-6 transition-colors duration-300",
+                      "w-5 h-5 flex-shrink-0 transition-colors",
                       openIndex === index ? "text-blue-600" : "text-slate-400"
                     )} 
                   />
@@ -103,17 +107,15 @@ export function WordPressFAQ() {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 pt-0">
-                      <div className="pt-4 border-t border-slate-100">
-                        <p className="text-slate-600 leading-relaxed">
-                          {faq.answer}
-                        </p>
-                      </div>
+                    <div className="px-6 pb-5 pt-2">
+                      <p className="text-slate-600 leading-relaxed">
+                        {faq.answer}
+                      </p>
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
