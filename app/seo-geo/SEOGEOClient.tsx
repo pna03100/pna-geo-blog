@@ -22,7 +22,7 @@ const services = [
   {
     icon: Sparkles,
     title: "GEO (Generative Engine Optimization)",
-    description: "ChatGPT, Perplexity, Gemini 등 AI 검색 엔진에서 Featured Snippet으로 노출되도록 콘텐츠를 최적화합니다.",
+    description: "Gemini, Perplexity, ChatGPT 등 AI 검색 엔진에서 Featured Snippet으로 노출되도록 콘텐츠를 최적화합니다.",
     color: "#4285F4" // Google Blue
   },
   {
@@ -43,7 +43,7 @@ const aiSaasServices = [
   {
     icon: Bot,
     title: "AI 기반 콘텐츠 최적화",
-    description: "ChatGPT, Claude, Gemini 등 LLM(대규모 언어 모델)이 이해하고 인용할 수 있는 구조화된 콘텐츠를 생성합니다. Prompt Engineering 전략으로 AI 검색 결과에서 상위 노출을 달성합니다.",
+    description: "Gemini, ChatGPT, Claude 등 LLM(대규모 언어 모델)이 이해하고 인용할 수 있는 구조화된 콘텐츠를 생성합니다. 특히 Google의 Gemini AI와 통합된 검색 결과에서 우선 노출을 달성합니다.",
     features: ["RAG 최적화", "Semantic Search 대응", "Vector DB 인덱싱"]
   },
   {
@@ -75,7 +75,7 @@ const benefits = [
   {
     icon: Sparkles,
     title: "AI 검색 엔진 대응",
-    description: "ChatGPT, Perplexity 등 차세대 검색 엔진에서 Featured Answer로 노출"
+    description: "Gemini, Perplexity 등 차세대 검색 엔진에서 Featured Answer로 노출"
   },
   {
     icon: Award,
@@ -121,17 +121,12 @@ export function SEOGEOClient() {
 
         <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 mb-6">
-              <Search className="w-4 h-4" />
-              <span className="text-sm font-semibold">Search Optimization</span>
-            </div>
-
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               SEO & GEO 최적화
             </h1>
 
             <p className="text-xl text-blue-100 leading-relaxed">
-              Google 검색부터 ChatGPT까지<br className="hidden md:block" />
+              Google 검색부터 Gemini AI까지<br className="hidden md:block" />
               모든 검색 엔진에서 상위 노출되는 전략
             </p>
           </div>
@@ -273,7 +268,7 @@ export function SEOGEOClient() {
                   </h3>
                   <div className="space-y-3 text-slate-700 leading-relaxed">
                     <p>
-                      <strong className="text-slate-900">• AI 검색 시대:</strong> 2024년 기준, ChatGPT의 월간 사용자는 1억 명을 돌파했으며, Google도 AI Overview(SGE)를 본격 도입했습니다. 전통적인 검색 결과 10개가 아닌, 단 하나의 AI 생성 답변만 노출되는 환경에서 살아남으려면 GEO 전략이 필수입니다.
+                      <strong className="text-slate-900">• AI 검색 시대:</strong> 2024년 기준, Google의 Gemini AI가 검색 결과에 통합되며 전 세계 수십억 사용자에게 노출되고 있으며, AI Overview(SGE)가 본격 도입되었습니다. 전통적인 검색 결과 10개가 아닌, 단 하나의 Gemini AI 생성 답변만 노출되는 환경에서 살아남으려면 GEO 전략이 필수입니다. Gemini는 Google 생태계와 완전히 통합되어 YouTube, Gmail, Docs 등 모든 Google 서비스에서 활용되며, 한국어 이해도도 ChatGPT보다 우수합니다.
                     </p>
                     <p>
                       <strong className="text-slate-900">• SaaS 특수성:</strong> B2B SaaS는 긴 구매 주기(3~12개월), 다수의 의사결정자(평균 6.8명), 높은 CAC(Customer Acquisition Cost)를 특징으로 합니다. "CRM software"같은 일반 키워드가 아닌, "HubSpot vs Salesforce pricing comparison 2026" 같은 Long-tail, High-intent 키워드 전략이 ROI를 결정합니다.

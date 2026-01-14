@@ -8,17 +8,17 @@ import Image from "next/image";
 import { Mail, Phone, MapPin, Printer } from "lucide-react";
 
 const quickLinks = [
-  { label: "회사 소개", href: "#about" },
-  { label: "서비스", href: "#solutions" },
-  { label: "블로그", href: "/blog" },
+  { label: "회사소개", href: "/about" },
+  { label: "서비스", href: "/#solutions" },
+  { label: "인사이트", href: "/insights" },
   { label: "문의하기", href: "/contact" },
 ];
 
 const services = [
   { label: "구글 애즈", href: "/google-ads" },
+  { label: "SEO & GEO", href: "/seo-geo" },
   { label: "워드프레스", href: "/wordpress" },
   { label: "퍼포먼스", href: "/performance" },
-  { label: "인사이트", href: "/insights" },
 ];
 
 export function FooterSection() {

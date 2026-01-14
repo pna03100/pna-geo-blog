@@ -107,11 +107,6 @@ export function PerformanceClient() {
 
         <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 mb-6">
-              <TrendingUp className="w-4 h-4" />
-              <span className="text-sm font-semibold">데이터 기반 마케팅</span>
-            </div>
-
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               퍼포먼스 마케팅
             </h1>

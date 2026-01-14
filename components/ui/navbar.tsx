@@ -14,6 +14,7 @@ import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navItems = [
+  { name: '회사소개', href: '/about' },
   { name: '구글 애즈', href: '/google-ads' },
   { name: 'SEO & GEO', href: '/seo-geo' },
   { name: '워드프레스', href: '/wordpress' },
