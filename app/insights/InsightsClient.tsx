@@ -13,7 +13,6 @@ import { motion } from "framer-motion";
 import { WPContent } from "@/lib/types";
 import { PostCard } from "@/components/insights/PostCard";
 import { Sparkles, ArrowRight } from "lucide-react";
-import { TextReveal } from "@/components/ui/text-reveal";
 
 interface InsightsClientProps {
   posts: WPContent[];

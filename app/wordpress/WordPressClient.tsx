@@ -11,7 +11,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Code, Palette, Zap, Shield, ArrowRight, Sparkles, Settings, TrendingUp, CheckCircle2 } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
-import { TextReveal } from "@/components/ui/text-reveal";
 import { WordPressFAQ } from "@/components/service/WordPressFAQ";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -14,7 +14,6 @@ import {
   Sparkles, Search, Share2, Award, X 
 } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
-import { TextReveal } from "@/components/ui/text-reveal";
 import { PerformanceFAQ } from "@/components/service/PerformanceFAQ";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
