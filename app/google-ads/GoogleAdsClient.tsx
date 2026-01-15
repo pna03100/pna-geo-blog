@@ -432,7 +432,7 @@ export function GoogleAdsClient() {
         <div className="absolute inset-0 z-0 bg-slate-900">
           <Image
             src="/images/hero/google-ads-hero-bg.jpg"
-            alt="Google Ads Background"
+            alt="피앤에이컴퍼니 구글 애즈 광고 대행 서비스 - 데이터 분석 대시보드"
             fill
             className="object-cover"
             quality={85}

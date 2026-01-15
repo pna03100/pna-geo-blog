@@ -91,6 +91,14 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     url: 'https://pnamarketing.co.kr',
     siteName: '피앤에이컴퍼니',
+    images: [
+      {
+        url: '/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: '피앤에이컴퍼니 - 구글 광고 대행사 | 평균 ROAS 500% 달성',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

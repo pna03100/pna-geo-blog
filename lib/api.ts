@@ -105,13 +105,16 @@ async function fetchAPI<T>(
     variables 
   });
 
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log(`🚀 [API Request] ${isServer ? '🖥️ Server' : '🌐 Client'}`);
-  console.log('📍 URL:', url);
-  console.log('📝 Query:', query.substring(0, 100) + '...');
-  console.log('🔧 Variables:', JSON.stringify(variables, null, 2));
-  console.log('📦 Request Body Length:', requestBody.length);
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  // [Security] Only log in development
+  if (process.env.NODE_ENV === 'development') {
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log(`🚀 [API Request] ${isServer ? '🖥️ Server' : '🌐 Client'}`);
+    console.log('📍 URL:', url);
+    console.log('📝 Query:', query.substring(0, 100) + '...');
+    console.log('🔧 Variables:', JSON.stringify(variables, null, 2));
+    console.log('📦 Request Body Length:', requestBody.length);
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  }
 
   try {
     const response = await fetch(url, {
@@ -125,17 +128,24 @@ async function fetchAPI<T>(
       cache: 'no-store',
     });
 
-    console.log('✅ Response Status:', response.status, response.statusText);
-    console.log('📋 Response Headers:', Object.fromEntries(response.headers.entries()));
+    if (process.env.NODE_ENV === 'development') {
+      console.log('✅ Response Status:', response.status, response.statusText);
+      console.log('📋 Response Headers:', Object.fromEntries(response.headers.entries()));
+    }
 
     // [DEBUG] 응답 본문을 먼저 텍스트로 읽기
     const responseText = await response.text();
-    console.log('📄 Response Body Length:', responseText.length);
-    console.log('📄 Response Body Preview:', responseText.substring(0, 500));
+    
+    if (process.env.NODE_ENV === 'development') {
+      console.log('📄 Response Body Length:', responseText.length);
+      console.log('📄 Response Body Preview:', responseText.substring(0, 500));
+    }
 
     if (!response.ok) {
-      console.error('❌ HTTP Error:', response.status);
-      console.error('📄 Full Response:', responseText);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('❌ HTTP Error:', response.status);
+        console.error('📄 Full Response:', responseText);
+      }
       return null;
     }
 
@@ -143,32 +153,42 @@ async function fetchAPI<T>(
     let json: GraphQLResponse<T>;
     try {
       json = JSON.parse(responseText);
-      console.log('✅ JSON Parsed Successfully');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('✅ JSON Parsed Successfully');
+      }
     } catch (parseError) {
-      console.error('❌ JSON Parse Failed:', parseError);
-      console.error('📄 Raw Text:', responseText.substring(0, 500));
+      if (process.env.NODE_ENV === 'development') {
+        console.error('❌ JSON Parse Failed:', parseError);
+        console.error('📄 Raw Text:', responseText.substring(0, 500));
+      }
       return null;
     }
 
     if (json.errors) {
-      console.error('❌ GraphQL Errors:', JSON.stringify(json.errors, null, 2));
+      if (process.env.NODE_ENV === 'development') {
+        console.error('❌ GraphQL Errors:', JSON.stringify(json.errors, null, 2));
+      }
       return null;
     }
 
-    console.log('✅ Data Received:', Object.keys(json.data || {}));
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('✅ Data Received:', Object.keys(json.data || {}));
+      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+    }
 
     return json.data;
   } catch (error) {
-    if (error instanceof Error) {
-      console.error('💥 [Fetch Exception]');
-      console.error('Error Type:', error.name);
-      console.error('Error Message:', error.message);
-      console.error('Stack:', error.stack);
-    } else {
-      console.error('💥 Unknown Error:', error);
+    if (process.env.NODE_ENV === 'development') {
+      if (error instanceof Error) {
+        console.error('💥 [Fetch Exception]');
+        console.error('Error Type:', error.name);
+        console.error('Error Message:', error.message);
+        console.error('Stack:', error.stack);
+      } else {
+        console.error('💥 Unknown Error:', error);
+      }
+      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
     }
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
     return null;
   }
 }
@@ -249,15 +269,17 @@ export async function getContentByURI(uri: string): Promise<WPContent | null> {
     const data = await fetchAPI<{ contentNode: unknown }>(query, { uri });
 
     if (!data || !data.contentNode) {
-      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      console.error('❌ [Data Not Found]');
-      console.error('📍 URI:', uri);
-      console.error('💡 Possible Causes:');
-      console.error('  1. WordPress API URL이 잘못되었습니다');
-      console.error('  2. 해당 URI의 콘텐츠가 WordPress에 존재하지 않습니다');
-      console.error('  3. WPGraphQL 플러그인이 비활성화되었습니다');
-      console.error('  4. CORS 문제로 요청이 차단되었습니다');
-      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+      if (process.env.NODE_ENV === 'development') {
+        console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.error('❌ [Data Not Found]');
+        console.error('📍 URI:', uri);
+        console.error('💡 Possible Causes:');
+        console.error('  1. WordPress API URL이 잘못되었습니다');
+        console.error('  2. 해당 URI의 콘텐츠가 WordPress에 존재하지 않습니다');
+        console.error('  3. WPGraphQL 플러그인이 비활성화되었습니다');
+        console.error('  4. CORS 문제로 요청이 차단되었습니다');
+        console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+      }
       return null;
     }
 
@@ -265,28 +287,32 @@ export async function getContentByURI(uri: string): Promise<WPContent | null> {
     const validated = WPContentSchema.safeParse(data.contentNode);
 
     if (!validated.success) {
-      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      console.error('❌ [Validation Failed] contentNode');
-      console.error('📍 URI:', uri);
-      console.error('🔍 Validation Errors:', JSON.stringify(validated.error.errors, null, 2));
-      console.error('📦 Raw Data:', JSON.stringify(data.contentNode, null, 2).substring(0, 500));
-      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+      if (process.env.NODE_ENV === 'development') {
+        console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.error('❌ [Validation Failed] contentNode');
+        console.error('📍 URI:', uri);
+        console.error('🔍 Validation Errors:', JSON.stringify(validated.error.errors, null, 2));
+        console.error('📦 Raw Data:', JSON.stringify(data.contentNode, null, 2).substring(0, 500));
+        console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+      }
       return null;
     }
 
     return validated.data;
   } catch (error) {
-    console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.error('💥 [getContentByURI Exception]');
-    console.error('📍 URI:', uri);
-    if (error instanceof Error) {
-      console.error('Error Name:', error.name);
-      console.error('Error Message:', error.message);
-      console.error('Stack Trace:', error.stack);
-    } else {
-      console.error('Unknown Error:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      console.error('💥 [getContentByURI Exception]');
+      console.error('📍 URI:', uri);
+      if (error instanceof Error) {
+        console.error('Error Name:', error.name);
+        console.error('Error Message:', error.message);
+        console.error('Stack Trace:', error.stack);
+      } else {
+        console.error('Unknown Error:', error);
+      }
+      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
     }
-    console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
     return null;
   }
 }
@@ -327,7 +353,9 @@ export async function getAllPosts(): Promise<WPContent[]> {
     const data = await fetchAPI<{ posts: { nodes: unknown[] } }>(query);
 
     if (!data || !data.posts || !data.posts.nodes) {
-      console.warn('⚠️ No posts found. Returning empty array.');
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('⚠️ No posts found. Returning empty array.');
+      }
       return [];
     }
 
@@ -335,7 +363,7 @@ export async function getAllPosts(): Promise<WPContent[]> {
     const validated = data.posts.nodes
       .map((node, index) => {
         const result = WPContentSchema.safeParse(node);
-        if (!result.success) {
+        if (!result.success && process.env.NODE_ENV === 'development') {
           console.error(`❌ [Validation Failed] Post #${index}`);
           console.error('Validation Errors:', JSON.stringify(result.error.errors, null, 2));
           console.error('Raw Data:', JSON.stringify(node, null, 2).substring(0, 500));
@@ -345,10 +373,14 @@ export async function getAllPosts(): Promise<WPContent[]> {
       .filter((result) => result.success)
       .map((result) => (result as z.SafeParseSuccess<WPContent>).data);
 
-    console.log(`✅ getAllPosts: ${validated.length} posts validated successfully`);
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`✅ getAllPosts: ${validated.length} posts validated successfully`);
+    }
     return validated;
   } catch (error) {
-    console.error('getAllPosts Error:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('getAllPosts Error:', error);
+    }
     return [];
   }
 }
@@ -375,7 +407,9 @@ export async function getAllPages(): Promise<WPContent[]> {
     const data = await fetchAPI<{ pages: { nodes: unknown[] } }>(query);
 
     if (!data || !data.pages || !data.pages.nodes) {
-      console.warn('⚠️ No pages found. Returning empty array.');
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('⚠️ No pages found. Returning empty array.');
+      }
       return [];
     }
 
@@ -387,7 +421,9 @@ export async function getAllPages(): Promise<WPContent[]> {
 
     return validated;
   } catch (error) {
-    console.error('getAllPages Error:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('getAllPages Error:', error);
+    }
     return [];
   }
 }
@@ -419,7 +455,9 @@ export async function getPrimaryMenu(): Promise<MenuItem[]> {
     const data = await fetchAPI<MenuResponse>(query);
 
     if (!data || !data.menus || !data.menus.nodes || data.menus.nodes.length === 0) {
-      console.warn('⚠️ No menus found. Returning dummy menu.');
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('⚠️ No menus found. Returning dummy menu.');
+      }
       return DUMMY_MENU_ITEMS;
     }
 
@@ -433,7 +471,9 @@ export async function getPrimaryMenu(): Promise<MenuItem[]> {
 
     return validated.length > 0 ? validated : DUMMY_MENU_ITEMS;
   } catch (error) {
-    console.error('getPrimaryMenu Error:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('getPrimaryMenu Error:', error);
+    }
     return DUMMY_MENU_ITEMS;
   }
 }

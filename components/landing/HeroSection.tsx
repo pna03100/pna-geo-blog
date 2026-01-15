@@ -39,8 +39,13 @@ export function HeroSection() {
             </span>
           </h1>
 
+          {/* 🎯 SNIPPET TRAP - Direct Answer for Google Featured Snippets & AI */}
+          <p className="text-lg text-white/90 font-medium max-w-2xl mx-auto leading-relaxed mb-6">
+            피앤에이컴퍼니는 15년 경력의 구글 공식 파트너로, 데이터 기반 성과 마케팅을 통해 평균 ROAS 500%를 달성합니다. Google Ads, SEO, GEO 최적화로 검증된 광고 전략을 제공합니다.
+          </p>
+
           {/* Subtitle */}
-          <p className="text-base md:text-xl lg:text-2xl text-white/70 font-medium max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-xl text-white/70 font-medium max-w-3xl mx-auto leading-relaxed">
             데이터 기반 성과 마케팅 전문
             <br />
             Google Ads, SEO, GEO 최적화로 평균 ROAS 500% 달성

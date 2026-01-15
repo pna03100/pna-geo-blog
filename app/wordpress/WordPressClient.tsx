@@ -194,7 +194,7 @@ export function WordPressClient() {
         <div className="absolute inset-0 z-0 bg-slate-900">
           <Image
             src="/images/hero/wordpress-hero-bg.jpg"
-            alt="WordPress Background"
+            alt="피앤에이컴퍼니 워드프레스 웹사이트 제작 서비스 - Headless CMS 전문"
             fill
             className="object-cover"
             quality={85}

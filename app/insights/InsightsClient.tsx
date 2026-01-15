@@ -151,7 +151,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
         <div className="absolute inset-0 z-0 bg-slate-900">
           <Image
             src="/images/hero/insights-hero-bg.jpg"
-            alt="Marketing Insights Background"
+            alt="피앤에이컴퍼니 마케팅 인사이트 - Google Ads SEO GEO 전략 가이드"
             fill
             className="object-cover"
             quality={85}

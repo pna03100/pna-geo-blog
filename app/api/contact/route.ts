@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     // Email content
     const mailOptions = {
       from: process.env.GMAIL_USER,
-      to: 'pna0310@naver.com',
+      to: process.env.CONTACT_EMAIL || 'pna0310@naver.com', // Fallback for backward compatibility
       subject: `[PNA 문의] ${company} - ${serviceType}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -80,8 +80,9 @@ ${message}
       { status: 200 }
     );
   } catch (error) {
+    // [Security] Only log errors in development
     if (process.env.NODE_ENV === 'development') {
-      console.error('Email send error:', error);
+      console.error('📧 Email send error:', error);
     }
     return NextResponse.json(
       { success: false, message: '메일 전송에 실패했습니다. 다시 시도해주세요.' },

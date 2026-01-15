@@ -68,7 +68,7 @@ export function AboutClient() {
         <div className="absolute inset-0 z-0 bg-slate-900">
           <Image
             src="/images/hero/company-hero-bg.jpg"
-            alt="Company Background"
+            alt="피앤에이컴퍼니 회사소개 - 15년 경력의 구글 공식 파트너 마케팅 에이전시"
             fill
             className="object-cover object-bottom"
             quality={85}

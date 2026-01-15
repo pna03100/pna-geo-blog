@@ -212,7 +212,7 @@ export function PerformanceClient() {
         <div className="absolute inset-0 z-0 bg-slate-900">
           <Image
             src="/images/hero/performance-hero-bg.jpg"
-            alt="Performance Marketing Background"
+            alt="피앤에이컴퍼니 퍼포먼스 마케팅 서비스 - 데이터 기반 ROI 최적화"
             fill
             className="object-cover"
             quality={85}

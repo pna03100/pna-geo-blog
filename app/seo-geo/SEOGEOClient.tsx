@@ -278,7 +278,7 @@ export function SEOGEOClient() {
         <div className="absolute inset-0 z-0 bg-slate-900">
           <Image
             src="/images/hero/seo-hero-bg.jpg"
-            alt="SEO Background"
+            alt="피앤에이컴퍼니 SEO & GEO 최적화 서비스 - 검색엔진 상위 노출 전략"
             fill
             className="object-cover"
             quality={85}
