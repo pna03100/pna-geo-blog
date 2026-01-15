@@ -7,9 +7,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { FadeIn } from "@/components/ui/fade-in";
 import { SectionTitle } from "./SectionTitle";
 
 interface FAQItem {
@@ -70,8 +68,7 @@ export function FAQSection() {
         {/* FAQ List - Premium Card Style */}
         <div className="max-w-4xl mx-auto mt-12 md:mt-16 space-y-4">
           {faqs.map((faq, index) => (
-            <FadeIn key={index} delay={index * 0.05}>
-              <div 
+            <div key={index} 
                 className={`
                   relative rounded-2xl bg-white border-2 overflow-hidden
                   transition-all duration-300
@@ -127,32 +124,23 @@ export function FAQSection() {
                 </button>
 
                 {/* Answer */}
-                <AnimatePresence initial={false}>
-                  {openIndex === index && (
-                    <motion.div
-                      id={`faq-answer-${index}`}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      {/* Blue Accent Line */}
-                      <div className="mx-6 h-px bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200" />
-                      
-                      <div className="px-6 py-6 md:py-8 bg-gradient-to-br from-blue-50/50 to-transparent">
-                        {/* Answer with proper left margin to align with question text */}
-                        <div className="ml-14">
-                          <p className="text-sm md:text-base text-slate-700 leading-relaxed">
-                            {faq.answer}
-                          </p>
-                        </div>
+                {openIndex === index && (
+                  <div id={`faq-answer-${index}`} className="overflow-hidden">
+                    {/* Blue Accent Line */}
+                    <div className="mx-6 h-px bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200" />
+                    
+                    <div className="px-6 py-6 md:py-8 bg-gradient-to-br from-blue-50/50 to-transparent">
+                      {/* Answer with proper left margin to align with question text */}
+                      <div className="ml-14">
+                        <p className="text-sm md:text-base text-slate-700 leading-relaxed">
+                          {faq.answer}
+                        </p>
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    </div>
+                  </div>
+                )}
               </div>
-            </FadeIn>
+            </div>
           ))}
         </div>
       </div>

@@ -6,7 +6,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -74,37 +73,24 @@ export function SEOFAQ() {
             <span className="text-lg font-bold text-slate-900 pr-4 group-hover:text-blue-600 transition-colors">
               {faq.question}
             </span>
-            <motion.div
-              animate={{ rotate: openIndex === index ? 180 : 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <ChevronDown 
-                className={cn(
-                  "w-5 h-5 flex-shrink-0 transition-colors",
-                  openIndex === index ? "text-blue-600" : "text-slate-400"
-                )} 
-              />
-            </motion.div>
+            <ChevronDown 
+              className={cn(
+                "w-5 h-5 flex-shrink-0 transition-all duration-200",
+                openIndex === index ? "text-blue-600 rotate-180" : "text-slate-400"
+              )} 
+            />
           </button>
 
           {/* Answer */}
-          <AnimatePresence>
-            {openIndex === index && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="overflow-hidden"
-              >
-                <div className="px-6 pb-5 pt-2">
-                  <p className="text-slate-600 leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
-              </motion.div>
-            )}
-            </AnimatePresence>
+          {openIndex === index && (
+            <div className="overflow-hidden">
+              <div className="px-6 pb-5 pt-2">
+                <p className="text-slate-600 leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       ))}
         </div>
