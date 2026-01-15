@@ -62,12 +62,8 @@ export function PerformanceFAQ() {
         {/* FAQ List */}
         <div className="max-w-4xl mx-auto space-y-4">
           {faqs.map((faq, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
               className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow"
             >
               {/* Question */}
@@ -109,7 +105,7 @@ export function PerformanceFAQ() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

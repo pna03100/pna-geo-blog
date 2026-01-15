@@ -279,13 +279,13 @@ export function WordPressClient() {
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* PLATFORM COMPARISON TABLE */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="border-t border-slate-200 bg-slate-50 py-20 md:py-32">
+      <section className="border-t border-white/10 bg-[#0B0B0D] py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               플랫폼 비교
             </h2>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-white/70">
               WordPress vs Wix vs 커스텀 개발
             </p>
           </div>
@@ -293,15 +293,15 @@ export function WordPressClient() {
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="border-b-2 border-slate-300">
-                  <th className="text-left p-4 font-bold text-slate-900 bg-slate-50">항목</th>
+                <tr className="border-b-2 border-white/10">
+                  <th className="text-left p-4 font-bold text-white bg-white/5">항목</th>
                   {platformComparison.platforms.map((platform, index) => (
                     <th 
                       key={index}
                       className={`text-center p-4 font-bold ${
                         platform.highlight 
                           ? 'bg-blue-600 text-white' 
-                          : 'bg-slate-50 text-slate-900'
+                          : 'bg-white/5 text-white'
                       }`}
                     >
                       {platform.name}
@@ -314,8 +314,8 @@ export function WordPressClient() {
               </thead>
               <tbody>
                 {platformComparison.criteria.map((criterion, rowIndex) => (
-                  <tr key={rowIndex} className="border-b border-slate-200">
-                    <td className="p-4 font-medium text-slate-700 bg-slate-50">
+                  <tr key={rowIndex} className="border-b border-white/10">
+                    <td className="p-4 font-medium text-white/70 bg-white/5">
                       {criterion.label}
                     </td>
                     {platformComparison.platforms.map((platform, colIndex) => (
@@ -323,8 +323,8 @@ export function WordPressClient() {
                         key={colIndex}
                         className={`text-center p-4 ${
                           platform.highlight 
-                            ? 'bg-blue-50 font-bold text-blue-900' 
-                            : 'bg-white text-slate-700'
+                            ? 'bg-blue-500/20 font-bold text-blue-300' 
+                            : 'bg-black/40 text-white/70'
                         }`}
                       >
                         {platform.values[criterion.key]}

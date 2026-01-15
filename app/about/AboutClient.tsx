@@ -206,13 +206,13 @@ export function AboutClient() {
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* TIMELINE - Vertical Clean List */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="relative bg-slate-100 py-20 md:py-32 border-b border-slate-300 overflow-hidden">
+      <section className="relative bg-[#0B0B0D] py-20 md:py-32 border-b border-white/10 overflow-hidden">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               15년간의 성장 여정
             </h2>
-            <p className="text-lg text-slate-600">
+            <p className="text-lg text-white/70">
               2010년부터 지금까지, 지속적인 혁신과 성장
             </p>
           </div>
@@ -221,21 +221,21 @@ export function AboutClient() {
             {/* Horizontal Timeline */}
             <div className="hidden md:block">
               {/* Timeline Line */}
-              <div className="absolute top-[50px] left-0 right-0 h-0.5 bg-slate-300" />
+              <div className="absolute top-[50px] left-0 right-0 h-0.5 bg-white/10" />
 
               <div className="flex justify-between items-start">
                 {timeline.map((item, index) => (
                   <div key={item.year} className="relative flex flex-col items-center group" style={{ width: '20%' }}>
                     {/* Year */}
                     <div className="relative z-10 mb-8">
-                      <span className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-indigo-600 group-hover:scale-110 transition-transform inline-block">
+                      <span className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-indigo-400 group-hover:scale-110 transition-transform inline-block">
                         {item.year}
                       </span>
                     </div>
 
                     {/* Content */}
                     <div className="text-center px-2">
-                      <h3 className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-relaxed">
+                      <h3 className="text-base font-bold text-white group-hover:text-blue-400 transition-colors leading-relaxed">
                         {item.title}
                       </h3>
                     </div>
@@ -249,12 +249,12 @@ export function AboutClient() {
               {timeline.map((item, index) => (
                 <div key={item.year} className="flex items-center gap-4 group">
                   <div className="flex-shrink-0">
-                    <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-indigo-600">
+                    <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-indigo-400">
                       {item.year}
                     </span>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-base font-bold text-white group-hover:text-blue-400 transition-colors">
                       {item.title}
                     </h3>
                   </div>

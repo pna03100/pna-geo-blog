@@ -327,13 +327,13 @@ export function PerformanceClient() {
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* 멀티 채널 전략 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="border-t border-slate-200 bg-slate-50 py-20 md:py-32">
+      <section className="border-t border-white/10 bg-[#0B0B0D] py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               멀티 채널 전략
             </h2>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-white/70">
               4대 채널 통합 관리
             </p>
           </div>
@@ -343,14 +343,14 @@ export function PerformanceClient() {
               const Icon = channel.icon;
               return (
                 <FadeIn key={index} delay={index * 0.1}>
-                  <div className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
+                  <div className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-blue-400 hover:bg-white/10 transition-all duration-300">
                     {/* Icon & Title */}
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                      <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
                         <Icon className="w-7 h-7 text-white" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-slate-900" style={{ lineHeight: '1.35' }}>
+                        <h3 className="text-xl font-bold text-white" style={{ lineHeight: '1.35' }}>
                           {channel.title}
                         </h3>
                       </div>
@@ -358,23 +358,23 @@ export function PerformanceClient() {
 
                     {/* Role */}
                     <div className="mb-4">
-                      <div className="text-xs font-bold text-slate-500 uppercase mb-2">역할</div>
-                      <p className="text-base font-bold text-blue-600">{channel.role}</p>
+                      <div className="text-xs font-bold text-white/50 uppercase mb-2">역할</div>
+                      <p className="text-base font-bold text-blue-400">{channel.role}</p>
                     </div>
 
                     {/* Budget */}
                     <div className="mb-4">
-                      <div className="text-xs font-bold text-slate-500 uppercase mb-2">예산 배분</div>
-                      <p className="text-base text-slate-700">{channel.budget}</p>
+                      <div className="text-xs font-bold text-white/50 uppercase mb-2">예산 배분</div>
+                      <p className="text-base text-white/70">{channel.budget}</p>
                     </div>
 
                     {/* Suitable */}
                     <div>
-                      <div className="text-xs font-bold text-slate-500 uppercase mb-3">적합</div>
+                      <div className="text-xs font-bold text-white/50 uppercase mb-3">적합</div>
                       <ul className="space-y-2">
                         {channel.suitable.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-sm text-slate-700">
-                            <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                          <li key={idx} className="flex items-start gap-2 text-sm text-white/70">
+                            <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
                             <span>{item}</span>
                           </li>
                         ))}

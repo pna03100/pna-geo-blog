@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { MapPin, Mail, Phone, Printer, CheckCircle2, Loader2, ArrowRight } from "lucide-react";
+import { MapPin, Mail, Phone, Printer, Loader2, ArrowRight } from "lucide-react";
 
 // ============================================
 // [Security] Zod Schema
@@ -56,7 +56,6 @@ const budgetOptions = [
 // ============================================
 export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const {
     register,
@@ -82,13 +81,8 @@ export function ContactSection() {
       const result = await response.json();
 
       if (response.ok && result.success) {
-        setIsSuccess(true);
-        reset();
-
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-          setIsSuccess(false);
-        }, 5000);
+        // Redirect to Thank You page
+        window.location.href = '/thank-you';
       } else {
         alert('메일 전송에 실패했습니다. 다시 시도해주세요.');
       }
@@ -128,21 +122,6 @@ export function ContactSection() {
             {/* Decorative Element */}
             <div className="absolute -top-px -right-px w-32 h-32 bg-gradient-to-br from-blue-100 to-transparent rounded-br-3xl rounded-tl-3xl opacity-20 pointer-events-none" />
             
-            {/* Success Message */}
-            {isSuccess && (
-              <div className="relative mb-8 p-5 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 flex items-start gap-3 shadow-lg">
-                <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm font-bold text-green-900">
-                    문의가 성공적으로 전송되었습니다!
-                  </p>
-                  <p className="text-xs text-green-700 mt-1 font-medium">
-                    빠른 시일 내에 연락드리겠습니다.
-                  </p>
-                </div>
-              </div>
-            )}
-
             <form onSubmit={handleSubmit(onSubmit)} className="relative space-y-6">
               {/* Company/Name */}
               <div>

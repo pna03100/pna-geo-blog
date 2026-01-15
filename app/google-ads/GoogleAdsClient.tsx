@@ -509,13 +509,13 @@ export function GoogleAdsClient() {
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* PLATFORM COMPARISON */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="border-t border-slate-200 bg-slate-50 py-20 md:py-32">
+      <section className="border-t border-white/10 bg-[#0B0B0D] py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               Google Ads vs 타 플랫폼
             </h2>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-white/70">
               데이터로 확인하는 구글 광고의 강점
             </p>
           </div>
@@ -523,15 +523,15 @@ export function GoogleAdsClient() {
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="border-b-2 border-slate-300">
-                  <th className="text-left p-4 font-bold text-slate-900 bg-slate-50">비교 항목</th>
+                <tr className="border-b-2 border-white/10">
+                  <th className="text-left p-4 font-bold text-white bg-white/5">비교 항목</th>
                   {platformComparison.platforms.map((platform, index) => (
                     <th 
                       key={index}
                       className={`text-center p-4 font-bold ${
                         platform.highlight 
                           ? 'bg-blue-600 text-white' 
-                          : 'bg-slate-50 text-slate-900'
+                          : 'bg-white/5 text-white'
                       }`}
                     >
                       {platform.name}
@@ -544,8 +544,8 @@ export function GoogleAdsClient() {
               </thead>
               <tbody>
                 {platformComparison.criteria.map((criterion, rowIndex) => (
-                  <tr key={rowIndex} className="border-b border-slate-200">
-                    <td className="p-4 font-medium text-slate-700 bg-slate-50">
+                  <tr key={rowIndex} className="border-b border-white/10">
+                    <td className="p-4 font-medium text-white/70 bg-white/5">
                       {criterion.label}
                     </td>
                     {platformComparison.platforms.map((platform, colIndex) => (
@@ -553,8 +553,8 @@ export function GoogleAdsClient() {
                         key={colIndex}
                         className={`text-center p-4 ${
                           platform.highlight 
-                            ? 'bg-blue-50 font-bold text-blue-900' 
-                            : 'bg-white text-slate-700'
+                            ? 'bg-blue-500/20 font-bold text-blue-300' 
+                            : 'bg-black/40 text-white/70'
                         }`}
                       >
                         {platform.values[criterion.key]}
@@ -567,7 +567,7 @@ export function GoogleAdsClient() {
           </div>
 
           <div className="mt-8 text-center">
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-white/50">
               * 데이터는 2024년 기준이며, 업종에 따라 차이가 있을 수 있습니다
             </p>
           </div>
@@ -694,26 +694,26 @@ export function GoogleAdsClient() {
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* WHY PNA */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="border-t border-slate-200 bg-slate-50 py-20 md:py-32">
+      <section className="border-t border-white/10 bg-[#0B0B0D] py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               왜 PNA인가?
             </h2>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-white/70">
               15년 노하우와 데이터 기반 전략
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-0 md:divide-x md:divide-slate-200 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-0 md:divide-x md:divide-white/10 max-w-7xl mx-auto">
             {pnaAdvantages.map((advantage, index) => (
               <FadeIn key={index} delay={index * 0.1}>
                 <div className="md:px-8 text-center">
-                  <advantage.icon className="w-12 h-12 text-blue-600 mx-auto mb-5" />
-                  <h3 className="text-lg font-bold text-slate-900 mb-3" style={{ lineHeight: '1.35' }}>
+                  <advantage.icon className="w-12 h-12 text-blue-400 mx-auto mb-5" />
+                  <h3 className="text-lg font-bold text-white mb-3" style={{ lineHeight: '1.35' }}>
                     {advantage.title}
                   </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">
+                  <p className="text-sm text-white/70 leading-relaxed">
                     {advantage.description}
                   </p>
                 </div>

@@ -38,7 +38,7 @@ export function HeroBackground() {
     window.addEventListener("resize", resizeCanvas);
 
     // Initialize particles
-    const particleCount = 150;
+    const particleCount = 80;
     particlesRef.current = Array.from({ length: particleCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,

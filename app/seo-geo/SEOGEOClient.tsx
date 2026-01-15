@@ -472,13 +472,13 @@ export function SEOGEOClient() {
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* 섹션 4: 업종별 전략 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="border-t border-slate-200 bg-white py-20 md:py-32">
+      <section className="border-t border-white/10 bg-[#0B0B0D] py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               업종별 전략
             </h2>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-white/70">
               비즈니스 특성에 맞는 최적의 SEO 전략
             </p>
           </div>
@@ -486,36 +486,36 @@ export function SEOGEOClient() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {industryStrategies.map((industry, index) => (
               <FadeIn key={index} delay={index * 0.1}>
-                <div className="p-8 rounded-2xl bg-white border-2 border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-6">{industry.title}</h3>
+                <div className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border-2 border-white/10 hover:border-blue-400 hover:bg-white/10 transition-all duration-300">
+                  <h3 className="text-2xl font-bold text-white mb-6">{industry.title}</h3>
 
                   <div className="space-y-4 mb-6">
-                    <div className="flex justify-between items-center py-2 border-b border-slate-200">
-                      <span className="text-sm text-slate-600">타겟</span>
-                      <span className="text-sm font-bold text-slate-900">{industry.target}</span>
+                    <div className="flex justify-between items-center py-2 border-b border-white/10">
+                      <span className="text-sm text-white/60">타겟</span>
+                      <span className="text-sm font-bold text-white">{industry.target}</span>
                     </div>
-                    <div className="flex justify-between items-center py-2 border-b border-slate-200">
-                      <span className="text-sm text-slate-600">기간</span>
-                      <span className="text-sm font-bold text-slate-900">{industry.period}</span>
+                    <div className="flex justify-between items-center py-2 border-b border-white/10">
+                      <span className="text-sm text-white/60">기간</span>
+                      <span className="text-sm font-bold text-white">{industry.period}</span>
                     </div>
-                    <div className="flex justify-between items-center py-2 border-b border-slate-200">
-                      <span className="text-sm text-slate-600">투자</span>
-                      <span className="text-sm font-bold text-slate-900">{industry.investment}</span>
+                    <div className="flex justify-between items-center py-2 border-b border-white/10">
+                      <span className="text-sm text-white/60">투자</span>
+                      <span className="text-sm font-bold text-white">{industry.investment}</span>
                     </div>
                     <div className="flex justify-between items-center py-2">
-                      <span className="text-sm text-slate-600">예상 {industry.expectedRevenue ? '수익' : 'ROI'}</span>
-                      <span className="text-lg font-bold text-blue-600">
+                      <span className="text-sm text-white/60">예상 {industry.expectedRevenue ? '수익' : 'ROI'}</span>
+                      <span className="text-lg font-bold text-blue-400">
                         {industry.expectedRevenue || industry.expectedROI}
                       </span>
                     </div>
                   </div>
 
                   <div>
-                    <div className="text-sm font-bold text-slate-500 uppercase mb-3">핵심 전략</div>
+                    <div className="text-sm font-bold text-white/50 uppercase mb-3">핵심 전략</div>
                     <ul className="space-y-2">
                       {industry.strategies.map((strategy, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-slate-700">
-                          <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                        <li key={idx} className="flex items-start gap-2 text-sm text-white/70">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
                           <span>{strategy}</span>
                         </li>
                       ))}
@@ -699,13 +699,13 @@ export function SEOGEOClient() {
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* 섹션 8: 성과 타임라인 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="border-t border-slate-200 bg-white py-20 md:py-32">
+      <section className="border-t border-white/10 bg-[#0B0B0D] py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               성과 타임라인
             </h2>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-white/70">
               단계별 성장 과정과 예상 성과
             </p>
           </div>
@@ -713,19 +713,19 @@ export function SEOGEOClient() {
           <div className="max-w-5xl mx-auto space-y-8">
             {timeline.map((phase, index) => (
               <FadeIn key={index} delay={index * 0.1}>
-                <div className="p-8 md:p-10 rounded-2xl bg-white border-2 border-slate-200">
+                <div className="p-8 md:p-10 rounded-2xl bg-white/5 backdrop-blur-sm border-2 border-white/10">
                   <div className="flex items-start gap-6 mb-6">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
                         <span className="text-white font-bold text-lg">{index + 1}</span>
                       </div>
                     </div>
                     <div className="flex-1">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold mb-2">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold mb-2">
                         <Clock className="w-3 h-3" />
                         {phase.month}
                       </div>
-                      <h3 className="text-2xl font-bold text-slate-900" style={{ lineHeight: '1.35' }}>
+                      <h3 className="text-2xl font-bold text-white" style={{ lineHeight: '1.35' }}>
                         {phase.phase}
                       </h3>
                     </div>
@@ -733,17 +733,17 @@ export function SEOGEOClient() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <div className="text-sm font-bold text-slate-500 uppercase mb-3">작업</div>
+                      <div className="text-sm font-bold text-white/50 uppercase mb-3">작업</div>
                       <ul className="space-y-2">
                         {phase.work.map((task, idx) => (
-                          <li key={idx} className="text-sm text-slate-700">{task}</li>
+                          <li key={idx} className="text-sm text-white/70">{task}</li>
                         ))}
                       </ul>
                     </div>
 
                     <div>
-                      <div className="text-sm font-bold text-slate-500 uppercase mb-3">성과</div>
-                      <p className="text-sm text-slate-700 leading-relaxed">{phase.performance}</p>
+                      <div className="text-sm font-bold text-white/50 uppercase mb-3">성과</div>
+                      <p className="text-sm text-white/70 leading-relaxed">{phase.performance}</p>
                     </div>
                   </div>
                 </div>
