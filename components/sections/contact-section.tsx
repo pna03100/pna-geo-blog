@@ -95,7 +95,9 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-20 md:py-32 bg-white">
+    <>
+      {/* SECTION: #CONTACT */}
+      <section data-section="CONTACT" id="contact" className="relative py-20 md:py-32 bg-white">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Title & Badge - Center Aligned */}
         <div className="flex flex-col justify-center items-center gap-6 mb-12">
@@ -316,5 +318,6 @@ export function ContactSection() {
         </div>
       </div>
     </section>
+    </>
   );
 }

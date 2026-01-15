@@ -12,7 +12,9 @@ import { GoogleAwardCard } from "@/components/ui/google-award-card";
 
 export function HeroSection() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#0B0B0D]">
+    <>
+      {/* SECTION: #HERO */}
+      <section data-section="HERO" className="relative w-full overflow-hidden bg-[#0B0B0D]">
       {/* Background Layer */}
       <HeroBackground />
       
@@ -83,5 +85,6 @@ export function HeroSection() {
 
       </div>
     </section>
+    </>
   );
 }

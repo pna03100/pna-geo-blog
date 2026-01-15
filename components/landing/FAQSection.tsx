@@ -50,7 +50,9 @@ export function FAQSection() {
   };
 
   return (
-    <section className="relative py-16 md:py-24 bg-slate-50">
+    <>
+      {/* SECTION: #FAQ */}
+      <section data-section="FAQ" className="relative py-16 md:py-24 bg-slate-50">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: 'linear-gradient(to right, rgb(15 23 42) 1px, transparent 1px), linear-gradient(to bottom, rgb(15 23 42) 1px, transparent 1px)',
@@ -144,5 +146,6 @@ export function FAQSection() {
         </div>
       </div>
     </section>
+    </>
   );
 }

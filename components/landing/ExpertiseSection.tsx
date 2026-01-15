@@ -71,7 +71,8 @@ const certifications = [
 
 export function ExpertiseSection() {
   return (
-    <SectionWrapper id="about" className="bg-white">
+    <SectionWrapper id="about" className="bg-white" data-section="EXPERTISE">
+      {/* SECTION: #EXPERTISE */}
       <SectionTitle
         badge="Trust & Authority"
         title="검증된 전문성"

@@ -25,7 +25,8 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
   // 데이터가 없으면 로딩 메시지 표시
   if (!posts || posts.length === 0) {
     return (
-      <SectionWrapper id="insights" className="bg-[#0B0C10] overflow-hidden">
+      <SectionWrapper id="insights" className="bg-[#0B0C10] overflow-hidden" data-section="INSIGHTS">
+        {/* SECTION: #INSIGHTS */}
         {/* Cyber Grid Pattern */}
         <div className="absolute inset-0 opacity-[0.03]" style={{
           backgroundImage: 'linear-gradient(to right, #2563EB 1px, transparent 1px), linear-gradient(to bottom, #2563EB 1px, transparent 1px)',
@@ -55,7 +56,8 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
   }
 
   return (
-    <SectionWrapper id="insights" className="bg-[#0B0C10] overflow-hidden">
+    <SectionWrapper id="insights" className="bg-[#0B0C10] overflow-hidden" data-section="INSIGHTS">
+      {/* SECTION: #INSIGHTS */}
       {/* Cyber Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: 'linear-gradient(to right, #2563EB 1px, transparent 1px), linear-gradient(to bottom, #2563EB 1px, transparent 1px)',

@@ -43,7 +43,9 @@ const metrics = [
 
 export function MetricsSection() {
   return (
-    <section className="py-20 md:py-32 relative z-10 overflow-hidden bg-[#0B0B0D]">
+    <>
+      {/* SECTION: #METRICS */}
+      <section data-section="METRICS" className="py-20 md:py-32 relative z-10 overflow-hidden bg-[#0B0B0D]">
       {/* Top Gradient Fade */}
       <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#0B0B0D] to-transparent pointer-events-none" />
       
@@ -114,5 +116,6 @@ export function MetricsSection() {
         </div>
       </div>
     </section>
+    </>
   );
 }

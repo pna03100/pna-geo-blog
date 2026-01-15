@@ -4,9 +4,6 @@
  * [Purpose] Show core values and working methodology
  */
 
-"use client";
-
-import { FadeIn } from "@/components/ui/fade-in";
 import { SectionTitle } from "./SectionTitle";
 import { Target, TrendingUp, Users, Zap } from "lucide-react";
 
@@ -35,7 +32,9 @@ const principles = [
 
 export function PhilosophySection() {
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden bg-slate-50">
+    <>
+      {/* SECTION: #PHILOSOPHY */}
+      <section data-section="PHILOSOPHY" className="relative py-16 md:py-24 overflow-hidden bg-slate-50">
       {/* Background Pattern - Subtle Grid */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: 'linear-gradient(to right, rgb(15 23 42) 1px, transparent 1px), linear-gradient(to bottom, rgb(15 23 42) 1px, transparent 1px)',
@@ -55,7 +54,7 @@ export function PhilosophySection() {
           {principles.map((principle, index) => {
             const Icon = principle.icon;
             return (
-              <FadeIn key={principle.title} delay={index * 0.1}>
+              <div key={principle.title}>
                 <div className="text-center group">
                   {/* Floating Icon */}
                   <div className="inline-flex items-center justify-center mb-6">
@@ -78,11 +77,12 @@ export function PhilosophySection() {
                     {principle.description}
                   </p>
                 </div>
-              </FadeIn>
+              </div>
             );
           })}
         </div>
       </div>
     </section>
+    </>
   );
 }
