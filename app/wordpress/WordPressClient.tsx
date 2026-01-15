@@ -193,7 +193,7 @@ export function WordPressClient() {
         {/* 1. Background Image */}
         <div className="absolute inset-0 z-0 bg-slate-900">
           <Image
-            src="/images/hero/wordpress-hero-bg.jpg.jpg"
+            src="/images/hero/wordpress-hero-bg.jpg"
             alt="WordPress Background"
             fill
             className="object-cover"

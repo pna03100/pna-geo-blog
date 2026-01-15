@@ -277,7 +277,7 @@ export function SEOGEOClient() {
         {/* 1. Background Image */}
         <div className="absolute inset-0 z-0 bg-slate-900">
           <Image
-            src="/images/hero/seo-hero-bg.jpg.jpg"
+            src="/images/hero/seo-hero-bg.jpg"
             alt="SEO Background"
             fill
             className="object-cover"

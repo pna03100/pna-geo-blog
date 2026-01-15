@@ -67,7 +67,7 @@ export function AboutClient() {
         {/* 1. Background Image */}
         <div className="absolute inset-0 z-0 bg-slate-900">
           <Image
-            src="/images/hero/company-hero-bg.jpg.jpg"
+            src="/images/hero/company-hero-bg.jpg"
             alt="Company Background"
             fill
             className="object-cover object-bottom"

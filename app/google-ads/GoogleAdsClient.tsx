@@ -431,7 +431,7 @@ export function GoogleAdsClient() {
         {/* 1. Background Image */}
         <div className="absolute inset-0 z-0 bg-slate-900">
           <Image
-            src="/images/hero/google-ads-hero-bg.jpg.jpg"
+            src="/images/hero/google-ads-hero-bg.jpg"
             alt="Google Ads Background"
             fill
             className="object-cover"
