@@ -144,7 +144,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
   }, [posts, selectedCategory, categories]);
 
   return (
-    <main className="min-h-screen pt-[73px] relative">
+    <main className="min-h-screen pt-16 relative">
       {/* HERO SECTION */}
       <section className="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
         {/* 1. Background Image */}
@@ -154,11 +154,10 @@ export function InsightsClient({ posts }: InsightsClientProps) {
             alt="Marketing Insights Background"
             fill
             className="object-cover"
-            quality={40}
-            loading="lazy"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA5AAAAA//Z"
+            quality={85}
+            priority
+            unoptimized={false}
+            sizes="100vw"
           />
           {/* 2. Dark Overlay */}
           <div className="absolute inset-0 bg-black/60" />
@@ -195,7 +194,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
       </section>
 
       {/* Magnetic Segmented Controls */}
-      <section className="sticky top-[73px] z-30 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 shadow-sm">
+      <section className="sticky top-16 z-30 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 shadow-sm">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl py-6">
           <div className="flex items-center justify-center">
             <div className="inline-flex bg-slate-100 rounded-full p-1.5">

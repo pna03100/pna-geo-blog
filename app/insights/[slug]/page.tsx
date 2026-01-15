@@ -139,7 +139,7 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
       {/* Background */}
       <BlueprintBackground />
 
-      <div className="min-h-screen relative pt-[73px]">
+      <div className="min-h-screen relative pt-16">
         <article className="container mx-auto px-4 pt-8 pb-32 max-w-7xl">
           {/* [GEO] JSON-LD Schema for Article */}
           <StructuredData
@@ -318,7 +318,7 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
 
             {/* Sidebar (Right Column) */}
             <aside className="lg:col-span-4">
-              <div className="sticky top-[97px] space-y-6">
+              <div className="sticky top-24 space-y-6">
                 {/* CTA Card */}
                 <CTACard />
 

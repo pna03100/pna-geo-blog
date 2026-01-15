@@ -129,7 +129,7 @@ export default async function DynamicPage({
 
   // Render Post or Page
   return (
-    <article className="container mx-auto px-4 py-12 max-w-4xl">
+    <article className="container mx-auto px-4 pt-16 pb-12 max-w-4xl">
       {/* Header */}
       <header className="mb-8 space-y-4">
         <h1 className="text-4xl md:text-5xl font-bold text-slate-950 tracking-tight">

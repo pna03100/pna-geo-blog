@@ -6,9 +6,7 @@
  */
 
 import type { Metadata } from 'next';
-import { SpotlightBackground } from '@/components/ui/spotlight-background';
 import { HeroSection } from '@/components/landing/HeroSection';
-import { GoogleAwardCard } from '@/components/ui/google-award-card';
 import { KeywordTicker } from '@/components/ui/keyword-ticker';
 import { MetricsSection } from '@/components/landing/MetricsSection';
 import { BentoSection } from '@/components/landing/BentoSection';
@@ -129,28 +127,22 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* 🎨 Fixed Background Layer - Spotlight Grid */}
-      <SpotlightBackground />
-
       {/* 📐 Strategic Content Hierarchy */}
-      <main className="relative">
+      <main className="relative pt-16">
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         {/* SECTION 1: HERO - The Hook & Authority                        */}
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <HeroSection />
-        
-        {/* ✨ CENTERPIECE: Golden Award Badge (Primary Trust Signal) */}
-        <div className="px-4 md:px-6">
-          <GoogleAwardCard />
-          
-          {/* 🎞️ VISUAL SEPARATOR: Subtle Keyword Rolling (Below Card) */}
-          <KeywordTicker />
-        </div>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         {/* SECTION 2: STATS - The Proof (Open Financial Layout)          */}
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <MetricsSection />
+        
+        {/* 🎞️ VISUAL SEPARATOR: Subtle Keyword Rolling */}
+        <div className="px-4 md:px-6">
+          <KeywordTicker />
+        </div>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         {/* SECTION 3: SERVICES - Core Offering (Asymmetrical Bento)      */}

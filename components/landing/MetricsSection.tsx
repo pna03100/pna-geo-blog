@@ -43,15 +43,9 @@ const metrics = [
 
 export function MetricsSection() {
   return (
-    <section className="py-20 md:py-32 relative z-10 bg-[#0B0C10] overflow-hidden">
-      {/* Cyber Grid Pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'linear-gradient(to right, #2563EB 1px, transparent 1px), linear-gradient(to bottom, #2563EB 1px, transparent 1px)',
-        backgroundSize: '80px 80px'
-      }} />
-      
-      {/* Blue Glow Accent */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]" />
+    <section className="py-20 md:py-32 relative z-10 overflow-hidden bg-[#0B0B0D]">
+      {/* Top Gradient Fade */}
+      <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#0B0B0D] to-transparent pointer-events-none" />
       
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative">
         

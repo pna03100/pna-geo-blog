@@ -37,7 +37,7 @@ export function ReadingProgress() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed top-[73px] left-0 right-0 h-1 bg-blue-600 origin-left z-40"
+          className="fixed top-16 left-0 right-0 h-1 bg-blue-600 origin-left z-40"
           style={{ scaleX }}
         />
       )}

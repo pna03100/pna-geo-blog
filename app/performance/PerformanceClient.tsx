@@ -203,7 +203,7 @@ const targetCustomers = {
 
 export function PerformanceClient() {
   return (
-    <main className="min-h-screen pt-[73px] relative">
+    <main className="min-h-screen pt-16 relative">
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* HERO SECTION */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
@@ -215,11 +215,10 @@ export function PerformanceClient() {
             alt="Performance Marketing Background"
             fill
             className="object-cover"
-            quality={40}
+            quality={85}
             priority
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA5AAAAA//Z"
+            unoptimized={false}
+            sizes="100vw"
           />
           {/* 2. Dark Overlay */}
           <div className="absolute inset-0 bg-black/60" />

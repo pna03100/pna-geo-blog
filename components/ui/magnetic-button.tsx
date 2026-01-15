@@ -55,8 +55,8 @@ export function MagneticButton({
   };
 
   const baseStyles = variant === "primary" 
-    ? "bg-blue-600 text-white shadow-2xl shadow-blue-600/30 hover:shadow-blue-600/50 border-2 border-blue-600"
-    : "bg-white text-slate-900 border-2 border-slate-300 hover:border-slate-400";
+    ? "bg-blue-600 backdrop-blur-sm text-white border border-blue-400/50 hover:bg-blue-500 hover:border-blue-300"
+    : "bg-transparent text-white border border-white/30 hover:border-white/50 hover:bg-white/5";
 
   const content = (
     <motion.div
@@ -65,7 +65,7 @@ export function MagneticButton({
       onMouseLeave={handleMouseLeave}
       animate={{ x: position.x, y: position.y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      className={`group relative inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-lg overflow-hidden cursor-pointer ${baseStyles} ${className}`}
+      className={`group relative inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base overflow-hidden cursor-pointer ${baseStyles} ${className}`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.98 }}
     >
@@ -73,7 +73,7 @@ export function MagneticButton({
       <motion.div
         className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
         style={{
-          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)",
+          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)",
         }}
       />
       

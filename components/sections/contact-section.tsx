@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { MapPin, Mail, Phone, Printer, Award, CheckCircle2, Loader2, ArrowRight } from "lucide-react";
+import { MapPin, Mail, Phone, Printer, CheckCircle2, Loader2, ArrowRight } from "lucide-react";
 
 // ============================================
 // [Security] Zod Schema
@@ -103,111 +103,27 @@ export function ContactSection() {
   return (
     <section id="contact" className="relative py-20 md:py-32 bg-white">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          {/* Left Column: Info */}
-          <div className="space-y-10">
-            {/* Title */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-6">
-                <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-                <span className="text-sm font-semibold text-blue-700">Contact Us</span>
-              </div>
-              
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight leading-[1.35]">
-                프로젝트 문의하기
-              </h2>
-              <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
-                성장을 위한 파트너, PNA 컴퍼니입니다.
-                <br />
-                문의 남겨주시면 담당자가 <span className="font-semibold text-blue-600">24시간 이내</span>에 연락드립니다.
-              </p>
+        {/* Title & Badge - Center Aligned */}
+        <div className="flex flex-col justify-center items-center gap-6 mb-12">
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-4">
+              <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+              <span className="text-sm font-semibold text-blue-700">Contact Us</span>
             </div>
-
-            {/* Contact Info */}
-            <div className="space-y-6">
-              {/* Address */}
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center">
-                  <MapPin className="w-5 h-5 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-slate-900 mb-2">
-                    주소
-                  </h3>
-                  <p className="text-slate-600 leading-relaxed text-sm">
-                    경기 고양시 일산동구 백마로195<br />
-                    SK엠시티 상가동 2층 2120호
-                  </p>
-                </div>
-              </div>
-
-              {/* Email */}
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-slate-900 mb-2">
-                    이메일
-                  </h3>
-                  <a
-                    href="mailto:pna0310@naver.com"
-                    className="text-slate-600 hover:text-blue-600 transition-colors font-medium text-sm"
-                  >
-                    pna0310@naver.com
-                  </a>
-                </div>
-              </div>
-
-              {/* Phone */}
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-slate-900 mb-2">
-                    전화
-                  </h3>
-                  <a
-                    href="tel:070-7733-7905"
-                    className="text-slate-600 hover:text-blue-600 transition-colors font-medium text-sm"
-                  >
-                    070-7733-7905
-                  </a>
-                </div>
-              </div>
-
-              {/* Fax */}
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center">
-                  <Printer className="w-5 h-5 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-slate-900 mb-2">
-                    팩스
-                  </h3>
-                  <p className="text-slate-600 font-medium text-sm">
-                    031-908-2225
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Trust Badge */}
-            <div className="inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 shadow-lg">
-              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white flex items-center justify-center">
-                <Award className="w-7 h-7 text-blue-600" />
-              </div>
-              <div>
-                <p className="text-base font-bold text-slate-900">
-                  Google 공식 파트너
-                </p>
-                <p className="text-xs text-slate-600 font-medium">Partner Badge Certified</p>
-              </div>
-            </div>
+            
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4 tracking-tight leading-[1.35]">
+              프로젝트 문의하기
+            </h2>
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
+              성장을 위한 파트너, PNA 컴퍼니입니다.
+              <br />
+              문의 남겨주시면 담당자가 <span className="font-semibold text-blue-600">24시간 이내</span>에 연락드립니다.
+            </p>
           </div>
+        </div>
 
-          {/* Right Column: Form */}
+        {/* Form - Full Width Below Title */}
+        <div className="max-w-4xl mx-auto">
           <div className="relative bg-white p-8 md:p-12 rounded-3xl shadow-2xl shadow-blue-600/5 border-2 border-slate-100 hover:border-blue-200 transition-all duration-300">
             {/* Decorative Element */}
             <div className="absolute -top-px -right-px w-32 h-32 bg-gradient-to-br from-blue-100 to-transparent rounded-br-3xl rounded-tl-3xl opacity-20 pointer-events-none" />

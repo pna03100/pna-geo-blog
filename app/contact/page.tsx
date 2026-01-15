@@ -30,7 +30,7 @@ export default function ContactPage() {
       <BlueprintBackground />
 
       {/* Main Content */}
-      <main className="relative min-h-screen pt-[73px]">
+      <main className="relative min-h-screen pt-16">
         <ContactSection />
       </main>
     </>
