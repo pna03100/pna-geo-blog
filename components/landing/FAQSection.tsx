@@ -140,7 +140,6 @@ export function FAQSection() {
                   </div>
                 )}
               </div>
-            </div>
           ))}
         </div>
       </div>
