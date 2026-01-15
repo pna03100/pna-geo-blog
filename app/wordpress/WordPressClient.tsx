@@ -196,10 +196,9 @@ export function WordPressClient() {
             alt="피앤에이컴퍼니 워드프레스 웹사이트 제작 서비스 - Headless CMS 전문"
             fill
             className="object-cover"
-            quality={85}
+            quality={60}
             priority
-            unoptimized={false}
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
           />
           {/* 2. Dark Overlay */}
           <div className="absolute inset-0 bg-black/60" />

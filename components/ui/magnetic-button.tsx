@@ -55,7 +55,7 @@ export function MagneticButton({
   };
 
   const baseStyles = variant === "primary" 
-    ? "bg-blue-600 backdrop-blur-sm text-white border border-blue-400/50 hover:bg-blue-500 hover:border-blue-300"
+    ? "bg-blue-600 text-white border border-blue-400/50 hover:bg-blue-500 hover:border-blue-300"
     : "bg-transparent text-white border border-white/30 hover:border-white/50 hover:bg-white/5";
 
   const content = (

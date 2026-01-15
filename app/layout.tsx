@@ -10,9 +10,20 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/ui/navbar';
 import { FooterSection } from '@/components/landing/FooterSection';
-import { FloatingActions } from '@/components/insights/FloatingActions';
+import dynamicImport from 'next/dynamic';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+// Performance: FloatingActions를 lazy load (초기 번들 크기 감소)
+const FloatingActions = dynamicImport(
+  () => import('@/components/insights/FloatingActions').then((mod) => mod.FloatingActions),
+  { ssr: false } // 서버 사이드 렌더링 불필요
+);
+
+const inter = Inter({ 
+  subsets: ['latin'], 
+  variable: '--font-inter',
+  display: 'swap', // FOIT 방지, 폰트 로딩 중에도 텍스트 표시
+  preload: true, // 폰트 사전 로드
+});
 
 // ============================================
 // [GEO] Metadata Configuration

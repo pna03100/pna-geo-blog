@@ -1,7 +1,7 @@
 /**
  * [Section] Hero - Dark Tech 2026 with Integrated Award Card
  * [Design] Clean Typography + Dashboard Preview
- * [Performance] LCP Optimized
+ * [Performance] LCP Optimized - H1 NO ANIMATION (Google Priority)
  */
 
 "use client";
@@ -15,7 +15,8 @@ export function HeroSection() {
     <>
       {/* SECTION: #HERO */}
       <section data-section="HERO" className="relative w-full overflow-hidden bg-[#0B0B0D]">
-      {/* Background Layer */}
+      
+      {/* 🎯 LCP 최우선: 배경 - 애니메이션 없이 먼저 로드 */}
       <HeroBackground />
       
       {/* Bottom Gradient Fade */}
@@ -28,7 +29,7 @@ export function HeroSection() {
           className="max-w-5xl mx-auto text-center pt-32 pb-12 sm:pt-36 md:pt-40 lg:pt-48 space-y-6 md:space-y-8"
         >
           
-          {/* Main Headline */}
+          {/* 🎯 LCP CRITICAL: Main Headline - NO ANIMATION (Google 우선) */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight" style={{ lineHeight: '1.15' }}>
             <span className="block text-white mb-2">
               구글 광고 대행사
@@ -42,6 +43,7 @@ export function HeroSection() {
           </h1>
 
           {/* 🎯 SNIPPET TRAP - Direct Answer for Google Featured Snippets & AI */}
+          {/* NO ANIMATION - 즉시 표시 */}
           <p className="text-lg text-white/90 font-medium max-w-2xl mx-auto leading-relaxed mb-6">
             피앤에이컴퍼니는 15년 경력의 구글 공식 파트너로,
             <br />
@@ -50,7 +52,7 @@ export function HeroSection() {
             Google Ads, SEO, GEO 최적화로 검증된 광고 전략을 제공합니다.
           </p>
 
-          {/* CTA Buttons */}
+          {/* ✨ 버튼 - NO ANIMATION (Performance) */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-20">
             <MagneticButton
               variant="primary"

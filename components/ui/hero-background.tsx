@@ -23,11 +23,13 @@ export function HeroBackground() {
   const animationFrameRef = useRef<number>();
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    // Performance: requestIdleCallback으로 Canvas 초기화 지연
+    const initCanvas = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
 
     // Set canvas size
     const resizeCanvas = () => {
@@ -37,8 +39,8 @@ export function HeroBackground() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    // Initialize particles
-    const particleCount = 80;
+    // Initialize particles (Performance: 80 → 50)
+    const particleCount = 50;
     particlesRef.current = Array.from({ length: particleCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
@@ -89,6 +91,19 @@ export function HeroBackground() {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
+    };
+
+    // Performance: 브라우저가 idle 상태일 때 Canvas 초기화
+    if ('requestIdleCallback' in window) {
+      const idleCallbackId = requestIdleCallback(initCanvas, { timeout: 2000 });
+      return () => {
+        cancelIdleCallback(idleCallbackId);
+      };
+    } else {
+      // Fallback: setTimeout
+      const timeoutId = setTimeout(initCanvas, 100);
+      return () => clearTimeout(timeoutId);
+    }
   }, []);
 
   return (
@@ -102,12 +117,12 @@ export function HeroBackground() {
 
       {/* Rotating Gradient Circles - Behind Title Near Header */}
       <div className="absolute inset-0 flex items-start justify-center pt-32" style={{ zIndex: 5 }}>
-        {/* Big Circle */}
+        {/* Big Circle - Performance Balanced: blur + reduced opacity */}
         <motion.div
           className="absolute"
           animate={{ rotate: 360 }}
           transition={{
-            duration: 12,
+            duration: 20,
             repeat: Infinity,
             ease: "linear",
           }}
@@ -116,17 +131,18 @@ export function HeroBackground() {
             height: "495px",
             borderRadius: "50%",
             background: "linear-gradient(229deg, rgb(59, 130, 246) 13%, rgba(37, 99, 235, 0) 35%, rgba(29, 78, 216, 0) 64%, rgb(30, 64, 175) 88%)",
-            filter: "blur(30px)",
-            opacity: 0.6,
+            filter: "blur(15px)",
+            opacity: 0.5,
+            willChange: "transform",
           }}
         />
 
-        {/* Small Circle - Overlapped */}
+        {/* Small Circle - Performance Balanced: blur + reduced opacity */}
         <motion.div
           className="absolute"
           animate={{ rotate: -360 }}
           transition={{
-            duration: 10,
+            duration: 16,
             repeat: Infinity,
             ease: "linear",
           }}
@@ -135,8 +151,9 @@ export function HeroBackground() {
             height: "418px",
             borderRadius: "50%",
             background: "linear-gradient(141deg, rgb(96, 165, 250) 13%, rgba(59, 130, 246, 0) 35%, rgba(37, 99, 235, 0) 64%, rgb(29, 78, 216) 88%)",
-            filter: "blur(25px)",
-            opacity: 0.55,
+            filter: "blur(12px)",
+            opacity: 0.45,
+            willChange: "transform",
           }}
         />
       </div>

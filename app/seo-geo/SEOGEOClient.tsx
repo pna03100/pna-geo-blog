@@ -281,10 +281,9 @@ export function SEOGEOClient() {
             alt="피앤에이컴퍼니 SEO & GEO 최적화 서비스 - 검색엔진 상위 노출 전략"
             fill
             className="object-cover"
-            quality={85}
+            quality={60}
             priority
-            unoptimized={false}
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
           />
           {/* 2. Dark Overlay */}
           <div className="absolute inset-0 bg-black/60" />
