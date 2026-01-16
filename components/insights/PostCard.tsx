@@ -59,7 +59,7 @@ export function PostCard({ post, priority = false }: PostCardProps) {
     <Link
       href={`/insights/${post.slug}${categorySlug ? `?category=${categorySlug}` : ''}`}
       prefetch={true}
-      className="group block h-full card-premium card-premium-border overflow-hidden"
+      className="group block h-full card-secondary card-premium-border overflow-hidden"
     >
       {/* Image */}
       <div className="relative w-full h-48 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">

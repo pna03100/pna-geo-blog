@@ -68,12 +68,12 @@ export function FAQSection() {
             <div key={index} 
                 className={`
                   relative rounded-2xl bg-white border-2 overflow-hidden
-                  transition-all duration-200
                   ${openIndex === index 
                     ? 'border-blue-500 shadow-xl shadow-blue-500/10' 
-                    : 'border-slate-200 hover:border-blue-300 hover:shadow-lg'
+                    : 'border-slate-200 hover:border-blue-300 hover:shadow-md'
                   }
                 `}
+                style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
               >
                 {/* Question Button */}
                 <button

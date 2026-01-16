@@ -272,7 +272,8 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
                   <Link
                     href={`/insights/${prevPost.slug}${category ? `?category=${category}` : ''}`}
                     prefetch={true}
-                    className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 will-change-transform"
+                    className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-md"
+                    style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
                   >
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
                       <ChevronLeft className="w-6 h-6 text-blue-600" />
@@ -295,7 +296,8 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
                   <Link
                     href={`/insights/${nextPost.slug}${category ? `?category=${category}` : ''}`}
                     prefetch={true}
-                    className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 will-change-transform"
+                    className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-md"
+                    style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
                   >
                     <div className="flex-1 min-w-0 text-right">
                       <div className="text-xs text-slate-500 font-semibold mb-1">다음 글</div>
@@ -318,7 +320,8 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
               <div className="mt-6">
                 <Link
                   href={`/insights${category ? `?category=${category}` : ''}`}
-                  className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-2xl bg-white border-2 border-slate-300 text-slate-900 font-semibold hover:bg-slate-50 hover:border-blue-600 hover:text-blue-600 transition-all shadow-sm"
+                  className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-2xl bg-white border-2 border-slate-300 text-slate-900 font-semibold hover:bg-slate-50 hover:border-blue-600 hover:text-blue-600 shadow-sm"
+                  style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
                 >
                   <ArrowLeft className="w-5 h-5" />
                   목록으로 돌아가기

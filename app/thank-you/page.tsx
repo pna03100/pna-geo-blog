@@ -49,7 +49,8 @@ export default function ThankYouPage() {
           {/* Primary Button */}
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold text-base shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/50 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 will-change-transform"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold text-base shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/50 hover:-translate-y-0.5 active:scale-[0.98]"
+            style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)', willChange: 'transform' }}
           >
             <Home className="w-5 h-5" />
             메인으로 돌아가기
@@ -58,7 +59,8 @@ export default function ThankYouPage() {
           {/* Secondary Link */}
           <Link
             href="/insights"
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white border-2 border-slate-200 text-slate-700 font-semibold text-base hover:border-blue-300 hover:text-blue-600 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 will-change-transform"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white border-2 border-slate-200 text-slate-700 font-semibold text-base hover:border-blue-300 hover:text-blue-600 hover:-translate-y-0.5 active:scale-[0.98]"
+            style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)', willChange: 'transform' }}
           >
             <Lightbulb className="w-5 h-5" />
             최신 마케팅 인사이트 보기

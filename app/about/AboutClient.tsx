@@ -389,7 +389,7 @@ export function AboutClient() {
             {coreValues.map((value, index) => {
               const Icon = value.icon;
               return (
-                <div key={value.title} className="bg-slate-100 p-8 md:p-10 hover:bg-white hover:-translate-y-0.5 hover:shadow-sm transition-all duration-200 will-change-transform">
+                <div key={value.title} className="bg-slate-100 p-8 md:p-10 hover:bg-white hover:shadow-sm" style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}>
                   {/* Icon */}
                   <Icon className="w-12 h-12 text-blue-600 mb-6" />
 

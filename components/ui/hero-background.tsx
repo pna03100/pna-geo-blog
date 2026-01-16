@@ -190,12 +190,6 @@ export function HeroBackground() {
         style={{ width: "100%", height: "100%", zIndex: 1 }}
       />
 
-      {/* Scan Light Overlay - 40s slow animation */}
-      <div 
-        className="absolute inset-0 pointer-events-none scan-light"
-        style={{ zIndex: 3 }}
-      />
-
       {/* Rotating Gradient Circles - Behind Title Near Header */}
       <div className="absolute inset-0 flex items-start justify-center pt-32" style={{ zIndex: 5 }}>
         {/* Big Circle - Performance Balanced: blur + reduced opacity */}

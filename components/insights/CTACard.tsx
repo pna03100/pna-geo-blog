@@ -33,7 +33,8 @@ export function CTACard() {
         {/* CTA Button */}
         <Link
           href="/contact"
-          className="group inline-flex items-center justify-center w-full gap-2 px-6 py-3 rounded-full bg-white text-blue-600 font-bold hover:bg-blue-50 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 shadow-lg mb-4 will-change-transform"
+          className="group inline-flex items-center justify-center w-full gap-2 px-6 py-3 rounded-full bg-white text-blue-600 font-bold hover:bg-blue-50 hover:-translate-y-0.5 active:scale-[0.98] shadow-lg mb-4"
+          style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)', willChange: 'transform' }}
         >
           <span>문의하기</span>
           <ArrowRight className="w-4 h-4 arrow-premium" />

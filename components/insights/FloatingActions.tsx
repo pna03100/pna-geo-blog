@@ -65,7 +65,8 @@ export function FloatingActions() {
           {/* CTA Button */}
           <Link
             href="/contact"
-            className="group flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/30 hover:shadow-xl hover:shadow-blue-600/40 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 will-change-transform"
+            className="group flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/30 hover:shadow-xl hover:shadow-blue-600/40 hover:-translate-y-px active:scale-[0.98]"
+            style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
             title="문의하기"
           >
             <Phone className="w-5 h-5" />
@@ -77,7 +78,8 @@ export function FloatingActions() {
           {/* Share Button */}
           <button
             onClick={handleShare}
-            className="group flex items-center justify-center w-14 h-14 rounded-full bg-white border border-slate-200 text-slate-700 shadow-lg hover:shadow-xl hover:-translate-y-0.5 hover:border-blue-600 hover:text-blue-600 active:scale-[0.98] transition-all duration-200 will-change-transform"
+            className="group flex items-center justify-center w-14 h-14 rounded-full bg-white border border-slate-200 text-slate-700 shadow-lg hover:shadow-xl hover:-translate-y-px hover:border-blue-600 hover:text-blue-600 active:scale-[0.98]"
+            style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
             title="공유하기"
           >
             <Share2 className="w-5 h-5" />
@@ -89,7 +91,8 @@ export function FloatingActions() {
           {/* Scroll to Top */}
           <button
             onClick={scrollToTop}
-            className="group flex items-center justify-center w-14 h-14 rounded-full bg-white border border-slate-200 text-slate-700 shadow-lg hover:shadow-xl hover:-translate-y-0.5 hover:border-blue-600 hover:text-blue-600 active:scale-[0.98] transition-all duration-200 will-change-transform"
+            className="group flex items-center justify-center w-14 h-14 rounded-full bg-white border border-slate-200 text-slate-700 shadow-lg hover:shadow-xl hover:-translate-y-px hover:border-blue-600 hover:text-blue-600 active:scale-[0.98]"
+            style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
             title="맨 위로"
           >
             <ArrowUp className="w-5 h-5" />

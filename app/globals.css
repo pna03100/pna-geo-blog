@@ -91,12 +91,14 @@
 
 /* Premium Button Styles - 일괄 관리 */
 @layer components {
+  /* Primary - 중요한 CTA (2px, will-change 유지) */
   .btn-premium-primary {
     @apply inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base cursor-pointer;
     @apply bg-blue-600 text-white border border-blue-400/50;
     @apply hover:border-blue-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/20;
     @apply active:scale-[0.98];
-    @apply transition-all duration-200 will-change-transform;
+    transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
   }
 
   .btn-premium-secondary {
@@ -104,7 +106,8 @@
     @apply bg-transparent text-white border border-white/30;
     @apply hover:border-white/50 hover:bg-white/5 hover:-translate-y-0.5;
     @apply active:scale-[0.98];
-    @apply transition-all duration-200 will-change-transform;
+    transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
   }
 
   .btn-premium-small {
@@ -112,14 +115,23 @@
     @apply bg-blue-600 text-white shadow-md shadow-blue-600/15;
     @apply hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/20;
     @apply active:scale-[0.98];
-    @apply transition-all duration-200 will-change-transform;
+    transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
   }
 
-  /* Premium Card Hover - 일괄 관리 */
+  /* Premium Card Hover - Primary (핵심 카드) */
   .card-premium {
     @apply bg-white border-2 rounded-xl md:rounded-2xl shadow-sm;
     @apply hover:shadow-lg hover:-translate-y-0.5;
-    @apply transition-all duration-200 will-change-transform;
+    transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
+  }
+
+  /* Secondary Card - 일반 카드 (1px, will-change 없음) */
+  .card-secondary {
+    @apply bg-white border-2 rounded-xl md:rounded-2xl shadow-sm;
+    @apply hover:shadow-md hover:-translate-y-px;
+    transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   .card-premium-border {
@@ -132,7 +144,11 @@
 
   /* Premium Arrow Animation */
   .arrow-premium {
-    @apply group-hover:translate-x-0.5 transition-transform duration-200;
+    transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  
+  .group:hover .arrow-premium {
+    @apply translate-x-0.5;
   }
 
   /* Premium Metric Hover */
