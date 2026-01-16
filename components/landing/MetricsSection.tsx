@@ -89,15 +89,22 @@ export function MetricsSection() {
                     </svg>
                   </div>
                   
-                  <div className="relative flex items-baseline justify-center gap-1">
+                  {/* Semantic Metric Value Container */}
+                  <span 
+                    className="metric-value relative inline-flex items-baseline justify-center gap-1" 
+                    aria-label={`${stat.label} ${stat.value}${stat.suffix}`}
+                    role="text"
+                  >
                     {/* Electric Blue Numbers with Glow */}
-                    <span className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#2563EB] tracking-tight drop-shadow-[0_0_20px_rgba(37,99,235,0.5)]">
-                      <CountUpNumber end={stat.value} suffix="" />
-                    </span>
-                    <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2563EB]/70">
+                    <CountUpNumber 
+                      end={stat.value} 
+                      suffix="" 
+                      className="number text-5xl md:text-6xl lg:text-7xl font-bold text-[#2563EB] tracking-tight drop-shadow-[0_0_20px_rgba(37,99,235,0.5)]"
+                    />
+                    <span className="unit text-3xl md:text-4xl lg:text-5xl font-bold text-[#2563EB]/70">
                       {stat.suffix}
                     </span>
-                  </div>
+                  </span>
                 </dd>
                 
                 {/* Description Badge - Cyber Style */}
