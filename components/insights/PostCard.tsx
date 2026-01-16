@@ -58,6 +58,7 @@ export function PostCard({ post, priority = false }: PostCardProps) {
   return (
     <Link
       href={`/insights/${post.slug}${categorySlug ? `?category=${categorySlug}` : ''}`}
+      prefetch={true}
       className="group block h-full rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-200 hover:scale-105 transition-all duration-300 overflow-hidden"
     >
       {/* Image */}

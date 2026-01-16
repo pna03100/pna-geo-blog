@@ -2,12 +2,14 @@
  * [GEO] 인사이트 상세 페이지 - Featured Snippet 최적화
  * [Security] Server Component + Zod Validation + XSS Defense
  * [Design] Premium 2-Column Layout with Sidebar (A Design)
+ * [Performance] Suspense for sidebar components
  */
 
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { getContentByURI, getAllPosts } from '@/lib/api';
 import { WPContent } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
@@ -31,6 +33,91 @@ interface PageProps {
   searchParams: Promise<{
     category?: string;
   }>;
+}
+
+// ============================================
+// [Performance] Server Components for Suspense
+// ============================================
+
+// Popular Posts Wrapper (fetches data independently)
+async function PopularPostsWrapper({ currentPostId }: { currentPostId: number }) {
+  const allPosts = await getAllPosts();
+  return <PopularPosts posts={allPosts} currentPostId={currentPostId} />;
+}
+
+// Post Navigation (fetches data independently)
+async function PostNavigation({ 
+  currentPostId, 
+  category 
+}: { 
+  currentPostId: number; 
+  category?: string; 
+}) {
+  const allPosts = await getAllPosts();
+  
+  // Find previous and next posts (filtered by category if specified)
+  let postsForNavigation = allPosts;
+  
+  if (category) {
+    // Filter posts by the same category
+    postsForNavigation = allPosts.filter(p => 
+      p.categories?.nodes?.some(cat => cat.slug === category)
+    );
+  }
+
+  const currentIndex = postsForNavigation.findIndex(p => p.databaseId === currentPostId);
+  const prevPost = currentIndex > 0 ? postsForNavigation[currentIndex - 1] : null;
+  const nextPost = currentIndex < postsForNavigation.length - 1 ? postsForNavigation[currentIndex + 1] : null;
+
+  return (
+    <nav className="mt-6 mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Previous Post */}
+      {prevPost ? (
+        <Link
+          href={`/insights/${prevPost.slug}${category ? `?category=${category}` : ''}`}
+          prefetch={true}
+          className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-lg transition-all duration-300"
+        >
+          <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+            <ChevronLeft className="w-6 h-6 text-blue-600" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-xs text-slate-500 font-semibold mb-1">이전 글</div>
+            <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2">
+              {prevPost.title}
+            </h3>
+          </div>
+        </Link>
+      ) : (
+        <div className="flex items-center justify-center p-6 rounded-2xl bg-slate-50 border border-slate-100 min-h-[96px]">
+          <div className="text-sm text-slate-400 text-center">이전 글이 없습니다</div>
+        </div>
+      )}
+
+      {/* Next Post */}
+      {nextPost ? (
+        <Link
+          href={`/insights/${nextPost.slug}${category ? `?category=${category}` : ''}`}
+          prefetch={true}
+          className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-lg transition-all duration-300"
+        >
+          <div className="flex-1 min-w-0 text-right">
+            <div className="text-xs text-slate-500 font-semibold mb-1">다음 글</div>
+            <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2">
+              {nextPost.title}
+            </h3>
+          </div>
+          <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+            <ChevronRight className="w-6 h-6 text-blue-600" />
+          </div>
+        </Link>
+      ) : (
+        <div className="flex items-center justify-center p-6 rounded-2xl bg-slate-50 border border-slate-100 min-h-[96px]">
+          <div className="text-sm text-slate-400 text-center">다음 글이 없습니다</div>
+        </div>
+      )}
+    </nav>
+  );
 }
 
 // ============================================
@@ -96,8 +183,7 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
     notFound();
   }
 
-  // Fetch all posts for related/popular sections
-  const allPosts = await getAllPosts();
+  // [Performance] Sidebar data will be fetched separately in Suspense boundaries
 
   // [Security] Safe Fallbacks
   const title = post.title || '제목 없음';
@@ -116,20 +202,6 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
   // Calculate reading time (rough estimate: 200 words per minute in Korean)
   const wordCount = content.replace(/<[^>]*>/g, '').length;
   const readingTime = Math.ceil(wordCount / 400); // Approximate for Korean
-
-  // Find previous and next posts (filtered by category if specified)
-  let postsForNavigation = allPosts;
-  
-  if (category && categories.length > 0) {
-    // Filter posts by the same category
-    postsForNavigation = allPosts.filter(p => 
-      p.categories?.nodes?.some(cat => cat.slug === category)
-    );
-  }
-
-  const currentIndex = postsForNavigation.findIndex(p => p.databaseId === post.databaseId);
-  const prevPost = currentIndex > 0 ? postsForNavigation[currentIndex - 1] : null;
-  const nextPost = currentIndex < postsForNavigation.length - 1 ? postsForNavigation[currentIndex + 1] : null;
 
   return (
     <>
@@ -257,52 +329,18 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
                 />
               </div>
 
-              {/* Previous/Next Post Navigation */}
-              <nav className="mt-6 mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Previous Post */}
-                {prevPost ? (
-                  <Link
-                    href={`/insights/${prevPost.slug}${category ? `?category=${category}` : ''}`}
-                    className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                      <ChevronLeft className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-xs text-slate-500 font-semibold mb-1">이전 글</div>
-                      <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2">
-                        {prevPost.title}
-                      </h3>
-                    </div>
-                  </Link>
-                ) : (
-                  <div className="flex items-center justify-center p-6 rounded-2xl bg-slate-50 border border-slate-100 min-h-[96px]">
-                    <div className="text-sm text-slate-400 text-center">이전 글이 없습니다</div>
-                  </div>
-                )}
-
-                {/* Next Post */}
-                {nextPost ? (
-                  <Link
-                    href={`/insights/${nextPost.slug}${category ? `?category=${category}` : ''}`}
-                    className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="flex-1 min-w-0 text-right">
-                      <div className="text-xs text-slate-500 font-semibold mb-1">다음 글</div>
-                      <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2">
-                        {nextPost.title}
-                      </h3>
-                    </div>
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                      <ChevronRight className="w-6 h-6 text-blue-600" />
-                    </div>
-                  </Link>
-                ) : (
-                  <div className="flex items-center justify-center p-6 rounded-2xl bg-slate-50 border border-slate-100 min-h-[96px]">
-                    <div className="text-sm text-slate-400 text-center">다음 글이 없습니다</div>
-                  </div>
-                )}
-              </nav>
+              {/* Previous/Next Post Navigation - Suspense for better performance */}
+              <Suspense fallback={
+                <nav className="mt-6 mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex items-center justify-center p-6 rounded-2xl bg-slate-50 border border-slate-100 min-h-[96px] animate-pulse" />
+                  <div className="flex items-center justify-center p-6 rounded-2xl bg-slate-50 border border-slate-100 min-h-[96px] animate-pulse" />
+                </nav>
+              }>
+                <PostNavigation 
+                  currentPostId={post.databaseId} 
+                  category={category} 
+                />
+              </Suspense>
 
               {/* Back to List Button */}
               <div className="mt-6">
@@ -316,14 +354,25 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
               </div>
             </div>
 
-            {/* Sidebar (Right Column) */}
+            {/* Sidebar (Right Column) - Suspense for better performance */}
             <aside className="lg:col-span-4">
               <div className="sticky top-24 space-y-6">
-                {/* CTA Card */}
+                {/* CTA Card - Static, no need for Suspense */}
                 <CTACard />
 
-                {/* Popular Posts */}
-                <PopularPosts posts={allPosts} currentPostId={post.databaseId} />
+                {/* Popular Posts - Suspense boundary */}
+                <Suspense fallback={
+                  <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                    <div className="h-8 bg-slate-200 rounded animate-pulse mb-4" />
+                    <div className="space-y-4">
+                      {[1, 2, 3].map(i => (
+                        <div key={i} className="h-20 bg-slate-100 rounded animate-pulse" />
+                      ))}
+                    </div>
+                  </div>
+                }>
+                  <PopularPostsWrapper currentPostId={post.databaseId} />
+                </Suspense>
               </div>
             </aside>
           </div>
