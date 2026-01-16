@@ -153,9 +153,9 @@ export function InsightsClient({ posts }: InsightsClientProps) {
             alt="피앤에이컴퍼니 마케팅 인사이트 - Google Ads SEO GEO 전략 가이드"
             fill
             className="object-cover"
-            quality={85}
+            quality={75}
             priority
-            unoptimized={false}
+            fetchPriority="high"
             sizes="100vw"
           />
           {/* 2. Dark Overlay */}

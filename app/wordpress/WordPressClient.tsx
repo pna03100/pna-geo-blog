@@ -197,7 +197,8 @@ export function WordPressClient() {
             className="object-cover"
             quality={60}
             priority
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            fetchPriority="high"
+            sizes="(max-width: 768px) 100vw, 1200px"
           />
           {/* 2. Dark Overlay */}
           <div className="absolute inset-0 bg-black/60" />
