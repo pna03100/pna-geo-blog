@@ -27,11 +27,10 @@ const envSchema = z.object({
     .string()
     .default('pnamarketing.co.kr'),
 
-  // 공식 연락처 이메일 (Anti-scraping)
+  // 공식 연락처 이메일 (Anti-scraping) - 필수
   NEXT_PUBLIC_CONTACT_EMAIL: z
     .string()
-    .email('NEXT_PUBLIC_CONTACT_EMAIL must be a valid email')
-    .default('pna0310@naver.com'),
+    .email('NEXT_PUBLIC_CONTACT_EMAIL must be a valid email'),
 
   // Node Environment
   NODE_ENV: z
@@ -73,15 +72,9 @@ function validateEnv() {
       console.error('\n💡 Note: Environment variables are optional.');
       console.error('   lib/api.ts automatically handles Server/Client routing.\n');
       
-      // [Security] Fallback to defaults
-      console.warn('⚠️  Using default values\n');
-      return {
-        WORDPRESS_API_URL: 'https://cms.pnamarketing.co.kr/graphql',
-        NEXT_PUBLIC_WORDPRESS_URL: 'https://cms.pnamarketing.co.kr',
-        NEXT_PUBLIC_FRONTEND_DOMAIN: 'pnamarketing.co.kr',
-        NEXT_PUBLIC_CONTACT_EMAIL: 'pna0310@naver.com',
-        NODE_ENV: (process.env.NODE_ENV as 'development' | 'production' | 'test') || 'development',
-      };
+      // [Security] Build will fail if required env vars are missing
+      console.error('\n⚠️  Build cannot proceed without required environment variables.\n');
+      throw new Error('Environment validation failed');
     }
     
     console.error('❌ Unexpected error during environment validation:', error);

@@ -72,18 +72,23 @@ const nextConfig = {
     };
   },
 
-  // 5. 리다이렉트 설정
+  // 5. 리다이렉트 설정 (단일 301, 체인 없음)
   async redirects() {
     return [
       {
         source: '/blog/:slug*',
         destination: '/insights/:slug*',
-        permanent: true, // 301 Permanent Redirect (SEO-friendly)
+        permanent: true, // 301 Permanent Redirect
       },
       {
         source: '/privacy-policy',
         destination: '/privacy',
-        permanent: true, // 301 Permanent Redirect
+        permanent: true, // 301 Permanent Redirect (단일 홉, canonical)
+      },
+      {
+        source: '/privacy-policy/',
+        destination: '/privacy',
+        permanent: true, // 301 Permanent Redirect (trailing slash 대응)
       },
     ];
   },

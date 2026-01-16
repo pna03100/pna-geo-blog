@@ -55,7 +55,7 @@ export function PhilosophySection() {
                   <div className="inline-flex items-center justify-center mb-6">
                     <div className="relative">
                       {/* Icon Circle */}
-                      <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 flex items-center justify-center transition-all duration-200 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:border-blue-400 group-hover:shadow-md">
+                      <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 flex items-center justify-center transition-all duration-200 ease-premium group-hover:border-blue-400 group-hover:shadow-md">
                         <Icon className="w-10 h-10 md:w-12 md:h-12 text-blue-600" />
                       </div>
                     </div>

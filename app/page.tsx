@@ -23,6 +23,9 @@ import { getAllPosts } from '@/lib/api';
 function generateJsonLd() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://pnamarketing.co.kr';
   
+  // [Security] env.ts에서 필수 검증 - env 없으면 빌드 실패
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL!; // Non-null assertion (env.ts 검증됨)
+  
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -40,7 +43,7 @@ function generateJsonLd() {
         "contactPoint": {
           "@type": "ContactPoint",
           "telephone": "+82-70-7733-7905",
-          "email": process.env.NEXT_PUBLIC_CONTACT_EMAIL || "pna0310@naver.com",
+          "email": contactEmail,
           "contactType": "Customer Service",
           "areaServed": "KR",
           "availableLanguage": ["Korean"]

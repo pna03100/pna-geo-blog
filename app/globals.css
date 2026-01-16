@@ -69,6 +69,13 @@
    Performance: 160-220ms, transform/opacity only
    ============================================ */
 
+/* Premium Easing Utility - 전체 통일 */
+@layer utilities {
+  .ease-premium {
+    transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+
 /* Premium Button Styles - 일괄 관리 */
 @layer components {
   /* Primary - 중요한 CTA (2px, will-change 유지) */
@@ -77,7 +84,9 @@
     @apply bg-blue-600 text-white border border-blue-400/50;
     @apply hover:border-blue-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/20;
     @apply active:scale-[0.98];
-    transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    @apply ease-premium;
+    transition-property: transform, box-shadow, background-color, border-color, color;
+    transition-duration: 200ms;
     will-change: transform;
   }
 
@@ -86,7 +95,9 @@
     @apply bg-transparent text-white border border-white/30;
     @apply hover:border-white/50 hover:bg-white/5 hover:-translate-y-0.5;
     @apply active:scale-[0.98];
-    transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    @apply ease-premium;
+    transition-property: transform, box-shadow, background-color, border-color, color;
+    transition-duration: 200ms;
     will-change: transform;
   }
 
@@ -95,7 +106,9 @@
     @apply bg-blue-600 text-white shadow-md shadow-blue-600/15;
     @apply hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/20;
     @apply active:scale-[0.98];
-    transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    @apply ease-premium;
+    transition-property: transform, box-shadow, background-color, border-color, color;
+    transition-duration: 200ms;
     will-change: transform;
   }
 
@@ -103,7 +116,9 @@
   .card-premium {
     @apply bg-white border-2 rounded-xl md:rounded-2xl shadow-sm;
     @apply hover:shadow-lg hover:-translate-y-0.5;
-    transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    @apply ease-premium;
+    transition-property: transform, box-shadow, border-color;
+    transition-duration: 200ms;
     will-change: transform;
   }
 
@@ -111,7 +126,9 @@
   .card-secondary {
     @apply bg-white border-2 rounded-xl md:rounded-2xl shadow-sm;
     @apply hover:shadow-md hover:-translate-y-px;
-    transition: all 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    @apply ease-premium;
+    transition-property: transform, box-shadow, border-color;
+    transition-duration: 200ms;
   }
 
   .card-premium-border {
@@ -124,7 +141,9 @@
 
   /* Premium Arrow Animation */
   .arrow-premium {
-    transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    @apply ease-premium;
+    transition-property: transform;
+    transition-duration: 200ms;
   }
   
   .group:hover .arrow-premium {
@@ -137,19 +156,27 @@
   }
 
   .metric-premium .metric-label {
-    @apply text-slate-400 transition-colors duration-200;
+    @apply text-slate-400 ease-premium;
+    transition-property: color;
+    transition-duration: 200ms;
   }
 
   .metric-premium .metric-number {
-    @apply transition-colors duration-200;
+    @apply ease-premium;
+    transition-property: color;
+    transition-duration: 200ms;
   }
 
   .metric-premium .metric-badge {
-    @apply transition-all duration-200;
+    @apply ease-premium;
+    transition-property: background-color, border-color;
+    transition-duration: 200ms;
   }
 
   .metric-premium .metric-badge-text {
-    @apply transition-colors duration-200;
+    @apply ease-premium;
+    transition-property: color;
+    transition-duration: 200ms;
   }
   
   /* Group hover states - must be in parent context */
