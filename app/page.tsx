@@ -162,7 +162,7 @@ export default async function HomePage() {
         <ExpertiseSection />
         
         {/* 🎞️ Partners Section with Marquee */}
-        <section className="relative py-12 md:py-16 bg-white border-t border-slate-200">
+        <section className="relative py-12 md:py-16 bg-slate-100 border-t border-slate-200">
           <div className="container mx-auto px-4 md:px-6 max-w-7xl">
             {/* Title */}
             <div className="text-center mb-8 md:mb-12">

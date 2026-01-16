@@ -42,9 +42,9 @@ const metrics = [
 
 export function MetricsSection() {
   return (
-    <section data-section="METRICS" className="py-20 md:py-32 relative z-10 overflow-hidden bg-[#0B0B0D]">
+    <section data-section="METRICS" className="py-20 md:py-32 relative z-10 overflow-hidden bg-slate-900">
       {/* Top Gradient Fade */}
-      <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#0B0B0D] to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-slate-900 to-transparent pointer-events-none" />
       
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative">
         

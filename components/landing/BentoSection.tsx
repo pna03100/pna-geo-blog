@@ -103,14 +103,6 @@ export function BentoSection() {
                     </div>
                   )}
 
-                  {/* Background Pattern for Featured Cards */}
-                  {solution.featured && (
-                    <div className="absolute inset-0 opacity-5">
-                      <div className="absolute inset-0" style={{
-                        backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(37,99,235,0.1) 10px, rgba(37,99,235,0.1) 20px)',
-                      }} />
-                    </div>
-                  )}
 
                   <div className="relative h-full flex flex-col">
                     {/* Icon with Gradient Background */}

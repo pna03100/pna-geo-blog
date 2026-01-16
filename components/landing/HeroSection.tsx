@@ -18,7 +18,7 @@ export function HeroSection() {
       <HeroBackground />
       
       {/* Bottom Gradient Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-[#0B0B0D] z-[5] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-slate-900 z-[5] pointer-events-none" />
       
       {/* 🎯 LCP CRITICAL: Server-Rendered Content (JavaScript 없이 즉시 표시) */}
       <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl">

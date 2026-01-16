@@ -52,12 +52,7 @@ export function FAQSection() {
   return (
     <>
       {/* SECTION: #FAQ */}
-      <section data-section="FAQ" className="relative py-16 md:py-24 bg-slate-50">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'linear-gradient(to right, rgb(15 23 42) 1px, transparent 1px), linear-gradient(to bottom, rgb(15 23 42) 1px, transparent 1px)',
-        backgroundSize: '40px 40px'
-      }} />
+      <section data-section="FAQ" className="relative py-16 md:py-24 bg-slate-100">
       
       <div className="container relative mx-auto px-4 md:px-6 max-w-7xl">
         {/* Section Header */}

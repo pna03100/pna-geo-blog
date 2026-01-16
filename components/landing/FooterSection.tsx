@@ -27,12 +27,6 @@ export function FooterSection() {
       {/* Glowing Gradient Top Border - Electric Blue */}
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#2563EB] to-transparent opacity-70" />
       
-      {/* Cyber Grid Pattern */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: 'linear-gradient(to right, #2563EB 1px, transparent 1px), linear-gradient(to bottom, #2563EB 1px, transparent 1px)',
-        backgroundSize: '80px 80px'
-      }} />
-      
       {/* Giant Brand Typography Background - Electric Blue Glow */}
       <div 
         className="absolute bottom-[-2rem] left-0 text-[8rem] md:text-[12rem] lg:text-[16rem] font-black text-blue-600/5 leading-none pointer-events-none select-none z-0 whitespace-nowrap overflow-hidden"

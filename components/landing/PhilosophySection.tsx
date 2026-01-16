@@ -34,12 +34,7 @@ export function PhilosophySection() {
   return (
     <>
       {/* SECTION: #PHILOSOPHY */}
-      <section data-section="PHILOSOPHY" className="relative py-16 md:py-24 overflow-hidden bg-slate-50">
-      {/* Background Pattern - Subtle Grid */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'linear-gradient(to right, rgb(15 23 42) 1px, transparent 1px), linear-gradient(to bottom, rgb(15 23 42) 1px, transparent 1px)',
-        backgroundSize: '40px 40px'
-      }} />
+      <section data-section="PHILOSOPHY" className="relative py-16 md:py-24 overflow-hidden bg-slate-100">
       
       <div className="container mx-auto px-4 md:px-6 max-w-7xl relative">
         {/* Section Header */}
