@@ -44,14 +44,14 @@ export function Navbar() {
           <div className="hidden lg:flex items-center justify-between h-16">
             
             {/* Logo */}
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center group">
               <Image
                 src="/logo.png"
                 alt="PNA Company"
                 width={140}
                 height={36}
                 priority
-                className="w-auto h-8 brightness-0 invert"
+                className="w-auto h-8 brightness-0 invert transition-all duration-300 group-hover:scale-105 group-hover:opacity-80"
               />
             </Link>
 
@@ -70,7 +70,7 @@ export function Navbar() {
 
             {/* CTA Button */}
             <Link href="/contact">
-              <button className="px-6 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 font-bold text-sm transition-colors shadow-lg shadow-blue-600/20">
+              <button className="px-6 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 hover:scale-105 hover:shadow-xl hover:shadow-blue-600/30 font-bold text-sm transition-all duration-300 shadow-lg shadow-blue-600/20">
                 문의하기
               </button>
             </Link>
@@ -80,14 +80,14 @@ export function Navbar() {
           <div className="flex lg:hidden items-center justify-between h-16">
             
             {/* Logo */}
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center group">
               <Image
                 src="/logo.png"
                 alt="PNA Company"
                 width={120}
                 height={32}
                 priority
-                className="w-auto h-7 brightness-0 invert"
+                className="w-auto h-7 brightness-0 invert transition-all duration-300 group-hover:scale-105 group-hover:opacity-80"
               />
             </Link>
 
@@ -126,7 +126,7 @@ export function Navbar() {
               ))}
               <div className="pt-2 pb-2">
                 <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  <button className="block w-full px-4 py-3 text-center text-sm font-bold rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20">
+                  <button className="block w-full px-4 py-3 text-center text-sm font-bold rounded-md bg-blue-600 text-white hover:bg-blue-700 hover:scale-105 hover:shadow-xl hover:shadow-blue-600/30 transition-all duration-300 shadow-lg shadow-blue-600/20">
                     문의하기
                   </button>
                 </Link>

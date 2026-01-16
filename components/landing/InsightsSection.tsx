@@ -1,12 +1,10 @@
 /**
  * [Section] Insights - Latest WordPress Posts
  * [Design] Uses shared PostCard component from insights page
- * [Animation] Scroll-triggered entrance for post cards
  */
 
 "use client";
 
-import { FadeIn } from "@/components/ui/fade-in";
 import { SectionWrapper } from "./SectionWrapper";
 import { SectionTitle } from "./SectionTitle";
 import { PostCard } from "@/components/insights/PostCard";
@@ -88,24 +86,20 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
         {latestPosts.map((post, index) => (
-          <FadeIn key={post.slug || index} delay={index * 0.1}>
-            <PostCard post={post} priority={index === 0} />
-          </FadeIn>
+          <PostCard key={post.slug || index} post={post} priority={index === 0} />
         ))}
       </div>
 
       {/* View All Link - Dark Mode */}
-      <FadeIn delay={0.4}>
-        <div className="text-center mt-12">
-          <Link
-            href="/insights"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-blue-500/30 bg-blue-600/10 hover:border-blue-400 hover:bg-blue-600/20 text-blue-400 font-bold transition-all group"
-          >
-            <span>모든 인사이트 보기</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-      </FadeIn>
+      <div className="text-center mt-12">
+        <Link
+          href="/insights"
+          className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-blue-500/30 bg-blue-600/10 hover:border-blue-400 hover:bg-blue-600/20 text-blue-400 font-bold transition-all group"
+        >
+          <span>모든 인사이트 보기</span>
+          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+        </Link>
+      </div>
       </div>
     </SectionWrapper>
   );

@@ -7,7 +7,6 @@
 
 import type { Metadata } from 'next';
 import { HeroSection } from '@/components/landing/HeroSection';
-import { KeywordTicker } from '@/components/ui/keyword-ticker';
 import { MetricsSection } from '@/components/landing/MetricsSection';
 import { BentoSection } from '@/components/landing/BentoSection';
 import { PhilosophySection } from '@/components/landing/PhilosophySection';
@@ -146,11 +145,6 @@ export default async function HomePage() {
         {/* SECTION 2: STATS - The Proof (Open Financial Layout)          */}
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <MetricsSection />
-        
-        {/* 🎞️ VISUAL SEPARATOR: Subtle Keyword Rolling */}
-        <div className="px-4 md:px-6">
-          <KeywordTicker />
-        </div>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         {/* SECTION 3: SERVICES - Core Offering (Asymmetrical Bento)      */}
