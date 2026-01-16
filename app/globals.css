@@ -154,19 +154,19 @@
   
   /* Group hover states - must be in parent context */
   .metric-premium:hover .metric-label {
-    @apply text-slate-300;
+    @apply text-slate-100;
   }
 
   .metric-premium:hover .metric-number {
-    @apply text-[#3B82F6];
+    @apply text-[#93C5FD];
   }
 
   .metric-premium:hover .metric-badge {
-    @apply bg-blue-600/15 border-blue-500/40;
+    @apply bg-blue-600/25 border-blue-500/60;
   }
 
   .metric-premium:hover .metric-badge-text {
-    @apply text-blue-300;
+    @apply text-blue-200;
   }
 }
 

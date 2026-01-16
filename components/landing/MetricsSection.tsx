@@ -51,7 +51,7 @@ export function MetricsSection() {
         {/* Header */}
         <div className="mb-12 md:mb-16 text-center">
           {/* Badge */}
-          <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-blue-600/20 border border-blue-500/30 shadow-lg shadow-blue-600/20 text-blue-400 text-xs md:text-sm font-semibold mb-5 md:mb-7">
+          <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-blue-600/20 border border-blue-500/40 shadow-lg shadow-blue-600/25 text-blue-300 text-xs md:text-sm font-semibold mb-5 md:mb-7">
             Proven Results
           </span>
           
@@ -61,7 +61,7 @@ export function MetricsSection() {
           </h2>
           
           {/* Description */}
-          <p className="text-base md:text-xl text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base md:text-xl text-slate-300 font-medium leading-relaxed max-w-2xl mx-auto">
             감각에 의존하지 않습니다. 오직 정확한 데이터만이 비즈니스의 성장을 만듭니다.
           </p>
         </div>
@@ -76,15 +76,15 @@ export function MetricsSection() {
                 )}
 
                 {/* Label */}
-                <dt className="metric-label text-sm md:text-base font-semibold mb-4 md:mb-5 leading-relaxed">
+<dt className="metric-label text-sm md:text-base font-semibold mb-4 md:mb-5 leading-relaxed text-slate-300">
                   {stat.label}
                 </dt>
                 
                 {/* Giant Number */}
                 <dd className="mb-4 md:mb-6 relative">
                   {/* Trending Up Icon Background with Blue Glow */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
-                    <svg className="w-20 h-20 md:w-24 md:h-24 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                  <div className="absolute inset-0 flex items-center justify-center opacity-15 pointer-events-none">
+                    <svg className="w-20 h-20 md:w-24 md:h-24 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
                     </svg>
                   </div>
@@ -99,17 +99,17 @@ export function MetricsSection() {
                     <CountUpNumber 
                       end={stat.value} 
                       suffix="" 
-                      className="metric-number number text-5xl md:text-6xl lg:text-7xl font-bold text-[#2563EB] tracking-tight drop-shadow-[0_0_20px_rgba(37,99,235,0.5)]"
+                      className="metric-number number text-5xl md:text-6xl lg:text-7xl font-bold text-[#60A5FA] tracking-tight drop-shadow-[0_0_25px_rgba(96,165,250,0.6)]"
                     />
-                    <span className="metric-number unit text-3xl md:text-4xl lg:text-5xl font-bold text-[#2563EB]/70">
+                    <span className="metric-number unit text-3xl md:text-4xl lg:text-5xl font-bold text-[#60A5FA]/80">
                       {stat.suffix}
                     </span>
                   </span>
                 </dd>
                 
                 {/* Description Badge - Cyber Style */}
-                <div className="metric-badge inline-flex items-center justify-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-blue-600/10 border border-blue-500/30">
-                  <span className="metric-badge-text text-xs md:text-sm font-semibold text-blue-400 leading-relaxed">
+                <div className="metric-badge inline-flex items-center justify-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-blue-600/15 border border-blue-500/40">
+                  <span className="metric-badge-text text-xs md:text-sm font-semibold text-blue-300 leading-relaxed">
                     {stat.description}
                   </span>
                 </div>

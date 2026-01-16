@@ -32,7 +32,7 @@ export function HeroSection() {
             <span className="block text-white mb-2">
               구글 광고 대행사
             </span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 mb-2">
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 mb-2 drop-shadow-[0_0_30px_rgba(96,165,250,0.5)]">
               데이터로 증명하는
             </span>
             <span className="block text-white">
