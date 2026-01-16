@@ -6,7 +6,6 @@
 
 "use client";
 
-import { motion } from "framer-motion";
 import { Award, Briefcase, TrendingUp, Users, CheckCircle2, Building2, Target } from "lucide-react";
 import { SectionWrapper } from "./SectionWrapper";
 import { SectionTitle } from "./SectionTitle";
