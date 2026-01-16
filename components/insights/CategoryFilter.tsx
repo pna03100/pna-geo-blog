@@ -6,7 +6,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { getCategoryColor } from "@/lib/category-colors";
 
@@ -27,12 +26,10 @@ export function CategoryFilter({ categories, selectedCategory, onSelectCategory,
   return (
     <div className="flex flex-wrap items-center gap-3">
       {/* All Button */}
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+      <button
         onClick={() => onSelectCategory('all')}
         className={cn(
-          "px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300",
+          "px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95",
           selectedCategory === 'all'
             ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
             : "bg-white text-slate-600 border border-slate-200 hover:border-blue-600 hover:text-blue-600"
@@ -42,7 +39,7 @@ export function CategoryFilter({ categories, selectedCategory, onSelectCategory,
         <span className="ml-2 text-xs opacity-70">
           {totalPosts}
         </span>
-      </motion.button>
+      </button>
 
       {/* Category Buttons */}
       {categories.map((category) => {
@@ -54,13 +51,11 @@ export function CategoryFilter({ categories, selectedCategory, onSelectCategory,
         const bgColor = bgColorMatch ? bgColorMatch[1] : '#4285F4';
         
         return (
-          <motion.button
+          <button
             key={category.slug}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             onClick={() => onSelectCategory(category.slug)}
             className={cn(
-              "px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 relative overflow-hidden group"
+              "px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-200 relative overflow-hidden group hover:scale-105 active:scale-95"
             )}
             style={
               isSelected
@@ -88,7 +83,7 @@ export function CategoryFilter({ categories, selectedCategory, onSelectCategory,
               {category.name}
               <span className="ml-2 text-xs opacity-70">{category.count}</span>
             </span>
-          </motion.button>
+          </button>
         );
       })}
     </div>

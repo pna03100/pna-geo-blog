@@ -1,7 +1,7 @@
 /**
- * [Component] Logo Marquee - Double Row Infinite Scroll
- * [Design] Two rows scrolling in opposite directions
- * [Performance] CSS Transform Only (GPU Accelerated)
+ * [Component] Logo Marquee - Infinite Scroll (Optimized)
+ * [Design] Single row scrolling with duplicates
+ * [Performance] CSS Transform + aria-hidden + lazy loading
  */
 
 "use client";
@@ -22,8 +22,8 @@ export function LogoMarquee() {
     { name: "당근마켓", logo: "/images/partners/danggeun.jpg" },
   ];
 
-  // Triple for seamless loop
-  const triplePartners = [...partners, ...partners, ...partners];
+  // Double for seamless loop (first set visible, second set for aria-hidden)
+  const doublePartners = [...partners, ...partners];
 
   return (
     <div className="relative w-full overflow-hidden bg-gradient-to-r from-slate-50 via-white to-slate-50 py-12">
@@ -33,27 +33,32 @@ export function LogoMarquee() {
 
       {/* Single Row - Scroll Left to Right */}
       <div className="flex animate-marquee-ltr">
-        {triplePartners.map((partner, index) => (
-          <div
-            key={`${partner.name}-${index}`}
-            className="flex-shrink-0 mx-8 md:mx-12 transition-all duration-300 hover:scale-110 group"
-          >
-            <div className="flex flex-col items-center gap-3 grayscale hover:grayscale-0 transition-all">
-              <div className="relative w-24 h-24 md:w-32 md:h-32 opacity-60 group-hover:opacity-100 transition-opacity">
-                <Image
-                  src={partner.logo}
-                  alt={`${partner.name} 로고`}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 96px, 128px"
-                />
+        {doublePartners.map((partner, index) => {
+          const isOriginal = index < partners.length;
+          return (
+            <div
+              key={`${partner.name}-${index}`}
+              className="flex-shrink-0 mx-8 md:mx-12 transition-all duration-300 hover:scale-110 group"
+              aria-hidden={!isOriginal}
+            >
+              <div className="flex flex-col items-center gap-3 grayscale hover:grayscale-0 transition-all">
+                <div className="relative w-24 h-24 md:w-32 md:h-32 opacity-60 group-hover:opacity-100 transition-opacity">
+                  <Image
+                    src={partner.logo}
+                    alt={`${partner.name} 로고`}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 96px, 128px"
+                    loading="lazy"
+                  />
+                </div>
+                <span className="text-xs md:text-sm font-semibold text-slate-400 group-hover:text-slate-700 transition-colors">
+                  {partner.name}
+                </span>
               </div>
-              <span className="text-xs md:text-sm font-semibold text-slate-400 group-hover:text-slate-700 transition-colors">
-                {partner.name}
-              </span>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* CSS Animations */}
@@ -63,11 +68,12 @@ export function LogoMarquee() {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-33.333%);
+            transform: translateX(-50%);
           }
         }
         .animate-marquee-ltr {
           animation: marquee-ltr 40s linear infinite;
+          will-change: transform;
         }
         .animate-marquee-ltr:hover {
           animation-play-state: paused;

@@ -9,13 +9,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { 
   Target, TrendingUp, Zap, ArrowRight, Sparkles, 
   BarChart3, Users, Award, CheckCircle2, X,
   Search, ShoppingBag, Video, Smartphone, Globe
 } from "lucide-react";
-import { FadeIn } from "@/components/ui/fade-in";
 import { GoogleAdsFAQ } from "@/components/service/GoogleAdsFAQ";
 
 const benefits = [
@@ -374,14 +373,10 @@ function CampaignTypesSection() {
         </div>
 
         {/* Tab Content */}
-        <AnimatePresence mode="wait">
-          <motion.div
+        <div className="max-w-5xl mx-auto">
+          <div
             key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="max-w-5xl mx-auto"
+            className="opacity-0 animate-tab-fade-in"
           >
             <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200">
               {/* Title */}
@@ -414,8 +409,8 @@ function CampaignTypesSection() {
                 ))}
               </div>
             </div>
-          </motion.div>
-        </AnimatePresence>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -449,7 +444,7 @@ export function GoogleAdsClient() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8"
           >
             <Target className="w-4 h-4 text-white" />
@@ -462,14 +457,9 @@ export function GoogleAdsClient() {
           </h1>
 
           {/* Description */}
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto"
-          >
+          <p className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto">
             낭비 없는 광고비, 데이터로 증명하는 성과
-          </motion.p>
+          </p>
         </div>
       </section>
 
@@ -489,17 +479,15 @@ export function GoogleAdsClient() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 md:divide-x md:divide-slate-200 max-w-6xl mx-auto">
           {benefits.map((benefit, index) => (
-            <FadeIn key={index} delay={index * 0.1}>
-              <div className="md:px-8 text-center">
-                <benefit.icon className="w-12 h-12 text-blue-600 mx-auto mb-5" />
-                <h3 className="text-xl font-bold text-slate-900 mb-3" style={{ lineHeight: '1.35' }}>
-                  {benefit.title}
-                </h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  {benefit.description}
-                </p>
-              </div>
-            </FadeIn>
+            <div key={index} className="md:px-8 text-center">
+              <benefit.icon className="w-12 h-12 text-blue-600 mx-auto mb-5" />
+              <h3 className="text-xl font-bold text-slate-900 mb-3" style={{ lineHeight: '1.35' }}>
+                {benefit.title}
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                {benefit.description}
+              </p>
+            </div>
           ))}
         </div>
         </div>
@@ -589,8 +577,7 @@ export function GoogleAdsClient() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {successCases.map((project, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300">
+              <div key={index} className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300">
                   {/* Category Badge */}
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-bold mb-4">
                     <TrendingUp className="w-4 h-4" />
@@ -637,7 +624,6 @@ export function GoogleAdsClient() {
                     <p className="text-sm text-slate-700 font-medium">{project.solution}</p>
                   </div>
                 </div>
-              </FadeIn>
             ))}
           </div>
         </div>
@@ -666,8 +652,7 @@ export function GoogleAdsClient() {
             {coreStrategy.map((strategy, index) => {
               const Icon = strategy.icon;
               return (
-                <FadeIn key={index} delay={index * 0.1}>
-                  <div className="flex items-start gap-6 p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
+                <div key={index} className="flex items-start gap-6 p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
                     {/* Icon */}
                     <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
                       <Icon className="w-8 h-8 text-white" />
@@ -683,7 +668,6 @@ export function GoogleAdsClient() {
                       </p>
                     </div>
                   </div>
-                </FadeIn>
               );
             })}
           </div>
@@ -706,17 +690,15 @@ export function GoogleAdsClient() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-0 md:divide-x md:divide-white/10 max-w-7xl mx-auto">
             {pnaAdvantages.map((advantage, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div className="md:px-8 text-center">
-                  <advantage.icon className="w-12 h-12 text-blue-400 mx-auto mb-5" />
-                  <h3 className="text-lg font-bold text-white mb-3" style={{ lineHeight: '1.35' }}>
-                    {advantage.title}
-                  </h3>
-                  <p className="text-sm text-white/70 leading-relaxed">
-                    {advantage.description}
-                  </p>
-                </div>
-              </FadeIn>
+              <div key={index} className="md:px-8 text-center">
+                <advantage.icon className="w-12 h-12 text-blue-400 mx-auto mb-5" />
+                <h3 className="text-lg font-bold text-white mb-3" style={{ lineHeight: '1.35' }}>
+                  {advantage.title}
+                </h3>
+                <p className="text-sm text-white/70 leading-relaxed">
+                  {advantage.description}
+                </p>
+              </div>
             ))}
           </div>
         </div>
@@ -738,8 +720,7 @@ export function GoogleAdsClient() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {industryStrategy.map((industry, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
+              <div key={index} className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
                       <TrendingUp className="w-5 h-5 text-white" />
@@ -762,7 +743,6 @@ export function GoogleAdsClient() {
                     ))}
                   </ul>
                 </div>
-              </FadeIn>
             ))}
           </div>
         </div>
@@ -784,8 +764,7 @@ export function GoogleAdsClient() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Recommended */}
-            <FadeIn delay={0.1}>
-              <div className="p-8 rounded-2xl bg-white border-2 border-blue-200">
+            <div className="p-8 rounded-2xl bg-white border-2 border-blue-200">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center">
                     <CheckCircle2 className="w-6 h-6 text-white" />
@@ -803,11 +782,9 @@ export function GoogleAdsClient() {
                   ))}
                 </ul>
               </div>
-            </FadeIn>
 
             {/* Not Recommended */}
-            <FadeIn delay={0.2}>
-              <div className="p-8 rounded-2xl bg-white border-2 border-slate-200">
+            <div className="p-8 rounded-2xl bg-white border-2 border-slate-200">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-slate-400 flex items-center justify-center">
                     <X className="w-6 h-6 text-white" />
@@ -825,7 +802,6 @@ export function GoogleAdsClient() {
                   ))}
                 </ul>
               </div>
-            </FadeIn>
           </div>
         </div>
       </section>
@@ -846,12 +822,11 @@ export function GoogleAdsClient() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {budgetGuide.map((guide, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div className={`p-8 rounded-2xl border-2 transition-all duration-300 ${
-                  guide.recommended 
-                    ? 'border-blue-600 bg-blue-50/50 shadow-xl' 
-                    : 'border-slate-200 bg-white'
-                }`}>
+              <div key={index} className={`p-8 rounded-2xl border-2 transition-all duration-300 ${
+                guide.recommended 
+                  ? 'border-blue-600 bg-blue-50/50 shadow-xl' 
+                  : 'border-slate-200 bg-white'
+              }`}>
                   {guide.recommended && (
                     <div className="text-center mb-4">
                       <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600 text-white text-sm font-bold">
@@ -883,7 +858,6 @@ export function GoogleAdsClient() {
                     ))}
                   </ul>
                 </div>
-              </FadeIn>
             ))}
           </div>
 

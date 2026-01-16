@@ -13,7 +13,6 @@ import {
   TrendingUp, Target, BarChart3, Zap, CheckCircle2, ArrowRight, 
   Sparkles, Search, Share2, Award, X 
 } from "lucide-react";
-import { FadeIn } from "@/components/ui/fade-in";
 import { PerformanceFAQ } from "@/components/service/PerformanceFAQ";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -228,7 +227,7 @@ export function PerformanceClient() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8"
           >
             <BarChart3 className="w-4 h-4 text-white" />
@@ -241,14 +240,9 @@ export function PerformanceClient() {
           </h1>
 
           {/* Description */}
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto"
-          >
+          <p className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto">
             측정 가능한 성과, 데이터 기반 최적화
-          </motion.p>
+          </p>
         </div>
       </section>
 
@@ -268,8 +262,7 @@ export function PerformanceClient() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {/* 단일 채널 */}
-          <FadeIn delay={0.1}>
-            <div className="p-10 rounded-2xl bg-white border-2 border-slate-200">
+          <div className="p-10 rounded-2xl bg-white border-2 border-slate-200">
               <h3 className="text-2xl font-bold text-slate-900 mb-6">{comparison.single.title}</h3>
               
               <div className="mb-6">
@@ -288,11 +281,9 @@ export function PerformanceClient() {
                 </ul>
               </div>
             </div>
-          </FadeIn>
 
           {/* 통합 전략 */}
-          <FadeIn delay={0.2}>
-            <div className="p-10 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white border-2 border-blue-600 shadow-xl">
+          <div className="p-10 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white border-2 border-blue-600 shadow-xl">
               <h3 className="text-2xl font-bold text-white mb-6">{comparison.integrated.title}</h3>
               
               <div className="mb-6">
@@ -317,7 +308,6 @@ export function PerformanceClient() {
                 </p>
               </div>
             </div>
-          </FadeIn>
         </div>
         </div>
       </section>
@@ -340,8 +330,7 @@ export function PerformanceClient() {
             {channels.map((channel, index) => {
               const Icon = channel.icon;
               return (
-                <FadeIn key={index} delay={index * 0.1}>
-                  <div className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-blue-400 hover:bg-white/10 transition-all duration-300">
+                <div key={index} className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-blue-400 hover:bg-white/10 transition-all duration-300">
                     {/* Icon & Title */}
                     <div className="flex items-center gap-4 mb-6">
                       <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
@@ -379,7 +368,6 @@ export function PerformanceClient() {
                       </ul>
                     </div>
                   </div>
-                </FadeIn>
               );
             })}
           </div>
@@ -402,8 +390,7 @@ export function PerformanceClient() {
 
           <div className="max-w-5xl mx-auto space-y-8">
             {optimizationSteps.map((step, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div className="p-8 md:p-10 rounded-2xl bg-white border-2 border-slate-200">
+              <div key={index} className="p-8 md:p-10 rounded-2xl bg-white border-2 border-slate-200">
                   <div className="flex items-start gap-6">
                     {/* Number */}
                     <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-2xl">
@@ -426,7 +413,6 @@ export function PerformanceClient() {
                     </div>
                   </div>
                 </div>
-              </FadeIn>
             ))}
           </div>
         </div>
@@ -448,8 +434,7 @@ export function PerformanceClient() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {successCases.map((project, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
-                <div className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300">
+              <div key={index} className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300">
                   {/* Category */}
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-bold mb-4">
                     <Target className="w-4 h-4" />
@@ -493,7 +478,6 @@ export function PerformanceClient() {
                     </div>
                   </div>
                 </div>
-              </FadeIn>
             ))}
           </div>
         </div>
@@ -515,8 +499,7 @@ export function PerformanceClient() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Recommended */}
-            <FadeIn delay={0.1}>
-              <div className="p-8 rounded-2xl bg-white border-2 border-blue-200">
+            <div className="p-8 rounded-2xl bg-white border-2 border-blue-200">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center">
                     <CheckCircle2 className="w-6 h-6 text-white" />
@@ -534,11 +517,9 @@ export function PerformanceClient() {
                   ))}
                 </ul>
               </div>
-            </FadeIn>
 
             {/* Not Recommended */}
-            <FadeIn delay={0.2}>
-              <div className="p-8 rounded-2xl bg-white border-2 border-slate-200">
+            <div className="p-8 rounded-2xl bg-white border-2 border-slate-200">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-slate-400 flex items-center justify-center">
                     <X className="w-6 h-6 text-white" />
@@ -556,7 +537,6 @@ export function PerformanceClient() {
                   ))}
                 </ul>
               </div>
-            </FadeIn>
           </div>
         </div>
       </section>

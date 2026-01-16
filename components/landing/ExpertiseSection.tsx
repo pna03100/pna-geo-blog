@@ -8,7 +8,6 @@
 
 import { motion } from "framer-motion";
 import { Award, Briefcase, TrendingUp, Users, CheckCircle2, Building2, Target } from "lucide-react";
-import { FadeIn } from "@/components/ui/fade-in";
 import { SectionWrapper } from "./SectionWrapper";
 import { SectionTitle } from "./SectionTitle";
 
@@ -81,8 +80,7 @@ export function ExpertiseSection() {
       />
 
       {/* CEO Profile - Full Width */}
-      <FadeIn delay={0.2}>
-        <div className="rounded-2xl overflow-hidden mb-12 shadow-xl">
+      <div className="rounded-2xl overflow-hidden mb-12 shadow-xl">
           <div className="grid md:grid-cols-[300px,1fr] gap-0">
             {/* Left: Avatar Only - Full Height */}
             <div className="bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-8xl md:text-9xl p-12 md:p-16">
@@ -175,15 +173,13 @@ export function ExpertiseSection() {
             </div>
           </div>
         </div>
-      </FadeIn>
 
       {/* Certifications - Centered Below */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:divide-x md:divide-slate-200 max-w-4xl mx-auto">
         {certifications.map((cert, index) => {
           const Icon = cert.icon;
           return (
-            <FadeIn key={cert.title} delay={0.3 + index * 0.1}>
-              <div className="px-8 py-6 md:py-0 text-center">
+            <div key={cert.title} className="px-8 py-6 md:py-0 text-center">
                 {/* Badge */}
                 <div className="inline-block px-3 py-1 rounded-full bg-blue-600 text-white text-xs font-bold mb-6">
                   {cert.badge}
@@ -200,7 +196,6 @@ export function ExpertiseSection() {
                   {cert.description}
                 </p>
               </div>
-            </FadeIn>
           );
         })}
       </div>

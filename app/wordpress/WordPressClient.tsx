@@ -10,7 +10,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Code, Palette, Zap, Shield, ArrowRight, Sparkles, Settings, TrendingUp, CheckCircle2 } from "lucide-react";
-import { FadeIn } from "@/components/ui/fade-in";
 import { WordPressFAQ } from "@/components/service/WordPressFAQ";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -210,7 +209,7 @@ export function WordPressClient() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8"
           >
             <Code className="w-4 h-4 text-white" />
@@ -223,14 +222,9 @@ export function WordPressClient() {
           </h1>
 
           {/* Description */}
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto"
-          >
+          <p className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto">
             Lighthouse 90점 이상, 기업급 보안, 무제한 확장성
-          </motion.p>
+          </p>
         </div>
       </section>
 
@@ -250,7 +244,7 @@ export function WordPressClient() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {whyWordPress.map((item, index) => (
-            <FadeIn key={index} delay={index * 0.1}>
+            <div key={index}>
               <div className="p-8 rounded-2xl bg-white border-2 border-slate-200">
                 <h3 className="text-2xl font-bold text-slate-900 mb-6">{item.title}</h3>
 
@@ -268,7 +262,7 @@ export function WordPressClient() {
 
                 <p className="text-lg font-bold text-blue-600">{item.conclusion}</p>
               </div>
-            </FadeIn>
+            </div>
           ))}
         </div>
         </div>
@@ -354,7 +348,7 @@ export function WordPressClient() {
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <FadeIn key={index} delay={index * 0.1}>
+                <div key={index}>
                   <div className="flex items-start gap-6 p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
                     {/* Icon */}
                     <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
@@ -371,7 +365,7 @@ export function WordPressClient() {
                       </p>
                     </div>
                   </div>
-                </FadeIn>
+                </div>
               );
             })}
           </div>
@@ -394,7 +388,7 @@ export function WordPressClient() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {successCases.map((project, index) => (
-              <FadeIn key={index} delay={index * 0.1}>
+              <div key={index}>
                 <div className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300">
                   {/* Category Badge */}
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-bold mb-4">
@@ -436,7 +430,7 @@ export function WordPressClient() {
                     </div>
                   </div>
                 </div>
-              </FadeIn>
+              </div>
             ))}
           </div>
         </div>
@@ -463,7 +457,7 @@ export function WordPressClient() {
             
             <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 relative">
               {processSteps.map((step, index) => (
-                <FadeIn key={index} delay={index * 0.1}>
+                <div key={index}>
                   <div className="text-center">
                     {/* Number Badge */}
                     <div className="relative inline-flex items-center justify-center w-32 h-32 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-bold text-4xl md:text-3xl mb-6 shadow-xl mx-auto">
@@ -486,7 +480,7 @@ export function WordPressClient() {
                       {step.duration}
                     </div>
                   </div>
-                </FadeIn>
+                </div>
               ))}
             </div>
           </div>

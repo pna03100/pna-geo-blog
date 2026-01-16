@@ -83,10 +83,10 @@ export function AboutClient() {
         {/* 3. Content */}
         <div className="relative z-10 container mx-auto px-4 md:px-6 max-w-7xl text-center">
           {/* Badge */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8"
           >
             <Award className="w-4 h-4 text-white" />
@@ -99,14 +99,9 @@ export function AboutClient() {
           </h1>
 
           {/* Description */}
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto"
-          >
+          <p className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto">
             데이터 기반 마케팅 전략과 AI 기술로 클라이언트의 성장을 이끄는 디지털 마케팅 전문 기업
-          </motion.p>
+          </p>
         </div>
       </section>
 
@@ -157,7 +152,12 @@ export function AboutClient() {
             </div>
 
             {/* Right: CEO Card - Dark Mode Style */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+            >
               <div className="relative group">
                 <div className="relative rounded-3xl bg-gradient-to-br from-slate-800 via-slate-900 to-blue-950 shadow-2xl p-8 md:p-10">
                   <span className="inline-block px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs font-bold mb-6">
@@ -198,7 +198,7 @@ export function AboutClient() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -225,7 +225,11 @@ export function AboutClient() {
 
               <div className="flex justify-between items-start">
                 {timeline.map((item, index) => (
-                  <div key={item.year} className="relative flex flex-col items-center group" style={{ width: '20%' }}>
+                  <div
+                    key={item.year}
+                    className="timeline-item relative flex flex-col items-center group"
+                    style={{ width: '20%' }}
+                  >
                     {/* Year */}
                     <div className="relative z-10 mb-8">
                       <span className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-indigo-400 group-hover:scale-110 transition-transform inline-block">
@@ -247,7 +251,10 @@ export function AboutClient() {
             {/* Mobile: Vertical Timeline */}
             <div className="md:hidden space-y-6">
               {timeline.map((item, index) => (
-                <div key={item.year} className="flex items-center gap-4 group">
+                <div
+                  key={item.year}
+                  className="timeline-item-mobile flex items-center gap-4 group"
+                >
                   <div className="flex-shrink-0">
                     <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-indigo-400">
                       {item.year}

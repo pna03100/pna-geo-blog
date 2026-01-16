@@ -6,41 +6,42 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 
 export function ReadingProgress() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
+  const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollTop = window.pageYOffset;
+          const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const scrollPercent = (scrollTop / docHeight) * 100;
+          
+          setProgress(scrollPercent);
+          setIsVisible(scrollTop > 10);
+          
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <AnimatePresence>
+    <>
       {isVisible && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed top-16 left-0 right-0 h-1 bg-blue-600 origin-left z-40"
-          style={{ scaleX }}
+        <div 
+          className="fixed top-16 left-0 h-1 bg-blue-600 origin-left z-40 transition-opacity duration-150"
+          style={{ width: `${progress}%` }}
         />
       )}
-    </AnimatePresence>
+    </>
   );
 }

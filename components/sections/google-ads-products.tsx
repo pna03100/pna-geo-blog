@@ -10,7 +10,6 @@ import { motion } from "framer-motion";
 import { 
   Cpu, Search, Monitor, Youtube, Smartphone, Zap
 } from "lucide-react";
-import { FadeIn } from "@/components/ui/fade-in";
 
 const products = [
   {
@@ -86,7 +85,7 @@ export function GoogleAdsProducts() {
             const spanClass = product.id === "pmax" ? "md:col-span-2 md:row-span-1" : "";
             
             return (
-              <FadeIn key={product.id} delay={index * 0.1}>
+              <div key={product.id}>
                 <motion.div
                   whileHover={{ y: -4 }}
                   className={`group relative bg-white/50 backdrop-blur-sm border border-slate-200 rounded-2xl p-6 md:p-8 hover:border-blue-400 hover:shadow-lg transition-all duration-300 ${spanClass}`}
@@ -130,7 +129,7 @@ export function GoogleAdsProducts() {
                     ))}
                   </div>
                 </motion.div>
-              </FadeIn>
+              </div>
             );
           })}
         </div>

@@ -5,7 +5,6 @@
  */
 
 import Link from "next/link";
-import { FadeIn } from "@/components/ui/fade-in";
 import { SectionWrapper } from "./SectionWrapper";
 import { SectionTitle } from "./SectionTitle";
 import { TrendingUp, Search, BarChart3, Code, Share2, BookOpen } from "lucide-react";
@@ -88,7 +87,7 @@ export function BentoSection() {
         {solutions.map((solution, index) => {
           const Icon = solution.icon;
           return (
-            <FadeIn key={solution.title} delay={index * 0.1} className={solution.span}>
+            <div key={solution.title} className={solution.span}>
               <Link href={solution.link} className="block h-full">
                 <div 
                   className={`group relative overflow-hidden rounded-xl md:rounded-2xl bg-white border-2 p-6 md:p-8 shadow-sm transition-all hover:shadow-2xl h-full cursor-pointer ${
@@ -164,7 +163,7 @@ export function BentoSection() {
                   </div>
                 </div>
               </Link>
-            </FadeIn>
+            </div>
           );
         })}
       </div>

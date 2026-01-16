@@ -1,12 +1,12 @@
 /**
- * [Component] Magnetic Button - Physical Interaction
- * [Design] Cursor-attracted with shining sheen effect
- * [Behavior] Neo-Tech 2026 Standard
+ * [Component] Magnetic Button - Physical Interaction (Optimized)
+ * [Design] Cursor-attracted magnetic effect with rAF
+ * [Performance] 6-8px max movement, mobile disabled
  */
 
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -27,32 +27,65 @@ export function MagneticButton({
 }: MagneticButtonProps) {
   const buttonRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+  const rafRef = useRef<number | null>(null);
+
+  // Detect mobile on mount
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!buttonRef.current) return;
+    // Disable on mobile
+    if (isMobile || !buttonRef.current) return;
     
-    const rect = buttonRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    // Calculate distance from center
-    const deltaX = e.clientX - centerX;
-    const deltaY = e.clientY - centerY;
-    
-    // Magnetic pull (max 12px)
-    const maxPull = 12;
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    const pullStrength = Math.min(distance / 100, 1);
-    
-    setPosition({
-      x: deltaX * pullStrength * 0.3,
-      y: deltaY * pullStrength * 0.3,
+    // Cancel previous rAF
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+    }
+
+    rafRef.current = requestAnimationFrame(() => {
+      if (!buttonRef.current) return;
+      
+      const rect = buttonRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
+      
+      // Reduced max pull to 7px (6-8px range)
+      const maxPull = 7;
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+      const pullStrength = Math.min(distance / 100, 1);
+      
+      const moveX = Math.max(-maxPull, Math.min(maxPull, deltaX * pullStrength * 0.2));
+      const moveY = Math.max(-maxPull, Math.min(maxPull, deltaY * pullStrength * 0.2));
+      
+      setPosition({ x: moveX, y: moveY });
     });
   };
 
   const handleMouseLeave = () => {
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+    }
     setPosition({ x: 0, y: 0 });
   };
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, []);
 
   const baseStyles = variant === "primary" 
     ? "bg-blue-600 text-white border border-blue-400/50 hover:bg-blue-500 hover:border-blue-300"
@@ -63,23 +96,15 @@ export function MagneticButton({
       ref={buttonRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      className={`group relative inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base overflow-hidden cursor-pointer ${baseStyles} ${className}`}
+      animate={isMobile ? {} : { x: position.x, y: position.y }}
+      transition={{ type: "spring", stiffness: 200, damping: 20, mass: 0.1 }}
+      className={`group relative inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base cursor-pointer ${baseStyles} ${className}`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.98 }}
+      style={{ transform: isMobile ? 'none' : undefined }}
     >
-      {/* Shining Sheen Effect */}
-      <motion.div
-        className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
-        style={{
-          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)",
-        }}
-      />
-      
-      {/* Content */}
-      <span className="relative z-10">{children}</span>
-      <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+      <span>{children}</span>
+      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
     </motion.div>
   );
 

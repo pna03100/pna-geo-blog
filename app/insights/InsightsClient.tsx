@@ -9,7 +9,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { WPContent } from "@/lib/types";
 import { PostCard } from "@/components/insights/PostCard";
 import { Sparkles, ArrowRight } from "lucide-react";
@@ -165,15 +164,10 @@ export function InsightsClient({ posts }: InsightsClientProps) {
         {/* 3. Content */}
         <div className="relative z-10 container mx-auto px-4 md:px-6 max-w-7xl text-center">
           {/* Badge */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8"
-          >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
             <Sparkles className="w-4 h-4 text-white" />
             <span className="text-sm font-bold text-white">Marketing Insights</span>
-          </motion.div>
+          </div>
 
           {/* Kinetic Typography Heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ lineHeight: '1.35' }}>
@@ -181,14 +175,9 @@ export function InsightsClient({ posts }: InsightsClientProps) {
           </h1>
 
           {/* Description */}
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto"
-          >
+          <p className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto">
             데이터 기반 성과 마케팅을 위한 실무 노하우와 최신 트렌드
-          </motion.p>
+          </p>
         </div>
       </section>
 
@@ -198,48 +187,34 @@ export function InsightsClient({ posts }: InsightsClientProps) {
           <div className="flex items-center justify-center">
             <div className="inline-flex bg-slate-100 rounded-full p-1.5">
               {/* All Tab */}
-              <motion.button
+              <button
                 onClick={() => setSelectedCategory('all')}
                 className={`
-                  relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300
+                  relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200
                   ${selectedCategory === 'all' 
-                    ? 'text-blue-600' 
+                    ? 'bg-white text-blue-600 shadow-md' 
                     : 'text-slate-600 hover:text-slate-900'
                   }
                 `}
               >
-                {selectedCategory === 'all' && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 bg-white rounded-full shadow-md"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
                 <span className="relative z-10">전체 ({posts.length})</span>
-              </motion.button>
+              </button>
 
               {/* Category Tabs */}
               {categories.map((category) => (
-                <motion.button
+                <button
                   key={category.slug}
                   onClick={() => setSelectedCategory(category.slug)}
                   className={`
-                    relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300
+                    relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200
                     ${selectedCategory === category.slug 
-                      ? 'text-blue-600' 
+                      ? 'bg-white text-blue-600 shadow-md' 
                       : 'text-slate-600 hover:text-slate-900'
                     }
                   `}
                 >
-                  {selectedCategory === category.slug && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute inset-0 bg-white rounded-full shadow-md"
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                  )}
                   <span className="relative z-10">{category.name} ({category.count})</span>
-                </motion.button>
+                </button>
               ))}
             </div>
           </div>
@@ -250,11 +225,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
       <section className="container mx-auto px-4 md:px-6 max-w-7xl pt-16 pb-32">
         {filteredPosts.length === 0 ? (
           // Empty State
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-2xl mx-auto text-center py-16"
-          >
+          <div className="max-w-2xl mx-auto text-center py-16">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-50 mb-6">
               <Sparkles className="w-10 h-10 text-blue-600" />
             </div>
@@ -271,18 +242,13 @@ export function InsightsClient({ posts }: InsightsClientProps) {
               전체 글 보기
               <ArrowRight className="w-4 h-4" />
             </button>
-          </motion.div>
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPosts.map((post, index) => (
-              <motion.div
-                key={post.databaseId || post.slug || index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.4 }}
-              >
+              <div key={post.databaseId || post.slug || index}>
                 <PostCard post={post} priority={index < 3} />
-              </motion.div>
+              </div>
             ))}
           </div>
         )}

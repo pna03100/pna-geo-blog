@@ -7,14 +7,12 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { FadeIn } from "./FadeIn";
 import { SectionWrapper } from "./SectionWrapper";
 
 export function CTASection() {
   return (
     <SectionWrapper id="contact" className="py-8 md:py-16">
-      <FadeIn>
-        <div className="relative overflow-hidden rounded-2xl md:rounded-[3rem] bg-black p-8 md:p-20">
+      <div className="relative overflow-hidden rounded-2xl md:rounded-[3rem] bg-black p-8 md:p-20">
           {/* Animated background elements */}
           <motion.div
             className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl"
@@ -156,7 +154,6 @@ export function CTASection() {
             </div>
           </div>
         </div>
-      </FadeIn>
     </SectionWrapper>
   );
 }

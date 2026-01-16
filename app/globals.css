@@ -68,6 +68,66 @@
   animation: float ease-in-out infinite;
 }
 
+/* Timeline Animations - Lightweight CSS */
+@keyframes timeline-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes timeline-fade-right {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.timeline-item {
+  animation: timeline-fade-up 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.timeline-item-mobile {
+  animation: timeline-fade-right 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* Stagger delays */
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.25s; }
+.timeline-item:nth-child(3) { animation-delay: 0.4s; }
+.timeline-item:nth-child(4) { animation-delay: 0.55s; }
+.timeline-item:nth-child(5) { animation-delay: 0.7s; }
+
+.timeline-item-mobile:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item-mobile:nth-child(2) { animation-delay: 0.2s; }
+.timeline-item-mobile:nth-child(3) { animation-delay: 0.3s; }
+.timeline-item-mobile:nth-child(4) { animation-delay: 0.4s; }
+.timeline-item-mobile:nth-child(5) { animation-delay: 0.5s; }
+
+/* Tab Transition - Lightweight CSS */
+@keyframes tab-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-tab-fade-in {
+  animation: tab-fade-in 0.15s ease-out forwards;
+}
+
 /* ============================================
    [Trinity] Glassmorphism & Grid Pattern Utilities
    Performance: GPU-accelerated transforms

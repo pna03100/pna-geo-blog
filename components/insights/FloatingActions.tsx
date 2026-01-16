@@ -6,7 +6,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp, Share2, Phone } from "lucide-react";
 import Link from "next/link";
 
@@ -60,14 +59,9 @@ export function FloatingActions() {
   };
 
   return (
-    <AnimatePresence>
+    <>
       {isVisible && (
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 20 }}
-          className="fixed right-6 bottom-6 z-40 flex flex-col gap-3"
-        >
+        <div className="fixed right-6 bottom-6 z-40 flex flex-col gap-3 animate-tab-fade-in">
           {/* CTA Button */}
           <Link
             href="/contact"
@@ -103,8 +97,8 @@ export function FloatingActions() {
               맨 위로
             </span>
           </button>
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   );
 }

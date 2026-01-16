@@ -6,7 +6,6 @@
 
 "use client";
 
-import { FadeIn } from "@/components/ui/fade-in";
 import { CountUpNumber } from "./CountUpNumber";
 import { SectionTitle } from "./SectionTitle";
 
@@ -43,9 +42,7 @@ const metrics = [
 
 export function MetricsSection() {
   return (
-    <>
-      {/* SECTION: #METRICS */}
-      <section data-section="METRICS" className="py-20 md:py-32 relative z-10 overflow-hidden bg-[#0B0B0D]">
+    <section data-section="METRICS" className="py-20 md:py-32 relative z-10 overflow-hidden bg-[#0B0B0D]">
       {/* Top Gradient Fade */}
       <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#0B0B0D] to-transparent pointer-events-none" />
       
@@ -72,8 +69,7 @@ export function MetricsSection() {
         {/* Open Layout with Vertical Dividers */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-0 mt-16 md:mt-20">
           {metrics.map((stat, index) => (
-            <FadeIn key={stat.id} delay={index * 0.1}>
-              <div className="relative text-center px-4 md:px-6">
+            <div key={stat.id} className="relative text-center px-4 md:px-6">
                 {/* Vertical Divider (Hidden on mobile, shown after first item on desktop) */}
                 {index > 0 && (
                   <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 h-32 w-px bg-slate-800" />
@@ -111,11 +107,9 @@ export function MetricsSection() {
                   </span>
                 </div>
               </div>
-            </FadeIn>
           ))}
         </div>
       </div>
     </section>
-    </>
   );
 }
