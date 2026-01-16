@@ -227,7 +227,7 @@ export default function PrivacyPage() {
                   <strong>연락처:</strong> 070-7733-7905
                 </li>
                 <li>
-                  <strong>이메일:</strong> pna03100@gmail.com
+                  <strong>이메일:</strong> pna0310 [at] naver [dot] com
                 </li>
               </ul>
             </section>

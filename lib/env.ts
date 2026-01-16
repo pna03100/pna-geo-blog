@@ -27,6 +27,12 @@ const envSchema = z.object({
     .string()
     .default('pnamarketing.co.kr'),
 
+  // 공식 연락처 이메일 (Anti-scraping)
+  NEXT_PUBLIC_CONTACT_EMAIL: z
+    .string()
+    .email('NEXT_PUBLIC_CONTACT_EMAIL must be a valid email')
+    .default('pna0310@naver.com'),
+
   // Node Environment
   NODE_ENV: z
     .enum(['development', 'production', 'test'])
@@ -43,12 +49,14 @@ function validateEnv() {
                          process.env.NEXT_PUBLIC_WORDPRESS_API_URL,
       NEXT_PUBLIC_WORDPRESS_URL: process.env.NEXT_PUBLIC_WORDPRESS_URL,
       NEXT_PUBLIC_FRONTEND_DOMAIN: process.env.NEXT_PUBLIC_FRONTEND_DOMAIN,
+      NEXT_PUBLIC_CONTACT_EMAIL: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
       NODE_ENV: process.env.NODE_ENV,
     });
 
     console.log('✅ [Env Validated]');
     console.log('  - WordPress URL:', parsed.WORDPRESS_API_URL);
     console.log('  - Frontend Domain:', parsed.NEXT_PUBLIC_FRONTEND_DOMAIN);
+    console.log('  - Contact Email:', parsed.NEXT_PUBLIC_CONTACT_EMAIL);
     return parsed;
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -71,6 +79,7 @@ function validateEnv() {
         WORDPRESS_API_URL: 'https://cms.pnamarketing.co.kr/graphql',
         NEXT_PUBLIC_WORDPRESS_URL: 'https://cms.pnamarketing.co.kr',
         NEXT_PUBLIC_FRONTEND_DOMAIN: 'pnamarketing.co.kr',
+        NEXT_PUBLIC_CONTACT_EMAIL: 'pna0310@naver.com',
         NODE_ENV: (process.env.NODE_ENV as 'development' | 'production' | 'test') || 'development',
       };
     }

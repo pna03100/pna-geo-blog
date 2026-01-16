@@ -48,12 +48,12 @@ export default function InsightNotFound() {
         <div className="mt-12 pt-8 border-t border-slate-200">
           <p className="text-sm text-slate-500">
             문제가 지속되면{' '}
-            <a 
-              href="mailto:contact@pnamarketing.co.kr" 
+            <Link 
+              href="/contact" 
               className="text-blue-600 hover:text-blue-700 underline"
             >
               문의하기
-            </a>
+            </Link>
           </p>
         </div>
         </div>

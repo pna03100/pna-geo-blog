@@ -6,25 +6,43 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import Script from "next/script";
 import { MapPin, Mail, Phone, Printer, Loader2, ArrowRight } from "lucide-react";
+
+// ============================================
+// [TypeScript] Turnstile Global Declaration
+// ============================================
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (element: string, options: {
+        sitekey: string;
+        callback: (token: string) => void;
+      }) => void;
+      reset: () => void;
+    };
+  }
+}
 
 // ============================================
 // [Security] Zod Schema
 // ============================================
 const contactSchema = z.object({
-  company: z.string().min(2, "회사명/성함을 입력해주세요 (최소 2자)"),
-  contact: z.string().min(10, "연락처를 정확히 입력해주세요"),
-  email: z.string().email("올바른 이메일 주소를 입력해주세요"),
+  company: z.string().min(2, "회사명/성함을 입력해주세요 (최소 2자)").max(100),
+  contact: z.string().min(10, "연락처를 정확히 입력해주세요").max(20),
+  email: z.string().email("올바른 이메일 주소를 입력해주세요").max(100),
   serviceType: z.string().min(1, "서비스 유형을 선택해주세요"),
   budget: z.string().min(1, "예산 범위를 선택해주세요"),
-  message: z.string().min(10, "문의 내용을 10자 이상 입력해주세요"),
+  message: z.string().min(10, "문의 내용을 10자 이상 입력해주세요").max(2000),
   privacy: z.boolean().refine((val) => val === true, {
     message: "개인정보 처리방침에 동의해주세요",
   }),
+  // Honeypot (봇 탐지용 - 사람은 채우지 않음)
+  website: z.string().max(0).optional(),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -56,6 +74,8 @@ const budgetOptions = [
 // ============================================
 export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string>('');
+  const [turnstileLoaded, setTurnstileLoaded] = useState(false);
 
   const {
     register,
@@ -66,6 +86,18 @@ export function ContactSection() {
     resolver: zodResolver(contactSchema),
   });
 
+  // [Security] Initialize Turnstile widget
+  useEffect(() => {
+    if (turnstileLoaded && window.turnstile && process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY) {
+      window.turnstile.render('#turnstile-widget', {
+        sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+        callback: (token: string) => {
+          setTurnstileToken(token);
+        },
+      });
+    }
+  }, [turnstileLoaded]);
+
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
 
@@ -75,7 +107,10 @@ export function ContactSection() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          turnstileToken, // Add Turnstile token
+        }),
       });
 
       const result = await response.json();
@@ -191,6 +226,24 @@ export function ContactSection() {
                 )}
               </div>
 
+              {/* Honeypot (Anti-bot) - Hidden from humans */}
+              <input
+                {...register("website")}
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                style={{
+                  position: 'absolute',
+                  left: '-9999px',
+                  width: '1px',
+                  height: '1px',
+                  opacity: 0,
+                  pointerEvents: 'none'
+                }}
+                aria-hidden="true"
+              />
+
               {/* Service Type & Budget (2 Column) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Service Type */}
@@ -294,6 +347,17 @@ export function ContactSection() {
                   </p>
                 )}
               </div>
+
+              {/* Cloudflare Turnstile (Anti-bot) */}
+              {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+                <>
+                  <Script
+                    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                    onLoad={() => setTurnstileLoaded(true)}
+                  />
+                  <div id="turnstile-widget" className="flex justify-center"></div>
+                </>
+              )}
 
               {/* Submit Button */}
               <button

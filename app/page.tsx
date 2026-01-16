@@ -40,7 +40,7 @@ function generateJsonLd() {
         "contactPoint": {
           "@type": "ContactPoint",
           "telephone": "+82-70-7733-7905",
-          "email": "pna0310@naver.com",
+          "email": process.env.NEXT_PUBLIC_CONTACT_EMAIL || "pna0310@naver.com",
           "contactType": "Customer Service",
           "areaServed": "KR",
           "availableLanguage": ["Korean"]

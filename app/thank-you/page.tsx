@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function ThankYouPage() {
   return (
-    <main className="relative min-h-screen pt-16 flex items-center justify-center">
+    <main className="relative min-h-screen pt-16 flex items-center justify-center bg-white">
 
       {/* Content */}
       <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-3xl text-center py-20">

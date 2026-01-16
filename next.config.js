@@ -72,13 +72,18 @@ const nextConfig = {
     };
   },
 
-  // 5. 리다이렉트 설정 (/blog/ → /insights/)
+  // 5. 리다이렉트 설정
   async redirects() {
     return [
       {
         source: '/blog/:slug*',
         destination: '/insights/:slug*',
         permanent: true, // 301 Permanent Redirect (SEO-friendly)
+      },
+      {
+        source: '/privacy-policy',
+        destination: '/privacy',
+        permanent: true, // 301 Permanent Redirect
       },
     ];
   },

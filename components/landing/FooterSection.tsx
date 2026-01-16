@@ -123,10 +123,10 @@ export function FooterSection() {
                   <li className="flex items-center gap-2 text-slate-400">
                     <Mail className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#60A5FA] flex-shrink-0" />
                     <a
-                      href="mailto:pna0310@naver.com"
+                      href="/contact"
                       className="hover:text-[#60A5FA] transition-colors"
                     >
-                      pna0310@naver.com
+                      문의하기
                     </a>
                   </li>
                 </ul>
