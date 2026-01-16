@@ -1,7 +1,8 @@
 /**
  * [Animation] CountUpNumber - Animated number counter
  * [Trigger] Counts up when element enters viewport
- * [Safety] SSR shows final value, CSR animates 0→end with no flash
+ * [Safety] SSR/HTML always shows final value (SEO/Screen Reader), animation is visual overlay only
+ * [No Flicker] 500 → 500 (HTML), visual 0 → 500 (overlay)
  */
 
 "use client";
@@ -24,8 +25,8 @@ export function CountUpNumber({
   prefix = "",
   className = "",
 }: CountUpNumberProps) {
-  // SSR/Hydration: Always show final value
-  const [displayCount, setDisplayCount] = useState(end);
+  // Visual animation count (0 → end)
+  const [visualCount, setVisualCount] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
@@ -44,7 +45,7 @@ export function CountUpNumber({
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
-      setDisplayCount(end);
+      setVisualCount(end);
       setHasAnimated(true);
       return;
     }
@@ -59,12 +60,12 @@ export function CountUpNumber({
       // Calculate current count: 0 → end
       const currentCount = Math.floor(progress * end);
 
-      setDisplayCount(currentCount);
+      setVisualCount(currentCount);
 
       if (progress < 1) {
         animationFrameRef.current = requestAnimationFrame(animate);
       } else {
-        setDisplayCount(end);
+        setVisualCount(end);
         setHasAnimated(true);
       }
     };
@@ -79,20 +80,33 @@ export function CountUpNumber({
     };
   }, [isMounted, isInView, end, duration, hasAnimated]);
 
-  // Screen reader accessibility: always announce final value, no live updates
-  const displayValue = `${prefix}${displayCount.toLocaleString()}${suffix}`;
-  const ariaLabel = `${prefix}${end.toLocaleString()}${suffix}`;
+  // SEO/Screen Reader: always final value
+  const seoValue = `${prefix}${end.toLocaleString()}${suffix}`;
+  // Visual: animated value (0 → end)
+  const visualValue = `${prefix}${visualCount.toLocaleString()}${suffix}`;
+  const showAnimation = isMounted && !hasAnimated;
 
   return (
-    <span 
-      ref={ref} 
-      className={className}
-      aria-label={ariaLabel}
-      aria-live="off"
-      role="text"
-      suppressHydrationWarning
-    >
-      {displayValue}
+    <span ref={ref} className={`relative inline-block ${className}`}>
+      {/* SEO/HTML Layer: Always final value (for crawlers/screen readers) */}
+      <span 
+        className={showAnimation ? "invisible" : ""}
+        aria-live="off"
+        role="text"
+      >
+        {seoValue}
+      </span>
+      
+      {/* Visual Animation Layer: 0 → end (client-only overlay) */}
+      {showAnimation && (
+        <span 
+          className="absolute inset-0"
+          aria-hidden="true"
+          suppressHydrationWarning
+        >
+          {visualValue}
+        </span>
+      )}
     </span>
   );
 }
