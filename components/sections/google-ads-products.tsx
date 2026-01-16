@@ -6,7 +6,6 @@
 
 "use client";
 
-import { motion } from "framer-motion";
 import { 
   Cpu, Search, Monitor, Youtube, Smartphone, Zap
 } from "lucide-react";
@@ -86,9 +85,8 @@ export function GoogleAdsProducts() {
             
             return (
               <div key={product.id}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className={`group relative bg-white/50 backdrop-blur-sm border border-slate-200 rounded-2xl p-6 md:p-8 hover:border-blue-400 hover:shadow-lg transition-all duration-300 ${spanClass}`}
+                <div
+                  className={`group relative bg-white/50 backdrop-blur-sm border border-slate-200 rounded-2xl p-6 md:p-8 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${spanClass}`}
                 >
                   {/* Featured Badge */}
                   {product.featured && (
@@ -128,7 +126,7 @@ export function GoogleAdsProducts() {
                       </span>
                     ))}
                   </div>
-                </motion.div>
+                </div>
               </div>
             );
           })}

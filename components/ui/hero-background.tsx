@@ -1,12 +1,13 @@
 /**
  * [Component] Hero Background - Canvas Particle + Rotating Circles
  * [Design] Interactive Particle Network with Gradient Circles
- * [Performance] Optimized Canvas rendering
+ * [Performance] Optimized Canvas rendering with safety checks
+ * [Safety] Mobile OFF, Tab visibility, Reduced motion support
  */
 
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 interface Particle {
@@ -21,8 +22,39 @@ export function HeroBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animationFrameRef = useRef<number>();
+  const animateFnRef = useRef<() => void>();
+  const [shouldAnimate, setShouldAnimate] = useState(true);
 
   useEffect(() => {
+    // Safety Check 1: Detect reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setShouldAnimate(false);
+      return;
+    }
+
+    // Safety Check 2: Detect mobile/low-end devices
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const isLowEnd = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+    if (isMobile || isLowEnd) {
+      setShouldAnimate(false);
+      return;
+    }
+
+    // Safety Check 3: Page Visibility API - pause when tab is hidden
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+        }
+      } else {
+        if (animateFnRef.current) {
+          animateFnRef.current();
+        }
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     // Performance: requestIdleCallback으로 Canvas 초기화 지연
     const initCanvas = () => {
       const canvas = canvasRef.current;
@@ -46,7 +78,7 @@ export function HeroBackground() {
       y: Math.random() * canvas.height,
       vx: (Math.random() - 0.5) * 0.5,
       vy: (Math.random() - 0.5) * 0.5,
-      radius: 0.8,
+      radius: 1.2,
     }));
 
     // Animation loop
@@ -82,29 +114,39 @@ export function HeroBackground() {
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
+    // Store animate function in ref for visibility change handler
+    animateFnRef.current = animate;
     animate();
 
     // Cleanup
     return () => {
       window.removeEventListener("resize", resizeCanvas);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
     };
 
+    // Only animate if all safety checks pass
+    if (!shouldAnimate) return;
+
     // Performance: 브라우저가 idle 상태일 때 Canvas 초기화
     if ('requestIdleCallback' in window) {
       const idleCallbackId = requestIdleCallback(initCanvas, { timeout: 2000 });
       return () => {
         cancelIdleCallback(idleCallbackId);
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
       };
     } else {
       // Fallback: setTimeout
       const timeoutId = setTimeout(initCanvas, 100);
-      return () => clearTimeout(timeoutId);
+      return () => {
+        clearTimeout(timeoutId);
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+      };
     }
-  }, []);
+  }, [shouldAnimate]);
 
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#0B0B0D]">
@@ -118,44 +160,72 @@ export function HeroBackground() {
       {/* Rotating Gradient Circles - Behind Title Near Header */}
       <div className="absolute inset-0 flex items-start justify-center pt-32" style={{ zIndex: 5 }}>
         {/* Big Circle - Performance Balanced: blur + reduced opacity */}
-        <motion.div
-          className="absolute"
-          animate={{ rotate: 360 }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          style={{
-            width: "495px",
-            height: "495px",
-            borderRadius: "50%",
-            background: "linear-gradient(229deg, rgb(59, 130, 246) 13%, rgba(37, 99, 235, 0) 35%, rgba(29, 78, 216, 0) 64%, rgb(30, 64, 175) 88%)",
-            filter: "blur(15px)",
-            opacity: 0.5,
-            willChange: "transform",
-          }}
-        />
+        {shouldAnimate ? (
+          <motion.div
+            className="absolute"
+            animate={{ rotate: 360 }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            style={{
+              width: "495px",
+              height: "495px",
+              borderRadius: "50%",
+              background: "linear-gradient(229deg, rgb(59, 130, 246) 13%, rgba(37, 99, 235, 0) 35%, rgba(29, 78, 216, 0) 64%, rgb(30, 64, 175) 88%)",
+              filter: "blur(15px)",
+              opacity: 0.5,
+              willChange: "transform",
+            }}
+          />
+        ) : (
+          <div
+            className="absolute"
+            style={{
+              width: "495px",
+              height: "495px",
+              borderRadius: "50%",
+              background: "linear-gradient(229deg, rgb(59, 130, 246) 13%, rgba(37, 99, 235, 0) 35%, rgba(29, 78, 216, 0) 64%, rgb(30, 64, 175) 88%)",
+              filter: "blur(15px)",
+              opacity: 0.5,
+            }}
+          />
+        )}
 
         {/* Small Circle - Performance Balanced: blur + reduced opacity */}
-        <motion.div
-          className="absolute"
-          animate={{ rotate: -360 }}
-          transition={{
-            duration: 16,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          style={{
-            width: "418px",
-            height: "418px",
-            borderRadius: "50%",
-            background: "linear-gradient(141deg, rgb(96, 165, 250) 13%, rgba(59, 130, 246, 0) 35%, rgba(37, 99, 235, 0) 64%, rgb(29, 78, 216) 88%)",
-            filter: "blur(12px)",
-            opacity: 0.45,
-            willChange: "transform",
-          }}
-        />
+        {shouldAnimate ? (
+          <motion.div
+            className="absolute"
+            animate={{ rotate: -360 }}
+            transition={{
+              duration: 16,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            style={{
+              width: "418px",
+              height: "418px",
+              borderRadius: "50%",
+              background: "linear-gradient(141deg, rgb(96, 165, 250) 13%, rgba(59, 130, 246, 0) 35%, rgba(37, 99, 235, 0) 64%, rgb(29, 78, 216) 88%)",
+              filter: "blur(12px)",
+              opacity: 0.45,
+              willChange: "transform",
+            }}
+          />
+        ) : (
+          <div
+            className="absolute"
+            style={{
+              width: "418px",
+              height: "418px",
+              borderRadius: "50%",
+              background: "linear-gradient(141deg, rgb(96, 165, 250) 13%, rgba(59, 130, 246, 0) 35%, rgba(37, 99, 235, 0) 64%, rgb(29, 78, 216) 88%)",
+              filter: "blur(12px)",
+              opacity: 0.45,
+            }}
+          />
+        )}
       </div>
 
       {/* Center Vignette */}

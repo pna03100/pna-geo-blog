@@ -1,6 +1,7 @@
 /**
  * [Animation] CountUpNumber - Animated number counter
  * [Trigger] Counts up when element enters viewport
+ * [Safety] Shows final number if JS fails, screen reader friendly
  */
 
 "use client";
@@ -23,13 +24,25 @@ export function CountUpNumber({
   prefix = "",
   className = "",
 }: CountUpNumberProps) {
-  const [count, setCount] = useState(0);
+  // Safety: Start with final value (JS fail-safe + SEO)
+  const [count, setCount] = useState(end);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView || hasAnimated) return;
 
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setCount(end);
+      setHasAnimated(true);
+      return;
+    }
+
+    // Start animation from 0
+    setCount(0);
     let startTime: number | null = null;
     const startValue = 0;
 
@@ -46,17 +59,25 @@ export function CountUpNumber({
         requestAnimationFrame(animate);
       } else {
         setCount(end);
+        setHasAnimated(true);
       }
     };
 
     requestAnimationFrame(animate);
-  }, [isInView, end, duration]);
+  }, [isInView, end, duration, hasAnimated]);
+
+  // Screen reader accessibility: always announce final value
+  const displayValue = `${prefix}${count.toLocaleString()}${suffix}`;
+  const ariaLabel = `${prefix}${end.toLocaleString()}${suffix}`;
 
   return (
-    <span ref={ref} className={className}>
-      {prefix}
-      {count.toLocaleString()}
-      {suffix}
+    <span 
+      ref={ref} 
+      className={className}
+      aria-label={ariaLabel}
+      role="text"
+    >
+      {displayValue}
     </span>
   );
 }
