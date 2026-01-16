@@ -84,12 +84,161 @@
   animation: badge-entrance 0.5s ease-out forwards;
 }
 
+/* ============================================
+   [Premium Motion] Apple/Tesla Style Animations
+   Performance: 160-220ms, transform/opacity only
+   ============================================ */
+
+/* Premium Button Styles - 일괄 관리 */
+@layer components {
+  .btn-premium-primary {
+    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base cursor-pointer;
+    @apply bg-blue-600 text-white border border-blue-400/50;
+    @apply hover:border-blue-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/20;
+    @apply active:scale-[0.98];
+    @apply transition-all duration-200 will-change-transform;
+  }
+
+  .btn-premium-secondary {
+    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base cursor-pointer;
+    @apply bg-transparent text-white border border-white/30;
+    @apply hover:border-white/50 hover:bg-white/5 hover:-translate-y-0.5;
+    @apply active:scale-[0.98];
+    @apply transition-all duration-200 will-change-transform;
+  }
+
+  .btn-premium-small {
+    @apply inline-flex items-center gap-2 px-6 py-2 rounded-md font-bold text-sm cursor-pointer;
+    @apply bg-blue-600 text-white shadow-md shadow-blue-600/15;
+    @apply hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/20;
+    @apply active:scale-[0.98];
+    @apply transition-all duration-200 will-change-transform;
+  }
+
+  /* Premium Card Hover - 일괄 관리 */
+  .card-premium {
+    @apply bg-white border-2 rounded-xl md:rounded-2xl shadow-sm;
+    @apply hover:shadow-lg hover:-translate-y-0.5;
+    @apply transition-all duration-200 will-change-transform;
+  }
+
+  .card-premium-border {
+    @apply border-slate-200 hover:border-blue-300;
+  }
+
+  .card-premium-border-featured {
+    @apply border-blue-200 hover:border-blue-400;
+  }
+
+  /* Premium Arrow Animation */
+  .arrow-premium {
+    @apply group-hover:translate-x-0.5 transition-transform duration-200;
+  }
+
+  /* Premium Metric Hover */
+  .metric-premium {
+    @apply cursor-default;
+  }
+
+  .metric-premium .metric-label {
+    @apply text-slate-400 transition-colors duration-200;
+  }
+
+  .metric-premium .metric-number {
+    @apply transition-colors duration-200;
+  }
+
+  .metric-premium .metric-badge {
+    @apply transition-all duration-200;
+  }
+
+  .metric-premium .metric-badge-text {
+    @apply transition-colors duration-200;
+  }
+  
+  /* Group hover states - must be in parent context */
+  .metric-premium:hover .metric-label {
+    @apply text-slate-300;
+  }
+
+  .metric-premium:hover .metric-number {
+    @apply text-[#3B82F6];
+  }
+
+  .metric-premium:hover .metric-badge {
+    @apply bg-blue-600/15 border-blue-500/40;
+  }
+
+  .metric-premium:hover .metric-badge-text {
+    @apply text-blue-300;
+  }
+}
+
+/* Scan Light - 40s radial gradient animation */
+@keyframes scan-light {
+  0%, 100% {
+    background: radial-gradient(
+      circle at 20% 30%,
+      rgba(59, 130, 246, 0.08) 0%,
+      transparent 50%
+    );
+  }
+  25% {
+    background: radial-gradient(
+      circle at 80% 40%,
+      rgba(96, 165, 250, 0.06) 0%,
+      transparent 50%
+    );
+  }
+  50% {
+    background: radial-gradient(
+      circle at 60% 70%,
+      rgba(59, 130, 246, 0.08) 0%,
+      transparent 50%
+    );
+  }
+  75% {
+    background: radial-gradient(
+      circle at 30% 60%,
+      rgba(96, 165, 250, 0.06) 0%,
+      transparent 50%
+    );
+  }
+}
+
+.scan-light {
+  animation: scan-light 40s ease-in-out infinite;
+}
+
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .animate-badge-entrance {
     animation: none;
     opacity: 1;
     transform: scale(1);
+  }
+  
+  /* Disable all premium animations */
+  .scan-light {
+    animation: none;
+    background: none;
+  }
+  
+  /* Remove will-change for better mobile performance */
+  * {
+    will-change: auto !important;
+  }
+}
+
+/* Mobile optimization - simpler transitions */
+@media (max-width: 768px) {
+  .will-change-transform {
+    will-change: auto;
+  }
+  
+  /* Faster transitions on mobile */
+  * {
+    transition-duration: 160ms !important;
   }
 }
 

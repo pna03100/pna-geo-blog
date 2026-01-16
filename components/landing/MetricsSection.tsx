@@ -69,14 +69,14 @@ export function MetricsSection() {
         {/* Open Layout with Vertical Dividers */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-0 mt-16 md:mt-20">
           {metrics.map((stat, index) => (
-            <div key={stat.id} className="relative text-center px-4 md:px-6">
+            <div key={stat.id} className="group metric-premium relative text-center px-4 md:px-6">
                 {/* Vertical Divider (Hidden on mobile, shown after first item on desktop) */}
                 {index > 0 && (
                   <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 h-32 w-px bg-slate-800" />
                 )}
 
                 {/* Label */}
-                <dt className="text-sm md:text-base font-semibold text-slate-400 mb-4 md:mb-5 leading-relaxed">
+                <dt className="metric-label text-sm md:text-base font-semibold mb-4 md:mb-5 leading-relaxed">
                   {stat.label}
                 </dt>
                 
@@ -99,17 +99,17 @@ export function MetricsSection() {
                     <CountUpNumber 
                       end={stat.value} 
                       suffix="" 
-                      className="number text-5xl md:text-6xl lg:text-7xl font-bold text-[#2563EB] tracking-tight drop-shadow-[0_0_20px_rgba(37,99,235,0.5)]"
+                      className="metric-number number text-5xl md:text-6xl lg:text-7xl font-bold text-[#2563EB] tracking-tight drop-shadow-[0_0_20px_rgba(37,99,235,0.5)]"
                     />
-                    <span className="unit text-3xl md:text-4xl lg:text-5xl font-bold text-[#2563EB]/70">
+                    <span className="metric-number unit text-3xl md:text-4xl lg:text-5xl font-bold text-[#2563EB]/70">
                       {stat.suffix}
                     </span>
                   </span>
                 </dd>
                 
                 {/* Description Badge - Cyber Style */}
-                <div className="inline-flex items-center justify-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-blue-600/10 border border-blue-500/30">
-                  <span className="text-xs md:text-sm font-semibold text-blue-400 leading-relaxed">
+                <div className="metric-badge inline-flex items-center justify-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-blue-600/10 border border-blue-500/30">
+                  <span className="metric-badge-text text-xs md:text-sm font-semibold text-blue-400 leading-relaxed">
                     {stat.description}
                   </span>
                 </div>

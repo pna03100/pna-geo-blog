@@ -345,7 +345,7 @@ export function WordPressClient() {
               const Icon = service.icon;
               return (
                 <div key={index}>
-                  <div className="flex items-start gap-6 p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-start gap-6 p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 will-change-transform">
                     {/* Icon */}
                     <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
                       <Icon className="w-8 h-8 text-white" />
@@ -385,7 +385,7 @@ export function WordPressClient() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {successCases.map((project, index) => (
               <div key={index}>
-                <div className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300">
+                <div className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 will-change-transform">
                   {/* Category Badge */}
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-bold mb-4">
                     <TrendingUp className="w-4 h-4" />
@@ -513,10 +513,10 @@ export function WordPressClient() {
           {/* CTA Button */}
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-blue-600 font-bold rounded-full hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl text-base"
+            className="btn-premium-primary !bg-white !text-blue-600 !border-blue-200 hover:!bg-blue-50 hover:!border-blue-400"
           >
             <span>문의하기</span>
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-5 h-5 arrow-premium" />
           </Link>
         </div>
       </section>

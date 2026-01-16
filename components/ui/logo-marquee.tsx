@@ -38,7 +38,7 @@ export function LogoMarquee() {
           return (
             <div
               key={`${partner.name}-${index}`}
-              className="flex-shrink-0 mx-8 md:mx-12 transition-all duration-300 hover:scale-110 group"
+              className="flex-shrink-0 mx-8 md:mx-12 transition-all duration-200 hover:-translate-y-0.5 group will-change-transform"
               aria-hidden={!isOriginal}
             >
               <div className="flex flex-col items-center gap-3 grayscale hover:grayscale-0 transition-all">

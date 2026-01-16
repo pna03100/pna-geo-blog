@@ -326,7 +326,7 @@ export function PerformanceClient() {
             {channels.map((channel, index) => {
               const Icon = channel.icon;
               return (
-                <div key={index} className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-blue-400 hover:bg-white/10 transition-all duration-300">
+                <div key={index} className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-blue-400 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-200 will-change-transform">
                     {/* Icon & Title */}
                     <div className="flex items-center gap-4 mb-6">
                       <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
@@ -430,7 +430,7 @@ export function PerformanceClient() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {successCases.map((project, index) => (
-              <div key={index} className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300">
+              <div key={index} className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 will-change-transform">
                   {/* Category */}
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-bold mb-4">
                     <Target className="w-4 h-4" />
@@ -567,10 +567,10 @@ export function PerformanceClient() {
           {/* CTA Button */}
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-blue-600 font-bold rounded-full hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl text-base"
+            className="btn-premium-primary !bg-white !text-blue-600 !border-blue-200 hover:!bg-blue-50 hover:!border-blue-400"
           >
             <span>문의하기</span>
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-5 h-5 arrow-premium" />
           </Link>
         </div>
       </section>

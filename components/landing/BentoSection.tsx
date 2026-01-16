@@ -90,10 +90,10 @@ export function BentoSection() {
             <div key={solution.title} className={solution.span}>
               <Link href={solution.link} className="block h-full">
                 <div 
-                  className={`group relative overflow-hidden rounded-xl md:rounded-2xl bg-white border-2 p-6 md:p-8 shadow-sm transition-all hover:shadow-2xl h-full cursor-pointer ${
+                  className={`group relative overflow-hidden p-6 md:p-8 h-full cursor-pointer card-premium ${
                     solution.featured 
-                      ? 'border-blue-200 hover:border-blue-500 hover:scale-[1.02]' 
-                      : 'border-slate-200 hover:border-blue-400'
+                      ? 'card-premium-border-featured' 
+                      : 'card-premium-border'
                   }`}
                 >
                   {/* Featured Badge for Main Services */}
@@ -106,7 +106,7 @@ export function BentoSection() {
 
                   <div className="relative h-full flex flex-col">
                     {/* Icon with Gradient Background */}
-                    <div className={`inline-flex items-center justify-center p-4 rounded-2xl mb-5 w-fit transition-all group-hover:scale-110 ${
+                    <div className={`inline-flex items-center justify-center p-4 rounded-2xl mb-5 w-fit transition-transform duration-200 ${
                       solution.featured 
                         ? `bg-gradient-to-br ${solution.gradientFrom} ${solution.gradientTo}` 
                         : 'bg-blue-50'
@@ -148,9 +148,9 @@ export function BentoSection() {
                     </ul>
 
                     {/* Hover Arrow */}
-                    <div className="mt-5 flex items-center gap-2 text-blue-600 font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="mt-5 flex items-center gap-2 text-blue-600 font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                       <span>자세히 보기</span>
-                      <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                      <span className="arrow-premium">→</span>
                     </div>
                   </div>
                 </div>

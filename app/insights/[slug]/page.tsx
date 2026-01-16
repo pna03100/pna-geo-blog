@@ -272,7 +272,7 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
                   <Link
                     href={`/insights/${prevPost.slug}${category ? `?category=${category}` : ''}`}
                     prefetch={true}
-                    className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-lg transition-all duration-300"
+                    className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 will-change-transform"
                   >
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
                       <ChevronLeft className="w-6 h-6 text-blue-600" />
@@ -295,7 +295,7 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
                   <Link
                     href={`/insights/${nextPost.slug}${category ? `?category=${category}` : ''}`}
                     prefetch={true}
-                    className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-lg transition-all duration-300"
+                    className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 will-change-transform"
                   >
                     <div className="flex-1 min-w-0 text-right">
                       <div className="text-xs text-slate-500 font-semibold mb-1">다음 글</div>

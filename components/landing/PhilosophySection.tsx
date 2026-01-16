@@ -58,8 +58,8 @@ export function PhilosophySection() {
                       <div className="absolute inset-0 bg-blue-500 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
                       
                       {/* Icon Circle */}
-                      <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 flex items-center justify-center transition-all duration-300 group-hover:border-blue-400 group-hover:scale-110 group-hover:shadow-xl">
-                        <Icon className="w-10 h-10 md:w-12 md:h-12 text-blue-600 transition-transform duration-300 group-hover:scale-110" />
+                      <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 flex items-center justify-center transition-all duration-200 group-hover:border-blue-400 group-hover:shadow-lg">
+                        <Icon className="w-10 h-10 md:w-12 md:h-12 text-blue-600 transition-transform duration-200" />
                       </div>
                     </div>
                   </div>

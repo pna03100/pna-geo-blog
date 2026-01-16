@@ -120,7 +120,7 @@ export function ContactSection() {
 
         {/* Form - Full Width Below Title */}
         <div className="max-w-4xl mx-auto">
-          <div className="relative bg-white p-8 md:p-12 rounded-3xl shadow-2xl shadow-blue-600/5 border-2 border-slate-100 hover:border-blue-200 transition-all duration-300">
+          <div className="relative bg-white p-8 md:p-12 rounded-3xl shadow-2xl shadow-blue-600/5 border-2 border-slate-100 hover:border-blue-200 transition-all duration-200">
             {/* Decorative Element */}
             <div className="absolute -top-px -right-px w-32 h-32 bg-gradient-to-br from-blue-100 to-transparent rounded-br-3xl rounded-tl-3xl opacity-20 pointer-events-none" />
             
@@ -299,7 +299,7 @@ export function ContactSection() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-8 py-5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg hover:from-blue-700 hover:to-indigo-700 hover:shadow-2xl hover:shadow-blue-600/30 hover:-translate-y-0.5 focus:ring-4 focus:ring-blue-600/30 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-2 group"
+                className="w-full px-8 py-5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:shadow-blue-600/20 hover:-translate-y-0.5 focus:ring-4 focus:ring-blue-600/30 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-2 group will-change-transform"
               >
                 {isSubmitting ? (
                   <>
@@ -309,7 +309,7 @@ export function ContactSection() {
                 ) : (
                   <>
                     <span>문의하기</span>
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-5 h-5 arrow-premium" />
                   </>
                 )}
               </button>

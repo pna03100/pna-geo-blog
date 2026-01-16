@@ -68,7 +68,7 @@ export function FAQSection() {
             <div key={index} 
                 className={`
                   relative rounded-2xl bg-white border-2 overflow-hidden
-                  transition-all duration-300
+                  transition-all duration-200
                   ${openIndex === index 
                     ? 'border-blue-500 shadow-xl shadow-blue-500/10' 
                     : 'border-slate-200 hover:border-blue-300 hover:shadow-lg'
@@ -86,7 +86,7 @@ export function FAQSection() {
                   <div className={`
                     flex-shrink-0 w-10 h-10 rounded-full 
                     flex items-center justify-center font-bold text-sm
-                    transition-all duration-300
+                    transition-all duration-200
                     ${openIndex === index
                       ? 'bg-blue-600 text-white scale-110'
                       : 'bg-slate-100 text-slate-400'
@@ -97,7 +97,7 @@ export function FAQSection() {
 
                   <h3 className={`
                     text-base md:text-xl font-bold leading-[1.4] flex-1 px-4
-                    transition-colors duration-300
+                    transition-colors duration-200
                     ${openIndex === index ? 'text-blue-600' : 'text-slate-900'}
                   `}>
                     {faq.question}
@@ -106,7 +106,7 @@ export function FAQSection() {
                   <div className={`
                     flex-shrink-0 w-10 h-10 rounded-full 
                     flex items-center justify-center
-                    transition-all duration-300
+                    transition-all duration-200
                     ${openIndex === index 
                       ? 'bg-blue-100 rotate-180' 
                       : 'bg-slate-100 group-hover:bg-blue-50'
@@ -114,7 +114,7 @@ export function FAQSection() {
                   `}>
                     <ChevronDown className={`
                       w-5 h-5
-                      transition-colors duration-300
+                      transition-colors duration-200
                       ${openIndex === index ? 'text-blue-600' : 'text-slate-600'}
                     `} />
                   </div>

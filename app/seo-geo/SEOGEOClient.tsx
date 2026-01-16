@@ -475,7 +475,7 @@ export function SEOGEOClient() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {industryStrategies.map((industry, index) => (
               <div key={index}>
-                <div className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border-2 border-white/10 hover:border-blue-400 hover:bg-white/10 transition-all duration-300">
+                <div className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border-2 border-white/10 hover:border-blue-400 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-200 will-change-transform">
                   <h3 className="text-2xl font-bold text-white mb-6">{industry.title}</h3>
 
                   <div className="space-y-4 mb-6">
@@ -534,7 +534,7 @@ export function SEOGEOClient() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {investmentTiers.map((tier, index) => (
               <div key={index}>
-                <div className={`p-8 rounded-2xl transition-all duration-300 ${
+                <div className={`p-8 rounded-2xl hover:-translate-y-0.5 transition-all duration-200 will-change-transform ${
                   tier.highlight 
                     ? 'bg-gradient-to-br from-blue-600 to-indigo-600 text-white border-2 border-blue-600 shadow-2xl scale-105' 
                     : 'bg-white text-slate-900 border-2 border-slate-200 hover:border-blue-300 hover:shadow-lg'
@@ -620,7 +620,7 @@ export function SEOGEOClient() {
             <div className="space-y-6 mb-12">
               {geoStrategies.map((strategy, index) => (
                 <div key={index}>
-                  <div className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
+                  <div className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 will-change-transform">
                     <div className="flex items-start gap-6">
                       <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xl">
                         {strategy.number}
@@ -664,7 +664,7 @@ export function SEOGEOClient() {
           <div className="max-w-5xl mx-auto space-y-8">
             {differentiators.map((item, index) => (
               <div key={index}>
-                <div className="p-8 md:p-10 rounded-2xl bg-white border-2 border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300">
+                <div className="p-8 md:p-10 rounded-2xl bg-white border-2 border-slate-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 will-change-transform">
                   <div className="flex items-start gap-6">
                     <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
                       <item.icon className="w-8 h-8 text-white" />
@@ -834,10 +834,10 @@ export function SEOGEOClient() {
           {/* CTA Button */}
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-blue-600 font-bold rounded-full hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl text-base"
+            className="btn-premium-primary !bg-white !text-blue-600 !border-blue-200 hover:!bg-blue-50 hover:!border-blue-400"
           >
             <span>문의하기</span>
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-5 h-5 arrow-premium" />
           </Link>
         </div>
       </section>

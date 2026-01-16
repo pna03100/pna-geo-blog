@@ -573,7 +573,7 @@ export function GoogleAdsClient() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {successCases.map((project, index) => (
-              <div key={index} className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300">
+              <div key={index} className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 will-change-transform">
                   {/* Category Badge */}
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-bold mb-4">
                     <TrendingUp className="w-4 h-4" />
@@ -648,7 +648,7 @@ export function GoogleAdsClient() {
             {coreStrategy.map((strategy, index) => {
               const Icon = strategy.icon;
               return (
-                <div key={index} className="flex items-start gap-6 p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
+                <div key={index} className="flex items-start gap-6 p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 will-change-transform">
                     {/* Icon */}
                     <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
                       <Icon className="w-8 h-8 text-white" />
@@ -716,7 +716,7 @@ export function GoogleAdsClient() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {industryStrategy.map((industry, index) => (
-              <div key={index} className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
+              <div key={index} className="p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 will-change-transform">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
                       <TrendingUp className="w-5 h-5 text-white" />
@@ -818,7 +818,7 @@ export function GoogleAdsClient() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {budgetGuide.map((guide, index) => (
-              <div key={index} className={`p-8 rounded-2xl border-2 transition-all duration-300 ${
+              <div key={index} className={`p-8 rounded-2xl border-2 hover:-translate-y-0.5 transition-all duration-200 will-change-transform ${
                 guide.recommended 
                   ? 'border-blue-600 bg-blue-50/50 shadow-xl' 
                   : 'border-slate-200 bg-white'
@@ -903,10 +903,10 @@ export function GoogleAdsClient() {
           {/* CTA Button */}
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-blue-600 font-bold rounded-full hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl text-base"
+            className="btn-premium-primary !bg-white !text-blue-600 !border-blue-200 hover:!bg-blue-50 hover:!border-blue-400"
           >
             <span>문의하기</span>
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-5 h-5 arrow-premium" />
           </Link>
         </div>
       </section>

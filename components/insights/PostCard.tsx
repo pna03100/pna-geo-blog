@@ -59,7 +59,7 @@ export function PostCard({ post, priority = false }: PostCardProps) {
     <Link
       href={`/insights/${post.slug}${categorySlug ? `?category=${categorySlug}` : ''}`}
       prefetch={true}
-      className="group block h-full rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-200 hover:scale-105 transition-all duration-300 overflow-hidden"
+      className="group block h-full card-premium card-premium-border overflow-hidden"
     >
       {/* Image */}
       <div className="relative w-full h-48 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
@@ -68,7 +68,7 @@ export function PostCard({ post, priority = false }: PostCardProps) {
             src={post.featuredImage.node.sourceUrl}
             alt={post.featuredImage.node.altText || post.title || ''}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover transition-transform duration-200"
             sizes="(max-width: 768px) 100vw, 33vw"
             priority={priority}
           />
@@ -115,9 +115,9 @@ export function PostCard({ post, priority = false }: PostCardProps) {
         </p>
 
         {/* Read More */}
-        <div className="flex items-center gap-1.5 text-blue-600 font-medium text-sm group-hover:gap-2 transition-all">
+        <div className="flex items-center gap-1.5 text-blue-600 font-medium text-sm transition-all duration-200">
           <span>자세히 보기</span>
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="w-4 h-4 arrow-premium" />
         </div>
       </div>
     </Link>

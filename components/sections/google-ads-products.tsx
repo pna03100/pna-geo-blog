@@ -86,7 +86,7 @@ export function GoogleAdsProducts() {
             return (
               <div key={product.id}>
                 <div
-                  className={`group relative bg-white/50 backdrop-blur-sm border border-slate-200 rounded-2xl p-6 md:p-8 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${spanClass}`}
+                  className={`group relative bg-white/50 backdrop-blur-sm border border-slate-200 rounded-2xl p-6 md:p-8 hover:border-blue-400 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 will-change-transform ${spanClass}`}
                 >
                   {/* Featured Badge */}
                   {product.featured && (
@@ -97,7 +97,7 @@ export function GoogleAdsProducts() {
 
                   {/* Icon */}
                   <div className="mb-5">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center transition-transform duration-200">
                       <Icon className="w-7 h-7 text-white" />
                     </div>
                   </div>

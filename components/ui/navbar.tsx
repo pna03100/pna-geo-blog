@@ -22,12 +22,15 @@ const navItems = [
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       if (isMobileMenuOpen) {
         setIsMobileMenuOpen(false)
       }
+      // 스크롤 10px 이상일 때 배경 강화
+      setIsScrolled(window.scrollY > 10)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -37,7 +40,11 @@ export function Navbar() {
   return (
     <>
       {/* Fixed Header - Dark Mode Always */}
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/95 backdrop-blur-sm">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+        isScrolled 
+          ? 'border-b border-white/20 bg-black shadow-lg' 
+          : 'border-b border-white/10 bg-black/95 backdrop-blur-sm'
+      }`}>
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           
           {/* Desktop Layout */}
@@ -51,7 +58,7 @@ export function Navbar() {
                 width={140}
                 height={36}
                 priority
-                className="w-auto h-8 brightness-0 invert transition-all duration-300 group-hover:scale-105 group-hover:opacity-80"
+                className="w-auto h-8 brightness-0 invert transition-all duration-200 group-hover:opacity-80"
               />
             </Link>
 
@@ -70,7 +77,7 @@ export function Navbar() {
 
             {/* CTA Button */}
             <Link href="/contact">
-              <button className="px-6 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 hover:scale-105 hover:shadow-xl hover:shadow-blue-600/30 font-bold text-sm transition-all duration-300 shadow-lg shadow-blue-600/20">
+              <button className="btn-premium-small">
                 문의하기
               </button>
             </Link>
@@ -87,7 +94,7 @@ export function Navbar() {
                 width={120}
                 height={32}
                 priority
-                className="w-auto h-7 brightness-0 invert transition-all duration-300 group-hover:scale-105 group-hover:opacity-80"
+                className="w-auto h-7 brightness-0 invert transition-all duration-200 group-hover:opacity-80"
               />
             </Link>
 
@@ -126,7 +133,7 @@ export function Navbar() {
               ))}
               <div className="pt-2 pb-2">
                 <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  <button className="block w-full px-4 py-3 text-center text-sm font-bold rounded-md bg-blue-600 text-white hover:bg-blue-700 hover:scale-105 hover:shadow-xl hover:shadow-blue-600/30 transition-all duration-300 shadow-lg shadow-blue-600/20">
+                  <button className="block w-full btn-premium-small !rounded-md">
                     문의하기
                   </button>
                 </Link>

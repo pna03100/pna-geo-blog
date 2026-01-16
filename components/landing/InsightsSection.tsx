@@ -81,10 +81,10 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
       <div className="text-center mt-12">
         <Link
           href="/insights"
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-blue-200 bg-blue-50 hover:border-blue-600 hover:bg-blue-600 hover:text-white text-blue-700 font-bold transition-all group"
+          className="btn-premium-primary !bg-blue-50 !text-blue-700 !border-blue-200 hover:!bg-blue-600 hover:!text-white hover:!border-blue-600 group"
         >
           <span>모든 인사이트 보기</span>
-          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-5 h-5 arrow-premium" />
         </Link>
       </div>
       </div>

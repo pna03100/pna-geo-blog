@@ -49,7 +49,7 @@ export default function ThankYouPage() {
           {/* Primary Button */}
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold text-base shadow-2xl shadow-blue-500/40 hover:shadow-blue-500/60 transition-all duration-300"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold text-base shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/50 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 will-change-transform"
           >
             <Home className="w-5 h-5" />
             메인으로 돌아가기
@@ -58,7 +58,7 @@ export default function ThankYouPage() {
           {/* Secondary Link */}
           <Link
             href="/insights"
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white border-2 border-slate-200 text-slate-700 font-semibold text-base hover:border-blue-300 hover:text-blue-600 transition-all duration-300"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white border-2 border-slate-200 text-slate-700 font-semibold text-base hover:border-blue-300 hover:text-blue-600 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 will-change-transform"
           >
             <Lightbulb className="w-5 h-5" />
             최신 마케팅 인사이트 보기
