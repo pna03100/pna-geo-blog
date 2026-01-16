@@ -9,6 +9,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
+import { AnimatedBadge } from "@/components/ui/animated-badge";
 import { WPContent } from "@/lib/types";
 import { PostCard } from "@/components/insights/PostCard";
 import { Sparkles, ArrowRight } from "lucide-react";
@@ -164,9 +165,8 @@ export function InsightsClient({ posts }: InsightsClientProps) {
         {/* 3. Content */}
         <div className="relative z-10 container mx-auto px-4 md:px-6 max-w-7xl text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
-            <Sparkles className="w-4 h-4 text-white" />
-            <span className="text-sm font-bold text-white">Marketing Insights</span>
+          <div className="mb-8">
+            <AnimatedBadge icon={Sparkles} text="Marketing Insights" />
           </div>
 
           {/* Kinetic Typography Heading */}

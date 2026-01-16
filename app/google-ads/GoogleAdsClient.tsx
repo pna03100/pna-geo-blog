@@ -9,7 +9,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { AnimatedBadge } from "@/components/ui/animated-badge";
 import { 
   Target, TrendingUp, Zap, ArrowRight, Sparkles, 
   BarChart3, Users, Award, CheckCircle2, X,
@@ -441,15 +441,9 @@ export function GoogleAdsClient() {
         {/* 3. Content */}
         <div className="relative z-10 container mx-auto px-4 md:px-6 max-w-7xl text-center">
           {/* Badge */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8"
-          >
-            <Target className="w-4 h-4 text-white" />
-            <span className="text-sm font-bold text-white">Google Ads Certified Partner</span>
-          </motion.div>
+          <div className="mb-8">
+            <AnimatedBadge icon={Target} text="Google Ads Certified Partner" />
+          </div>
 
           {/* Kinetic Typography Heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ lineHeight: '1.35' }}>

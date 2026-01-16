@@ -6,9 +6,9 @@
 
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { AnimatedBadge } from "@/components/ui/animated-badge";
 import { 
   Users, 
   Award, 
@@ -83,15 +83,9 @@ export function AboutClient() {
         {/* 3. Content */}
         <div className="relative z-10 container mx-auto px-4 md:px-6 max-w-7xl text-center">
           {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8"
-          >
-            <Award className="w-4 h-4 text-white" />
-            <span className="text-sm font-bold text-white">Company Story</span>
-          </motion.div>
+          <div className="mb-8">
+            <AnimatedBadge icon={Award} text="Company Story" />
+          </div>
 
           {/* Heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ lineHeight: '1.35' }}>
@@ -152,12 +146,7 @@ export function AboutClient() {
             </div>
 
             {/* Right: CEO Card - Dark Mode Style */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-            >
+            <div className="animate-on-scroll">
               <div className="relative group">
                 <div className="relative rounded-3xl bg-gradient-to-br from-slate-800 via-slate-900 to-blue-950 shadow-2xl p-8 md:p-10">
                   <span className="inline-block px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs font-bold mb-6">
@@ -198,7 +187,7 @@ export function AboutClient() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -427,19 +416,15 @@ export function AboutClient() {
                     { category: "의료/헬스케어", examples: "병원, 건강 서비스" },
                     { category: "금융/핀테크", examples: "금융 서비스, 결제 솔루션" }
                   ].map((item, idx) => (
-                    <motion.div
+                    <div
                       key={item.category}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.05 * idx }}
-                      className="p-4 rounded-lg hover:bg-slate-50 transition-colors"
+                      className="animate-on-scroll-small p-4 rounded-lg hover:bg-slate-50 transition-colors"
                     >
                       <div className="flex items-baseline gap-3">
                         <div className="text-lg font-bold text-blue-600">{item.category}</div>
                         <div className="text-sm text-slate-600">{item.examples}</div>
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </div>
