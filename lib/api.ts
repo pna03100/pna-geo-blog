@@ -2,8 +2,10 @@
 // [Security] WordPress GraphQL API Client
 // OWASP A03 Defense: Input Validation with Zod
 // Trinity Core: Type-Safe + Validated + Defensive
+// [Performance] React cache() for request deduplication
 // ============================================
 
+import { cache } from 'react';
 import { z } from 'zod';
 import { env } from './env';
 import {
@@ -219,7 +221,8 @@ const DUMMY_MENU_ITEMS: MenuItem[] = [
 // ============================================
 // Get Content by URI (Page or Post)
 // ============================================
-export async function getContentByURI(uri: string): Promise<WPContent | null> {
+// [Performance] Cached to prevent duplicate requests during SSR
+export const getContentByURI = cache(async (uri: string): Promise<WPContent | null> => {
   const query = `
     query GetContentByURI($uri: ID!) {
       contentNode(id: $uri, idType: URI) {
@@ -315,12 +318,13 @@ export async function getContentByURI(uri: string): Promise<WPContent | null> {
     }
     return null;
   }
-}
+});
 
 // ============================================
 // Get All Posts (for Sitemap / Homepage)
 // ============================================
-export async function getAllPosts(): Promise<WPContent[]> {
+// [Performance] Cached to prevent duplicate requests during SSR
+export const getAllPosts = cache(async (): Promise<WPContent[]> => {
   const query = `
     query GetAllPosts {
       posts(first: 100, where: { status: PUBLISH }) {
@@ -383,7 +387,7 @@ export async function getAllPosts(): Promise<WPContent[]> {
     }
     return [];
   }
-}
+});
 
 // ============================================
 // Get All Pages (for Sitemap)
