@@ -2,7 +2,7 @@
  * [Component] Hero Background - Canvas Particle + Rotating Circles
  * [Design] Interactive Particle Network with Gradient Circles
  * [Performance] Optimized Canvas rendering with safety checks
- * [Safety] Mobile OFF, Tab visibility, Reduced motion support
+ * [Safety] Viewport-based detection, Tab visibility, Reduced motion support
  */
 
 "use client";
@@ -23,36 +23,50 @@ export function HeroBackground() {
   const particlesRef = useRef<Particle[]>([]);
   const animationFrameRef = useRef<number>();
   const animateFnRef = useRef<() => void>();
+  const visibilityHandlerRef = useRef<(() => void) | null>(null);
   const [shouldAnimate, setShouldAnimate] = useState(true);
 
   useEffect(() => {
-    // Safety Check 1: Detect reduced motion preference
+    // Safety Check 1 (PRIORITY): Detect reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       setShouldAnimate(false);
       return;
     }
 
-    // Safety Check 2: Detect mobile/low-end devices
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const isLowEnd = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
-    if (isMobile || isLowEnd) {
+    // Safety Check 2 (PRIORITY): Viewport-based mobile detection (accurate)
+    const isMobileViewport = window.innerWidth < 768;
+    if (isMobileViewport) {
       setShouldAnimate(false);
       return;
     }
 
-    // Safety Check 3: Page Visibility API - pause when tab is hidden
+    // Safety Check 3 (AUXILIARY): UA + hardware as backup
+    const isMobileUA = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const isLowEnd = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+    if (isMobileUA && isLowEnd) {
+      setShouldAnimate(false);
+      return;
+    }
+
+    // Safety Check 4: Page Visibility API - pause when tab is hidden (prevent memory leak)
     const handleVisibilityChange = () => {
       if (document.hidden) {
+        // Tab hidden: cancel animation loop
         if (animationFrameRef.current) {
           cancelAnimationFrame(animationFrameRef.current);
+          animationFrameRef.current = undefined;
         }
       } else {
-        if (animateFnRef.current) {
+        // Tab visible: resume animation loop
+        if (animateFnRef.current && !animationFrameRef.current) {
           animateFnRef.current();
         }
       }
     };
+    
+    // Store handler in ref to prevent duplicate listeners
+    visibilityHandlerRef.current = handleVisibilityChange;
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
     // Performance: requestIdleCallback으로 Canvas 초기화 지연
@@ -116,34 +130,53 @@ export function HeroBackground() {
 
     // Store animate function in ref for visibility change handler
     animateFnRef.current = animate;
+    
+    // Debug: Log animation loop start (should only appear once per mount)
+    console.log('[HeroBackground] Animation loop started');
+    
     animate();
 
-    // Cleanup
+    // Cleanup - prevent memory leaks
     return () => {
       window.removeEventListener("resize", resizeCanvas);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = undefined;
+      }
+      // Remove visibility listener inside initCanvas cleanup
+      if (visibilityHandlerRef.current) {
+        document.removeEventListener('visibilitychange', visibilityHandlerRef.current);
       }
     };
     };
 
     // Only animate if all safety checks pass
-    if (!shouldAnimate) return;
+    if (!shouldAnimate) {
+      // Clean up visibility listener if animation is disabled
+      return () => {
+        if (visibilityHandlerRef.current) {
+          document.removeEventListener('visibilitychange', visibilityHandlerRef.current);
+        }
+      };
+    }
 
     // Performance: 브라우저가 idle 상태일 때 Canvas 초기화
     if ('requestIdleCallback' in window) {
       const idleCallbackId = requestIdleCallback(initCanvas, { timeout: 2000 });
       return () => {
         cancelIdleCallback(idleCallbackId);
-        document.removeEventListener('visibilitychange', handleVisibilityChange);
+        if (visibilityHandlerRef.current) {
+          document.removeEventListener('visibilitychange', visibilityHandlerRef.current);
+        }
       };
     } else {
       // Fallback: setTimeout
       const timeoutId = setTimeout(initCanvas, 100);
       return () => {
         clearTimeout(timeoutId);
-        document.removeEventListener('visibilitychange', handleVisibilityChange);
+        if (visibilityHandlerRef.current) {
+          document.removeEventListener('visibilitychange', visibilityHandlerRef.current);
+        }
       };
     }
   }, [shouldAnimate]);

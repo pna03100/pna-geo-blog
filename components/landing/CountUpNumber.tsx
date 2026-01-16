@@ -1,7 +1,7 @@
 /**
  * [Animation] CountUpNumber - Animated number counter
  * [Trigger] Counts up when element enters viewport
- * [Safety] Shows final number if JS fails, screen reader friendly
+ * [Safety] SSR shows final value, CSR animates 0→end with no flash
  */
 
 "use client";
@@ -24,50 +24,63 @@ export function CountUpNumber({
   prefix = "",
   className = "",
 }: CountUpNumberProps) {
-  // Safety: Start with final value (JS fail-safe + SEO)
-  const [count, setCount] = useState(end);
+  // SSR/Hydration: Always show final value
+  const [displayCount, setDisplayCount] = useState(end);
+  const [isMounted, setIsMounted] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
+  const animationFrameRef = useRef<number>();
+
+  // Client-side only detection
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
-    if (!isInView || hasAnimated) return;
+    // Only animate on client after mount and when in view
+    if (!isMounted || !isInView || hasAnimated) return;
 
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
-      setCount(end);
+      setDisplayCount(end);
       setHasAnimated(true);
       return;
     }
 
-    // Start animation from 0
-    setCount(0);
+    // Animation: 0 → end (smooth count up)
     let startTime: number | null = null;
-    const startValue = 0;
 
     const animate = (currentTime: number) => {
       if (startTime === null) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
 
-      // Linear animation (constant speed)
-      const currentCount = Math.floor(progress * (end - startValue) + startValue);
+      // Calculate current count: 0 → end
+      const currentCount = Math.floor(progress * end);
 
-      setCount(currentCount);
+      setDisplayCount(currentCount);
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        animationFrameRef.current = requestAnimationFrame(animate);
       } else {
-        setCount(end);
+        setDisplayCount(end);
         setHasAnimated(true);
       }
     };
 
-    requestAnimationFrame(animate);
-  }, [isInView, end, duration, hasAnimated]);
+    animationFrameRef.current = requestAnimationFrame(animate);
 
-  // Screen reader accessibility: always announce final value
-  const displayValue = `${prefix}${count.toLocaleString()}${suffix}`;
+    // Cleanup
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [isMounted, isInView, end, duration, hasAnimated]);
+
+  // Screen reader accessibility: always announce final value, no live updates
+  const displayValue = `${prefix}${displayCount.toLocaleString()}${suffix}`;
   const ariaLabel = `${prefix}${end.toLocaleString()}${suffix}`;
 
   return (
@@ -75,7 +88,9 @@ export function CountUpNumber({
       ref={ref} 
       className={className}
       aria-label={ariaLabel}
+      aria-live="off"
       role="text"
+      suppressHydrationWarning
     >
       {displayValue}
     </span>
