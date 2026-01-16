@@ -71,9 +71,10 @@ export function AboutClient() {
             alt="피앤에이컴퍼니 회사소개 - 15년 경력의 구글 공식 파트너 마케팅 에이전시"
             fill
             className="object-cover object-bottom"
-            quality={75}
+            quality={100}
             priority
             fetchPriority="high"
+            unoptimized={true}
             sizes="100vw"
           />
           {/* 2. Dark Overlay */}

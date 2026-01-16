@@ -430,9 +430,10 @@ export function GoogleAdsClient() {
             alt="피앤에이컴퍼니 구글 애즈 광고 대행 서비스 - 데이터 분석 대시보드"
             fill
             className="object-cover"
-            quality={60}
+            quality={100}
             priority
             fetchPriority="high"
+            unoptimized={true}
             sizes="(max-width: 768px) 100vw, 1200px"
           />
           {/* 2. Dark Overlay */}

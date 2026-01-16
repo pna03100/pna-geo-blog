@@ -213,9 +213,10 @@ export function PerformanceClient() {
             alt="피앤에이컴퍼니 퍼포먼스 마케팅 서비스 - 데이터 기반 ROI 최적화"
             fill
             className="object-cover"
-            quality={60}
+            quality={100}
             priority
             fetchPriority="high"
+            unoptimized={true}
             sizes="(max-width: 768px) 100vw, 1200px"
           />
           {/* 2. Dark Overlay */}
