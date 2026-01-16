@@ -14,10 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function WordPressPage() {
-  return (
-    <>
-      <BlueprintBackground />
-      <WordPressClient />
-    </>
-  );
+  return <WordPressClient />;
 }

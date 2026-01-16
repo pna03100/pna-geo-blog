@@ -6,7 +6,6 @@
 
 import type { Metadata } from "next";
 import { FileText, Clock } from "lucide-react";
-import { BlueprintBackground } from "@/components/ui/blueprint-background";
 
 // ============================================
 // [GEO] Metadata
@@ -26,12 +25,7 @@ export const metadata: Metadata = {
 // ============================================
 export default function TermsPage() {
   return (
-    <>
-      {/* Standard BlueprintBackground */}
-      <BlueprintBackground />
-
-      {/* Main Content */}
-      <main className="relative min-h-screen py-24 md:py-32 px-4 md:px-6">
+    <main className="relative min-h-screen py-24 md:py-32 px-4 md:px-6">
         <div className="container mx-auto max-w-4xl">
           {/* Glass Container */}
           <article className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-xl rounded-3xl p-8 md:p-12">
@@ -193,6 +187,5 @@ export default function TermsPage() {
           </article>
         </div>
       </main>
-    </>
   );
 }

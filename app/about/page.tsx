@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { AboutClient } from './AboutClient';
-import { SubPageBackground } from '@/components/ui/sub-page-background';
 
 export const metadata: Metadata = {
   title: '회사소개 | 피앤에이컴퍼니',
@@ -13,10 +12,5 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return (
-    <>
-      <SubPageBackground />
-      <AboutClient />
-    </>
-  );
+  return <AboutClient />;
 }

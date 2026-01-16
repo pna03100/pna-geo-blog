@@ -10,6 +10,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/ui/navbar';
 import { FooterSection } from '@/components/landing/FooterSection';
+import { BlueprintBackground } from '@/components/ui/blueprint-background';
 import dynamicImport from 'next/dynamic';
 
 // Performance: FloatingActions를 lazy load (초기 번들 크기 감소)
@@ -105,6 +106,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${inter.className} text-slate-950`}>
+        {/* 🎨 Global Background - Single Source of Truth */}
+        <BlueprintBackground />
+        
         <Navbar />
         {children}
         <FloatingActions />

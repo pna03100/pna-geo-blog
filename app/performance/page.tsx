@@ -14,10 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function PerformancePage() {
-  return (
-    <>
-      <BlueprintBackground />
-      <PerformanceClient />
-    </>
-  );
+  return <PerformanceClient />;
 }

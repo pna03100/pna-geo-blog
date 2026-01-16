@@ -6,6 +6,7 @@
 
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatedBadge } from "@/components/ui/animated-badge";
@@ -58,6 +59,68 @@ const timeline = [
 
 
 export function AboutClient() {
+  const [timelineVisible, setTimelineVisible] = useState(false);
+  const [ceoVisible, setCeoVisible] = useState(false);
+  const [statsVisible, setStatsVisible] = useState(false);
+  
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const ceoRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const timelineObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !timelineVisible) {
+            setTimelineVisible(true);
+          }
+        });
+      },
+      observerOptions
+    );
+
+    const ceoObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !ceoVisible) {
+            setCeoVisible(true);
+          }
+        });
+      },
+      observerOptions
+    );
+
+    const statsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !statsVisible) {
+            setStatsVisible(true);
+          }
+        });
+      },
+      observerOptions
+    );
+
+    const timelineElement = timelineRef.current;
+    const ceoElement = ceoRef.current;
+    const statsElement = statsRef.current;
+
+    if (timelineElement) timelineObserver.observe(timelineElement);
+    if (ceoElement) ceoObserver.observe(ceoElement);
+    if (statsElement) statsObserver.observe(statsElement);
+
+    return () => {
+      if (timelineElement) timelineObserver.unobserve(timelineElement);
+      if (ceoElement) ceoObserver.unobserve(ceoElement);
+      if (statsElement) statsObserver.unobserve(statsElement);
+    };
+  }, [timelineVisible, ceoVisible, statsVisible]);
+
   return (
     <main className="relative min-h-screen pt-16">
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
@@ -147,7 +210,7 @@ export function AboutClient() {
             </div>
 
             {/* Right: CEO Card - Dark Mode Style */}
-            <div className="animate-on-scroll">
+            <div ref={ceoRef} className={ceoVisible ? 'animate-on-scroll' : 'opacity-0'}>
               <div className="relative group">
                 <div className="relative rounded-3xl bg-gradient-to-br from-slate-800 via-slate-900 to-blue-950 shadow-2xl p-8 md:p-10">
                   <span className="inline-block px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs font-bold mb-6">
@@ -207,7 +270,7 @@ export function AboutClient() {
             </p>
           </div>
 
-          <div className="relative">
+          <div ref={timelineRef} className="relative">
             {/* Horizontal Timeline */}
             <div className="hidden md:block">
               {/* Timeline Line */}
@@ -217,7 +280,7 @@ export function AboutClient() {
                 {timeline.map((item, index) => (
                   <div
                     key={item.year}
-                    className="timeline-item relative flex flex-col items-center group"
+                    className={`relative flex flex-col items-center group ${timelineVisible ? 'timeline-item' : 'opacity-0'}`}
                     style={{ width: '20%' }}
                   >
                     {/* Year */}
@@ -243,7 +306,7 @@ export function AboutClient() {
               {timeline.map((item, index) => (
                 <div
                   key={item.year}
-                  className="timeline-item-mobile flex items-center gap-4 group"
+                  className={`flex items-center gap-4 group ${timelineVisible ? 'timeline-item-mobile' : 'opacity-0'}`}
                 >
                   <div className="flex-shrink-0">
                     <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-indigo-400">
@@ -402,7 +465,7 @@ export function AboutClient() {
             </div>
 
             {/* Right: Client Types */}
-            <div>
+            <div ref={statsRef}>
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-8 leading-[1.3]">
                   다양한 산업군과 함께
@@ -419,7 +482,7 @@ export function AboutClient() {
                   ].map((item, idx) => (
                     <div
                       key={item.category}
-                      className="animate-on-scroll-small p-4 rounded-lg hover:bg-slate-50 transition-colors"
+                      className={statsVisible ? 'animate-on-scroll-small p-4 rounded-lg hover:bg-slate-50 transition-colors' : 'opacity-0 p-4 rounded-lg hover:bg-slate-50 transition-colors'}
                     >
                       <div className="flex items-baseline gap-3">
                         <div className="text-lg font-bold text-blue-600">{item.category}</div>

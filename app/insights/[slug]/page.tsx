@@ -14,7 +14,6 @@ import { WPContent } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
-import { BlueprintBackground } from '@/components/ui/blueprint-background';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { sanitizeWordPressHTML, stripHtmlTags, truncateText } from '@/lib/sanitize';
 import { ReadingProgress } from '@/components/insights/ReadingProgress';
@@ -147,9 +146,6 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
     <>
       {/* Reading Progress Bar */}
       <ReadingProgress />
-
-      {/* Background */}
-      <BlueprintBackground />
 
       <div className="min-h-screen relative pt-16">
         <article className="container mx-auto px-4 pt-8 pb-32 max-w-7xl">

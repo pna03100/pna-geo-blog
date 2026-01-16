@@ -4,7 +4,6 @@
  */
 
 import { Metadata } from 'next';
-import { BlueprintBackground } from '@/components/ui/blueprint-background';
 import { ContactSection } from '@/components/sections/contact-section';
 
 // ============================================
@@ -25,14 +24,8 @@ export const metadata: Metadata = {
 // ============================================
 export default function ContactPage() {
   return (
-    <>
-      {/* Background */}
-      <BlueprintBackground />
-
-      {/* Main Content */}
-      <main className="relative min-h-screen pt-16">
-        <ContactSection />
-      </main>
-    </>
+    <main className="relative min-h-screen pt-16">
+      <ContactSection />
+    </main>
   );
 }

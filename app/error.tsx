@@ -7,7 +7,6 @@
 
 import Link from 'next/link';
 import { useEffect } from 'react';
-import { BlueprintBackground } from '@/components/ui/blueprint-background';
 import { RefreshCw, Mail } from 'lucide-react';
 
 export default function Error({
@@ -26,10 +25,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <>
-      <BlueprintBackground />
-      
-      <div className="relative min-h-[80vh] flex flex-col items-center justify-center text-center px-4 pt-[73px]">
+    <div className="relative min-h-[80vh] flex flex-col items-center justify-center text-center px-4 pt-[73px]">
         {/* Visual Decor: Huge 500 Text Background */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0">
           <h1 className="text-[12rem] md:text-[16rem] font-bold text-slate-200/30 select-none leading-none">
@@ -76,7 +72,6 @@ export default function Error({
           </div>
         </div>
       </div>
-    </>
   );
 }
 

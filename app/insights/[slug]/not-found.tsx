@@ -6,14 +6,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { BlueprintBackground } from '@/components/ui/blueprint-background';
 
 export default function InsightNotFound() {
   return (
-    <div className="relative">
-      <BlueprintBackground />
-      
-      <div className="min-h-screen relative flex items-center justify-center px-4 pt-[73px]">
+    <div className="min-h-screen relative flex items-center justify-center px-4 pt-[73px]">
         <div className="max-w-2xl w-full text-center">
           {/* 404 Icon */}
           <div className="mb-8">
@@ -61,7 +57,6 @@ export default function InsightNotFound() {
           </p>
         </div>
         </div>
-      </div>
     </div>
   );
 }

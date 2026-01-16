@@ -5,7 +5,6 @@
 
 import { Metadata } from 'next';
 import { SEOGEOClient } from './SEOGEOClient';
-import { BlueprintBackground } from '@/components/ui/blueprint-background';
 
 export const metadata: Metadata = {
   title: 'SEO & GEO 최적화',
@@ -19,10 +18,5 @@ export const metadata: Metadata = {
 };
 
 export default function SEOGEOPage() {
-  return (
-    <>
-      <BlueprintBackground />
-      <SEOGEOClient />
-    </>
-  );
+  return <SEOGEOClient />;
 }

@@ -198,7 +198,7 @@ export function HeroBackground() {
             className="absolute"
             animate={{ rotate: 360 }}
             transition={{
-              duration: 20,
+              duration: 12,
               repeat: Infinity,
               ease: "linear",
             }}
@@ -232,7 +232,7 @@ export function HeroBackground() {
             className="absolute"
             animate={{ rotate: -360 }}
             transition={{
-              duration: 16,
+              duration: 10,
               repeat: Infinity,
               ease: "linear",
             }}

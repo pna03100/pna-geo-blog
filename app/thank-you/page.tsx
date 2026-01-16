@@ -6,13 +6,10 @@
 
 import { CheckCircle, Home, Lightbulb } from "lucide-react";
 import Link from "next/link";
-import { GridBackground } from "@/components/ui/grid-background";
 
 export default function ThankYouPage() {
   return (
-    <main className="relative min-h-screen pt-16 flex items-center justify-center bg-white">
-      {/* Background */}
-      <GridBackground />
+    <main className="relative min-h-screen pt-16 flex items-center justify-center">
 
       {/* Content */}
       <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-3xl text-center py-20">
