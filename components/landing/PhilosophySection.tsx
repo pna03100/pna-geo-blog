@@ -2,9 +2,12 @@
  * [Section] Philosophy & Process - Open Air Layout
  * [Design] NO CARDS - Icons and text float freely with generous whitespace
  * [Purpose] Show core values and working methodology
+ * [Animation] Lightweight fade-in on scroll with Intersection Observer
  */
 
-import { SectionTitle } from "./SectionTitle";
+"use client";
+
+import { useEffect, useRef } from "react";
 import { Target, TrendingUp, Users, Zap } from "lucide-react";
 
 const principles = [
@@ -31,25 +34,61 @@ const principles = [
 ];
 
 export function PhilosophySection() {
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    itemRefs.current.forEach((item) => {
+      if (item) observer.observe(item);
+    });
+
+    return () => {
+      itemRefs.current.forEach((item) => {
+        if (item) observer.unobserve(item);
+      });
+    };
+  }, []);
+
   return (
     <>
       {/* SECTION: #PHILOSOPHY */}
-      <section data-section="PHILOSOPHY" className="relative py-16 md:py-24 overflow-hidden">
+      <section data-section="PHILOSOPHY" className="relative py-32 md:py-40">
       
       <div className="container mx-auto px-4 md:px-6 max-w-7xl relative">
         {/* Section Header */}
-        <SectionTitle
-          badge="Our Philosophy"
-          title="우리의 일하는 방식"
-          description="15년간 검증된 원칙으로 고객의 성공을 보장합니다"
-        />
+        <div className="mb-12 md:mb-16 text-center">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1px', lineHeight: '1.3' }}>
+            우리의 일하는 방식
+          </h2>
+          <p className="text-base md:text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto">
+            15년간 검증된 원칙으로 고객의 성공을 보장합니다
+          </p>
+        </div>
 
         {/* Open Air Layout - NO CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16 mt-16 md:mt-20">
           {principles.map((principle, index) => {
             const Icon = principle.icon;
             return (
-              <div key={principle.title}>
+              <div 
+                key={principle.title}
+                ref={(el) => { itemRefs.current[index] = el; }}
+                className="philosophy-item opacity-0 translate-y-4"
+                style={{ transitionDelay: `${index * 0.2}s` }}
+              >
                 <div className="text-center group">
                   {/* Floating Icon */}
                   <div className="inline-flex items-center justify-center mb-6">

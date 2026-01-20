@@ -2,10 +2,12 @@
  * [Section] Trust & Authority - Complete Redesign
  * [Design] Premium B2B Layout with Strong Visual Hierarchy
  * [Purpose] Build credibility through data and partnerships
+ * [Animation] Lightweight fade-in on scroll with Intersection Observer
  */
 
 "use client";
 
+import { useEffect, useRef } from "react";
 import { Award, Briefcase, TrendingUp, Users, CheckCircle2, Building2, Target } from "lucide-react";
 import { SectionWrapper } from "./SectionWrapper";
 import { SectionTitle } from "./SectionTitle";
@@ -68,6 +70,44 @@ const certifications = [
 ];
 
 export function ExpertiseSection() {
+  const ceoCardRef = useRef<HTMLDivElement>(null);
+  const certRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    // Observe CEO card
+    if (ceoCardRef.current) {
+      observer.observe(ceoCardRef.current);
+    }
+
+    // Observe certification items
+    certRefs.current.forEach((cert) => {
+      if (cert) observer.observe(cert);
+    });
+
+    return () => {
+      if (ceoCardRef.current) {
+        observer.unobserve(ceoCardRef.current);
+      }
+      certRefs.current.forEach((cert) => {
+        if (cert) observer.unobserve(cert);
+      });
+    };
+  }, []);
+
   return (
     <SectionWrapper id="about" className="" data-section="EXPERTISE">
       {/* SECTION: #EXPERTISE */}
@@ -78,8 +118,11 @@ export function ExpertiseSection() {
         align="center"
       />
 
-      {/* CEO Profile - Full Width */}
-      <div className="rounded-2xl overflow-hidden mb-12 shadow-xl">
+      {/* CEO Profile - Full Width with Fade Up */}
+      <div 
+        ref={ceoCardRef}
+        className="rounded-2xl overflow-hidden mb-12 shadow-xl philosophy-item opacity-0 translate-y-4"
+      >
           <div className="grid md:grid-cols-[300px,1fr] gap-0">
             {/* Left: Avatar Only - Full Height */}
             <div className="bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-8xl md:text-9xl p-12 md:p-16">
@@ -167,12 +210,17 @@ export function ExpertiseSection() {
           </div>
         </div>
 
-      {/* Certifications - Centered Below */}
+      {/* Certifications - Centered Below with Fade Up */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:divide-x md:divide-slate-200 max-w-4xl mx-auto">
         {certifications.map((cert, index) => {
           const Icon = cert.icon;
           return (
-            <div key={cert.title} className="px-8 py-6 md:py-0 text-center">
+            <div 
+              key={cert.title} 
+              ref={(el) => { certRefs.current[index] = el; }}
+              className="px-8 py-6 md:py-0 text-center philosophy-item opacity-0 translate-y-4"
+              style={{ transitionDelay: `${index * 0.15}s` }}
+            >
                 {/* Icon */}
                 <Icon className="w-12 h-12 text-blue-600 mx-auto mb-5" />
                 

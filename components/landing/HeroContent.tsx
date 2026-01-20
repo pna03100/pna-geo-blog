@@ -10,7 +10,7 @@ export function HeroContent() {
   return (
     <div className="max-w-3xl hero-content-animate">
       {/* 🎯 LCP CRITICAL: Main Headline - Server Rendered */}
-      <h1 className="mb-6 md:mb-8 text-left text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900" style={{ lineHeight: '1.3', letterSpacing: '-0.02em' }}>
+      <h1 className="mb-6 md:mb-8 text-left text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 relative" style={{ lineHeight: '1.3', letterSpacing: '-0.02em' }}>
         <span className="block">
           구글 광고 대행사
         </span>

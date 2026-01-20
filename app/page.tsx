@@ -147,7 +147,7 @@ export default async function HomePage() {
 
         {/* Google Award Badge - Below Hero */}
         <section className="relative -mt-8 mb-16 md:mb-20">
-          <div className="container mx-auto px-4 md:px-6 max-w-7xl flex justify-center perspective-1000">
+          <div className="container mx-auto px-4 md:px-6 max-w-7xl flex justify-center">
             <GoogleAwardBadge />
           </div>
         </section>

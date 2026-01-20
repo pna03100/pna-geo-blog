@@ -42,7 +42,7 @@ const metrics = [
 
 export function MetricsSection() {
   return (
-    <section data-section="METRICS" className="py-20 md:py-32 relative z-10 overflow-hidden">
+    <section data-section="METRICS" className="py-32 md:py-40 relative z-10 overflow-hidden">
       
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative">
         

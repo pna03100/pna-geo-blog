@@ -74,6 +74,16 @@
   .ease-premium {
     transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
   }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
 }
 
 /* Premium Button Styles - 일괄 관리 */
@@ -475,6 +485,58 @@
   }
   100% {
     left: 100%;
+  }
+}
+
+/* Scroll Reveal Card - Intersection Observer */
+.scroll-reveal-card {
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal-card.is-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Philosophy Item Fade-In */
+.philosophy-item {
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.philosophy-item.is-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Expertise Slide from Left */
+.expertise-slide-left {
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.expertise-slide-left.is-visible {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+/* Solution Card Icon Glow */
+.solution-icon-glow {
+  position: relative;
+}
+
+/* Pulse Slow Animation */
+.animate-pulse-slow {
+  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
   }
 }
 

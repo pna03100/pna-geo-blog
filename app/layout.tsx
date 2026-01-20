@@ -87,7 +87,7 @@ export const metadata: Metadata = {
   
   // [GEO] 검증 태그 (Search Console)
   verification: {
-    // google: 'your-google-site-verification-code',
+    google: 'TMMrqXsSdFTx9VvORpwrCeJziGW-QQC4ukms0YfrNWo',
     other: {
       'naver-site-verification': '886fa3f3a57007c7718e21599f34db31b78116fd',
     },
