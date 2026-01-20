@@ -427,3 +427,153 @@
     transform: rotate(360deg); 
   }
 }
+
+/* 3D Perspective for Interactive Elements */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* ============================================
+   [Hero] CSS Animations - Optimized for SEO & Performance
+   Pure CSS for instant rendering + smooth transitions
+   ============================================ */
+
+/* Hero Content Container - No Animation */
+.hero-content-animate {
+  /* No entrance animation */
+}
+
+/* Hero Title Shine Effect - "피앤에이컴퍼니는" only */
+.hero-title-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-title-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  animation: shine 5s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  30% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Hero Description - Faster */
+.hero-description {
+  opacity: 0;
+  animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+
+/* Hero Buttons - Faster */
+.hero-buttons {
+  opacity: 0;
+  animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+}
+
+/* Hero Stats - Faster */
+.hero-stats {
+  opacity: 0;
+  animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Stats Hover Effect */
+.stat-item {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+
+.stat-item:hover {
+  transform: scale(1.05);
+}
+
+/* Background Typography - 3D Depth (Z-axis) */
+.bg-typo-container {
+  opacity: 0;
+  transform-origin: bottom right;
+  perspective: 1000px;
+  animation: bgTypoDepthReveal 5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bgTypoDepthReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) translateZ(-500px);
+    filter: blur(20px) brightness(1.5);
+  }
+  50% {
+    opacity: 0.7;
+    filter: blur(5px) brightness(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateZ(0px);
+    filter: blur(0px) brightness(1);
+  }
+}
+
+.bg-typo-pna {
+  /* No separate animation */
+}
+
+.bg-typo-marketing {
+  /* No separate animation */
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-shine::before,
+  .hero-description,
+  .hero-buttons,
+  .hero-stats,
+  .bg-typo-container,
+  .bg-typo-pna,
+  .bg-typo-marketing {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .stat-item:hover {
+    transform: none;
+  }
+}
