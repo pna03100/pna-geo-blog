@@ -22,39 +22,42 @@ export function HeroSection() {
       
       {/* 🎯 LCP CRITICAL: Server-Rendered Content (JavaScript 없이 즉시 표시) */}
       <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl">
-        {/* Main Content with Top Spacing */}
-        <div 
-          className="max-w-5xl mx-auto text-center pt-32 pb-12 sm:pt-36 md:pt-40 lg:pt-48 space-y-6 md:space-y-8"
-        >
+        {/* 2-Column Layout: Title Left, Award Right */}
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-center py-32 md:py-40 lg:py-48">
           
-          {/* 🎯 LCP CRITICAL: Main Headline - Server Rendered (Google 최우선) */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight" style={{ lineHeight: '1.15' }}>
-            <span className="block text-white mb-2">
-              구글 광고 대행사
-            </span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 mb-2 drop-shadow-[0_0_30px_rgba(96,165,250,0.5)]">
-              데이터로 증명하는
-            </span>
-            <span className="block text-white">
-              피앤에이컴퍼니
-            </span>
-          </h1>
+          {/* Left: Text Content */}
+          <div>
+            {/* English Slogan */}
+            <p className="text-sm md:text-base font-semibold tracking-wider text-blue-400/90 mb-4 md:mb-6 uppercase">
+              Data-Driven Online Marketing
+            </p>
 
-          {/* 🎯 SNIPPET TRAP - Direct Answer for Google Featured Snippets & AI */}
-          {/* Server Rendered - 즉시 표시 */}
-          <p className="text-lg text-white/90 font-medium max-w-2xl mx-auto leading-relaxed mb-6">
-            구글애즈 · SEO · GEO 전문, 15년 경력의 구글 공식 파트너
-            <br />
-            데이터 기반 성과 마케팅으로 평균 ROAS 500% 달성
-          </p>
+            {/* 🎯 LCP CRITICAL: Main Headline - Server Rendered (Google 최우선) */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6 md:mb-8" style={{ lineHeight: '1.15' }}>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 mb-2 md:mb-3 drop-shadow-[0_0_30px_rgba(96,165,250,0.5)]">
+                구글 광고 대행사
+              </span>
+              <span className="block text-white">
+                피앤에이컴퍼니
+              </span>
+            </h1>
 
-          {/* CTA Buttons - Client Component (onClick handlers) */}
-          <HeroButtons />
-        </div>
+            {/* 🎯 SNIPPET TRAP - Direct Answer for Google Featured Snippets & AI */}
+            {/* Server Rendered - 즉시 표시 */}
+            <p className="text-base md:text-lg lg:text-xl text-white/90 font-medium leading-relaxed mb-8 md:mb-10">
+              구글애즈 · SEO · GEO 전문, 15년 경력의 구글 공식 파트너
+              <br />
+              데이터 기반 성과 마케팅으로 평균 ROAS 500% 달성
+            </p>
 
-        {/* TOP 100 Award Card - Client Component (Motion) */}
-        <div className="relative w-full max-w-[1040px] mx-auto pb-12 md:pb-16 mt-16 md:mt-20">
-          <GoogleAwardCard />
+            {/* CTA Buttons - Client Component (onClick handlers) */}
+            <HeroButtons />
+          </div>
+
+          {/* Right: TOP 100 Award Card - Client Component (Motion) */}
+          <div className="relative mt-8 md:mt-0">
+            <GoogleAwardCard />
+          </div>
         </div>
 
       </div>

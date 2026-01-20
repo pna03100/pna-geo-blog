@@ -42,21 +42,19 @@ const metrics = [
 
 export function MetricsSection() {
   return (
-    <section data-section="METRICS" className="py-20 md:py-32 relative z-10 overflow-hidden bg-slate-900">
-      {/* Top Gradient Fade */}
-      <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-slate-900 to-transparent pointer-events-none" />
+    <section data-section="METRICS" className="py-20 md:py-32 relative z-10 overflow-hidden bg-white">
       
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative">
         
         {/* Header */}
         <div className="mb-12 md:mb-16 text-center">
           {/* Title */}
-          <h2 className="text-3xl md:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1.5px', lineHeight: '1.3' }}>
+          <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1.5px', lineHeight: '1.3' }}>
             숫자로 증명하는 퍼포먼스
           </h2>
           
           {/* Description */}
-          <p className="text-base md:text-xl text-slate-300 font-medium leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base md:text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto">
             감각에 의존하지 않습니다. 오직 정확한 데이터만이 비즈니스의 성장을 만듭니다.
           </p>
         </div>
@@ -67,19 +65,19 @@ export function MetricsSection() {
             <div key={stat.id} className="group metric-premium relative text-center px-4 md:px-6">
                 {/* Vertical Divider (Hidden on mobile, shown after first item on desktop) */}
                 {index > 0 && (
-                  <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 h-32 w-px bg-slate-800" />
+                  <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 h-32 w-px bg-slate-200" />
                 )}
 
                 {/* Label */}
-<dt className="metric-label text-sm md:text-base font-semibold mb-4 md:mb-5 leading-relaxed text-slate-300">
+<dt className="metric-label text-sm md:text-base font-semibold mb-4 md:mb-5 leading-relaxed text-slate-600">
                   {stat.label}
                 </dt>
                 
                 {/* Giant Number */}
                 <dd className="mb-4 md:mb-6 relative">
-                  {/* Trending Up Icon Background with Blue Glow */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-15 pointer-events-none">
-                    <svg className="w-20 h-20 md:w-24 md:h-24 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                  {/* Trending Up Icon Background */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
+                    <svg className="w-20 h-20 md:w-24 md:h-24 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
                     </svg>
                   </div>
@@ -90,21 +88,21 @@ export function MetricsSection() {
                     aria-label={`${stat.label} ${stat.value}${stat.suffix}`}
                     role="text"
                   >
-                    {/* Electric Blue Numbers with Glow */}
+                    {/* Blue Numbers */}
                     <CountUpNumber 
                       end={stat.value} 
                       suffix="" 
-                      className="metric-number number text-5xl md:text-6xl lg:text-7xl font-bold text-[#60A5FA] tracking-tight drop-shadow-[0_0_25px_rgba(96,165,250,0.6)]"
+                      className="metric-number number text-5xl md:text-6xl lg:text-7xl font-bold text-blue-600 tracking-tight"
                     />
-                    <span className="metric-number unit text-3xl md:text-4xl lg:text-5xl font-bold text-[#60A5FA]/80">
+                    <span className="metric-number unit text-3xl md:text-4xl lg:text-5xl font-bold text-blue-600">
                       {stat.suffix}
                     </span>
                   </span>
                 </dd>
                 
-                {/* Description Badge - Cyber Style */}
-                <div className="metric-badge inline-flex items-center justify-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-blue-600/15 border border-blue-500/40">
-                  <span className="metric-badge-text text-xs md:text-sm font-semibold text-blue-300 leading-relaxed">
+                {/* Description */}
+                <div className="inline-flex items-center justify-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-blue-50 border border-blue-100">
+                  <span className="text-xs md:text-sm font-semibold text-blue-700 leading-relaxed">
                     {stat.description}
                   </span>
                 </div>

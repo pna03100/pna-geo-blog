@@ -190,9 +190,9 @@ export function HeroBackground() {
         style={{ width: "100%", height: "100%", zIndex: 1 }}
       />
 
-      {/* Rotating Gradient Circles - Behind Title Near Header */}
-      <div className="absolute inset-0 flex items-start justify-center pt-32" style={{ zIndex: 5 }}>
-        {/* Big Circle - Performance Balanced: blur + reduced opacity */}
+      {/* Rotating Gradient Circles - Card Corner Placement (Diagonal) */}
+      <div className="absolute inset-0" style={{ zIndex: 5 }}>
+        {/* Big Circle - Right Top Corner of Card */}
         {shouldAnimate ? (
           <motion.div
             className="absolute"
@@ -203,12 +203,14 @@ export function HeroBackground() {
               ease: "linear",
             }}
             style={{
-              width: "495px",
-              height: "495px",
+              top: "28%",
+              right: "3%",
+              width: "420px",
+              height: "420px",
               borderRadius: "50%",
               background: "linear-gradient(229deg, rgb(59, 130, 246) 13%, rgba(37, 99, 235, 0) 35%, rgba(29, 78, 216, 0) 64%, rgb(30, 64, 175) 88%)",
               filter: "blur(15px)",
-              opacity: 0.5,
+              opacity: 0.45,
               willChange: "transform",
             }}
           />
@@ -216,17 +218,19 @@ export function HeroBackground() {
           <div
             className="absolute"
             style={{
-              width: "495px",
-              height: "495px",
+              top: "28%",
+              right: "3%",
+              width: "420px",
+              height: "420px",
               borderRadius: "50%",
               background: "linear-gradient(229deg, rgb(59, 130, 246) 13%, rgba(37, 99, 235, 0) 35%, rgba(29, 78, 216, 0) 64%, rgb(30, 64, 175) 88%)",
               filter: "blur(15px)",
-              opacity: 0.5,
+              opacity: 0.45,
             }}
           />
         )}
 
-        {/* Small Circle - Performance Balanced: blur + reduced opacity */}
+        {/* Small Circle - Left Bottom Corner of Card */}
         {shouldAnimate ? (
           <motion.div
             className="absolute"
@@ -237,12 +241,14 @@ export function HeroBackground() {
               ease: "linear",
             }}
             style={{
-              width: "418px",
-              height: "418px",
+              bottom: "22%",
+              right: "28%",
+              width: "360px",
+              height: "360px",
               borderRadius: "50%",
               background: "linear-gradient(141deg, rgb(96, 165, 250) 13%, rgba(59, 130, 246, 0) 35%, rgba(37, 99, 235, 0) 64%, rgb(29, 78, 216) 88%)",
               filter: "blur(12px)",
-              opacity: 0.45,
+              opacity: 0.4,
               willChange: "transform",
             }}
           />
@@ -250,12 +256,14 @@ export function HeroBackground() {
           <div
             className="absolute"
             style={{
-              width: "418px",
-              height: "418px",
+              bottom: "22%",
+              right: "28%",
+              width: "360px",
+              height: "360px",
               borderRadius: "50%",
               background: "linear-gradient(141deg, rgb(96, 165, 250) 13%, rgba(59, 130, 246, 0) 35%, rgba(37, 99, 235, 0) 64%, rgb(29, 78, 216) 88%)",
               filter: "blur(12px)",
-              opacity: 0.45,
+              opacity: 0.4,
             }}
           />
         )}

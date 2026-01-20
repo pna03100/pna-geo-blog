@@ -9,7 +9,7 @@ import { ArrowRight } from "lucide-react";
 
 export function HeroButtons() {
   return (
-    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-20">
+    <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
       <button
         onClick={() => {
           const contactSection = document.getElementById('contact');
@@ -17,7 +17,7 @@ export function HeroButtons() {
             contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         }}
-        className="group btn-premium-primary"
+        className="group btn-premium-primary w-full sm:w-auto"
       >
         <span>무료 상담 시작하기</span>
         <ArrowRight className="w-5 h-5 arrow-premium" />
@@ -30,7 +30,7 @@ export function HeroButtons() {
             solutionsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         }}
-        className="group btn-premium-secondary"
+        className="group btn-premium-secondary w-full sm:w-auto"
       >
         <span>서비스 둘러보기</span>
         <ArrowRight className="w-5 h-5 arrow-premium" />
