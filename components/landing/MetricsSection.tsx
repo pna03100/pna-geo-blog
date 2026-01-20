@@ -50,11 +50,6 @@ export function MetricsSection() {
         
         {/* Header */}
         <div className="mb-12 md:mb-16 text-center">
-          {/* Badge */}
-          <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-blue-600/20 border border-blue-500/40 shadow-lg shadow-blue-600/25 text-blue-300 text-xs md:text-sm font-semibold mb-5 md:mb-7">
-            Proven Results
-          </span>
-          
           {/* Title */}
           <h2 className="text-3xl md:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1.5px', lineHeight: '1.3' }}>
             숫자로 증명하는 퍼포먼스

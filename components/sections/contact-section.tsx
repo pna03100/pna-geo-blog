@@ -137,11 +137,6 @@ export function ContactSection() {
         {/* Title & Badge - Center Aligned */}
         <div className="flex flex-col justify-center items-center gap-6 mb-12">
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-4">
-              <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-              <span className="text-sm font-semibold text-blue-700">Contact Us</span>
-            </div>
-            
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4 tracking-tight leading-[1.35]">
               프로젝트 문의하기
             </h2>

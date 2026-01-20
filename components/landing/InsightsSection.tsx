@@ -28,11 +28,6 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
         
         <div className="relative">
           <div className="mb-12 md:mb-16 text-center">
-            {/* Badge */}
-            <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs md:text-sm font-semibold mb-5 md:mb-7">
-              Insights
-            </span>
-            
             {/* Title */}
             <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1.5px', lineHeight: '1.3' }}>
               마케팅 인사이트
@@ -55,11 +50,6 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
       <div className="relative">
         {/* Header - Light Mode */}
         <div className="mb-12 md:mb-16 text-center">
-          {/* Badge */}
-          <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs md:text-sm font-semibold mb-5 md:mb-7">
-            Insights
-          </span>
-          
           {/* Title */}
           <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1.5px', lineHeight: '1.3' }}>
             마케팅 인사이트

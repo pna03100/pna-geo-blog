@@ -99,12 +99,6 @@ export function ExpertiseSection() {
                 <p className="text-slate-200 text-base md:text-lg">
                   Founder & CEO
                 </p>
-
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-bold">
-                  <span>✨</span>
-                  <span>AI · SEO · GEO 전문 컨설턴트</span>
-                </div>
               </div>
 
               {/* Friendly Introduction - Extended */}
@@ -179,11 +173,6 @@ export function ExpertiseSection() {
           const Icon = cert.icon;
           return (
             <div key={cert.title} className="px-8 py-6 md:py-0 text-center">
-                {/* Badge */}
-                <div className="inline-block px-3 py-1 rounded-full bg-blue-600 text-white text-xs font-bold mb-6">
-                  {cert.badge}
-                </div>
-                
                 {/* Icon */}
                 <Icon className="w-12 h-12 text-blue-600 mx-auto mb-5" />
                 

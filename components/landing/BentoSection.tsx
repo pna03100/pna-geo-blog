@@ -96,14 +96,6 @@ export function BentoSection() {
                       : 'card-premium-border'
                   }`}
                 >
-                  {/* Featured Badge for Main Services */}
-                  {solution.featured && (
-                    <div className="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs font-bold rounded-full">
-                      MAIN
-                    </div>
-                  )}
-
-
                   <div className="relative h-full flex flex-col">
                     {/* Icon with Gradient Background */}
                     <div className={`inline-flex items-center justify-center p-4 rounded-2xl mb-5 w-fit transition-transform duration-200 ${

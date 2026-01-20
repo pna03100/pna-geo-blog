@@ -43,11 +43,9 @@ export function HeroSection() {
           {/* 🎯 SNIPPET TRAP - Direct Answer for Google Featured Snippets & AI */}
           {/* Server Rendered - 즉시 표시 */}
           <p className="text-lg text-white/90 font-medium max-w-2xl mx-auto leading-relaxed mb-6">
-            피앤에이컴퍼니는 15년 경력의 구글 공식 파트너로,
+            구글애즈 · SEO · GEO 전문, 15년 경력의 구글 공식 파트너
             <br />
-            데이터 기반 성과 마케팅을 통해 평균 ROAS 500%를 달성합니다.
-            <br />
-            Google Ads, SEO, GEO 최적화로 검증된 광고 전략을 제공합니다.
+            데이터 기반 성과 마케팅으로 평균 ROAS 500% 달성
           </p>
 
           {/* CTA Buttons - Client Component (onClick handlers) */}

@@ -23,11 +23,6 @@ export function SectionTitle({
   
   return (
     <div className={`mb-12 md:mb-16 ${alignClass}`}>
-      {/* Badge */}
-      <span className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-900/5 text-blue-600 text-xs md:text-sm font-semibold mb-5 md:mb-7">
-        {badge}
-      </span>
-      
       {/* Title */}
       <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1.5px', lineHeight: '1.3' }}>
         {title}
