@@ -488,37 +488,48 @@
   }
 }
 
+/* ============================================
+   [Performance] Scroll-Triggered Animations
+   GPU-accelerated with transform & opacity only
+   ============================================ */
+
 /* Scroll Reveal Card - Intersection Observer */
 .scroll-reveal-card {
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .scroll-reveal-card.is-visible {
   opacity: 1 !important;
   transform: translateY(0) !important;
+  will-change: auto; /* Remove after animation */
 }
 
 /* Philosophy Item Fade-In */
 .philosophy-item {
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
               transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .philosophy-item.is-visible {
   opacity: 1 !important;
   transform: translateY(0) !important;
+  will-change: auto; /* Remove after animation */
 }
 
 /* Expertise Slide from Left */
 .expertise-slide-left {
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
               transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .expertise-slide-left.is-visible {
   opacity: 1 !important;
   transform: translateX(0) !important;
+  will-change: auto; /* Remove after animation */
 }
 
 /* Solution Card Icon Glow */
@@ -621,6 +632,69 @@
   /* No separate animation */
 }
 
+/* ============================================
+   [Performance] Background Blob Animations
+   Pure CSS, GPU-accelerated, no JS overhead
+   ============================================ */
+
+.bg-blob-1 {
+  animation: blob-float-1 25s ease-in-out infinite;
+  will-change: transform;
+}
+
+.bg-blob-2 {
+  animation: blob-float-2 30s ease-in-out infinite;
+  will-change: transform;
+}
+
+.bg-blob-3 {
+  animation: blob-pulse 20s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.bg-blob-4 {
+  animation: blob-float-4 28s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes blob-float-1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(50px, 30px, 0);
+  }
+}
+
+@keyframes blob-float-2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-30px, 40px, 0);
+  }
+}
+
+@keyframes blob-pulse {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+    opacity: 0.35;
+  }
+}
+
+@keyframes blob-float-4 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-20px, -25px, 0);
+  }
+}
+
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .hero-title-shine::before,
@@ -629,7 +703,14 @@
   .hero-stats,
   .bg-typo-container,
   .bg-typo-pna,
-  .bg-typo-marketing {
+  .bg-typo-marketing,
+  .philosophy-item,
+  .expertise-slide-left,
+  .scroll-reveal-card,
+  .bg-blob-1,
+  .bg-blob-2,
+  .bg-blob-3,
+  .bg-blob-4 {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

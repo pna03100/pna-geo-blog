@@ -3,12 +3,12 @@
  * [Trigger] Counts up when element enters viewport
  * [Safety] SSR/HTML always shows final value (SEO/Screen Reader), animation is visual overlay only
  * [No Flicker] 500 → 500 (HTML), visual 0 → 500 (overlay)
+ * [Performance] Pure Intersection Observer, no Framer Motion
  */
 
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
 
 interface CountUpNumberProps {
   end: number;
@@ -29,13 +29,37 @@ export function CountUpNumber({
   const [visualCount, setVisualCount] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
   const animationFrameRef = useRef<number>();
 
   // Client-side only detection
   useEffect(() => {
     setIsMounted(true);
+  }, []);
+
+  // Intersection Observer for viewport detection
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect(); // Once detected, stop observing
+        }
+      },
+      {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    observer.observe(ref.current);
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -57,8 +81,9 @@ export function CountUpNumber({
       if (startTime === null) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
 
-      // Calculate current count: 0 → end
-      const currentCount = Math.floor(progress * end);
+      // Easing function for smooth animation
+      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+      const currentCount = Math.floor(easeOutCubic * end);
 
       setVisualCount(currentCount);
 
