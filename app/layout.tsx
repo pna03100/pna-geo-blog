@@ -10,7 +10,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/ui/navbar';
 import { FooterSection } from '@/components/landing/FooterSection';
-import { BlueprintBackground } from '@/components/ui/blueprint-background';
+import { HeroBackground } from '@/components/ui/hero-background';
 import dynamicImport from 'next/dynamic';
 
 // Performance: FloatingActions를 lazy load (초기 번들 크기 감소)
@@ -106,8 +106,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${inter.className} text-slate-950`}>
-        {/* 🎨 Global Background - Single Source of Truth */}
-        <BlueprintBackground />
+        {/* 🎨 Global Background - Apple-style Gradient Mesh */}
+        <div className="fixed inset-0 -z-50 bg-gradient-to-br from-slate-50 via-white to-blue-50">
+          <HeroBackground />
+        </div>
         
         <Navbar />
         {children}

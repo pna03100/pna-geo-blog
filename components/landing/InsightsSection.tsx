@@ -23,13 +23,13 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
   // 데이터가 없으면 로딩 메시지 표시
   if (!posts || posts.length === 0) {
     return (
-      <SectionWrapper id="insights" className="bg-white overflow-hidden" data-section="INSIGHTS">
+      <SectionWrapper id="insights" className="overflow-hidden" data-section="INSIGHTS">
         {/* SECTION: #INSIGHTS */}
         
         <div className="relative">
           <div className="mb-12 md:mb-16 text-center">
             {/* Title */}
-            <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1.5px', lineHeight: '1.3' }}>
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1px', lineHeight: '1.3' }}>
               마케팅 인사이트
             </h2>
             
@@ -44,14 +44,14 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
   }
 
   return (
-    <SectionWrapper id="insights" className="bg-white overflow-hidden" data-section="INSIGHTS">
+    <SectionWrapper id="insights" className="overflow-hidden" data-section="INSIGHTS">
       {/* SECTION: #INSIGHTS */}
       
       <div className="relative">
         {/* Header - Light Mode */}
         <div className="mb-12 md:mb-16 text-center">
           {/* Title */}
-          <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1.5px', lineHeight: '1.3' }}>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1px', lineHeight: '1.3' }}>
             마케팅 인사이트
           </h2>
           

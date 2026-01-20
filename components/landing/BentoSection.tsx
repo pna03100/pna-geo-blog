@@ -74,7 +74,7 @@ const solutions = [
 
 export function BentoSection() {
   return (
-    <SectionWrapper id="solutions" className="bg-white" data-section="SOLUTIONS">
+    <SectionWrapper id="solutions" className="" data-section="SOLUTIONS">
       {/* SECTION: #SOLUTIONS */}
       <SectionTitle
         badge="Core Solutions"

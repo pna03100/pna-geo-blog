@@ -24,7 +24,7 @@ export function SectionTitle({
   return (
     <div className={`mb-12 md:mb-16 ${alignClass}`}>
       {/* Title */}
-      <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1.5px', lineHeight: '1.3' }}>
+      <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1px', lineHeight: '1.3' }}>
         {title}
       </h2>
       

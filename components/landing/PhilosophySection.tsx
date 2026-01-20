@@ -34,7 +34,7 @@ export function PhilosophySection() {
   return (
     <>
       {/* SECTION: #PHILOSOPHY */}
-      <section data-section="PHILOSOPHY" className="relative py-16 md:py-24 overflow-hidden bg-slate-100">
+      <section data-section="PHILOSOPHY" className="relative py-16 md:py-24 overflow-hidden">
       
       <div className="container mx-auto px-4 md:px-6 max-w-7xl relative">
         {/* Section Header */}

@@ -42,14 +42,14 @@ const metrics = [
 
 export function MetricsSection() {
   return (
-    <section data-section="METRICS" className="py-20 md:py-32 relative z-10 overflow-hidden bg-white">
+    <section data-section="METRICS" className="py-20 md:py-32 relative z-10 overflow-hidden">
       
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative">
         
         {/* Header */}
         <div className="mb-12 md:mb-16 text-center">
           {/* Title */}
-          <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1.5px', lineHeight: '1.3' }}>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1px', lineHeight: '1.3' }}>
             숫자로 증명하는 퍼포먼스
           </h2>
           

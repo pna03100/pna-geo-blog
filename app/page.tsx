@@ -144,6 +144,21 @@ export default async function HomePage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <HeroSection />
 
+        {/* Google Award Badge - Below Hero */}
+        <section className="relative -mt-8 mb-16 md:mb-20">
+          <div className="container mx-auto px-4 md:px-6 max-w-7xl flex justify-center">
+            <div className="inline-flex items-center gap-6 md:gap-8 px-10 md:px-16 py-8 md:py-12 rounded-3xl md:rounded-[2rem] bg-white border-2 border-blue-100 shadow-xl shadow-blue-500/10 hover:shadow-2xl hover:shadow-blue-500/15 hover:-translate-y-1 transition-all duration-300">
+              <div className="flex items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-blue-50 to-indigo-50">
+                <span className="text-5xl md:text-7xl">🏆</span>
+              </div>
+              <div className="text-left">
+                <p className="text-xl md:text-3xl font-bold text-slate-900 mb-2">2023 Google Top 100 Campaign</p>
+                <p className="text-base md:text-lg text-slate-600">구글 공식 인증 우수 캠페인 선정</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         {/* SECTION 2: STATS - The Proof (Open Financial Layout)          */}
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
@@ -165,7 +180,7 @@ export default async function HomePage() {
         <ExpertiseSection />
         
         {/* 🎞️ Partners Section with Marquee */}
-        <section className="relative py-12 md:py-16 bg-slate-100 border-t border-slate-200">
+        <section className="relative py-12 md:py-16">
           <div className="container mx-auto px-4 md:px-6 max-w-7xl">
             {/* Title */}
             <div className="text-center mb-8 md:mb-12">

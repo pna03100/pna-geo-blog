@@ -9,7 +9,7 @@ import { ArrowRight } from "lucide-react";
 
 export function HeroButtons() {
   return (
-    <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+    <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
       <button
         onClick={() => {
           const contactSection = document.getElementById('contact');

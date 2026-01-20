@@ -69,7 +69,7 @@ const certifications = [
 
 export function ExpertiseSection() {
   return (
-    <SectionWrapper id="about" className="bg-white" data-section="EXPERTISE">
+    <SectionWrapper id="about" className="" data-section="EXPERTISE">
       {/* SECTION: #EXPERTISE */}
       <SectionTitle
         badge="Trust & Authority"

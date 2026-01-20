@@ -52,7 +52,7 @@ export function FAQSection() {
   return (
     <>
       {/* SECTION: #FAQ */}
-      <section data-section="FAQ" className="relative py-16 md:py-24 bg-slate-100">
+      <section data-section="FAQ" className="relative py-16 md:py-24">
       
       <div className="container relative mx-auto px-4 md:px-6 max-w-7xl">
         {/* Section Header */}

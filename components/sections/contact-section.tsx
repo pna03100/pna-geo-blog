@@ -132,12 +132,12 @@ export function ContactSection() {
   return (
     <>
       {/* SECTION: #CONTACT */}
-      <section data-section="CONTACT" id="contact" className="relative py-20 md:py-32 bg-white">
+      <section data-section="CONTACT" id="contact" className="relative py-20 md:py-32">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Title & Badge - Center Aligned */}
         <div className="flex flex-col justify-center items-center gap-6 mb-12">
           <div className="text-center">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4 tracking-tight leading-[1.35]">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 tracking-tight leading-[1.35]">
               프로젝트 문의하기
             </h2>
             <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
