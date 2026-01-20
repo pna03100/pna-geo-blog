@@ -9,7 +9,7 @@ import { HeroButtons } from "./HeroButtons";
 export function HeroContent() {
   return (
     <div className="max-w-3xl hero-content-animate">
-      {/* 🎯 LCP CRITICAL: Main Headline - Server Rendered */}
+      {/* 🎯 SEO OPTIMIZED: H1 contains only main keywords (Google Ads Agency + Brand) */}
       <h1 className="mb-6 md:mb-8 text-left text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 relative" style={{ lineHeight: '1.3', letterSpacing: '-0.02em' }}>
         <span className="block">
           구글 광고 대행사
@@ -20,10 +20,7 @@ export function HeroContent() {
             filter: 'drop-shadow(0 4px 20px rgba(59, 130, 246, 0.25))'
           }}
         >
-          피앤에이컴퍼니는
-        </span>
-        <span className="block">
-          데이터로 증명합니다.
+          피앤에이컴퍼니
         </span>
       </h1>
 

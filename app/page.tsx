@@ -7,7 +7,7 @@
 
 import type { Metadata } from 'next';
 import { HeroSection } from '@/components/landing/HeroSection';
-import { GoogleAwardBadge } from '@/components/landing/GoogleAwardBadge';
+import { ScrollAwardSection } from '@/components/landing/ScrollAwardSection';
 import { MetricsSection } from '@/components/landing/MetricsSection';
 import { BentoSection } from '@/components/landing/BentoSection';
 import { PhilosophySection } from '@/components/landing/PhilosophySection';
@@ -145,12 +145,8 @@ export default async function HomePage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <HeroSection />
 
-        {/* Google Award Badge - Below Hero */}
-        <section className="relative -mt-8 mb-16 md:mb-20">
-          <div className="container mx-auto px-4 md:px-6 max-w-7xl flex justify-center">
-            <GoogleAwardBadge />
-          </div>
-        </section>
+        {/* Google Award Badge - Scroll Interactive */}
+        <ScrollAwardSection />
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         {/* SECTION 2: STATS - The Proof (Open Financial Layout)          */}
