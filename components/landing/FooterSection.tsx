@@ -23,7 +23,7 @@ const services = [
 
 export function FooterSection() {
   return (
-    <footer className="relative bg-gradient-to-b from-white/50 to-slate-50/50 backdrop-blur-sm border-t border-slate-200/50 overflow-hidden pt-16 md:pt-24 pb-8 md:pb-12 mt-0">
+    <footer className="relative bg-gradient-to-b from-slate-50 to-slate-100 backdrop-blur-sm border-t border-slate-200/50 overflow-hidden pt-16 md:pt-24 pb-8 md:pb-12 mt-0">
       {/* Elegant Gradient Top Border */}
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400/30 to-transparent" />
       

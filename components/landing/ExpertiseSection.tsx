@@ -1,71 +1,34 @@
 /**
- * [Section] Trust & Authority - Complete Redesign
- * [Design] Premium B2B Layout with Strong Visual Hierarchy
- * [Purpose] Build credibility through data and partnerships
- * [Animation] Lightweight fade-in on scroll with Intersection Observer
+ * [Section] Trust & Authority - Careons Style
+ * [Design] Image-focused layout with minimal icons
+ * [Purpose] Build credibility through visual storytelling
+ * [Animation] Lightweight fade-in on scroll
  */
 
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Award, Briefcase, TrendingUp, Users, CheckCircle2, Building2, Target } from "lucide-react";
 import { SectionWrapper } from "./SectionWrapper";
-import { SectionTitle } from "./SectionTitle";
-
-const stats = [
-  {
-    icon: Award,
-    value: "500%",
-    label: "평균 ROAS",
-    description: "업계 최고 수준"
-  },
-  {
-    icon: TrendingUp,
-    value: "470억+",
-    label: "누적 광고비 집행",
-    description: "검증된 실적"
-  },
-  {
-    icon: Users,
-    value: "500+",
-    label: "성공 프로젝트",
-    description: "15년간 쌓은 노하우"
-  },
-  {
-    icon: Target,
-    value: "98%",
-    label: "고객 만족도",
-    description: "지속 파트너십"
-  },
-];
-
-const partners = [
-  { name: "삼성전자", emoji: "🔷", category: "대기업" },
-  { name: "한화시스템", emoji: "🟠", category: "방산/에너지" },
-  { name: "대보건설", emoji: "🏗️", category: "건설" },
-  { name: "Google", emoji: "🔴", category: "공식 파트너" },
-  { name: "Naver", emoji: "🟢", category: "플랫폼" },
-  { name: "Kakao", emoji: "🟡", category: "플랫폼" },
-];
+import Image from "next/image";
 
 const certifications = [
   {
-    icon: Award,
     title: "Google Partner",
     description: "구글 공식 인증 파트너",
-    badge: "Official"
+    badge: "Official",
+    image: "/images/hero/google-ads-hero-bg.jpg"
   },
   {
-    icon: Briefcase,
     title: "15년+ 경력",
     description: "대기업 포트폴리오 다수",
-    badge: "Expert"
+    badge: "Expert",
+    image: "/images/hero/performance-hero-bg.jpg"
   },
   {
-    icon: Building2,
     title: "광고 법인",
     description: "15년 운영 실적",
-    badge: "Trusted"
+    badge: "Trusted",
+    image: "/images/hero/seo-hero-bg.jpg"
   },
 ];
 
@@ -88,12 +51,10 @@ export function ExpertiseSection() {
       }
     );
 
-    // Observe CEO card
     if (ceoCardRef.current) {
       observer.observe(ceoCardRef.current);
     }
 
-    // Observe certification items
     certRefs.current.forEach((cert) => {
       if (cert) observer.observe(cert);
     });
@@ -110,132 +71,117 @@ export function ExpertiseSection() {
 
   return (
     <SectionWrapper id="about" className="" data-section="EXPERTISE">
-      {/* SECTION: #EXPERTISE */}
-      <SectionTitle
-        badge="Trust & Authority"
-        title="검증된 전문성"
-        description="대한민국 대표 기업들이 선택한 데이터 마케팅 파트너"
-        align="center"
-      />
+      {/* Badge */}
+      <div className="mb-6">
+        <span className="inline-flex items-center gap-2 text-blue-400 font-semibold text-sm">
+          <span className="w-2 h-2 rounded-full bg-blue-400"></span>
+          전문성
+        </span>
+      </div>
 
-      {/* CEO Profile - Full Width with Fade Up */}
+      {/* Header */}
+      <div className="mb-12 md:mb-16">
+        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.2' }}>
+          검증된 전문성
+        </h2>
+        <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl">
+          대한민국 대표 기업들이 선택한 데이터 마케팅 파트너
+        </p>
+      </div>
+
+      {/* CEO Profile - Full Width Image Card */}
       <div 
         ref={ceoCardRef}
-        className="rounded-2xl overflow-hidden mb-12 shadow-xl philosophy-item opacity-0 translate-y-4"
+        className="relative rounded-3xl overflow-hidden mb-12 philosophy-item opacity-0 translate-y-4 h-[500px] md:h-[600px]"
       >
-          <div className="grid md:grid-cols-[300px,1fr] gap-0">
-            {/* Left: Avatar Only - Full Height */}
-            <div className="bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-8xl md:text-9xl p-12 md:p-16">
-              👨‍💼
-            </div>
-
-            {/* Right: Info + Achievements */}
-            <div className="p-8 md:p-10 text-white space-y-6 bg-gradient-to-br from-slate-800 via-slate-900 to-blue-950">
-              {/* Header Section */}
-              <div className="space-y-4 pb-6 border-b border-slate-600">
-                {/* Name */}
-                <h3 className="text-3xl md:text-4xl font-bold" style={{ lineHeight: '1.3' }}>
-                  안태민
-                </h3>
-
-                {/* Slogan */}
-                <p className="text-slate-200 text-base md:text-lg">
-                  Founder & CEO
-                </p>
+        {/* Background Image */}
+        <Image
+          src="/images/hero/performance-hero-bg.jpg"
+          alt="CEO Profile"
+          fill
+          className="object-cover"
+        />
+        
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/70 to-slate-900/30" />
+        
+        {/* Content at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 text-white">
+          <div className="max-w-4xl">
+            {/* Name & Title */}
+            <h3 className="text-4xl md:text-5xl font-bold mb-3" style={{ lineHeight: '1.2' }}>
+              안태민
+            </h3>
+            <p className="text-xl md:text-2xl text-blue-300 mb-6">
+              Founder & CEO
+            </p>
+            
+            {/* Description */}
+            <p className="text-base md:text-lg text-white/90 leading-relaxed mb-8 max-w-3xl">
+              15년간 대기업부터 스타트업까지 다양한 비즈니스와 함께하며 쌓아온 경험과 노하우를 바탕으로, 
+              데이터에 기반한 전략적 마케팅 솔루션을 제공합니다.
+            </p>
+            
+            {/* Achievements Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <p className="text-2xl md:text-3xl font-bold text-white mb-1">15년+</p>
+                <p className="text-sm text-white/80">퍼포먼스 마케팅</p>
               </div>
-
-              {/* Friendly Introduction - Extended */}
-              <div className="space-y-3">
-                <p className="text-base md:text-lg text-slate-200 leading-relaxed">
-                  데이터 기반의 과학적 마케팅으로 고객사의 성공을 함께 만들어갑니다.
-                </p>
-                <p className="text-sm md:text-base text-slate-300 leading-relaxed">
-                  15년간 대기업부터 스타트업까지 다양한 비즈니스와 함께하며 쌓아온 경험과 노하우를 바탕으로, 
-                  데이터에 기반한 전략적 마케팅 솔루션을 제공합니다. 
-                  고객사의 지속 가능한 성장과 성공이 저희의 가장 큰 목표입니다.
-                </p>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <p className="text-2xl md:text-3xl font-bold text-white mb-1">Top 100</p>
+                <p className="text-sm text-white/80">구글 우수 캠페인</p>
               </div>
-
-              {/* Achievements - 2x2 Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm md:text-base text-white font-bold leading-relaxed">
-                      15년 퍼포먼스 마케터
-                    </p>
-                    <p className="text-xs md:text-sm text-slate-300">
-                      구글 애즈 및 GA4 전문가
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm md:text-base text-white font-bold leading-relaxed">
-                      구글 우수 100대 캠페인
-                    </p>
-                    <p className="text-xs md:text-sm text-slate-300">
-                      2023년 공식 선정
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm md:text-base text-white font-bold leading-relaxed">
-                      한화시스템 · 대보건설
-                    </p>
-                    <p className="text-xs md:text-sm text-slate-300">
-                      마케팅 총괄 CFO
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm md:text-base text-white font-bold leading-relaxed">
-                      광고 법인 15년 운영
-                    </p>
-                    <p className="text-xs md:text-sm text-slate-300">
-                      500+ 성공 프로젝트
-                    </p>
-                  </div>
-                </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <p className="text-2xl md:text-3xl font-bold text-white mb-1">500+</p>
+                <p className="text-sm text-white/80">성공 프로젝트</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                <p className="text-2xl md:text-3xl font-bold text-white mb-1">470억+</p>
+                <p className="text-sm text-white/80">누적 광고비</p>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-      {/* Certifications - Centered Below with Fade Up */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:divide-x md:divide-slate-200 max-w-4xl mx-auto">
+      {/* Certifications - 3 Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {certifications.map((cert, index) => {
-          const Icon = cert.icon;
           return (
             <div 
               key={cert.title} 
               ref={(el) => { certRefs.current[index] = el; }}
-              className="px-8 py-6 md:py-0 text-center philosophy-item opacity-0 translate-y-4"
+              className="group relative rounded-2xl overflow-hidden philosophy-item opacity-0 translate-y-4 h-[300px]"
               style={{ transitionDelay: `${index * 0.15}s` }}
             >
-                {/* Icon */}
-                <Icon className="w-12 h-12 text-blue-600 mx-auto mb-5" />
-                
-                {/* Content */}
-                <h4 className="text-lg font-bold text-slate-900 mb-2" style={{ lineHeight: '1.35' }}>
+              {/* Background Image */}
+              <Image
+                src={cert.image}
+                alt={cert.title}
+                fill
+                className="object-cover"
+              />
+              
+              {/* Overlay - lighter on hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-slate-900/50 group-hover:from-slate-900/70 group-hover:to-slate-900/30 transition-all duration-300" />
+              
+              {/* Content at bottom */}
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-semibold mb-3 border border-blue-400/30">
+                  {cert.badge}
+                </span>
+                <h4 className="text-xl font-bold text-white mb-2" style={{ lineHeight: '1.3' }}>
                   {cert.title}
                 </h4>
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm text-white/80 leading-relaxed">
                   {cert.description}
                 </p>
               </div>
+            </div>
           );
         })}
       </div>
-
     </SectionWrapper>
   );
 }

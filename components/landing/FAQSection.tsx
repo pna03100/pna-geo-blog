@@ -8,7 +8,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { SectionTitle } from "./SectionTitle";
+import Image from "next/image";
 
 interface FAQItem {
   question: string;
@@ -52,25 +52,54 @@ export function FAQSection() {
   return (
     <>
       {/* SECTION: #FAQ */}
-      <section data-section="FAQ" className="relative py-16 md:py-24">
+      <section data-section="FAQ" className="relative py-16 md:py-24 bg-white">
       
       <div className="container relative mx-auto px-4 md:px-6 max-w-7xl">
-        {/* Section Header */}
-        <SectionTitle
-          badge="FAQ"
-          title="자주 묻는 질문"
-          description="고객님들이 가장 궁금해하시는 질문들을 모았습니다"
-        />
+        {/* 2 Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-[400px,1fr] gap-12 lg:gap-16 items-start">
+          
+          {/* Left: Header */}
+          <div className="lg:sticky lg:top-24">
+            <div className="mb-6">
+              <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm">
+                <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+                FAQ
+              </span>
+            </div>
+            
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.2' }}>
+              자주 묻는 질문
+            </h2>
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-8">
+              고객님들이 가장 궁금해하시는 질문들을 모았습니다
+            </p>
+            
+            {/* Decorative Image */}
+            <div className="hidden lg:block relative rounded-2xl overflow-hidden h-64 mt-8">
+              <Image
+                src="/images/hero/google-ads-hero-bg.jpg"
+                alt="FAQ"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <p className="text-white font-semibold text-lg">
+                  24시간 이내 답변 드립니다
+                </p>
+              </div>
+            </div>
+          </div>
 
-        {/* FAQ List - Premium Card Style */}
-        <div className="max-w-4xl mx-auto mt-12 md:mt-16 space-y-4">
+          {/* Right: FAQ List */}
+          <div className="space-y-3">
           {faqs.map((faq, index) => (
             <div key={index} 
                 className={`
-                  relative rounded-2xl bg-white border-2 overflow-hidden
+                  relative rounded-2xl bg-white overflow-hidden border
                   ${openIndex === index 
-                    ? 'border-blue-500 shadow-xl shadow-blue-500/10' 
-                    : 'border-slate-200 hover:border-blue-300 hover:shadow-md'
+                    ? 'border-blue-400 shadow-lg' 
+                    : 'border-slate-200 hover:border-slate-300'
                   }
                 `}
                 style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
@@ -78,44 +107,31 @@ export function FAQSection() {
                 {/* Question Button */}
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full py-6 md:py-8 px-6 flex items-center justify-between gap-4 text-left group"
+                  className="w-full py-6 md:py-7 px-6 md:px-8 flex items-center justify-between gap-4 text-left group"
                   aria-expanded={openIndex === index}
                   aria-controls={`faq-answer-${index}`}
                 >
-                  {/* Number Badge */}
-                  <div className={`
-                    flex-shrink-0 w-10 h-10 rounded-full 
-                    flex items-center justify-center font-bold text-sm
-                    transition-all duration-200
-                    ${openIndex === index
-                      ? 'bg-blue-600 text-white scale-110'
-                      : 'bg-slate-100 text-slate-400'
-                    }
-                  `}>
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
-
                   <h3 className={`
-                    text-base md:text-xl font-bold leading-[1.4] flex-1 px-4
+                    text-base md:text-lg font-bold leading-[1.4] flex-1
                     transition-colors duration-200
-                    ${openIndex === index ? 'text-blue-600' : 'text-slate-900'}
+                    ${openIndex === index ? 'text-blue-600' : 'text-slate-900 group-hover:text-slate-700'}
                   `}>
                     {faq.question}
                   </h3>
                   
                   <div className={`
-                    flex-shrink-0 w-10 h-10 rounded-full 
+                    flex-shrink-0 w-8 h-8 rounded-full 
                     flex items-center justify-center
                     transition-all duration-200
                     ${openIndex === index 
-                      ? 'bg-blue-100 rotate-180' 
-                      : 'bg-slate-100 group-hover:bg-blue-50'
+                      ? 'bg-blue-600 rotate-180' 
+                      : 'bg-slate-100 group-hover:bg-slate-200'
                     }
                   `}>
                     <ChevronDown className={`
                       w-5 h-5
                       transition-colors duration-200
-                      ${openIndex === index ? 'text-blue-600' : 'text-slate-600'}
+                      ${openIndex === index ? 'text-white' : 'text-slate-600'}
                     `} />
                   </div>
                 </button>
@@ -123,13 +139,9 @@ export function FAQSection() {
                 {/* Answer */}
                 {openIndex === index && (
                   <div id={`faq-answer-${index}`} className="overflow-hidden">
-                    {/* Blue Accent Line */}
-                    <div className="mx-6 h-px bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200" />
-                    
-                    <div className="px-6 py-6 md:py-8 bg-gradient-to-br from-blue-50/50 to-transparent">
-                      {/* Answer with proper left margin to align with question text */}
-                      <div className="ml-14">
-                        <p className="text-sm md:text-base text-slate-700 leading-relaxed">
+                    <div className="px-6 md:px-8 pb-6 md:pb-7 pt-2">
+                      <div className="pl-0">
+                        <p className="text-sm md:text-base text-slate-600 leading-relaxed">
                           {faq.answer}
                         </p>
                       </div>
@@ -138,6 +150,7 @@ export function FAQSection() {
                 )}
               </div>
           ))}
+          </div>
         </div>
       </div>
     </section>

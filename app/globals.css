@@ -9,17 +9,22 @@
 
 @layer base {
   :root {
-    /* Light Mode - Blue Theme */
+    /* [Careons] Light Mode - Emerald Green + Clean White */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    
+    /* [Careons] Primary - Emerald Green */
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* [PNA] Secondary - Blue (Keep for backward compatibility) */
+    --secondary: 221.2 83.2% 53.3%;
+    --secondary-foreground: 210 40% 98%;
+    
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96.1%;
@@ -28,8 +33,12 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.75rem;
+    --ring: 160 84% 39%;
+    --radius: 1rem;
+    
+    /* [Careons] Custom Gradient Variables */
+    --gradient-emerald-start: 160 84% 39%;
+    --gradient-emerald-end: 158 64% 52%;
   }
 }
 
@@ -38,13 +47,38 @@
     @apply border-border;
   }
   
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
+    overflow-x: hidden;
     @apply antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    /* [Careons] Clean White Background */
+    background-color: #ffffff;
   }
 
   html {
     scroll-behavior: smooth;
+  }
+}
+
+/* ============================================
+   [Careons] Blue Gradient Utilities (PNA Brand)
+   ============================================ */
+@layer utilities {
+  .gradient-blue {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  }
+  
+  .gradient-blue-subtle {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  }
+  
+  .text-gradient-blue {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
   }
 }
 

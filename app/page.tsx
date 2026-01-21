@@ -139,19 +139,21 @@ export default async function HomePage() {
       />
 
       {/* 📐 Strategic Content Hierarchy */}
-      <main className="relative pt-16">
+      <main className="relative overflow-hidden">
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        {/* SECTION 1: HERO - The Hook & Authority                        */}
+        {/* SECTION 1: HERO - The Hook & Authority (Full Screen Entrance) */}
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <HeroSection />
 
-        {/* Google Award Badge - Scroll Interactive */}
-        <ScrollAwardSection />
+        {/* Content Container - Pushed up by scroll, starts closer to hero */}
+        <div className="relative -mt-48 md:-mt-64">
+          {/* Google Award Badge - Scroll Interactive */}
+          <ScrollAwardSection />
 
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        {/* SECTION 2: STATS - The Proof (Open Financial Layout)          */}
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <MetricsSection />
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          {/* SECTION 2: STATS - The Proof (Open Financial Layout)          */}
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          <MetricsSection />
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         {/* SECTION 3: SERVICES - Core Offering (Asymmetrical Bento)      */}
@@ -169,7 +171,7 @@ export default async function HomePage() {
         <ExpertiseSection />
         
         {/* 🎞️ Partners Section with Marquee */}
-        <section className="relative py-12 md:py-16">
+        <section className="relative py-12 md:py-16 bg-white">
           <div className="container mx-auto px-4 md:px-6 max-w-7xl">
             {/* Title */}
             <div className="text-center mb-8 md:mb-12">
@@ -200,6 +202,7 @@ export default async function HomePage() {
         {/* SECTION 8: CONTACT - Conversion (Split Panel)                 */}
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <ContactSection />
+        </div>
       </main>
     </>
   );

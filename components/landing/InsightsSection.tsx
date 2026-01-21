@@ -27,14 +27,18 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
         {/* SECTION: #INSIGHTS */}
         
         <div className="relative">
-          <div className="mb-12 md:mb-16 text-center">
-            {/* Title */}
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1px', lineHeight: '1.3' }}>
+          <div className="mb-6">
+            <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm">
+              <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+              인사이트
+            </span>
+          </div>
+          
+          <div className="mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.2' }}>
               마케팅 인사이트
             </h2>
-            
-            {/* Description */}
-            <p className="text-base md:text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl">
               곧 유용한 마케팅 인사이트를 공유하겠습니다
             </p>
           </div>
@@ -48,15 +52,19 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
       {/* SECTION: #INSIGHTS */}
       
       <div className="relative">
-        {/* Header - Light Mode */}
-        <div className="mb-12 md:mb-16 text-center">
-          {/* Title */}
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ letterSpacing: '-1px', lineHeight: '1.3' }}>
+        {/* Header */}
+        <div className="mb-6">
+          <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm">
+            <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+            인사이트
+          </span>
+        </div>
+        
+        <div className="mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.2' }}>
             마케팅 인사이트
           </h2>
-          
-          {/* Description */}
-          <p className="text-base md:text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl">
             데이터 기반 성과 마케팅을 위한 실무 노하우와 최신 트렌드를 공유합니다
           </p>
         </div>

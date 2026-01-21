@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Script from "next/script";
+import Image from "next/image";
 import { MapPin, Mail, Phone, Printer, Loader2, ArrowRight } from "lucide-react";
 
 // ============================================
@@ -132,25 +133,76 @@ export function ContactSection() {
   return (
     <>
       {/* SECTION: #CONTACT */}
-      <section data-section="CONTACT" id="contact" className="relative py-20 md:py-32">
+      <section data-section="CONTACT" id="contact" className="relative py-20 md:py-32 bg-white">
+      
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-        {/* Title & Badge - Center Aligned */}
-        <div className="flex flex-col justify-center items-center gap-6 mb-12">
-          <div className="text-center">
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 tracking-tight leading-[1.35]">
+        {/* 2 Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-[400px,1fr] gap-12 lg:gap-16 items-start">
+          
+          {/* Left: Header */}
+          <div className="lg:sticky lg:top-24">
+            <div className="mb-6">
+              <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm">
+                <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+                문의하기
+              </span>
+            </div>
+            
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.2' }}>
               프로젝트 문의하기
             </h2>
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-8">
               성장을 위한 파트너, PNA 컴퍼니입니다.
-              <br />
               문의 남겨주시면 담당자가 <span className="font-semibold text-blue-600">24시간 이내</span>에 연락드립니다.
             </p>
+            
+            {/* Contact Info */}
+            <div className="space-y-4 mb-8">
+              <div className="flex items-start gap-3">
+                <Phone className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-sm text-slate-500 mb-1">전화</p>
+                  <p className="text-base font-semibold text-slate-900">070-7733-7905</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <Mail className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-sm text-slate-500 mb-1">이메일</p>
+                  <p className="text-base font-semibold text-slate-900">contact@pnamarketing.co.kr</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-sm text-slate-500 mb-1">주소</p>
+                  <p className="text-base font-semibold text-slate-900">경기도 고양시 일산동구<br />백마로195, SK엠시티</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Decorative Image */}
+            <div className="hidden lg:block relative rounded-2xl overflow-hidden h-64">
+              <Image
+                src="/images/hero/wordpress-hero-bg.jpg"
+                alt="Contact"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <p className="text-white font-semibold text-lg">
+                  함께 성장할 준비가 되셨나요?
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        {/* Form - Full Width Below Title */}
-        <div className="max-w-4xl mx-auto">
-          <div className="relative bg-white p-8 md:p-12 rounded-3xl shadow-2xl shadow-blue-600/5 border-2 border-slate-100 hover:border-blue-200 transition-all duration-200">
+          {/* Right: Form */}
+          <div>
+          <div className="relative bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-slate-200">
             {/* Decorative Element */}
             <div className="absolute -top-px -right-px w-32 h-32 bg-gradient-to-br from-blue-100 to-transparent rounded-br-3xl rounded-tl-3xl opacity-20 pointer-events-none" />
             
@@ -373,6 +425,7 @@ export function ContactSection() {
                 )}
               </button>
             </form>
+          </div>
           </div>
         </div>
       </div>

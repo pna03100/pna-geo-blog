@@ -10,6 +10,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { SectionWrapper } from "./SectionWrapper";
 import { TrendingUp, Search, BarChart3, Code, Share2, BookOpen, MoveRight } from "lucide-react";
+import Image from "next/image";
 
 const solutions = [
   {
@@ -18,10 +19,11 @@ const solutions = [
     title: "구글 애즈",
     badge: "GOOGLE ADS",
     description: "P-Max 캠페인과 AI 입찰로 평균 ROAS 500% 달성",
-    features: ["Performance Max 전략", "Smart Bidding AI", "GA4 고급 분석"],
+    features: ["Performance Max", "Smart Bidding AI"],
     featured: true,
     accent: "blue",
-    link: "/google-ads"
+    link: "/google-ads",
+    image: "/images/hero/google-ads-hero-bg.jpg"
   },
   {
     id: "seo-geo",
@@ -29,21 +31,11 @@ const solutions = [
     title: "SEO & GEO",
     badge: "SEO & GEO",
     description: "Gemini AI와 Google 검색에서 동시 상위 노출",
-    features: ["Technical SEO", "Gemini AI 최적화", "E-E-A-T 전략"],
+    features: ["Technical SEO", "Gemini AI 최적화"],
     featured: true,
     accent: "blue",
-    link: "/seo-geo"
-  },
-  {
-    id: "performance",
-    icon: BarChart3,
-    title: "퍼포먼스 마케팅",
-    badge: "PERFORMANCE",
-    description: "데이터 기반 의사결정으로 마케팅 ROI 극대화",
-    features: ["Marketing Mix", "Full-Funnel 최적화", "A/B 테스트"],
-    featured: false,
-    accent: "blue",
-    link: "/performance"
+    link: "/seo-geo",
+    image: "/images/hero/seo-hero-bg.jpg"
   },
   {
     id: "wordpress",
@@ -51,32 +43,23 @@ const solutions = [
     title: "워드프레스",
     badge: "WORDPRESS",
     description: "Headless CMS로 초고속 웹사이트 구축",
-    features: ["Headless CMS", "커스텀 개발", "성능 최적화"],
+    features: ["Headless CMS", "커스텀 개발"],
     featured: false,
     accent: "blue",
-    link: "/wordpress"
+    link: "/wordpress",
+    image: "/images/hero/wordpress-hero-bg.jpg"
   },
   {
-    id: "social",
-    icon: Share2,
-    title: "소셜 미디어",
-    badge: "SOCIAL MEDIA",
-    description: "Meta·네이버·카카오 통합 캠페인 관리",
-    features: ["Cross-Channel", "Dynamic Ads", "크리에이티브"],
+    id: "performance",
+    icon: BarChart3,
+    title: "퍼포먼스",
+    badge: "PERFORMANCE",
+    description: "데이터 기반 의사결정으로 마케팅 ROI 극대화",
+    features: ["Marketing Mix", "Full-Funnel"],
     featured: false,
     accent: "blue",
-    link: "/performance"
-  },
-  {
-    id: "insights",
-    icon: BookOpen,
-    title: "인사이트",
-    badge: "INSIGHTS",
-    description: "AI·GEO·데이터 분석 실전 전략 공유",
-    features: ["최신 트렌드", "AI 가이드", "케이스 스터디"],
-    featured: false,
-    accent: "blue",
-    link: "/insights"
+    link: "/performance",
+    image: "/images/hero/performance-hero-bg.jpg"
   },
 ];
 
@@ -173,25 +156,33 @@ export function BentoSection() {
   }, []);
 
   return (
-    <SectionWrapper id="solutions" className="py-32 md:py-40" data-section="SOLUTIONS">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-        {/* Left Column - Sticky Title */}
-        <div className="lg:col-span-1">
-          <div className="lg:sticky lg:top-40 text-left relative">
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight relative" style={{ letterSpacing: '-1px', lineHeight: '1.3' }}>
+    <section id="solutions" className="py-20 md:py-32 bg-slate-900 relative" data-section="SOLUTIONS">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        
+        {/* [Careons] Small Badge */}
+        <div className="mb-6">
+          <span className="inline-flex items-center gap-2 text-blue-400 font-semibold text-sm">
+            <span className="w-2 h-2 rounded-full bg-blue-400"></span>
+            서비스
+          </span>
+        </div>
+        
+        {/* Header */}
+        <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-3" style={{ lineHeight: '1.2' }}>
               통합 마케팅 솔루션
             </h2>
-            <p className="text-base md:text-xl text-slate-600 font-medium leading-relaxed">
-              Google Ads와 SEO & GEO를 중심으로 한 데이터 기반 성과 마케팅
-            </p>
           </div>
+          <p className="text-base md:text-lg text-slate-300 leading-relaxed max-w-xl">
+            Google Ads와 SEO & GEO를 중심으로 한 데이터 기반 성과 마케팅
+          </p>
         </div>
 
-        {/* Right Column - Cards */}
-        <div className="lg:col-span-2 space-y-4">
+        {/* [Careons] Cards Grid - 2x2 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {solutions.map((solution, index) => {
             const Icon = solution.icon;
-            const colors = accentColors[solution.accent as keyof typeof accentColors];
             
             return (
               <div
@@ -200,58 +191,46 @@ export function BentoSection() {
                 className="scroll-reveal-card opacity-0 translate-y-8"
               >
                 <Link href={solution.link} className="block h-full">
-                  <div 
-                    className={`group relative overflow-hidden cursor-pointer transition-all duration-500 ease-out rounded-2xl backdrop-blur-sm ${
-                      solution.featured 
-                        ? `bg-gradient-to-br ${colors.bg} border ${colors.border} shadow-xl ${colors.shadow} hover:shadow-2xl ${colors.hover}`
-                        : `bg-gradient-to-br ${colors.bg} border ${colors.border} shadow-md hover:shadow-lg ${colors.hover}`
-                    } hover:-translate-y-1`}
-                  >
-                    {/* Subtle gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
-
-                    {/* Icon - Top Left Background */}
-                    <div className="absolute top-6 left-6 opacity-15">
-                      <Icon className={`w-24 h-24 md:w-32 md:h-32 ${colors.iconText}`} strokeWidth={1} />
+                  <div className="group relative overflow-hidden rounded-3xl bg-slate-800 border border-slate-700 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1">
+                    
+                    {/* Image Area with Real Photo */}
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      <Image
+                        src={solution.image}
+                        alt={solution.title}
+                        fill
+                        className="object-cover"
+                      />
+                      {/* Dark overlay (disappears on hover) */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/70 to-slate-800/70 group-hover:from-slate-900/0 group-hover:to-slate-800/0 transition-all duration-300" />
                     </div>
-
-                    <div className="relative p-6 md:p-8 text-center">
-                      {/* Service Badge - Centered */}
-                      <div className="flex justify-center mb-6">
-                        <div className={`px-3 py-1 rounded-full text-xs font-bold border backdrop-blur-sm ${colors.badge} tracking-wide`}>
-                          {solution.badge}
-                        </div>
-                      </div>
-
-                      {/* Title */}
-                      <div className="mb-4">
-                        <h3 className="text-3xl md:text-4xl font-bold text-white group-hover:text-blue-400 transition-colors">
-                          {solution.title}
-                        </h3>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-slate-300 leading-relaxed mb-6 font-medium">
+                    
+                    {/* Content */}
+                    <div className="p-6 md:p-8">
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
+                        {solution.title}
+                      </h3>
+                      
+                      <p className="text-slate-300 leading-relaxed mb-6">
                         {solution.description}
                       </p>
-
-                      {/* Features - Single Line with Dividers */}
-                      <div className="flex items-center justify-center gap-3 mb-6 text-sm text-slate-400 flex-wrap">
-                        {solution.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-center gap-3">
-                            <span>{feature}</span>
-                            {idx < solution.features.length - 1 && (
-                              <div className="w-px h-3 bg-slate-600" />
-                            )}
-                          </div>
-                        ))}
+                      
+                      {/* Raised/Goal Amount Style */}
+                      <div className="flex items-center justify-between mb-6 text-sm">
+                        <div>
+                          <p className="text-slate-400 mb-1">핵심 기술</p>
+                          <p className="text-white font-bold">{solution.features[0]}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-slate-400 mb-1">전문 분야</p>
+                          <p className="text-blue-400 font-bold">{solution.features[1]}</p>
+                        </div>
                       </div>
-
-                      {/* CTA - Centered */}
-                      <div className="flex items-center justify-center gap-2 text-blue-400 group-hover:text-blue-300 font-semibold text-sm group-hover:gap-3 transition-all">
-                        <span>자세히 보기</span>
-                        <MoveRight className="w-4 h-4" />
-                      </div>
+                      
+                      {/* Learn More Button */}
+                      <button className="w-full py-3 px-6 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-slate-900 transition-all duration-200">
+                        자세히 보기 →
+                      </button>
                     </div>
                   </div>
                 </Link>
@@ -259,7 +238,18 @@ export function BentoSection() {
             );
           })}
         </div>
+        
+        {/* [Careons] Bottom CTA */}
+        <div className="text-center">
+          <p className="text-slate-400 mb-4">
+            모든 서비스를 확인하고 비즈니스 성장에 동참하세요
+          </p>
+          <Link href="/google-ads" className="inline-flex items-center gap-2 text-blue-400 font-semibold hover:gap-3 transition-all">
+            <span>전체 서비스 보기</span>
+            <MoveRight className="w-5 h-5" />
+          </Link>
+        </div>
       </div>
-    </SectionWrapper>
+    </section>
   );
 }

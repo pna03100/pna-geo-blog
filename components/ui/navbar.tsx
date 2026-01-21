@@ -23,27 +23,42 @@ const navItems = [
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
+    // Show navbar after initial hero animation
+    const showTimer = setTimeout(() => {
+      setIsVisible(true)
+    }, 1500) // Show after 1.5s
+
     const handleScroll = () => {
       if (isMobileMenuOpen) {
         setIsMobileMenuOpen(false)
+      }
+      // Show immediately on scroll
+      if (window.scrollY > 50) {
+        setIsVisible(true)
       }
       // 스크롤 10px 이상일 때 배경 강화
       setIsScrolled(window.scrollY > 10)
     }
 
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      clearTimeout(showTimer)
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [isMobileMenuOpen])
 
   return (
     <>
-      {/* Fixed Header - Glassmorphism */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      {/* [Careons] Fixed Header - Cleaner Glassmorphism with entrance animation */}
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
-          ? 'border-b border-slate-200/50 bg-white/80 backdrop-blur-xl shadow-sm shadow-slate-900/5' 
-          : 'border-b border-slate-100/0 bg-white/70 backdrop-blur-lg'
+          ? 'border-b border-slate-200/40 bg-slate-50/95 backdrop-blur-xl' 
+          : 'border-b border-transparent bg-slate-50/80 backdrop-blur-md'
+      } ${
+        isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
       }`}>
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           
@@ -76,9 +91,9 @@ export function Navbar() {
               ))}
             </nav>
 
-            {/* CTA Button */}
+            {/* [Careons] CTA Button - Blue */}
             <Link href="/contact">
-              <button className="px-6 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold text-sm hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-200 hover:-translate-y-0.5">
+              <button className="px-6 py-2.5 rounded-full gradient-blue text-white font-semibold text-sm hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-200 hover:-translate-y-0.5 hover:scale-105">
                 문의하기
               </button>
             </Link>
@@ -120,7 +135,7 @@ export function Navbar() {
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
         <div className="fixed top-18 left-0 right-0 z-40 lg:hidden border-b border-slate-200/50 shadow-xl shadow-slate-900/10">
-          <div className="bg-white/95 backdrop-blur-xl">
+          <div className="bg-slate-50/95 backdrop-blur-xl">
             <div className="container mx-auto px-4 py-4 space-y-2">
               {navItems.map((item) => (
                 <Link
@@ -134,7 +149,7 @@ export function Navbar() {
               ))}
               <div className="pt-3 pb-1">
                 <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  <button className="block w-full px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold text-sm hover:from-blue-700 hover:to-indigo-700 transition-all duration-200">
+                  <button className="block w-full px-6 py-3.5 rounded-xl gradient-blue text-white font-semibold text-sm hover:shadow-lg transition-all duration-200">
                     문의하기
                   </button>
                 </Link>
