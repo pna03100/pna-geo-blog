@@ -55,9 +55,21 @@
     overflow-x: hidden;
     @apply antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
-    /* [Careons] Clean White Background */
-    background-color: #ffffff;
     line-height: 1.5; /* 기본 행간 */
+  }
+  
+  /* ============================================
+     [PNA] Background System
+     ============================================ */
+  
+  /* 기본 배경: 순백색 (에디토리얼 무드) */
+  .bg-main {
+    background-color: #ffffff;
+  }
+  
+  /* Authority 섹션: 다크 네이비 (프리미엄 권위감) */
+  .bg-authority {
+    @apply bg-slate-950; /* #020617 */
   }
 
   /* ============================================
@@ -90,6 +102,67 @@
   /* 작은 라벨/배지 - 자간 매우 넓게 */
   .badge, .label, .uppercase {
     @apply tracking-widest;
+  }
+}
+
+/* ============================================
+   [PNA] Reusable Component Styles
+   ============================================ */
+@layer components {
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full bg-blue-600 text-white font-semibold text-base hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30 transition-all duration-200 active:scale-[0.98];
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-blue-600 text-blue-600 font-semibold text-base hover:bg-blue-600 hover:text-white transition-all duration-200;
+  }
+  
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-slate-900 border-2 border-slate-300 hover:bg-slate-50 hover:border-slate-400 transition-all duration-200;
+  }
+
+  /* Badges */
+  .badge-primary {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-blue-600/10 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-widest;
+  }
+  
+  .badge-secondary {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider border border-blue-200;
+  }
+  
+  .badge-dot {
+    @apply inline-flex items-center gap-2 text-blue-600 font-semibold text-sm;
+  }
+  
+  .badge-dot::before {
+    content: '';
+    @apply w-2 h-2 rounded-full bg-blue-600;
+  }
+
+  /* Cards */
+  .card-white {
+    @apply bg-slate-50 rounded-2xl border border-slate-200 hover:border-slate-300 transition-all duration-300 shadow-sm;
+  }
+  
+  .card-dark {
+    @apply bg-slate-900 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all duration-300;
+  }
+
+  /* Section Headers */
+  .section-title {
+    @apply text-3xl md:text-5xl font-bold text-slate-900 tracking-tight;
+    line-height: 1.3;
+  }
+  
+  .section-description {
+    @apply text-base md:text-lg text-slate-600 tracking-normal;
+    line-height: 1.7;
+  }
+
+  /* Form Inputs */
+  .input-field {
+    @apply w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium placeholder:text-slate-400 bg-white focus:bg-white shadow-sm;
   }
 }
 

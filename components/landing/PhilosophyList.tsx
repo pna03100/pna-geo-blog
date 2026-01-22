@@ -40,7 +40,7 @@ const phases = [
 
 export function PhilosophyList() {
   return (
-    <section data-section="PHILOSOPHY" className="relative py-20 md:py-32 bg-slate-50">
+    <section data-section="PHILOSOPHY" className="relative py-20 md:py-32">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         
         <SectionHeader 

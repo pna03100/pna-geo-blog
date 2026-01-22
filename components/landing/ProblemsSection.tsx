@@ -40,7 +40,7 @@ const problems = [
 
 export function ProblemsSection() {
   return (
-    <section className="py-20 md:py-32 bg-white" data-section="PROBLEMS">
+    <section className="py-20 md:py-32" data-section="PROBLEMS">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         
         {/* Grid Layout for Sticky */}
@@ -48,17 +48,17 @@ export function ProblemsSection() {
           
           {/* Left Column: Sticky Title */}
           <div className="sticky top-36 self-start h-fit">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 border border-blue-200 text-blue-600 text-xs font-bold uppercase tracking-widest mb-6">
+            <div className="badge-dot mb-6">
               The Structural Problem
             </div>
             
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight" style={{ lineHeight: '1.3' }}>
+            <h2 className="section-title mb-6">
               구글 광고를 운영해도<br/>
               <span className="text-slate-400">성과가 나지 않는</span><br/>
               구조적 이유
             </h2>
             
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed">
+            <p className="section-description">
               마케팅 예산을 늘려도 효율은 제자리걸음입니다. 이것은 단순한 운영의 문제가 아니라, 비즈니스를 지탱하는 '구조'의 결함입니다.
             </p>
           </div>

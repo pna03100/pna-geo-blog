@@ -34,28 +34,22 @@ export function AwardMetricsUnified() {
           {/* Left: Text Content */}
           <div>
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-blue-600/10 border border-blue-500/30 text-blue-400 text-[10px] font-bold uppercase tracking-[0.1em] mb-8">
-              Verified Authority
+            <div className="inline-flex items-center gap-2 text-blue-400 font-semibold text-sm mb-6">
+              <span className="w-2 h-2 rounded-full bg-blue-400"></span>
+              VERIFIED AUTHORITY
             </div>
 
-            {/* Title - 3 lines */}
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-white" style={{ 
-              fontWeight: 700,
-              letterSpacing: '-0.02em',
-              lineHeight: '1.35'
-            }}>
-              2023<br/>
+            {/* Title */}
+            <h2 className="section-title text-white mb-6">
               Google Korea<br/>
-              TOP 100 선정
+              우수 캠페인 TOP 100 선정
             </h2>
 
             {/* Description */}
-            <p className="text-base md:text-lg text-slate-400 leading-relaxed" style={{ 
-              fontWeight: 400,
+            <p className="text-base md:text-lg text-slate-400 tracking-normal max-w-3xl" style={{ 
               lineHeight: '1.7'
             }}>
-              Google이 성과로 인정한 구조. 단순 노출이 아닌, 비즈니스의 실질적<br className="hidden lg:block"/>
-              성장을 증명했습니다.
+              Google이 성과로 인정한 구조. 단순 노출이 아닌, 비즈니스의 실질적 성장을 증명했습니다.
             </p>
           </div>
 

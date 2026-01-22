@@ -118,12 +118,8 @@ export default function RootLayout({
         {/* Pretendard 한글 폰트 CDN */}
         <link rel="stylesheet" as="style" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
       </head>
-      <body className={`${manrope.variable} ${cormorant.variable} font-sans text-slate-950`}>
-        {/* [Careons] Global Background - F0F1F2 */}
-        <div className="fixed inset-0 -z-50" style={{ backgroundColor: '#F0F1F2' }}>
-          {/* Subtle noise texture for depth */}
-          <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")' }} />
-        </div>
+      <body className={`${manrope.variable} ${cormorant.variable} font-sans text-slate-950 bg-main`}>
+        {/* [PNA] Pure White Background */}
         
         <NavbarNew />
         {children}

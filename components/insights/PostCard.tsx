@@ -54,7 +54,7 @@ export function PostCard({ post, priority = false }: PostCardProps) {
       prefetch={true}
       className="group block h-full"
     >
-      <article className="relative h-full rounded-2xl overflow-hidden bg-white border border-slate-200 hover:border-slate-300 transition-all duration-300 hover:shadow-xl flex flex-col">
+      <article className="relative h-full rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 hover:border-slate-300 transition-all duration-300 hover:shadow-xl flex flex-col">
         
         {/* Image with overlay */}
         <div className="relative w-full h-64 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">

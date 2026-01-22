@@ -9,13 +9,13 @@ import Image from "next/image";
 
 export function CEOSection() {
   return (
-    <section className="py-20 md:py-32 bg-slate-900 relative overflow-hidden" data-section="CEO">
+    <section className="py-20 md:py-32 relative bg-slate-950 overflow-hidden" data-section="CEO">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 right-20 w-96 h-96 bg-blue-500 rounded-full blur-[150px]"></div>
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-indigo-500 rounded-full blur-[150px]"></div>
       </div>
-
+      
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
         
         {/* 2 Column Layout */}
@@ -52,14 +52,14 @@ export function CEOSection() {
           {/* Right: Content */}
           <div>
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-blue-600/20 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6">
+            <div className="inline-flex items-center gap-2 text-blue-400 font-semibold text-sm mb-6">
+              <span className="w-2 h-2 rounded-full bg-blue-400"></span>
               EXPERT
             </div>
 
             {/* Title */}
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 tracking-tight" style={{ lineHeight: '1.3' }}>
-              <span className="text-white">실무 전문가의 직접 관리가<br/>만드는 </span>
-              <span className="text-blue-400">압도적인 차이</span>
+            <h2 className="section-title text-white mb-8">
+              실무 전문가의 직접 관리가<br/>만드는 <span className="text-blue-400">압도적인 차이</span>
             </h2>
 
             {/* Quote */}

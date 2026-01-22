@@ -56,13 +56,13 @@ const services = [
 
 export function ServicesAlternate() {
   return (
-    <section id="solutions" className="py-20 md:py-32 bg-white relative" data-section="SOLUTIONS">
+    <section id="solutions" className="py-20 md:py-32 relative" data-section="SOLUTIONS">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         
         <SectionHeader 
           badge="서비스"
-          title="비즈니스 성장을 가속화하는 4가지 정밀 솔루션"
-          description="데이터 기반 전략으로 귀사의 성장을 증명합니다"
+          title="PNA가 제공하는 핵심 마케팅 서비스"
+          description="구글 광고, SEO & GEO, 워드프레스, 퍼포먼스 마케팅까지 데이터 기반의 통합 솔루션을 제공합니다"
         />
 
         {/* Services Grid */}

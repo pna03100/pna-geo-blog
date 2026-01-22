@@ -78,7 +78,7 @@ export function FloatingActions() {
           {/* Share Button */}
           <button
             onClick={handleShare}
-            className="group flex items-center justify-center w-14 h-14 rounded-full bg-white border border-slate-200 text-slate-700 shadow-lg hover:shadow-xl hover:-translate-y-px hover:border-blue-600 hover:text-blue-600 active:scale-[0.98]"
+            className="group flex items-center justify-center w-14 h-14 rounded-full bg-slate-50 border border-slate-200 text-slate-700 shadow-lg hover:shadow-xl hover:-translate-y-px hover:border-blue-600 hover:text-blue-600 active:scale-[0.98]"
             style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
             title="공유하기"
           >
@@ -91,7 +91,7 @@ export function FloatingActions() {
           {/* Scroll to Top */}
           <button
             onClick={scrollToTop}
-            className="group flex items-center justify-center w-14 h-14 rounded-full bg-white border border-slate-200 text-slate-700 shadow-lg hover:shadow-xl hover:-translate-y-px hover:border-blue-600 hover:text-blue-600 active:scale-[0.98]"
+            className="group flex items-center justify-center w-14 h-14 rounded-full bg-slate-50 border border-slate-200 text-slate-700 shadow-lg hover:shadow-xl hover:-translate-y-px hover:border-blue-600 hover:text-blue-600 active:scale-[0.98]"
             style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
             title="맨 위로"
           >

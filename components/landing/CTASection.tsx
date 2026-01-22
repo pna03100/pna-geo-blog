@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export function CTASection() {
   return (
-    <section className="relative py-20 md:py-32 bg-white" data-section="CTA">
+    <section className="relative py-20 md:py-32" data-section="CTA">
       <div className="container mx-auto px-4 md:px-6 max-w-5xl">
         <div className="text-center">
           {/* Title */}
@@ -27,10 +27,7 @@ export function CTASection() {
 
           {/* CTA Button */}
           <div className="mb-12">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-blue-600 text-white font-semibold text-lg hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30 transition-all duration-200 active:scale-[0.98]"
-            >
+            <Link href="/contact" className="btn-primary text-lg">
               무료 전략 상담 받기
             </Link>
           </div>

@@ -8,6 +8,7 @@
 
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 
 interface FAQItem {
   question: string;
@@ -55,20 +56,11 @@ export function FAQSection() {
           
           {/* Left: Header (Sticky) */}
           <div className="lg:sticky lg:top-24">
-            <div className="mb-6">
-              <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm">
-                <span className="w-2 h-2 rounded-full bg-blue-600"></span>
-                FAQ
-              </span>
-            </div>
-            
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6" style={{ lineHeight: '1.3' }}>
-              자주 묻는 질문
-            </h2>
-            
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed">
-              PNA 컴퍼니에 대해 궁금하신 점을 확인하세요
-            </p>
+            <SectionHeader 
+              badge="FAQ"
+              title="자주 묻는 질문"
+              description="PNA 컴퍼니에 대해 궁금하신 점을 확인하세요"
+            />
           </div>
           
           {/* Right: FAQ List */}
@@ -76,7 +68,7 @@ export function FAQSection() {
           {faqs.map((faq, index) => (
             <div key={index} 
                 className={`
-                  relative rounded-2xl bg-white overflow-hidden border
+                  relative rounded-2xl bg-slate-50 overflow-hidden border
                   ${openIndex === index 
                     ? 'border-blue-400 shadow-lg' 
                     : 'border-slate-200 hover:border-slate-300'

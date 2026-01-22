@@ -38,7 +38,7 @@ export function LogoMarquee() {
               aria-hidden={!isOriginal}
             >
               {/* Card Container */}
-              <div className="relative w-32 h-20 md:w-40 md:h-24 rounded-2xl bg-white border-2 border-slate-200 group-hover:border-blue-400 group-hover:shadow-xl transition-all duration-300 overflow-hidden">
+              <div className="relative w-32 h-20 md:w-40 md:h-24 rounded-2xl bg-slate-50 border-2 border-slate-200 group-hover:border-blue-400 group-hover:shadow-xl transition-all duration-300 overflow-hidden">
                 {/* Logo */}
                 <div className="absolute inset-0 flex items-center justify-center p-4">
                   <Image

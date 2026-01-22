@@ -42,8 +42,8 @@ export function NavbarNew() {
       {/* Clean White Header */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/70 backdrop-blur-xl shadow-sm border-b border-slate-200/50' 
-          : 'bg-white/50 backdrop-blur-lg'
+          ? 'bg-slate-50/90 backdrop-blur-xl shadow-sm border-b border-slate-200' 
+          : 'bg-slate-50/70 backdrop-blur-lg'
       }`}>
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           
@@ -128,7 +128,7 @@ export function NavbarNew() {
         <div className="fixed inset-0 z-40 lg:hidden">
           <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
           
-          <div className="fixed top-16 left-0 right-0 bg-white border-b border-slate-200 shadow-xl">
+          <div className="fixed top-16 left-0 right-0 bg-slate-50 border-b border-slate-200 shadow-xl">
             <nav className="container mx-auto px-4 py-6 space-y-4">
               {navItems.map((item) => {
                 const isActive = pathname === item.href

@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Script from "next/script";
 import { Loader2, ArrowRight } from "lucide-react";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 
 // ============================================
 // [TypeScript] Turnstile Global Declaration
@@ -140,20 +141,11 @@ export function ContactSection() {
           
           {/* Left: Header (Sticky) */}
           <div className="lg:sticky lg:top-24">
-            <div className="mb-6">
-              <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm">
-                <span className="w-2 h-2 rounded-full bg-blue-600"></span>
-                문의하기
-              </span>
-            </div>
-            
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6" style={{ lineHeight: '1.3' }}>
-              프로젝트 문의하기
-            </h2>
-            
-            <p className="text-base md:text-lg text-slate-600 tracking-normal mb-8" style={{ lineHeight: '1.7' }}>
-              성장을 위한 파트너, PNA 컴퍼니입니다. 문의 남겨주시면 담당자가 <span className="font-semibold text-blue-600">24시간 이내</span>에 연락드립니다.
-            </p>
+            <SectionHeader 
+              badge="문의하기"
+              title="프로젝트 문의하기"
+              description="성장을 위한 파트너, PNA 컴퍼니입니다. 문의 남겨주시면 담당자가 24시간 이내에 연락드립니다."
+            />
             
             {/* Decorative Badge */}
             <div className="hidden lg:block p-6 rounded-2xl bg-blue-50 border border-blue-200">
@@ -165,7 +157,7 @@ export function ContactSection() {
 
           {/* Right: Form */}
           <div>
-          <div className="relative bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-slate-200">
+          <div className="relative bg-slate-50 p-8 md:p-10 rounded-3xl shadow-xl border border-slate-200">
             {/* Decorative Element */}
             <div className="absolute -top-px -right-px w-32 h-32 bg-gradient-to-br from-blue-100 to-transparent rounded-br-3xl rounded-tl-3xl opacity-20 pointer-events-none" />
             
@@ -182,7 +174,7 @@ export function ContactSection() {
                   {...register("company")}
                   type="text"
                   id="company"
-                  className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium placeholder:text-slate-400 bg-slate-50 focus:bg-white"
+                  className="input-field"
                   placeholder="예: 피앤에이컴퍼니"
                 />
                 {errors.company && (
@@ -204,7 +196,7 @@ export function ContactSection() {
                   {...register("contact")}
                   type="tel"
                   id="contact"
-                  className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium placeholder:text-slate-400 bg-slate-50 focus:bg-white"
+                  className="input-field"
                   placeholder="010-1234-5678"
                 />
                 {errors.contact && (
@@ -226,7 +218,7 @@ export function ContactSection() {
                   {...register("email")}
                   type="email"
                   id="email"
-                  className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium placeholder:text-slate-400 bg-slate-50 focus:bg-white"
+                  className="input-field"
                   placeholder="example@company.com"
                 />
                 {errors.email && (
@@ -267,7 +259,7 @@ export function ContactSection() {
                   <select
                     {...register("serviceType")}
                     id="serviceType"
-                    className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium bg-slate-50 focus:bg-white cursor-pointer"
+                    className="input-field cursor-pointer"
                   >
                     {serviceOptions.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -293,7 +285,7 @@ export function ContactSection() {
                   <select
                     {...register("budget")}
                     id="budget"
-                    className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium bg-slate-50 focus:bg-white cursor-pointer"
+                    className="input-field cursor-pointer"
                   >
                     {budgetOptions.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -321,7 +313,7 @@ export function ContactSection() {
                   {...register("message")}
                   id="message"
                   rows={6}
-                  className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium placeholder:text-slate-400 bg-slate-50 focus:bg-white resize-none"
+                  className="input-field resize-none"
                   placeholder="프로젝트에 대해 자세히 알려주세요..."
                 />
                 {errors.message && (
@@ -373,7 +365,7 @@ export function ContactSection() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-8 py-5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:shadow-blue-600/20 hover:-translate-y-0.5 focus:ring-4 focus:ring-blue-600/30 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-2 group will-change-transform"
+                className="btn-primary w-full justify-center py-5 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>

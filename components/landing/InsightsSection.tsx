@@ -53,14 +53,11 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
         ))}
       </div>
 
-      {/* View All Link - Light Mode */}
+      {/* View All Link */}
       <div className="text-center mt-12">
-        <Link
-          href="/insights"
-          className="btn-premium-primary !bg-blue-50 !text-blue-700 !border-blue-200 hover:!bg-blue-600 hover:!text-white hover:!border-blue-600 group"
-        >
+        <Link href="/insights" className="btn-secondary">
           <span>모든 인사이트 보기</span>
-          <ArrowRight className="w-5 h-5 arrow-premium" />
+          <ArrowRight className="w-5 h-5" />
         </Link>
       </div>
       </div>

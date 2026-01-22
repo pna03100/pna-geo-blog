@@ -11,7 +11,7 @@ export function HeroSectionFinal() {
   return (
     <section 
       data-section="HERO" 
-      className="relative w-full bg-gradient-to-b from-slate-50 via-white to-slate-100 pt-36 pb-20 md:pt-44 md:pb-24"
+      className="relative w-full pt-36 pb-20 md:pt-44 md:pb-24"
     >
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         
