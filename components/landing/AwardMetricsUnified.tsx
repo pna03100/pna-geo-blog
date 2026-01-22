@@ -24,6 +24,7 @@ export function AwardMetricsUnified() {
   return (
     <div 
       ref={cardRef as React.RefObject<HTMLDivElement>}
+      data-section="AUTHORITY"
       className="reveal-3d-lift relative rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-[#0a0e1a] via-[#0f1420] to-[#0a0e1a] p-12 md:p-16 lg:p-20 border border-slate-800/30 shadow-2xl"
     >
       
