@@ -61,11 +61,11 @@ export function FloatingActions() {
   return (
     <>
       {isVisible && (
-        <div className="fixed right-6 bottom-6 z-40 flex flex-col gap-4 animate-tab-fade-in">
+        <div className="hidden md:flex fixed right-6 bottom-6 z-40 flex-col gap-4 animate-tab-fade-in">
           {/* CTA Button - Premium Blue */}
           <Link
             href="/contact"
-            className="group relative flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-600/40 hover:shadow-2xl hover:shadow-blue-600/50 hover:scale-105 active:scale-95 transition-all duration-300"
+            className="group relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-600/40 hover:shadow-2xl hover:shadow-blue-600/50 hover:scale-105 active:scale-95 transition-all duration-300"
             title="문의하기"
           >
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -78,7 +78,7 @@ export function FloatingActions() {
           {/* Share Button - Premium Glass */}
           <button
             onClick={handleShare}
-            className="group relative flex items-center justify-center w-16 h-16 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/50 text-slate-700 shadow-xl shadow-slate-900/10 hover:shadow-2xl hover:shadow-blue-600/20 hover:scale-105 hover:border-blue-500/50 hover:text-blue-600 active:scale-95 transition-all duration-300"
+            className="group relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/50 text-slate-700 shadow-xl shadow-slate-900/10 hover:shadow-2xl hover:shadow-blue-600/20 hover:scale-105 hover:border-blue-500/50 hover:text-blue-600 active:scale-95 transition-all duration-300"
             title="공유하기"
           >
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -91,7 +91,7 @@ export function FloatingActions() {
           {/* Scroll to Top - Premium Glass */}
           <button
             onClick={scrollToTop}
-            className="group relative flex items-center justify-center w-16 h-16 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/50 text-slate-700 shadow-xl shadow-slate-900/10 hover:shadow-2xl hover:shadow-blue-600/20 hover:scale-105 hover:border-blue-500/50 hover:text-blue-600 active:scale-95 transition-all duration-300"
+            className="group relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/50 text-slate-700 shadow-xl shadow-slate-900/10 hover:shadow-2xl hover:shadow-blue-600/20 hover:scale-105 hover:border-blue-500/50 hover:text-blue-600 active:scale-95 transition-all duration-300"
             title="맨 위로"
           >
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

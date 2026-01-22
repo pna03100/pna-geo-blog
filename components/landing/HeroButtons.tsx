@@ -29,9 +29,10 @@ export function HeroButtons() {
             solutionsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         }}
-        className="btn-outline group cursor-pointer"
+        className="btn-secondary group cursor-pointer"
       >
         <span>서비스 둘러보기</span>
+        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
       </button>
     </>
   );
