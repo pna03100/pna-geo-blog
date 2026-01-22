@@ -57,7 +57,7 @@ const services = [
 
 // Service Card Component with Individual Scroll Reveal
 function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
-  const cardRef = useScrollReveal("active", { threshold: 0.3, once: true });
+  const cardRef = useScrollReveal("active", { threshold: 0.25, once: true });
   const IconComponent = service.icon;
 
   return (
@@ -65,7 +65,6 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       ref={cardRef as React.RefObject<HTMLAnchorElement>}
       href={service.link}
       className="reveal-insights-card group relative bg-slate-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-800 hover:border-slate-700"
-      style={{ transitionDelay: `${index * 200}ms` }}
     >
       {/* Background Image */}
       <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-300">

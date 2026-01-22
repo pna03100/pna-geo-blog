@@ -40,8 +40,8 @@ const problems = [
 ];
 
 export function ProblemsSection() {
-  const leftRef = useScrollReveal("active", { threshold: 0.3, once: true });
-  const rightRef = useScrollReveal("active", { threshold: 0.25, once: true });
+  const leftRef = useScrollReveal("active", { threshold: 0.35, once: true });
+  const rightRef = useScrollReveal("active", { threshold: 0.35, once: true });
 
   return (
     <section className="py-20 md:py-32" data-section="PROBLEMS">

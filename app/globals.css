@@ -322,33 +322,29 @@
   transform: translateX(0);
 }
 
-/* Timeline: 스크롤마다 하나씩 등장 - 살짝 빠르게 */
+/* Timeline: 스크롤마다 하나씩 등장 - 쫀득하게 */
 .reveal-timeline {
   opacity: 0;
-  transform: translateX(-30px);
-  transition: all 1000ms cubic-bezier(0.33, 1, 0.68, 1);
+  transform: translateX(-30px) scale(0.95);
+  transition: all 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .reveal-timeline.active {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) scale(1);
 }
 
-/* 6. Insights: 카드 페이드 업 */
+/* 6. Insights & Services: 카드 페이드 업 - 쫀득하게 */
 .reveal-insights-card {
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 1400ms cubic-bezier(0.33, 1, 0.68, 1);
+  transform: translateY(40px) scale(0.95);
+  transition: all 1000ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .reveal-insights-card.active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
-
-.reveal-insights-card:nth-child(1) { transition-delay: 0ms; }
-.reveal-insights-card:nth-child(2) { transition-delay: 200ms; }
-.reveal-insights-card:nth-child(3) { transition-delay: 400ms; }
 
 /* 7. CTA: 빠르고 쫀득하게 (하단 여백 없음) */
 .reveal-zoom-push {

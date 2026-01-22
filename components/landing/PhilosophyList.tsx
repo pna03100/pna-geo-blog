@@ -69,7 +69,7 @@ export function PhilosophyList() {
 
 // Phase Item Component with Individual Scroll Reveal
 function PhaseItem({ phase, index }: { phase: typeof phases[0]; index: number }) {
-  const itemRef = useScrollReveal("active", { threshold: 0.6, once: true });
+  const itemRef = useScrollReveal("active", { threshold: 0.5, once: true });
 
   return (
     <div 

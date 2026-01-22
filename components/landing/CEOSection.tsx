@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
 
 export function CEOSection() {
-  const ceoRef = useScrollReveal("active", { threshold: 0.35, once: true });
+  const ceoRef = useScrollReveal("active", { threshold: 0.4, once: true });
 
   return (
     <section 

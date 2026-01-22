@@ -19,7 +19,7 @@ const clients = [
 ];
 
 export function AwardMetricsUnified() {
-  const cardRef = useScrollReveal("active", { threshold: 0.35, once: true });
+  const cardRef = useScrollReveal("active", { threshold: 0.4, once: true });
 
   return (
     <div 

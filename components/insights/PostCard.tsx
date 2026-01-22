@@ -33,7 +33,7 @@ function decodeHTMLEntities(text: string): string {
 }
 
 export function PostCard({ post, priority = false }: PostCardProps) {
-  const cardRef = useScrollReveal("active", { threshold: 0.3, once: true });
+  const cardRef = useScrollReveal("active", { threshold: 0.25, once: true });
   const date = post.date ? new Date(post.date).toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: '2-digit',

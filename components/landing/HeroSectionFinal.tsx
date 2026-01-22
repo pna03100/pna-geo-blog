@@ -10,7 +10,7 @@ import { HeroButtons } from "./HeroButtons";
 import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
 
 export function HeroSectionFinal() {
-  const contentRef = useScrollReveal("active", { threshold: 0.3, once: true });
+  const contentRef = useScrollReveal("active", { threshold: 0.2, once: true });
 
   return (
     <section 
