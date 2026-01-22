@@ -41,33 +41,43 @@ export function AwardMetricsUnified() {
 
             {/* Title */}
             <h2 className="section-title text-white mb-6">
+              2023<br/>
               Google Korea<br/>
-              우수 캠페인 TOP 100 선정
+              우수 캠페인 TOP 100
             </h2>
 
             {/* Description */}
             <p className="text-base md:text-lg text-slate-400 tracking-normal max-w-3xl" style={{ 
               lineHeight: '1.7'
             }}>
-              Google이 성과로 인정한 구조. 단순 노출이 아닌, 비즈니스의 실질적 성장을 증명했습니다.
+              Google Korea가 직접 선정한 우수 캠페인 TOP 100에 이름을 올렸습니다. 단순한 광고 노출이나 클릭수가 아닌, 실제 비즈니스 성장과 ROI 개선이라는 명확한 성과를 인정받았습니다. 이는 데이터 기반의 정밀한 전략과 지속적인 최적화가 만들어낸 결과입니다.
             </p>
           </div>
 
           {/* Right: Image Card */}
-          <div className="relative">
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-800/30 border border-slate-700/50 shadow-xl">
+          <div className="relative group">
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-slate-800/50 shadow-2xl transition-all duration-500 group-hover:border-slate-700">
+              {/* Background Image */}
               <Image
                 src="/images/hero/performance-hero-bg.jpg"
                 alt="Campaign Performance"
                 fill
-                className="object-cover opacity-30"
+                className="object-cover transition-all duration-500 group-hover:scale-105 group-hover:opacity-40"
+                style={{ opacity: 0.3 }}
               />
               
-              {/* Overlay Content */}
-              <div className="absolute inset-0 flex flex-col items-start justify-end p-6 md:p-8 bg-gradient-to-t from-slate-900/95 via-slate-900/50 to-transparent">
-                <p className="text-[10px] text-slate-500 font-medium uppercase tracking-[0.15em] mb-2">Campaign Performance</p>
-                <p className="text-white font-semibold text-lg md:text-xl mb-4">Verified by Google Korea</p>
-                <div className="inline-flex px-4 py-1.5 rounded-md bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider">
+              {/* Dark Overlay - 호버 시 밝아짐 */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/60 transition-opacity duration-500 group-hover:from-slate-900 group-hover:via-slate-900/70 group-hover:to-slate-900/40" />
+              
+              {/* Content */}
+              <div className="absolute inset-0 flex flex-col items-start justify-end p-8 md:p-10">
+                <p className="text-xs text-slate-500 font-medium uppercase tracking-widest mb-3 transition-colors duration-300 group-hover:text-slate-400">
+                  Campaign Performance
+                </p>
+                <h3 className="text-xl md:text-2xl font-semibold text-white mb-6 transition-all duration-300 group-hover:text-white">
+                  Verified by Google Korea
+                </h3>
+                <div className="inline-flex px-5 py-2 rounded-lg bg-blue-600/90 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 group-hover:bg-blue-600 group-hover:shadow-lg group-hover:shadow-blue-600/50">
                   Official Partner
                 </div>
               </div>
