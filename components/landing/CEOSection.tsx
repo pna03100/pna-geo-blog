@@ -14,7 +14,7 @@ export function CEOSection() {
   return (
     <section 
       ref={ceoRef as React.RefObject<HTMLElement>}
-      className="reveal-scale-up py-20 md:py-32 relative bg-slate-950 overflow-hidden" 
+      className="reveal-blur-focus py-20 md:py-32 relative bg-slate-950 overflow-hidden" 
       data-section="CEO"
     >
       {/* Background Pattern */}

@@ -18,7 +18,7 @@ const services = [
     icon: Cpu,
     title: "구글 광고",
     subtitle: "GOOGLE ADS",
-    description: "AI 스마트 입찰과 정밀 타겟팅으로 효율을 극대화하여 광고비 낭비를 최소화하는 전략을 수립합니다.",
+    description: "AI 스마트 입찰과 정밀 타겟팅으로 광고 효율을 극대화합니다. 실시간 데이터 분석을 통해 광고비 낭비를 최소화하고 최적의 성과를 이끌어냅니다.",
     features: ["스마트 입찰 최적화", "정밀 타겟팅", "실시간 모니터링"],
     link: "/google-ads",
     image: "/images/hero/google-ads-hero-bg.jpg"
@@ -28,7 +28,7 @@ const services = [
     icon: Globe,
     title: "SEO & GEO",
     subtitle: "SEO & GEO",
-    description: "검색 엔진과 Gemini AI 결과에 동시 상위 노출되는 시맨틱 점유 전략으로 브랜드 가치를 높입니다.",
+    description: "검색 엔진과 Gemini AI 결과에 동시 상위 노출되는 시맨틱 전략을 구축합니다. 데이터 기반의 정밀한 컨텐츠 최적화로 브랜드 가치를 높입니다.",
     features: ["시맨틱 SEO", "AI 검색 최적화", "브랜드 노출 확대"],
     link: "/seo-geo",
     image: "/images/hero/seo-hero-bg.jpg"
@@ -38,7 +38,7 @@ const services = [
     icon: Layout,
     title: "워드프레스",
     subtitle: "WORDPRESS",
-    description: "기술적 SEO 최적화와 사용자 경험을 동시에 고려한 초고속 퍼포먼스 웹사이트를 구축합니다.",
+    description: "기술적 SEO 최적화와 사용자 경험을 동시에 고려한 웹사이트를 구축합니다. 초고속 퍼포먼스와 완벽한 반응형 디자인으로 비즈니스 성장을 지원합니다.",
     features: ["기술적 SEO", "UX 최적화", "고속 퍼포먼스"],
     link: "/wordpress",
     image: "/images/hero/wordpress-hero-bg.jpg"
@@ -48,7 +48,7 @@ const services = [
     icon: RefreshCw,
     title: "퍼포먼스 마케팅",
     subtitle: "PERFORMANCE MARKETING",
-    description: "추측을 배제하고 전 과정 데이터 추적을 통해 마케팅 ROI 최적화의 길을 제안합니다.",
+    description: "추측을 배제하고 전 과정 데이터 추적을 통해 마케팅을 최적화합니다. 명확한 성과 지표 분석으로 지속 가능한 ROI 향상을 실현합니다.",
     features: ["데이터 추적", "ROI 최적화", "성과 분석"],
     link: "/performance",
     image: "/images/hero/performance-hero-bg.jpg"
@@ -102,13 +102,13 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
           {service.title}
         </h3>
 
-        {/* Description */}
-        <p className="text-slate-300 leading-relaxed mb-8 text-base">
+        {/* Description - 고정 높이로 2줄 유지 */}
+        <p className="text-slate-300 leading-relaxed mb-8 text-base h-[3rem] line-clamp-2">
           {service.description}
         </p>
 
         {/* Features with Dividers */}
-        <div className="flex items-center gap-3 text-sm text-slate-400">
+        <div className="flex items-center gap-3 text-sm text-slate-400 mb-6">
           {service.features.map((feature, idx) => (
             <React.Fragment key={idx}>
               <span className="whitespace-nowrap">{feature}</span>
@@ -119,8 +119,8 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
           ))}
         </div>
 
-        {/* Progress Bar */}
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-slate-800">
+        {/* Progress Bar - Inside Content */}
+        <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
           <div className="h-full bg-gradient-to-r from-blue-600 to-blue-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out" />
         </div>
       </div>
