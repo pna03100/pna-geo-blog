@@ -60,11 +60,13 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
           </span>
         </div>
         
-        <div className="mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.2' }}>
-            마케팅 인사이트
-          </h2>
-          <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl">
+        <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-3" style={{ lineHeight: '1.2' }}>
+              마케팅 인사이트
+            </h2>
+          </div>
+          <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl">
             데이터 기반 성과 마케팅을 위한 실무 노하우와 최신 트렌드를 공유합니다
           </p>
         </div>

@@ -7,6 +7,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export function ScrollAwardSection() {
@@ -29,24 +30,25 @@ export function ScrollAwardSection() {
 
   return (
     <section 
-      className="pt-16 pb-8 md:pt-24 md:pb-12 relative will-change-transform" 
+      className="relative will-change-transform" 
       style={{
         transform: `translateY(${translateY}vh)`,
         transition: 'transform 0.1s ease-out'
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="py-20 md:py-32" style={{ backgroundColor: '#F0F1F2' }}>
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
           
-          {/* [Careons] Left - Image */}
-          <div className="relative order-2 lg:order-1">
-            <div className="relative aspect-[16/10] rounded-3xl overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50">
+          {/* [Careons] Right - Image (swapped position) */}
+          <div className="relative order-2 lg:order-2">
+            <div className="relative aspect-[16/10] rounded-3xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
               {/* Image placeholder - 트로피와 Google 로고 */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
                   <div className="text-8xl mb-4">🏆</div>
-                  <div className="px-8 py-4 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl">
+                  <div className="px-8 py-4 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl">
                     <p className="text-2xl font-bold text-slate-900">Google Partner</p>
                     <p className="text-lg text-blue-600 font-semibold">Top 100 Campaign 2023</p>
                   </div>
@@ -54,13 +56,13 @@ export function ScrollAwardSection() {
               </div>
               
               {/* Decorative elements */}
-              <div className="absolute top-10 right-10 w-32 h-32 bg-blue-300/30 rounded-full blur-3xl" />
-              <div className="absolute bottom-10 left-10 w-40 h-40 bg-indigo-200/40 rounded-full blur-3xl" />
+              <div className="absolute top-10 right-10 w-32 h-32 bg-slate-300/30 rounded-full blur-3xl" />
+              <div className="absolute bottom-10 left-10 w-40 h-40 bg-slate-200/40 rounded-full blur-3xl" />
             </div>
           </div>
           
-          {/* [Careons] Right - Content */}
-          <div className="order-1 lg:order-2">
+          {/* [Careons] Left - Content (swapped position) */}
+          <div className="order-1 lg:order-1">
             
             {/* Small Badge */}
             <div className="mb-4">
@@ -81,14 +83,17 @@ export function ScrollAwardSection() {
             </p>
             
             {/* CTA Button */}
-            <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-slate-200 text-slate-900 font-semibold hover:border-blue-400 hover:bg-blue-50 transition-all duration-200">
-              <span>자세히 보기</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </button>
+            <Link href="/about">
+              <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-slate-200 text-slate-900 font-semibold hover:border-blue-400 hover:bg-blue-50 transition-all duration-200">
+                <span>자세히 보기</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            </Link>
           </div>
           
+        </div>
         </div>
       </div>
     </section>

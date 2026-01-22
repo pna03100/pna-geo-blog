@@ -150,6 +150,25 @@ export default async function HomePage() {
           {/* Google Award Badge - Scroll Interactive */}
           <ScrollAwardSection />
 
+          {/* 🎞️ Partners Section - Simple Layout */}
+          <section className="relative pt-8 pb-16 md:pt-24 md:pb-24">
+            <div className="max-w-7xl mx-auto px-4 md:px-6">
+              {/* Badge & Title */}
+              <div className="mb-8">
+                <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm mb-4">
+                  <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+                  클라이언트
+                </span>
+                <h2 className="text-2xl md:text-4xl font-bold text-slate-900 mt-4" style={{ lineHeight: '1.2' }}>
+                  대한민국 대표 기업들이 선택한 파트너
+                </h2>
+              </div>
+              
+              {/* Logo Marquee */}
+              <LogoMarquee />
+            </div>
+          </section>
+
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
           {/* SECTION 2: STATS - The Proof (Open Financial Layout)          */}
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
@@ -169,24 +188,6 @@ export default async function HomePage() {
         {/* SECTION 5: TRUST - Credibility (Glassmorphism + Marquee)      */}
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         <ExpertiseSection />
-        
-        {/* 🎞️ Partners Section with Marquee */}
-        <section className="relative py-12 md:py-16 bg-white">
-          <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-            {/* Title */}
-            <div className="text-center mb-8 md:mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3" style={{ lineHeight: '1.4' }}>
-                주요 파트너사
-              </h2>
-              <p className="text-base md:text-lg text-slate-600 leading-relaxed">
-                대한민국 대표 기업들과 함께합니다
-              </p>
-            </div>
-          </div>
-          
-          {/* Logo Marquee */}
-          <LogoMarquee />
-        </section>
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         {/* SECTION 6: INSIGHTS - Thought Leadership                      */}

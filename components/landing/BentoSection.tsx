@@ -156,7 +156,7 @@ export function BentoSection() {
   }, []);
 
   return (
-    <section id="solutions" className="py-20 md:py-32 bg-slate-900 relative" data-section="SOLUTIONS">
+    <section id="solutions" className="py-20 md:py-32 bg-black relative" data-section="SOLUTIONS">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         
         {/* [Careons] Small Badge */}

@@ -51,14 +51,14 @@ export function MetricsSection() {
         </div>
         
         {/* Header */}
-        <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-3" style={{ lineHeight: '1.2' }}>
               숫자로 증명하는 퍼포먼스
             </h2>
           </div>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl">
-            감각에 의존하지 않습니다. 오직 정확한 데이터만이 비즈니스의 성장을 만듭니다.
+            감각에 의존하지 않습니다. 정확한 데이터만이 비즈니스의 성장을 만듭니다.
           </p>
         </div>
 

@@ -80,11 +80,13 @@ export function ExpertiseSection() {
       </div>
 
       {/* Header */}
-      <div className="mb-12 md:mb-16">
-        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.2' }}>
-          검증된 전문성
-        </h2>
-        <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl">
+      <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-3" style={{ lineHeight: '1.2' }}>
+            검증된 전문성
+          </h2>
+        </div>
+        <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl">
           대한민국 대표 기업들이 선택한 데이터 마케팅 파트너
         </p>
       </div>
@@ -145,39 +147,34 @@ export function ExpertiseSection() {
         </div>
       </div>
 
-      {/* Certifications - 3 Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Certifications - 3-Column with Dividers */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
         {certifications.map((cert, index) => {
           return (
             <div 
               key={cert.title} 
               ref={(el) => { certRefs.current[index] = el; }}
-              className="group relative rounded-2xl overflow-hidden philosophy-item opacity-0 translate-y-4 h-[300px]"
+              className={`philosophy-item opacity-0 translate-y-4 text-center py-8 md:py-12 px-6 ${
+                index !== certifications.length - 1 ? 'md:border-r border-slate-200' : ''
+              }`}
               style={{ transitionDelay: `${index * 0.15}s` }}
             >
-              {/* Background Image */}
-              <Image
-                src={cert.image}
-                alt={cert.title}
-                fill
-                className="object-cover"
-              />
-              
-              {/* Overlay - lighter on hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-slate-900/50 group-hover:from-slate-900/70 group-hover:to-slate-900/30 transition-all duration-300" />
-              
-              {/* Content at bottom */}
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-semibold mb-3 border border-blue-400/30">
+              {/* Badge */}
+              <div className="mb-4 flex justify-center">
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider border border-blue-200">
                   {cert.badge}
                 </span>
-                <h4 className="text-xl font-bold text-white mb-2" style={{ lineHeight: '1.3' }}>
-                  {cert.title}
-                </h4>
-                <p className="text-sm text-white/80 leading-relaxed">
-                  {cert.description}
-                </p>
               </div>
+              
+              {/* Title */}
+              <h4 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3" style={{ lineHeight: '1.2' }}>
+                {cert.title}
+              </h4>
+              
+              {/* Description */}
+              <p className="text-base text-slate-600 leading-relaxed">
+                {cert.description}
+              </p>
             </div>
           );
         })}

@@ -11,8 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Script from "next/script";
-import Image from "next/image";
-import { MapPin, Mail, Phone, Printer, Loader2, ArrowRight } from "lucide-react";
+import { Loader2, ArrowRight } from "lucide-react";
 
 // ============================================
 // [TypeScript] Turnstile Global Declaration
@@ -133,7 +132,7 @@ export function ContactSection() {
   return (
     <>
       {/* SECTION: #CONTACT */}
-      <section data-section="CONTACT" id="contact" className="relative py-20 md:py-32 bg-white">
+      <section data-section="CONTACT" id="contact" className="relative py-20 md:py-32">
       
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* 2 Column Layout */}
@@ -156,47 +155,11 @@ export function ContactSection() {
               문의 남겨주시면 담당자가 <span className="font-semibold text-blue-600">24시간 이내</span>에 연락드립니다.
             </p>
             
-            {/* Contact Info */}
-            <div className="space-y-4 mb-8">
-              <div className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-sm text-slate-500 mb-1">전화</p>
-                  <p className="text-base font-semibold text-slate-900">070-7733-7905</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-sm text-slate-500 mb-1">이메일</p>
-                  <p className="text-base font-semibold text-slate-900">contact@pnamarketing.co.kr</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-sm text-slate-500 mb-1">주소</p>
-                  <p className="text-base font-semibold text-slate-900">경기도 고양시 일산동구<br />백마로195, SK엠시티</p>
-                </div>
-              </div>
-            </div>
-            
-            {/* Decorative Image */}
-            <div className="hidden lg:block relative rounded-2xl overflow-hidden h-64">
-              <Image
-                src="/images/hero/wordpress-hero-bg.jpg"
-                alt="Contact"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6">
-                <p className="text-white font-semibold text-lg">
-                  함께 성장할 준비가 되셨나요?
-                </p>
-              </div>
+            {/* Decorative Badge */}
+            <div className="hidden lg:block mt-8 p-6 rounded-2xl bg-blue-50 border border-blue-200">
+              <p className="text-blue-600 font-semibold text-base">
+                🚀 함께 성장할 준비가 되셨나요?
+              </p>
             </div>
           </div>
 
