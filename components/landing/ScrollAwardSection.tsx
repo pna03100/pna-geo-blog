@@ -68,18 +68,18 @@ export function ScrollAwardSection() {
             <div className="mb-4">
               <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm">
                 <span className="w-2 h-2 rounded-full bg-blue-600"></span>
-                Google Award
+                Authority
               </span>
             </div>
             
             {/* Title */}
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.2' }}>
-              2023 Google Top 100 Campaign
+              대한민국 상위 1%에게만<br/>허락된 이름,<br/><span className="text-blue-600">Google TOP 100 파트너</span>
             </h2>
             
             {/* Description */}
             <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-6">
-              구글 공식 파트너로서 <span className="text-blue-600 font-semibold">2023년 Top 100 Campaign</span>에 선정되었습니다. 15년간 축적된 노하우와 데이터 기반 전략으로 고객의 성공을 만들어갑니다.
+              수천 개의 대행사 중 구글코리아가 직접 선정한 우수 캠페인 파트너십. 피앤에이컴퍼니는 단순히 광고를 집행하는 곳이 아닌, <span className="text-blue-600 font-semibold">최신 알고리즘을 비즈니스 결과로 연결하는 전략 그룹</span>입니다.
             </p>
             
             {/* CTA Button */}

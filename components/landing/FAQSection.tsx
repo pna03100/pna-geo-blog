@@ -7,7 +7,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 
 interface FAQItem {
   question: string;
@@ -16,28 +16,24 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: "구글 애즈 광고 대행 비용은 어떻게 되나요?",
-    answer: "광고 대행 비용은 월 광고비의 15~20%로 책정되며, 최소 계약 기간은 3개월입니다. 광고비 규모와 업종에 따라 맞춤 견적을 제공해드리며, 초기 셋업 비용은 별도로 협의 가능합니다. 무료 상담을 통해 정확한 견적을 받아보세요."
+    question: "피앤에이컴퍼니의 차별점은 무엇인가요?",
+    answer: "15년 실전 경험과 구글 TOP 100 선정 이력이 증명하는 전문성입니다. 담당자가 수시로 바뀌지 않는 전문가 직접 관리 시스템을 지향합니다. 영업 사원이 아닌 15년 차 전문가가 귀사의 비즈니스 본질에 집중한 전략을 직접 리딩합니다."
   },
   {
-    question: "ROAS 500%는 어떻게 달성하나요?",
-    answer: "15년간 축적된 데이터 기반 최적화 노하우를 활용합니다. 검색 의도 분석, 정밀 타겟팅, 키워드 최적화, 랜딩페이지 개선, 입찰 전략 조정 등을 통해 광고 효율을 극대화합니다. 또한 실시간 모니터링과 주간 리포트를 통해 지속적으로 성과를 개선합니다."
+    question: "SEO와 GEO 전략은 어떻게 진행되나요?",
+    answer: "기존 검색 결과 상위 노출(SEO)과 AI 검색 결과(GEO)를 동시에 분석하여, 브랜드가 최상단에 노출될 수 있는 시맨틱 구조를 설계합니다. Gemini AI와 Google 검색 엔진 모두에서 상위 노출되는 통합 전략을 제공합니다."
   },
   {
-    question: "워드프레스 제작 기간은 얼마나 걸리나요?",
-    answer: "기본 웹사이트는 2~3주, 커스터마이징이 많은 경우 4~6주 소요됩니다. 기획, 디자인, 개발, SEO 최적화, 테스트 과정을 거치며, 고객님과의 피드백을 반영하여 진행됩니다. 급한 경우 우선 일정 조율이 가능합니다."
+    question: "대행 비용과 계약 방식이 궁금합니다.",
+    answer: "투명한 수수료 체계를 지향하며, 비즈니스 규모와 목표에 최적화된 맞춤형 견적을 제안드립니다. 월 광고비의 15~20%로 책정되며, 초기 셋업 비용은 별도 협의 가능합니다. 무료 성과 진단을 통해 정확한 견적을 받아보세요."
   },
   {
-    question: "SEO 최적화 효과는 언제부터 나타나나요?",
-    answer: "SEO는 장기적인 전략으로, 일반적으로 3~6개월 후부터 가시적인 효과가 나타납니다. 웹사이트 구조 개선, 콘텐츠 최적화, 백링크 구축 등을 통해 검색 엔진 순위를 점진적으로 향상시킵니다. 초기 1~2개월 내에 기술적 개선 사항은 반영됩니다."
+    question: "효율 개선 시점은 언제부터인가요?",
+    answer: "셋팅 직후부터 실시간 모니터링이 시작됩니다. 정교한 AI 학습 과정을 거쳐 점진적이고 지속적인 성과 향상을 도모합니다. 일반적으로 2~4주 내에 초기 최적화 효과가 나타나며, 3개월 후부터 안정적인 성과를 확인하실 수 있습니다."
   },
   {
-    question: "계약 후 어떤 지원을 받을 수 있나요?",
-    answer: "전담 매니저가 배정되어 실시간 소통이 가능하며, 주간/월간 성과 리포트를 제공합니다. 광고 계정 관리, 캠페인 최적화, 전략 컨설팅, 기술 지원 등 포괄적인 서비스를 받으실 수 있습니다. 또한 평생 무료 기술 지원과 업데이트가 제공됩니다."
-  },
-  {
-    question: "소규모 예산으로도 광고 대행이 가능한가요?",
-    answer: "네, 가능합니다. 최소 월 광고비 300만원부터 대행 서비스를 제공하며, 예산에 맞는 최적의 전략을 수립해드립니다. 소규모 예산이라도 효율적인 타겟팅과 정밀한 관리를 통해 높은 ROAS를 달성할 수 있습니다."
+    question: "성과 분석 리포트는 어떻게 제공되나요?",
+    answer: "GA4 기반의 객관적 데이터를 바탕으로 분석 보고서를 제공하며, 대시보드를 통해 모든 지표를 투명하게 공유합니다. 주간 성과 요약과 월간 상세 리포트를 통해 캠페인 성과를 실시간으로 확인하실 수 있습니다."
   },
 ];
 
@@ -57,7 +53,7 @@ export function FAQSection() {
         {/* 2 Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-[400px,1fr] gap-12 lg:gap-16 items-start">
           
-          {/* Left: Header */}
+          {/* Left: Header (Sticky) */}
           <div className="lg:sticky lg:top-24">
             <div className="mb-6">
               <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm">
@@ -66,21 +62,15 @@ export function FAQSection() {
               </span>
             </div>
             
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.2' }}>
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6" style={{ lineHeight: '1.3' }}>
               자주 묻는 질문
             </h2>
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-8">
-              고객님들이 가장 궁금해하시는 질문들을 모았습니다
-            </p>
             
-            {/* Decorative Badge */}
-            <div className="hidden lg:block mt-8 p-6 rounded-2xl bg-blue-50 border border-blue-200">
-              <p className="text-blue-600 font-semibold text-base">
-                💬 24시간 이내 답변 드립니다
-              </p>
-            </div>
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed">
+              PNA 컴퍼니에 대해 궁금하신 점을 확인하세요
+            </p>
           </div>
-
+          
           {/* Right: FAQ List */}
           <div className="space-y-3">
           {faqs.map((faq, index) => (
@@ -114,15 +104,15 @@ export function FAQSection() {
                     flex items-center justify-center
                     transition-all duration-200
                     ${openIndex === index 
-                      ? 'bg-blue-600 rotate-180' 
+                      ? 'bg-blue-600' 
                       : 'bg-slate-100 group-hover:bg-slate-200'
                     }
                   `}>
-                    <ChevronDown className={`
-                      w-5 h-5
-                      transition-colors duration-200
-                      ${openIndex === index ? 'text-white' : 'text-slate-600'}
-                    `} />
+                    {openIndex === index ? (
+                      <Minus className="w-5 h-5 text-white" />
+                    ) : (
+                      <Plus className="w-5 h-5 text-slate-600" />
+                    )}
                   </div>
                 </button>
 

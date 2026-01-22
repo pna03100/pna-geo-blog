@@ -12,10 +12,10 @@ import Image from "next/image";
 const metrics = [
   {
     id: "roas",
-    label: "광고주 평균 ROAS",
+    label: "평균 ROAS",
     value: 500,
     suffix: "%",
-    description: "업계 평균 대비 3.5배 높은 성과",
+    description: "데이터 최적화 기반 실적",
     image: "/images/hero/google-ads-hero-bg.jpg"
   },
   {
@@ -23,15 +23,15 @@ const metrics = [
     label: "누적 광고 집행액",
     value: 470,
     suffix: "억+",
-    description: "데이터로 검증된 집행 노하우",
+    description: "검증된 운용 능력",
     image: "/images/hero/performance-hero-bg.jpg"
   },
   {
-    id: "projects",
-    label: "성공 프로젝트",
-    value: 500,
-    suffix: "+",
-    description: "15년간 검증된 실전 경험",
+    id: "experience",
+    label: "실전 경력",
+    value: 15,
+    suffix: "년+",
+    description: "업계를 선도해온 마케팅 노하우",
     image: "/images/hero/seo-hero-bg.jpg"
   },
 ];
@@ -54,11 +54,11 @@ export function MetricsSection() {
         <div className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-3" style={{ lineHeight: '1.2' }}>
-              숫자로 증명하는 퍼포먼스
+              데이터로 기록된<br/>파트너사의 성장 궤적
             </h2>
           </div>
           <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl">
-            감각에 의존하지 않습니다. 정확한 데이터만이 비즈니스의 성장을 만듭니다.
+            추측이 아닌 실제 수치로 증명된 성과. 우리의 전문성은 파트너사의 성장으로 말합니다.
           </p>
         </div>
 

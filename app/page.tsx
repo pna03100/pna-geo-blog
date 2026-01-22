@@ -6,16 +6,15 @@
  */
 
 import type { Metadata } from 'next';
-import { HeroSection } from '@/components/landing/HeroSection';
-import { ScrollAwardSection } from '@/components/landing/ScrollAwardSection';
-import { MetricsSection } from '@/components/landing/MetricsSection';
-import { BentoSection } from '@/components/landing/BentoSection';
-import { PhilosophySection } from '@/components/landing/PhilosophySection';
-import { ExpertiseSection } from '@/components/landing/ExpertiseSection';
-import { LogoMarquee } from '@/components/ui/logo-marquee';
+import { HeroSectionFinal } from '@/components/landing/HeroSectionFinal';
+import { AwardMetricsUnified } from '@/components/landing/AwardMetricsUnified';
+import { ProblemsSection } from '@/components/landing/ProblemsSection';
+import { ServicesAlternate } from '@/components/landing/ServicesAlternate';
+import { PhilosophyList } from '@/components/landing/PhilosophyList';
+import { CEOSection } from '@/components/landing/CEOSection';
 import { InsightsSection } from '@/components/landing/InsightsSection';
 import { FAQSection } from '@/components/landing/FAQSection';
-import { ContactSection } from '@/components/sections/contact-section';
+import { CTASection } from '@/components/landing/CTASection';
 import { getAllPosts } from '@/lib/api';
 
 // ============================================
@@ -84,12 +83,12 @@ function generateJsonLd() {
 // [GEO] Dynamic Metadata
 // ============================================
 export const metadata: Metadata = {
-  title: '구글애즈 광고 대행사 피앤에이컴퍼니 | 데이터로 증명하는 성과',
-  description: 'Google 공식 파트너 | 평균 ROAS 500% | GA4 정밀 분석 | SEO & GEO 최적화 | 15년 실전 경험으로 증명된 데이터 기반 성과 마케팅',
-  keywords: ['구글애즈', 'Google Ads', '구글 광고 대행', 'SEO', 'GEO', '퍼포먼스 마케팅', 'GA4', '데이터 분석'],
+  title: '구글 광고 대행사 피앤에이컴퍼니 | TOP 1%가 증명하는 성과 마케팅',
+  description: '15년 실전 데이터로 무장한 구글 공식 파트너. ROAS 500%를 지향하는 전략적 구글 광고 대행, SEO/GEO 최적화, 워드프레스 제작 전문. 데이터로 귀사의 성장을 증명합니다.',
+  keywords: ['구글애즈', 'Google Ads', '구글 광고 대행', 'SEO', 'GEO', '퍼포먼스 마케팅', 'GA4', '데이터 분석', 'Google TOP 100'],
   openGraph: {
-    title: '피앤에이컴퍼니 - 구글 광고 대행사',
-    description: 'Google 공식 파트너 | 평균 ROAS 500% 달성',
+    title: '구글 광고 대행사 피앤에이컴퍼니 | TOP 1%가 증명하는 성과',
+    description: '15년 실전 데이터로 무장한 구글 공식 파트너 | ROAS 500% 지향',
     type: 'website',
     locale: 'ko_KR',
     url: 'https://pnamarketing.co.kr',
@@ -139,55 +138,43 @@ export default async function HomePage() {
       />
 
       {/* 📐 Strategic Content Hierarchy */}
-      <main className="relative overflow-hidden">
+      <main className="relative">
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        {/* SECTION 1: HERO - The Hook & Authority (Full Screen Entrance) */}
+        {/* SECTION 1: HERO - Performance Architecture                    */}
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <HeroSection />
+        <HeroSectionFinal />
 
-        {/* Content Container - Pushed up by scroll, starts closer to hero */}
-        <div className="relative -mt-48 md:-mt-64">
-          {/* Google Award Badge - Scroll Interactive */}
-          <ScrollAwardSection />
-
-          {/* 🎞️ Partners Section - Simple Layout */}
-          <section className="relative pt-8 pb-16 md:pt-24 md:pb-24">
+        {/* Content Container */}
+        <div className="relative">
+          
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          {/* SECTION 2: Unified Award + Metrics + Clients Card              */}
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          <section className="pt-8 pb-20 md:pt-12 md:pb-32 bg-gradient-to-b from-slate-100 to-white relative z-10">
             <div className="max-w-7xl mx-auto px-4 md:px-6">
-              {/* Badge & Title */}
-              <div className="mb-8">
-                <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm mb-4">
-                  <span className="w-2 h-2 rounded-full bg-blue-600"></span>
-                  클라이언트
-                </span>
-                <h2 className="text-2xl md:text-4xl font-bold text-slate-900 mt-4" style={{ lineHeight: '1.2' }}>
-                  대한민국 대표 기업들이 선택한 파트너
-                </h2>
-              </div>
-              
-              {/* Logo Marquee */}
-              <LogoMarquee />
+              <AwardMetricsUnified />
             </div>
           </section>
 
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-          {/* SECTION 2: STATS - The Proof (Open Financial Layout)          */}
+          {/* SECTION 3: PROBLEMS - Structural Issues (Sticky Title)        */}
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-          <MetricsSection />
+          <ProblemsSection />
+
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          {/* SECTION 4: SERVICES - Alternating Layout                      */}
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          <ServicesAlternate />
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        {/* SECTION 3: SERVICES - Core Offering (Asymmetrical Bento)      */}
+        {/* SECTION 4: PHILOSOPHY - How We Work (Simple List)             */}
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <BentoSection />
+        <PhilosophyList />
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        {/* SECTION 4: PHILOSOPHY - How We Work (Open Air)                */}
+        {/* SECTION 5: CEO - Expert Leadership                            */}
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <PhilosophySection />
-
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        {/* SECTION 5: TRUST - Credibility (Glassmorphism + Marquee)      */}
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <ExpertiseSection />
+        <CEOSection />
 
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         {/* SECTION 6: INSIGHTS - Thought Leadership                      */}
@@ -202,7 +189,7 @@ export default async function HomePage() {
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
         {/* SECTION 8: CONTACT - Conversion (Split Panel)                 */}
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <ContactSection />
+        <CTASection />
         </div>
       </main>
     </>

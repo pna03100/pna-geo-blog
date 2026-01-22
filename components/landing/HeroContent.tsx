@@ -19,32 +19,35 @@ export function HeroContent() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        데이터로 증명하는 성과 마케팅
+        TOP 1%가 증명하는 성과 마케팅
       </motion.p>
 
       {/* 🎯 SEO OPTIMIZED: H1 - White Text, Left Aligned */}
       <motion.h1 
-        className="mb-6 md:mb-8 text-5xl md:text-6xl lg:text-7xl font-extrabold text-white relative" 
+        className="mb-6 md:mb-8 text-4xl md:text-5xl lg:text-6xl font-extrabold text-white relative" 
         style={{ lineHeight: '1.2', letterSpacing: '-0.02em' }}
         initial={{ opacity: 1, y: 0 }}
         animate={{ opacity: 1, y: 0 }}
       >
         <span className="block">
-          구글 광고 대행사.
+          광고비 지출을
         </span>
         <span className="block">
-          피앤에이컴퍼니.
+          매출 투자로 전환하는
+        </span>
+        <span className="block text-blue-400">
+          구글 광고 대행사
         </span>
       </motion.h1>
 
       {/* 🎯 SNIPPET TRAP - Direct Answer - White Text */}
       <motion.p 
-        className="text-base md:text-lg text-white/90 leading-relaxed mb-10 md:mb-12 max-w-2xl"
+        className="text-base md:text-lg text-white/90 leading-relaxed mb-10 md:mb-12 max-w-3xl"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
       >
-        구글애즈 · SEO · GEO 전문, 15년 경력의 구글 공식 파트너로 데이터 기반 성과 마케팅을 통해 평균 ROAS 500%를 달성합니다.
+        담당자만 수시로 바뀌는 대행사 대신, 15년 실전 데이터로 무장한 구글 공식 파트너를 만나보세요. 우리는 수치로 말하고 실적으로 전문성을 증명합니다.
       </motion.p>
 
       {/* [Careons] CTA Buttons - Left Aligned */}

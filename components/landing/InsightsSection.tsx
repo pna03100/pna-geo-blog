@@ -8,6 +8,7 @@
 import { SectionWrapper } from "./SectionWrapper";
 import { SectionTitle } from "./SectionTitle";
 import { PostCard } from "@/components/insights/PostCard";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { WPContent } from "@/lib/types";
@@ -26,23 +27,11 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
       <SectionWrapper id="insights" className="overflow-hidden" data-section="INSIGHTS">
         {/* SECTION: #INSIGHTS */}
         
-        <div className="relative">
-          <div className="mb-6">
-            <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm">
-              <span className="w-2 h-2 rounded-full bg-blue-600"></span>
-              인사이트
-            </span>
-          </div>
-          
-          <div className="mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.2' }}>
-              마케팅 인사이트
-            </h2>
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl">
-              곧 유용한 마케팅 인사이트를 공유하겠습니다
-            </p>
-          </div>
-        </div>
+        <SectionHeader 
+          badge="INSIGHTS"
+          title="성과를 만드는 데이터와 전략 인사이트"
+          description="곧 유용한 마케팅 인사이트를 공유하겠습니다"
+        />
       </SectionWrapper>
     );
   }
@@ -52,24 +41,11 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
       {/* SECTION: #INSIGHTS */}
       
       <div className="relative">
-        {/* Header */}
-        <div className="mb-6">
-          <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm">
-            <span className="w-2 h-2 rounded-full bg-blue-600"></span>
-            인사이트
-          </span>
-        </div>
-        
-        <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-          <div>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-3" style={{ lineHeight: '1.2' }}>
-              마케팅 인사이트
-            </h2>
-          </div>
-          <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl">
-            데이터 기반 성과 마케팅을 위한 실무 노하우와 최신 트렌드를 공유합니다
-          </p>
-        </div>
+        <SectionHeader 
+          badge="INSIGHTS"
+          title="성과를 만드는 데이터와 전략 인사이트"
+          description="데이터 기반 마케팅 전문가가 전하는 최신 트렌드와 성공 노하우"
+        />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
         {latestPosts.map((post, index) => (

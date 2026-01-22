@@ -26,37 +26,31 @@ export function LogoMarquee() {
   const doublePartners = [...partners, ...partners];
 
   return (
-    <div className="relative w-full overflow-hidden py-12">
-      {/* Gradient Fade on Sides */}
-      <div className="absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #F0F1F2, rgba(240, 241, 242, 0.8), transparent)' }} />
-      <div className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #F0F1F2, rgba(240, 241, 242, 0.8), transparent)' }} />
-
+    <div className="relative w-full overflow-hidden py-8">
       {/* Single Row - Scroll Left to Right */}
-      <div className="flex animate-marquee-ltr">
+      <div className="flex animate-marquee-ltr gap-6">
         {doublePartners.map((partner, index) => {
           const isOriginal = index < partners.length;
           return (
             <div
               key={`${partner.name}-${index}`}
-              className="flex-shrink-0 mx-8 md:mx-12 hover:opacity-80"
-              style={{ transition: 'opacity 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
+              className="flex-shrink-0 group"
               aria-hidden={!isOriginal}
             >
-              <div className="flex flex-col items-center gap-3 transition-all">
-                <div className="relative w-24 h-24 md:w-32 md:h-32 opacity-70 hover:opacity-90 transition-opacity">
+              {/* Card Container */}
+              <div className="relative w-32 h-20 md:w-40 md:h-24 rounded-2xl bg-white border-2 border-slate-200 group-hover:border-blue-400 group-hover:shadow-xl transition-all duration-300 overflow-hidden">
+                {/* Logo */}
+                <div className="absolute inset-0 flex items-center justify-center p-4">
                   <Image
                     src={partner.logo}
                     alt={`${partner.name} 로고`}
                     fill
-                    className="object-contain grayscale"
+                    className="object-contain opacity-40 group-hover:opacity-70 transition-opacity duration-300 grayscale group-hover:grayscale-0 p-3"
                     style={{ mixBlendMode: 'multiply' }}
-                    sizes="(max-width: 768px) 96px, 128px"
+                    sizes="(max-width: 768px) 128px, 160px"
                     loading="lazy"
                   />
                 </div>
-                <span className="text-xs md:text-sm font-semibold text-slate-600 hover:text-slate-800 transition-colors">
-                  {partner.name}
-                </span>
               </div>
             </div>
           );
@@ -74,7 +68,7 @@ export function LogoMarquee() {
           }
         }
         .animate-marquee-ltr {
-          animation: marquee-ltr 25s linear infinite;
+          animation: marquee-ltr 30s linear infinite;
           will-change: transform;
         }
         .animate-marquee-ltr:hover {

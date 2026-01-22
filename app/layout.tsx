@@ -6,9 +6,9 @@
 export const dynamic = 'force-dynamic';
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Manrope, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
-import { Navbar } from '@/components/ui/navbar';
+import { NavbarNew } from '@/components/ui/navbar-new';
 import { FooterSection } from '@/components/landing/FooterSection';
 import { HeroBackground } from '@/components/ui/hero-background';
 import dynamicImport from 'next/dynamic';
@@ -19,11 +19,20 @@ const FloatingActions = dynamicImport(
   { ssr: false } // 서버 사이드 렌더링 불필요
 );
 
-const inter = Inter({ 
+// 메인 폰트: Manrope (영문/숫자)
+const manrope = Manrope({ 
   subsets: ['latin'], 
-  variable: '--font-inter',
-  display: 'swap', // FOIT 방지, 폰트 로딩 중에도 텍스트 표시
-  preload: true, // 폰트 사전 로드
+  variable: '--font-manrope',
+  display: 'swap',
+  preload: true,
+});
+
+// 포인트 폰트: Cormorant Garamond (세리프)
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  variable: '--font-cormorant',
+  display: 'swap',
 });
 
 // ============================================
@@ -105,14 +114,18 @@ export default function RootLayout({
 
   return (
     <html lang="ko">
-      <body className={`${inter.className} text-slate-950`}>
+      <head>
+        {/* Pretendard 한글 폰트 CDN */}
+        <link rel="stylesheet" as="style" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+      </head>
+      <body className={`${manrope.variable} ${cormorant.variable} font-sans text-slate-950`}>
         {/* [Careons] Global Background - F0F1F2 */}
         <div className="fixed inset-0 -z-50" style={{ backgroundColor: '#F0F1F2' }}>
           {/* Subtle noise texture for depth */}
           <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")' }} />
         </div>
         
-        <Navbar />
+        <NavbarNew />
         {children}
         <FloatingActions />
         <FooterSection />

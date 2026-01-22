@@ -138,7 +138,7 @@ export function ContactSection() {
         {/* 2 Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-[400px,1fr] gap-12 lg:gap-16 items-start">
           
-          {/* Left: Header */}
+          {/* Left: Header (Sticky) */}
           <div className="lg:sticky lg:top-24">
             <div className="mb-6">
               <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm">
@@ -147,16 +147,16 @@ export function ContactSection() {
               </span>
             </div>
             
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.2' }}>
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6" style={{ lineHeight: '1.3' }}>
               프로젝트 문의하기
             </h2>
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-8">
-              성장을 위한 파트너, PNA 컴퍼니입니다.
-              문의 남겨주시면 담당자가 <span className="font-semibold text-blue-600">24시간 이내</span>에 연락드립니다.
+            
+            <p className="text-base md:text-lg text-slate-600 tracking-normal mb-8" style={{ lineHeight: '1.7' }}>
+              성장을 위한 파트너, PNA 컴퍼니입니다. 문의 남겨주시면 담당자가 <span className="font-semibold text-blue-600">24시간 이내</span>에 연락드립니다.
             </p>
             
             {/* Decorative Badge */}
-            <div className="hidden lg:block mt-8 p-6 rounded-2xl bg-blue-50 border border-blue-200">
+            <div className="hidden lg:block p-6 rounded-2xl bg-blue-50 border border-blue-200">
               <p className="text-blue-600 font-semibold text-base">
                 🚀 함께 성장할 준비가 되셨나요?
               </p>

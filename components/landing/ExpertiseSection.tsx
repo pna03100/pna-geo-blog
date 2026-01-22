@@ -83,11 +83,11 @@ export function ExpertiseSection() {
       <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
         <div>
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-3" style={{ lineHeight: '1.2' }}>
-            검증된 전문성
+            실무 전문가의 직접 관리가<br/>만드는 압도적인 차이
           </h2>
         </div>
         <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl">
-          대한민국 대표 기업들이 선택한 데이터 마케팅 파트너
+          영업 사원이 아닌 15년 차 전문가가 직접 리딩합니다
         </p>
       </div>
 
@@ -115,13 +115,12 @@ export function ExpertiseSection() {
               안태민
             </h3>
             <p className="text-xl md:text-2xl text-blue-300 mb-6">
-              Founder & CEO
+              대표 / 구글 광고 전문가
             </p>
             
             {/* Description */}
             <p className="text-base md:text-lg text-white/90 leading-relaxed mb-8 max-w-3xl">
-              15년간 대기업부터 스타트업까지 다양한 비즈니스와 함께하며 쌓아온 경험과 노하우를 바탕으로, 
-              데이터에 기반한 전략적 마케팅 솔루션을 제공합니다.
+              "영업 사원에게 귀사의 운명을 맡기지 마세요. 15년 차 전문가 안태민이 비즈니스의 본질에 집중한 전략을 직접 리딩합니다. 우리는 대행사가 아닌, <span className="text-blue-400 font-semibold">성장의 길을 함께 걷는 파트너</span>입니다."
             </p>
             
             {/* Achievements Grid */}

@@ -16,9 +16,9 @@ const solutions = [
   {
     id: "google-ads",
     icon: TrendingUp,
-    title: "구글 애즈",
+    title: "구글 광고",
     badge: "GOOGLE ADS",
-    description: "P-Max 캠페인과 AI 입찰로 평균 ROAS 500% 달성",
+    description: "AI 스마트 입찰과 정밀 타겟팅으로 효율을 극대화하여 광고비 낭비를 최소화하는 전략을 수립합니다",
     features: ["Performance Max", "Smart Bidding AI"],
     featured: true,
     accent: "blue",
@@ -30,7 +30,7 @@ const solutions = [
     icon: Search,
     title: "SEO & GEO",
     badge: "SEO & GEO",
-    description: "Gemini AI와 Google 검색에서 동시 상위 노출",
+    description: "검색 엔진과 Gemini AI 결과에 동시 상위 노출되는 시맨틱 점유 전략으로 브랜드 가치를 높입니다",
     features: ["Technical SEO", "Gemini AI 최적화"],
     featured: true,
     accent: "blue",
@@ -42,7 +42,7 @@ const solutions = [
     icon: Code,
     title: "워드프레스",
     badge: "WORDPRESS",
-    description: "Headless CMS로 초고속 웹사이트 구축",
+    description: "기술적 SEO 최적화와 사용자 경험을 동시에 고려한 초고속 퍼포먼스 웹사이트를 구축합니다",
     features: ["Headless CMS", "커스텀 개발"],
     featured: false,
     accent: "blue",
@@ -52,9 +52,9 @@ const solutions = [
   {
     id: "performance",
     icon: BarChart3,
-    title: "퍼포먼스",
+    title: "퍼포먼스 마케팅",
     badge: "PERFORMANCE",
-    description: "데이터 기반 의사결정으로 마케팅 ROI 극대화",
+    description: "추측을 배제하고 전 과정 데이터 추적을 통해 마케팅 ROI 최적화의 길을 제안합니다",
     features: ["Marketing Mix", "Full-Funnel"],
     featured: false,
     accent: "blue",
@@ -171,11 +171,11 @@ export function BentoSection() {
         <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-3" style={{ lineHeight: '1.2' }}>
-              통합 마케팅 솔루션
+              비즈니스 성장을 가속화하는<br/>4가지 정밀 솔루션
             </h2>
           </div>
           <p className="text-base md:text-lg text-slate-300 leading-relaxed max-w-xl">
-            Google Ads와 SEO & GEO를 중심으로 한 데이터 기반 성과 마케팅
+            데이터 기반 전략으로 귀사의 성장을 증명합니다
           </p>
         </div>
 
