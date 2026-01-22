@@ -6,6 +6,8 @@
 "use client";
 
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
+import React from "react";
 
 const phases = [
   {
@@ -56,53 +58,61 @@ export function PhilosophyList() {
           <div className="absolute left-0 top-0 bottom-0 w-px bg-slate-200" style={{ left: '256px' }}></div>
 
           {phases.map((phase, index) => (
-            <div 
-              key={index}
-              className="group relative flex gap-20 pb-32 last:pb-0"
-            >
-              {/* Left: Phase Label (Right Aligned) */}
-              <div className="absolute left-0 w-64 pr-16" style={{ left: '-256px' }}>
-                <div className="flex flex-col items-end">
-                  <p className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-3">PHASE</p>
-                  <h3 className="text-2xl md:text-3xl font-bold text-slate-300 group-hover:text-blue-600 transition-colors duration-300 font-mono tracking-tight leading-none whitespace-nowrap">
-                    {phase.phase} {phase.subtitle}
-                  </h3>
-                </div>
-              </div>
-
-              {/* Center: Circle on Timeline - Centered to Content */}
-              <div className="absolute left-0 flex items-center justify-center" style={{ left: '-6px', top: '50%', transform: 'translateY(-50%)' }}>
-                {/* Circle - Border only, filled on hover */}
-                <div className="w-3 h-3 rounded-full border-2 border-slate-300 bg-transparent group-hover:bg-blue-600 group-hover:border-blue-600 transition-all duration-300"></div>
-              </div>
-
-              {/* Right: Content */}
-              <div className="flex-1 pt-0 pl-16">
-                <h4 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4 leading-tight">
-                  {phase.title}
-                </h4>
-                
-                <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-5">
-                  {phase.description}
-                </p>
-                
-                {/* Tags - Always Visible */}
-                <div className="flex flex-wrap gap-2">
-                  {phase.tags.map((tag, tagIndex) => (
-                    <span 
-                      key={tagIndex}
-                      className="px-3 py-1.5 rounded-md bg-slate-200 text-slate-600 group-hover:bg-blue-50 group-hover:text-blue-600 text-xs font-semibold uppercase tracking-wider transition-colors duration-300"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <PhaseItem key={index} phase={phase} index={index} />
           ))}
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+// Phase Item Component with Individual Scroll Reveal
+function PhaseItem({ phase, index }: { phase: typeof phases[0]; index: number }) {
+  const itemRef = useScrollReveal("active", { threshold: 0.6, once: true });
+
+  return (
+    <div 
+      ref={itemRef as React.RefObject<HTMLDivElement>}
+      className="reveal-timeline group relative flex gap-20 pb-32 last:pb-0"
+    >
+      {/* Left: Phase Label (Right Aligned) */}
+      <div className="absolute left-0 w-64 pr-16" style={{ left: '-256px' }}>
+        <div className="flex flex-col items-end">
+          <p className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-3">PHASE</p>
+          <h3 className="text-2xl md:text-3xl font-bold text-slate-300 group-hover:text-blue-600 transition-colors duration-300 font-mono tracking-tight leading-none whitespace-nowrap">
+            {phase.phase} {phase.subtitle}
+          </h3>
+        </div>
+      </div>
+
+      {/* Center: Circle on Timeline */}
+      <div className="absolute left-0 flex items-center justify-center" style={{ left: '-6px', top: '50%', transform: 'translateY(-50%)' }}>
+        <div className="w-3 h-3 rounded-full border-2 border-slate-300 bg-transparent group-hover:bg-blue-600 group-hover:border-blue-600 transition-all duration-300"></div>
+      </div>
+
+      {/* Right: Content */}
+      <div className="flex-1 pt-0 pl-16">
+        <h4 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4 leading-tight">
+          {phase.title}
+        </h4>
+        
+        <p className="text-base md:text-lg text-slate-600 leading-relaxed mb-5">
+          {phase.description}
+        </p>
+        
+        {/* Tags - Always Visible */}
+        <div className="flex flex-wrap gap-2">
+          {phase.tags.map((tag, tagIndex) => (
+            <span 
+              key={tagIndex}
+              className="px-3 py-1.5 rounded-md bg-slate-200 text-slate-600 group-hover:bg-blue-50 group-hover:text-blue-600 text-xs font-semibold uppercase tracking-wider transition-colors duration-300"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

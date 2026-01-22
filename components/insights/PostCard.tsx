@@ -4,10 +4,13 @@
  * [Security] Type-Safe Props
  */
 
+"use client";
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { WPContent } from '@/lib/types';
 import { ArrowRight, FileText } from 'lucide-react';
+import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
 
 interface PostCardProps {
   post: WPContent;
@@ -30,6 +33,7 @@ function decodeHTMLEntities(text: string): string {
 }
 
 export function PostCard({ post, priority = false }: PostCardProps) {
+  const cardRef = useScrollReveal("active", { threshold: 0.3, once: true });
   const date = post.date ? new Date(post.date).toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: '2-digit',
@@ -54,7 +58,10 @@ export function PostCard({ post, priority = false }: PostCardProps) {
       prefetch={true}
       className="group block h-full"
     >
-      <article className="relative h-full rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 hover:border-slate-300 transition-all duration-300 hover:shadow-xl flex flex-col">
+      <article 
+        ref={cardRef as React.RefObject<HTMLElement>}
+        className="reveal-insights-card relative h-full rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 hover:border-slate-300 transition-all duration-300 hover:shadow-xl flex flex-col"
+      >
         
         {/* Image with overlay */}
         <div className="relative w-full h-64 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">

@@ -1,13 +1,17 @@
 /**
  * [Section] Hero - Exact Reference Design
  * [Design] Google Premier Partner + Performance Architecture
+ * [Animation] Cinematic Reveal
  */
 
 "use client";
 
 import { HeroButtons } from "./HeroButtons";
+import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
 
 export function HeroSectionFinal() {
+  const contentRef = useScrollReveal("active", { threshold: 0.3, once: true });
+
   return (
     <section 
       data-section="HERO" 
@@ -20,14 +24,17 @@ export function HeroSectionFinal() {
           Performance Architecture
         </p>
 
-        {/* Main Title */}
+        {/* Main Title - 처음부터 보임 */}
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8" style={{ lineHeight: '1.25' }}>
           <span className="block text-slate-900">구글 광고 대행사</span>
           <span className="block text-blue-600">피앤에이컴퍼니</span>
         </h1>
 
-        {/* Bottom Section: 2 Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
+        {/* Bottom Section: 2 Columns - 애니메이션 */}
+        <div 
+          ref={contentRef as React.RefObject<HTMLDivElement>}
+          className="reveal-hero-content grid grid-cols-1 lg:grid-cols-2 gap-8 items-end"
+        >
           
           {/* Left: Description */}
           <div>

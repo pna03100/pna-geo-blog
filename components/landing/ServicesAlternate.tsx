@@ -10,6 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Cpu, Globe, Layout, RefreshCw } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
 
 const services = [
   {
@@ -54,6 +55,79 @@ const services = [
   },
 ];
 
+// Service Card Component with Individual Scroll Reveal
+function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
+  const cardRef = useScrollReveal("active", { threshold: 0.3, once: true });
+  const IconComponent = service.icon;
+
+  return (
+    <Link 
+      ref={cardRef as React.RefObject<HTMLAnchorElement>}
+      href={service.link}
+      className="reveal-insights-card group relative bg-slate-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-800 hover:border-slate-700"
+      style={{ transitionDelay: `${index * 200}ms` }}
+    >
+      {/* Background Image */}
+      <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+        <Image
+          src={service.image}
+          alt={service.title}
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-900/50 to-transparent" />
+      </div>
+
+      {/* Content */}
+      <div className="relative p-8 md:p-10">
+        
+        {/* Top: Icon & Arrow */}
+        <div className="flex items-start justify-between mb-6">
+          {/* Icon */}
+          <div className="w-12 h-12 rounded-lg bg-slate-800 group-hover:bg-blue-600 flex items-center justify-center transition-colors duration-300">
+            <IconComponent className="w-6 h-6 text-slate-400 group-hover:text-white transition-colors duration-300" strokeWidth={2} />
+          </div>
+          
+          {/* Arrow - No background, turns blue on hover */}
+          <ArrowUpRight className="w-6 h-6 text-slate-600 group-hover:text-blue-500 transition-colors duration-300" strokeWidth={2} />
+        </div>
+
+        {/* Subtitle */}
+        <p className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-3">
+          {service.subtitle}
+        </p>
+
+        {/* Title */}
+        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors duration-300">
+          {service.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-slate-300 leading-relaxed mb-8 text-base">
+          {service.description}
+        </p>
+
+        {/* Features with Dividers */}
+        <div className="flex items-center gap-3 text-sm text-slate-400">
+          {service.features.map((feature, idx) => (
+            <React.Fragment key={idx}>
+              <span className="whitespace-nowrap">{feature}</span>
+              {idx < service.features.length - 1 && (
+                <span className="w-px h-3 bg-slate-700"></span>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+
+        {/* Progress Bar */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-slate-800">
+          <div className="h-full bg-gradient-to-r from-blue-600 to-blue-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out" />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export function ServicesAlternate() {
   return (
     <section id="solutions" className="py-20 md:py-32 relative" data-section="SOLUTIONS">
@@ -67,77 +141,9 @@ export function ServicesAlternate() {
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {services.map((service) => {
-            const IconComponent = service.icon;
-            
-            return (
-              <Link 
-                key={service.id}
-                href={service.link}
-                className="group relative bg-slate-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-800 hover:border-slate-700"
-              >
-                {/* Background Image */}
-                <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-900/50 to-transparent" />
-                </div>
-
-                {/* Content */}
-                <div className="relative p-8 md:p-10">
-                  
-                  {/* Top: Icon & Arrow */}
-                  <div className="flex items-start justify-between mb-6">
-                    {/* Icon */}
-                    <div className="w-12 h-12 rounded-lg bg-slate-800 group-hover:bg-blue-600 flex items-center justify-center transition-colors duration-300">
-                      <IconComponent className="w-6 h-6 text-slate-400 group-hover:text-white transition-colors duration-300" strokeWidth={2} />
-                    </div>
-                    
-                    {/* Arrow - No Background */}
-                    <ArrowUpRight className="w-5 h-5 text-slate-600 group-hover:text-blue-600 transition-colors duration-300" />
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
-                    {service.title}
-                  </h3>
-
-                  {/* Subtitle */}
-                  <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">
-                    {service.subtitle}
-                  </p>
-
-                  {/* Description */}
-                  <p className="text-base text-slate-400 leading-relaxed mb-6">
-                    {service.description}
-                  </p>
-
-                  {/* Features with Vertical Dividers */}
-                  <div className="flex items-center gap-3 mb-6 text-sm text-slate-500">
-                    {service.features.map((feature, idx) => (
-                      <React.Fragment key={idx}>
-                        <span>{feature}</span>
-                        {idx < service.features.length - 1 && (
-                          <div className="w-px h-3 bg-slate-700" />
-                        )}
-                      </React.Fragment>
-                    ))}
-                  </div>
-
-                  {/* Progress Bar (Inside Card) */}
-                  <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-blue-600 to-blue-400 w-0 group-hover:w-full transition-all duration-700 ease-out" />
-                  </div>
-
-                </div>
-
-              </Link>
-            );
-          })}
+          {services.map((service, index) => (
+            <ServiceCard key={service.id} service={service} index={index} />
+          ))}
         </div>
       </div>
     </section>

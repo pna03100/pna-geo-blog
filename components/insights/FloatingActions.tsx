@@ -61,42 +61,42 @@ export function FloatingActions() {
   return (
     <>
       {isVisible && (
-        <div className="fixed right-6 bottom-6 z-40 flex flex-col gap-3 animate-tab-fade-in">
-          {/* CTA Button */}
+        <div className="fixed right-6 bottom-6 z-40 flex flex-col gap-4 animate-tab-fade-in">
+          {/* CTA Button - Premium Blue */}
           <Link
             href="/contact"
-            className="group flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/30 hover:shadow-xl hover:shadow-blue-600/40 hover:-translate-y-px active:scale-[0.98]"
-            style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
+            className="group relative flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-xl shadow-blue-600/40 hover:shadow-2xl hover:shadow-blue-600/50 hover:scale-105 active:scale-95 transition-all duration-300"
             title="문의하기"
           >
-            <Phone className="w-5 h-5" />
-            <span className="absolute right-16 px-3 py-1.5 rounded-lg bg-slate-900 text-white text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <Phone className="w-6 h-6 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
+            <span className="absolute right-20 px-4 py-2 rounded-xl bg-slate-900/95 backdrop-blur-sm text-white text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-xl pointer-events-none">
               문의하기
             </span>
           </Link>
 
-          {/* Share Button */}
+          {/* Share Button - Premium Glass */}
           <button
             onClick={handleShare}
-            className="group flex items-center justify-center w-14 h-14 rounded-full bg-slate-50 border border-slate-200 text-slate-700 shadow-lg hover:shadow-xl hover:-translate-y-px hover:border-blue-600 hover:text-blue-600 active:scale-[0.98]"
-            style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
+            className="group relative flex items-center justify-center w-16 h-16 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/50 text-slate-700 shadow-xl shadow-slate-900/10 hover:shadow-2xl hover:shadow-blue-600/20 hover:scale-105 hover:border-blue-500/50 hover:text-blue-600 active:scale-95 transition-all duration-300"
             title="공유하기"
           >
-            <Share2 className="w-5 h-5" />
-            <span className="absolute right-16 px-3 py-1.5 rounded-lg bg-slate-900 text-white text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <Share2 className="w-5 h-5 relative z-10 group-hover:scale-110 transition-transform duration-300" />
+            <span className="absolute right-20 px-4 py-2 rounded-xl bg-slate-900/95 backdrop-blur-sm text-white text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-xl pointer-events-none">
               공유하기
             </span>
           </button>
 
-          {/* Scroll to Top */}
+          {/* Scroll to Top - Premium Glass */}
           <button
             onClick={scrollToTop}
-            className="group flex items-center justify-center w-14 h-14 rounded-full bg-slate-50 border border-slate-200 text-slate-700 shadow-lg hover:shadow-xl hover:-translate-y-px hover:border-blue-600 hover:text-blue-600 active:scale-[0.98]"
-            style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
+            className="group relative flex items-center justify-center w-16 h-16 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/50 text-slate-700 shadow-xl shadow-slate-900/10 hover:shadow-2xl hover:shadow-blue-600/20 hover:scale-105 hover:border-blue-500/50 hover:text-blue-600 active:scale-95 transition-all duration-300"
             title="맨 위로"
           >
-            <ArrowUp className="w-5 h-5" />
-            <span className="absolute right-16 px-3 py-1.5 rounded-lg bg-slate-900 text-white text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <ArrowUp className="w-5 h-5 relative z-10 group-hover:-translate-y-1 transition-transform duration-300" />
+            <span className="absolute right-20 px-4 py-2 rounded-xl bg-slate-900/95 backdrop-blur-sm text-white text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-xl pointer-events-none">
               맨 위로
             </span>
           </button>

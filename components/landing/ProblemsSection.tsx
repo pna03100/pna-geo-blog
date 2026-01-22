@@ -6,6 +6,7 @@
 "use client";
 
 import Image from "next/image";
+import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
 
 const problems = [
   {
@@ -39,6 +40,9 @@ const problems = [
 ];
 
 export function ProblemsSection() {
+  const leftRef = useScrollReveal("active", { threshold: 0.3, once: true });
+  const rightRef = useScrollReveal("active", { threshold: 0.25, once: true });
+
   return (
     <section className="py-20 md:py-32" data-section="PROBLEMS">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -47,7 +51,10 @@ export function ProblemsSection() {
         <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-12 lg:gap-20">
           
           {/* Left Column: Sticky Title */}
-          <div className="sticky top-36 self-start h-fit">
+          <div 
+            ref={leftRef as React.RefObject<HTMLDivElement>}
+            className="reveal-depth-left sticky top-36 self-start h-fit"
+          >
             <div className="badge-dot mb-6">
               The Structural Problem
             </div>
@@ -64,7 +71,10 @@ export function ProblemsSection() {
           </div>
 
           {/* Right Column: Scrolling Problem Cards */}
-          <div className="space-y-20 md:space-y-24">
+          <div 
+            ref={rightRef as React.RefObject<HTMLDivElement>}
+            className="reveal-depth-right space-y-20 md:space-y-24"
+          >
             {problems.map((problem, index) => (
               <div key={index}>
                 <div className="grid grid-cols-1 md:grid-cols-[1fr,300px] gap-8 items-start">

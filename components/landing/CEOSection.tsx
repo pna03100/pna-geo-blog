@@ -6,10 +6,17 @@
 "use client";
 
 import Image from "next/image";
+import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
 
 export function CEOSection() {
+  const ceoRef = useScrollReveal("active", { threshold: 0.35, once: true });
+
   return (
-    <section className="py-20 md:py-32 relative bg-slate-950 overflow-hidden" data-section="CEO">
+    <section 
+      ref={ceoRef as React.RefObject<HTMLElement>}
+      className="reveal-scale-up py-20 md:py-32 relative bg-slate-950 overflow-hidden" 
+      data-section="CEO"
+    >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 right-20 w-96 h-96 bg-blue-500 rounded-full blur-[150px]"></div>

@@ -1,16 +1,24 @@
 /**
  * [Section] CTA - Call to Action
  * [Design] Centered CTA with background image
+ * [Animation] Zoom Push Effect
  */
 
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
+import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
 
 export function CTASection() {
+  const ctaRef = useScrollReveal("active", { threshold: 0.3, once: true });
+
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden" data-section="CTA">
+    <section 
+      ref={ctaRef as React.RefObject<HTMLElement>}
+      className="reveal-zoom-push relative py-20 md:py-32 overflow-hidden" 
+      data-section="CTA"
+    >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
