@@ -13,14 +13,11 @@ export function HeroButtons() {
       {/* Primary Button */}
       <button
         onClick={() => {
-          const contactSection = document.getElementById('contact');
-          if (contactSection) {
-            contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+          window.location.href = '/contact';
         }}
         className="btn-primary group cursor-pointer"
       >
-        <span>무료 성과 진단 신청</span>
+        <span>무료 상담 시작하기</span>
         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
       </button>
 

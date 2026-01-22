@@ -526,7 +526,7 @@ export function AboutClient() {
                 href="/contact"
                 className="group relative inline-flex items-center justify-center gap-3 px-8 py-5 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-all shadow-2xl hover:shadow-blue-600/50 text-lg overflow-hidden"
               >
-                <span className="relative z-10">무료 상담 신청</span>
+                <span className="relative z-10">무료 상담 시작하기</span>
                 <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity" />
               </Link>
