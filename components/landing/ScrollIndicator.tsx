@@ -40,7 +40,7 @@ export function ScrollIndicator() {
 
   return (
     <div 
-      className="fixed left-1/2 z-50 hidden md:flex md:bottom-20 lg:bottom-24 transition-opacity duration-300 ease-out"
+      className="fixed left-1/2 bottom-12 z-50 hidden md:flex transition-opacity duration-300 ease-out"
       style={{ 
         opacity: opacity,
         transform: `translateX(-50%) translateY(${(1 - opacity) * 20}px)`,
@@ -48,20 +48,20 @@ export function ScrollIndicator() {
       }}
     >
       <div className="flex flex-col items-center gap-1.5 md:gap-2">
-        {/* 텍스트 - 모바일에서 작게 */}
-        <p className="text-[10px] md:text-xs font-medium text-slate-500 uppercase tracking-widest">
+        {/* 텍스트 */}
+        <p className="text-xs font-medium text-white/80 uppercase tracking-widest">
           Scroll
         </p>
         
-        {/* 아이콘 + 애니메이션 - 모바일 크기 조정 */}
+        {/* 아이콘 + 애니메이션 */}
         <div className="relative">
           {/* 외곽 원 */}
-          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-slate-300 bg-white/80 backdrop-blur-sm shadow-lg flex items-center justify-center animate-bounce">
-            <ChevronDown className="w-4 h-4 md:w-5 md:h-5 text-slate-600" strokeWidth={2.5} />
+          <div className="w-10 h-10 rounded-full border-2 border-white/40 bg-white/10 backdrop-blur-sm shadow-lg flex items-center justify-center animate-bounce">
+            <ChevronDown className="w-5 h-5 text-white" strokeWidth={2.5} />
           </div>
           
           {/* 펄스 효과 */}
-          <div className="absolute inset-0 rounded-full border-2 border-blue-500 animate-ping opacity-20"></div>
+          <div className="absolute inset-0 rounded-full border-2 border-white/40 animate-ping opacity-20"></div>
         </div>
       </div>
     </div>

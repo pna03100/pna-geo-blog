@@ -5,7 +5,7 @@
 
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -23,11 +23,17 @@ const navItems = [
 export function NavbarNew() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const navRefs = useRef<(HTMLAnchorElement | null)[]>([])
   const pathname = usePathname()
+  
+  // 투명 히어로를 가진 페이지들
+  const transparentHeroPages = ['/', '/about', '/google-ads', '/seo-geo', '/wordpress', '/performance', '/insights']
+  const hasTransparentHero = transparentHeroPages.includes(pathname)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
+      setIsScrolled(window.scrollY > 50)
       if (isMobileMenuOpen) {
         setIsMobileMenuOpen(false)
       }
@@ -37,14 +43,36 @@ export function NavbarNew() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [isMobileMenuOpen])
 
+  // 투명 히어로 페이지에서 스크롤 전: 투명 배경
+  const getHeaderStyle = () => {
+    if (hasTransparentHero && !isScrolled) {
+      return 'bg-transparent'
+    }
+    if (isScrolled) {
+      return 'bg-slate-50/90 backdrop-blur-xl shadow-sm border-b border-slate-200'
+    }
+    return 'bg-slate-50/70 backdrop-blur-lg'
+  }
+
+  // 투명 히어로 페이지에서 스크롤 전: 흰색 텍스트
+  const getTextColor = (isActive: boolean) => {
+    if (hasTransparentHero && !isScrolled) {
+      return isActive ? 'text-white' : 'text-white/80 hover:text-white'
+    }
+    return isActive ? 'text-slate-900' : 'text-slate-600 hover:text-slate-900'
+  }
+
+  const getIconColor = () => {
+    if (hasTransparentHero && !isScrolled) {
+      return 'text-white'
+    }
+    return 'text-slate-900'
+  }
+
   return (
     <>
       {/* Clean White Header */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-slate-50/90 backdrop-blur-xl shadow-sm border-b border-slate-200' 
-          : 'bg-slate-50/70 backdrop-blur-lg'
-      }`}>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${getHeaderStyle()}`}>
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           
           {/* Desktop Layout */}
@@ -58,34 +86,76 @@ export function NavbarNew() {
                 width={130}
                 height={34}
                 priority
-                className="w-auto h-8 transition-all duration-300 group-hover:opacity-80"
+                className={`w-auto h-8 transition-all duration-300 group-hover:opacity-80 ${
+                  hasTransparentHero && !isScrolled ? 'brightness-0 invert' : ''
+                }`}
               />
             </Link>
 
             {/* Navigation */}
-            <nav className="flex items-center gap-8">
-              {navItems.map((item) => {
-                const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`text-base font-medium transition-colors duration-200 ${
-                      isActive 
-                        ? 'text-slate-900' 
-                        : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
+            <div 
+              className="relative"
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <nav className="relative flex items-center gap-8 pb-4">
+                {navItems.map((item, index) => {
+                  const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
+                  return (
+                    <Link
+                      key={item.name}
+                      ref={(el) => {
+                        navRefs.current[index] = el
+                      }}
+                      href={item.href}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      className={`relative text-base font-medium transition-colors duration-200 ${getTextColor(isActive)}`}
+                    >
+                      {item.name}
+                    </Link>
+                  )
+                })}
+              </nav>
+              
+              {/* Base continuous bar */}
+              <div className={`absolute left-0 right-0 bottom-0 h-[3px] transition-colors duration-300 ${
+                hasTransparentHero && !isScrolled ? 'bg-white/10' : 'bg-slate-300/30'
+              }`} />
+              
+              {/* Animated gauge bar */}
+              {(() => {
+                const activeIndex = navItems.findIndex(item => 
+                  pathname === item.href || pathname.startsWith(item.href + '/')
                 )
-              })}
-            </nav>
+                const displayIndex = hoveredIndex !== null ? hoveredIndex : activeIndex
+                const targetRef = navRefs.current[displayIndex]
+                
+                if (displayIndex === -1 || !targetRef) return null
+                
+                const left = targetRef.offsetLeft
+                const width = targetRef.offsetWidth
+                
+                return (
+                  <div
+                    className={`absolute bottom-0 h-[3px] transition-all duration-300 ease-out`}
+                    style={{
+                      left: `${left}px`,
+                      width: `${width}px`,
+                      backgroundColor: hasTransparentHero && !isScrolled ? 'white' : '#2563eb',
+                      transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+                    }}
+                  />
+                )
+              })()}
+            </div>
 
             {/* CTA Button */}
             <Link
               href="/contact"
-              className="px-6 py-2.5 rounded-xl bg-blue-600 text-white font-semibold text-sm transition-all duration-200 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/25"
+              className={`px-6 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                hasTransparentHero && !isScrolled
+                  ? 'bg-white/10 backdrop-blur-md text-white border border-white/30 hover:bg-white/20 hover:border-white/50 hover:shadow-lg hover:shadow-white/10'
+                  : 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/25'
+              }`}
             >
               문의하기
             </Link>
@@ -102,20 +172,24 @@ export function NavbarNew() {
                 width={110}
                 height={28}
                 priority
-                className="w-auto h-7"
+                className={`w-auto h-7 transition-all duration-300 ${
+                  hasTransparentHero && !isScrolled ? 'brightness-0 invert' : ''
+                }`}
               />
             </Link>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              className={`p-2 rounded-lg transition-colors ${
+                hasTransparentHero && !isScrolled ? 'hover:bg-white/10' : 'hover:bg-slate-100'
+              }`}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-slate-900" />
+                <X className={`w-6 h-6 ${getIconColor()}`} />
               ) : (
-                <Menu className="w-6 h-6 text-slate-900" />
+                <Menu className={`w-6 h-6 ${getIconColor()}`} />
               )}
             </button>
           </div>

@@ -11,6 +11,7 @@ import Image from "next/image";
 import { AnimatedBadge } from "@/components/ui/animated-badge";
 import { Code, Palette, Zap, Shield, ArrowRight, Sparkles, Settings, TrendingUp, CheckCircle2 } from "lucide-react";
 import { WordPressFAQ } from "@/components/service/WordPressFAQ";
+import { ServiceHeroSection } from "@/components/sections/ServiceHeroSection";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 섹션 2: 왜 워드프레스인가
@@ -183,46 +184,18 @@ const processSteps = [
 
 export function WordPressClient() {
   return (
-    <main className="min-h-screen pt-16 relative">
+    <main className="min-h-screen relative">
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* HERO SECTION */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
-        {/* 1. Background Image */}
-        <div className="absolute inset-0 z-0 bg-slate-900">
-          <Image
-            src="/images/hero/wordpress-hero-bg.jpg"
-            alt="피앤에이컴퍼니 워드프레스 웹사이트 제작 서비스 - Headless CMS 전문"
-            fill
-            className="object-cover"
-            quality={100}
-            priority
-            fetchPriority="high"
-            unoptimized={true}
-            sizes="(max-width: 768px) 100vw, 1200px"
-          />
-          {/* 2. Dark Overlay */}
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
-
-        {/* 3. Content */}
-        <div className="relative z-10 container mx-auto px-4 md:px-6 max-w-7xl text-center">
-          {/* Badge */}
-          <div className="mb-8">
-            <AnimatedBadge icon={Code} text="WordPress Development" />
-          </div>
-
-          {/* Kinetic Typography Heading */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ lineHeight: '1.35' }}>
-            워드프레스 웹사이트 제작
-          </h1>
-
-          {/* Description */}
-          <p className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto">
-            Lighthouse 90점 이상, 기업급 보안, 무제한 확장성
-          </p>
-        </div>
-      </section>
+      <ServiceHeroSection
+        icon={Code}
+        badgeText="WordPress Development"
+        title="워드프레스 웹사이트 제작"
+        description="Lighthouse 90점 이상, 기업급 보안, 무제한 확장성"
+        backgroundImage="/images/hero/wordpress-hero-bg.jpg"
+        backgroundAlt="피앤에이컴퍼니 워드프레스 웹사이트 제작 서비스 - Headless CMS 전문"
+      />
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* 왜 워드프레스인가 */}

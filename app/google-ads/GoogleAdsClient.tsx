@@ -16,6 +16,7 @@ import {
   Search, ShoppingBag, Video, Smartphone, Globe
 } from "lucide-react";
 import { GoogleAdsFAQ } from "@/components/service/GoogleAdsFAQ";
+import { ServiceHeroSection } from "@/components/sections/ServiceHeroSection";
 
 const benefits = [
   {
@@ -418,46 +419,18 @@ function CampaignTypesSection() {
 
 export function GoogleAdsClient() {
   return (
-    <main className="min-h-screen pt-16 relative">
+    <main className="min-h-screen relative">
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      {/* HERO SECTION (고정) */}
+      {/* HERO SECTION */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
-        {/* 1. Background Image */}
-        <div className="absolute inset-0 z-0 bg-slate-900">
-          <Image
-            src="/images/hero/google-ads-hero-bg.jpg"
-            alt="피앤에이컴퍼니 구글 애즈 광고 대행 서비스 - 데이터 분석 대시보드"
-            fill
-            className="object-cover"
-            quality={100}
-            priority
-            fetchPriority="high"
-            unoptimized={true}
-            sizes="(max-width: 768px) 100vw, 1200px"
-          />
-          {/* 2. Dark Overlay */}
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
-
-        {/* 3. Content */}
-        <div className="relative z-10 container mx-auto px-4 md:px-6 max-w-7xl text-center">
-          {/* Badge */}
-          <div className="mb-8">
-            <AnimatedBadge icon={Target} text="Google Ads Certified Partner" />
-          </div>
-
-          {/* Kinetic Typography Heading */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ lineHeight: '1.35' }}>
-            구글 광고 대행
-          </h1>
-
-          {/* Description */}
-          <p className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto">
-            낭비 없는 광고비, 데이터로 증명하는 성과
-          </p>
-        </div>
-      </section>
+      <ServiceHeroSection
+        icon={Target}
+        badgeText="Google Ads Certified Partner"
+        title="구글 광고 대행"
+        description="낭비 없는 광고비, 데이터로 증명하는 성과"
+        backgroundImage="/images/hero/google-ads-hero-bg.jpg"
+        backgroundAlt="피앤에이컴퍼니 구글 애즈 광고 대행 서비스 - 데이터 분석 대시보드"
+      />
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* WHY GOOGLE ADS */}

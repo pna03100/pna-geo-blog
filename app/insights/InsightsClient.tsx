@@ -13,6 +13,7 @@ import { AnimatedBadge } from "@/components/ui/animated-badge";
 import { WPContent } from "@/lib/types";
 import { PostCard } from "@/components/insights/PostCard";
 import { Sparkles, ArrowRight } from "lucide-react";
+import { ServiceHeroSection } from "@/components/sections/ServiceHeroSection";
 
 interface InsightsClientProps {
   posts: WPContent[];
@@ -143,44 +144,16 @@ export function InsightsClient({ posts }: InsightsClientProps) {
   }, [posts, selectedCategory, categories]);
 
   return (
-    <main className="min-h-screen pt-16 relative">
+    <main className="min-h-screen relative">
       {/* HERO SECTION */}
-      <section className="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
-        {/* 1. Background Image */}
-        <div className="absolute inset-0 z-0 bg-slate-900">
-          <Image
-            src="/images/hero/insights-hero-bg.jpg"
-            alt="피앤에이컴퍼니 마케팅 인사이트 - Google Ads SEO GEO 전략 가이드"
-            fill
-            className="object-cover"
-            quality={100}
-            priority
-            fetchPriority="high"
-            unoptimized={true}
-            sizes="100vw"
-          />
-          {/* 2. Dark Overlay */}
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
-
-        {/* 3. Content */}
-        <div className="relative z-10 container mx-auto px-4 md:px-6 max-w-7xl text-center">
-          {/* Badge */}
-          <div className="mb-8">
-            <AnimatedBadge icon={Sparkles} text="Marketing Insights" />
-          </div>
-
-          {/* Kinetic Typography Heading */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ lineHeight: '1.35' }}>
-            마케팅 인사이트
-          </h1>
-
-          {/* Description */}
-          <p className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto">
-            데이터 기반 성과 마케팅을 위한 실무 노하우와 최신 트렌드
-          </p>
-        </div>
-      </section>
+      <ServiceHeroSection
+        icon={Sparkles}
+        badgeText="Marketing Insights"
+        title="마케팅 인사이트"
+        description="데이터 기반 성과 마케팅을 위한 실무 노하우와 최신 트렌드"
+        backgroundImage="/images/hero/insights-hero-bg.jpg"
+        backgroundAlt="피앤에이컴퍼니 마케팅 인사이트 - Google Ads SEO GEO 전략 가이드"
+      />
 
       {/* Magnetic Segmented Controls */}
       <section className="sticky top-16 z-30 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 shadow-sm">

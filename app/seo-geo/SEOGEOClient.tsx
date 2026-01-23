@@ -14,6 +14,7 @@ import {
   BarChart3, Clock, Rocket, Brain
 } from "lucide-react";
 import { SEOFAQ } from "@/components/service/SEOFAQ";
+import { ServiceHeroSection } from "@/components/sections/ServiceHeroSection";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 섹션 2: 광고 vs SEO 비교
@@ -268,46 +269,18 @@ const targetCustomers = {
 
 export function SEOGEOClient() {
   return (
-    <main className="min-h-screen pt-16 relative">
+    <main className="min-h-screen relative">
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      {/* 섹션 1: HERO */}
+      {/* HERO SECTION */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
-        {/* 1. Background Image */}
-        <div className="absolute inset-0 z-0 bg-slate-900">
-          <Image
-            src="/images/hero/seo-hero-bg.jpg"
-            alt="피앤에이컴퍼니 SEO & GEO 최적화 서비스 - 검색엔진 상위 노출 전략"
-            fill
-            className="object-cover"
-            quality={100}
-            priority
-            fetchPriority="high"
-            unoptimized={true}
-            sizes="(max-width: 768px) 100vw, 1200px"
-          />
-          {/* 2. Dark Overlay */}
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
-
-        {/* 3. Content */}
-        <div className="relative z-10 container mx-auto px-4 md:px-6 max-w-7xl text-center">
-          {/* Badge */}
-          <div className="mb-8">
-            <AnimatedBadge icon={Target} text="SEO & GEO Strategy" />
-          </div>
-
-          {/* Kinetic Typography Heading */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ lineHeight: '1.35' }}>
-            유일한 마케팅 자산, SEO
-          </h1>
-
-          {/* Description */}
-          <p className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto">
-            광고는 멈추면 끝납니다. SEO는 계속 작동합니다.
-          </p>
-        </div>
-      </section>
+      <ServiceHeroSection
+        icon={Target}
+        badgeText="SEO & GEO Strategy"
+        title="유일한 마케팅 자산, SEO"
+        description="광고는 멈추면 끝납니다. SEO는 계속 작동합니다."
+        backgroundImage="/images/hero/seo-hero-bg.jpg"
+        backgroundAlt="피앤에이컴퍼니 SEO & GEO 최적화 서비스 - 검색엔진 상위 노출 전략"
+      />
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* 섹션 2: 광고 vs SEO */}

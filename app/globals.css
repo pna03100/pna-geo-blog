@@ -229,15 +229,41 @@
 
 /* 1. Hero: Title은 처음부터, 나머지만 부드럽게 올라옴 */
 .reveal-hero-content {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 1200ms cubic-bezier(0.33, 1, 0.68, 1);
-  will-change: transform, opacity;
+  opacity: 1;
 }
 
-.reveal-hero-content.active {
+/* 히어로 내부 요소 순차 등장 (Stagger) - 데스크톱 */
+.reveal-hero-content .hero-item-1,
+.reveal-hero-content .hero-item-2,
+.reveal-hero-content .hero-item-3,
+.reveal-hero-content .hero-item-4 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-hero-content.active .hero-item-1 {
   opacity: 1;
   transform: translateY(0);
+  transition-delay: 100ms;
+}
+
+.reveal-hero-content.active .hero-item-2 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 300ms;
+}
+
+.reveal-hero-content.active .hero-item-3 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 500ms;
+}
+
+.reveal-hero-content.active .hero-item-4 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 700ms;
 }
 
 /* 모바일: 애니메이션 최적화 (히어로만 활성화) */
@@ -1270,6 +1296,66 @@
   }
 }
 
+/* ============================================
+   [Wave Background Animation] Smooth Flowing Waves
+   Performance: GPU-accelerated, transform-only
+   ============================================ */
+
+/* Wave Animation - 3 Layers with Different Speeds */
+@keyframes wave-slow {
+  0% {
+    transform: translateX(0) translateZ(0);
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0);
+  }
+}
+
+@keyframes wave-medium {
+  0% {
+    transform: translateX(0) translateZ(0);
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0);
+  }
+}
+
+@keyframes wave-fast {
+  0% {
+    transform: translateX(0) translateZ(0);
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0);
+  }
+}
+
+.animate-wave-slow {
+  animation: wave-slow 25s linear infinite;
+}
+
+.animate-wave-medium {
+  animation: wave-medium 18s linear infinite;
+}
+
+.animate-wave-fast {
+  animation: wave-fast 12s linear infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.15;
+    transform: scale(1.05);
+  }
+}
+
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .hero-title-shine::before,
@@ -1285,7 +1371,11 @@
   .bg-blob-1,
   .bg-blob-2,
   .bg-blob-3,
-  .bg-blob-4 {
+  .bg-blob-4,
+  .animate-wave-slow,
+  .animate-wave-medium,
+  .animate-wave-fast,
+  .animate-pulse-slow {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

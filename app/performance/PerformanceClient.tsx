@@ -14,6 +14,7 @@ import {
   Sparkles, Search, Share2, Award, X 
 } from "lucide-react";
 import { PerformanceFAQ } from "@/components/service/PerformanceFAQ";
+import { ServiceHeroSection } from "@/components/sections/ServiceHeroSection";
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 섹션 2: 단일 채널 vs 통합 전략
@@ -201,46 +202,18 @@ const targetCustomers = {
 
 export function PerformanceClient() {
   return (
-    <main className="min-h-screen pt-16 relative">
+    <main className="min-h-screen relative">
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* HERO SECTION */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
-        {/* 1. Background Image */}
-        <div className="absolute inset-0 z-0 bg-slate-900">
-          <Image
-            src="/images/hero/performance-hero-bg.jpg"
-            alt="피앤에이컴퍼니 퍼포먼스 마케팅 서비스 - 데이터 기반 ROI 최적화"
-            fill
-            className="object-cover"
-            quality={100}
-            priority
-            fetchPriority="high"
-            unoptimized={true}
-            sizes="(max-width: 768px) 100vw, 1200px"
-          />
-          {/* 2. Dark Overlay */}
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
-
-        {/* 3. Content */}
-        <div className="relative z-10 container mx-auto px-4 md:px-6 max-w-7xl text-center">
-          {/* Badge */}
-          <div className="mb-8">
-            <AnimatedBadge icon={BarChart3} text="Performance Marketing" />
-          </div>
-
-          {/* Kinetic Typography Heading */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ lineHeight: '1.35' }}>
-            퍼포먼스 마케팅
-          </h1>
-
-          {/* Description */}
-          <p className="text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto">
-            측정 가능한 성과, 데이터 기반 최적화
-          </p>
-        </div>
-      </section>
+      <ServiceHeroSection
+        icon={BarChart3}
+        badgeText="Performance Marketing"
+        title="퍼포먼스 마케팅"
+        description="측정 가능한 성과, 데이터 기반 최적화"
+        backgroundImage="/images/hero/performance-hero-bg.jpg"
+        backgroundAlt="피앤에이컴퍼니 퍼포먼스 마케팅 서비스 - 데이터 기반 ROI 최적화"
+      />
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       {/* 단일 채널 vs 통합 전략 */}
