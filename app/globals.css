@@ -586,7 +586,30 @@
   transform: scale(1);
 }
 
-/* 8. Simple Fade Up (for text-heavy sections) */
+/* 8. Mobile: 양옆 등장 애니메이션 (프라블럼, 서비스, 성공 섹션) */
+.reveal-fade-up-mobile-left {
+  opacity: 0;
+  transform: translateX(-30px) translateY(20px);
+  transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-fade-up-mobile-left.active {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+.reveal-fade-up-mobile-right {
+  opacity: 0;
+  transform: translateX(30px) translateY(20px);
+  transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-fade-up-mobile-right.active {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+/* 9. Simple Fade Up (for text-heavy sections) */
 .reveal-fade-up {
   opacity: 1;
   transform: translateY(0);

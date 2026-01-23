@@ -64,7 +64,8 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
     <Link 
       ref={cardRef as React.RefObject<HTMLAnchorElement>}
       href={service.link}
-      className="service-card-mobile group relative bg-slate-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-800 hover:border-slate-700"
+      className="service-card-mobile reveal-insights-card group relative bg-slate-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-800 hover:border-slate-700"
+      style={{ transitionDelay: `${index * 150}ms` }}
     >
       {/* Background Image */}
       <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-300">

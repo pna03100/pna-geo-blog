@@ -40,7 +40,7 @@ export function ScrollIndicator() {
 
   return (
     <div 
-      className="hidden md:fixed md:bottom-20 lg:bottom-24 left-1/2 z-50 transition-opacity duration-300 ease-out"
+      className="fixed left-1/2 z-50 hidden md:flex md:bottom-20 lg:bottom-24 transition-opacity duration-300 ease-out"
       style={{ 
         opacity: opacity,
         transform: `translateX(-50%) translateY(${(1 - opacity) * 20}px)`,

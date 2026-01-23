@@ -98,7 +98,14 @@ export function ProblemsSection() {
 
           {/* Right Column: Scrolling Problem Cards - 모바일 2x2 그리드 */}
           <div 
-            ref={mobileCardsRef}
+            ref={(el) => {
+              if (rightRef && 'current' in rightRef) {
+                (rightRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+              }
+              if (mobileCardsRef) {
+                mobileCardsRef.current = el;
+              }
+            }}
             className="reveal-depth-right"
           >
             {/* 모바일: 2x2 그리드 / 데스크톱: 세로 리스트 */}
@@ -106,7 +113,12 @@ export function ProblemsSection() {
               {problems.map((problem, index) => (
                 <div key={index} className="md:contents">
                   {/* 모바일: 카드 형태 */}
-                  <div className="md:hidden flex flex-col gap-3 problem-card-mobile">
+                  <div 
+                    className={`md:hidden flex flex-col gap-3 problem-card-mobile ${
+                      index % 2 === 0 ? 'reveal-fade-up-mobile-left' : 'reveal-fade-up-mobile-right'
+                    }`}
+                    style={{ transitionDelay: `${index * 150}ms` }}
+                  >
                     <div className="relative aspect-square rounded-xl overflow-hidden bg-slate-100 shadow-sm">
                       <Image
                         src={problem.image}
