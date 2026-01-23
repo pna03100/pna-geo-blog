@@ -71,7 +71,7 @@ export function ProblemsSection() {
 
   return (
     <section className="relative bg-white pt-20 pb-20 md:pt-32 md:pb-32 rounded-t-[40px] md:rounded-t-[60px] z-10" data-section="PROBLEMS">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-6 md:px-6">
         
         {/* Grid Layout for Sticky */}
         <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-20">
@@ -87,8 +87,7 @@ export function ProblemsSection() {
             
             <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ lineHeight: '1.3' }}>
               구글 광고를 운영해도<br/>
-              <span className="text-slate-400">성과가 나지 않는</span><br/>
-              구조적 이유
+              <span className="text-slate-400">성과가 나지 않는 구조적 이유</span>
             </h2>
             
             <p className="text-sm md:text-base lg:text-lg text-slate-600 tracking-normal" style={{ lineHeight: '1.7' }}>

@@ -39,7 +39,7 @@ export function FooterSection() {
         />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl py-16 md:py-20">
+      <div className="container relative z-10 mx-auto px-6 md:px-6 max-w-7xl py-16 md:py-20">
         {/* Top Section: Brand */}
         <div className="mb-16 pb-16 border-b border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
@@ -60,8 +60,8 @@ export function FooterSection() {
               <p className="text-white/60 text-sm">사업자등록번호: 845-81-02768</p>
             </div>
 
-            {/* Right: Slogan */}
-            <div className="md:text-right">
+            {/* Right: Slogan - 모바일 숨김 */}
+            <div className="hidden md:block md:text-right">
               <p className="text-white/70 text-base md:text-lg leading-relaxed text-right">
                 데이터 기반 성과 마케팅으로<br />
                 비즈니스 성장을 만듭니다.
@@ -73,8 +73,8 @@ export function FooterSection() {
         {/* Main Footer Grid: 4 Columns */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           
-          {/* 빠른 링크 */}
-          <div>
+          {/* 빠른 링크 - 모바일 숨김 */}
+          <div className="hidden md:block">
             <h4 className="text-white font-semibold mb-4">빠른 링크</h4>
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
@@ -91,8 +91,8 @@ export function FooterSection() {
             </ul>
           </div>
 
-          {/* 서비스 */}
-          <div>
+          {/* 서비스 - 모바일 숨김 */}
+          <div className="hidden md:block">
             <h4 className="text-white font-semibold mb-4">서비스</h4>
             <ul className="space-y-2.5">
               {serviceLinks.map((link) => (

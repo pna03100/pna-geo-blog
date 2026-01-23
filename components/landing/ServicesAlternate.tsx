@@ -5,12 +5,11 @@
 
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUp, Cpu, Globe, Layout, RefreshCw } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
 
 const services = [
   {
@@ -55,17 +54,14 @@ const services = [
   },
 ];
 
-// Service Card Component with Individual Scroll Reveal
+// Service Card Component
 function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
-  const cardRef = useScrollReveal("active", { threshold: 0.25, once: true });
   const IconComponent = service.icon;
 
   return (
     <Link 
-      ref={cardRef as React.RefObject<HTMLAnchorElement>}
       href={service.link}
-      className="service-card-mobile reveal-insights-card group relative bg-slate-900/80 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 overflow-hidden border border-slate-700/50 hover:border-blue-500/50"
-      style={{ transitionDelay: `${index * 150}ms` }}
+      className="group relative bg-slate-900/80 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 overflow-hidden border border-slate-700/50 hover:border-blue-500/50"
     >
       {/* Background Image */}
       <div className="absolute inset-0 opacity-15 group-hover:opacity-25 transition-opacity duration-300">
@@ -75,47 +71,50 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
           fill
           className="object-cover"
           loading="lazy"
-          sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-blue-950/50 to-transparent" />
       </div>
 
-      {/* Content - 모바일 패딩 조정 */}
-      <div className="relative p-6 md:p-8 lg:p-10">
+      {/* Content */}
+      <div className="relative p-6 md:p-8 lg:p-10 text-center md:text-left">
         
-        {/* Top: Icon & Arrow - 모바일 크기 조정 */}
-        <div className="flex items-start justify-between mb-3 md:mb-6">
-          {/* Icon */}
-          <div className="w-8 h-8 md:w-12 md:h-12 rounded-md md:rounded-lg bg-slate-800/80 group-hover:bg-blue-600 flex items-center justify-center transition-all duration-300">
-            <IconComponent className="w-4 h-4 md:w-6 md:h-6 text-slate-300 group-hover:text-white transition-colors duration-300" strokeWidth={2} />
-          </div>
-          
-          {/* Arrow in Circle - 모바일 숨김 */}
-          <div className="hidden md:flex w-10 h-10 rounded-full border-2 border-slate-700 group-hover:border-blue-500 items-center justify-center transition-all duration-300">
-            <ArrowUp 
-              className="w-5 h-5 text-slate-500 group-hover:text-blue-400 transition-all duration-300 group-hover:rotate-90" 
-              strokeWidth={2} 
-            />
+        {/* Top: Icon & Arrow */}
+        <div className="mb-4 md:mb-6">
+          {/* 모바일: 아이콘 가운데 / 데스크톱: 아이콘 + 화살표 */}
+          <div className="flex items-start justify-center md:justify-between">
+            {/* Icon */}
+            <div className="w-12 h-12 rounded-lg bg-slate-800/80 group-hover:bg-blue-600 flex items-center justify-center transition-all duration-300">
+              <IconComponent className="w-6 h-6 text-slate-300 group-hover:text-white transition-colors duration-300" strokeWidth={2} />
+            </div>
+            
+            {/* Arrow in Circle - 모바일 숨김 */}
+            <div className="hidden md:flex w-10 h-10 rounded-full border-2 border-slate-700 group-hover:border-blue-500 items-center justify-center transition-all duration-300">
+              <ArrowUp 
+                className="w-5 h-5 text-slate-500 group-hover:text-blue-400 transition-all duration-300 group-hover:rotate-90" 
+                strokeWidth={2} 
+              />
+            </div>
           </div>
         </div>
 
         {/* Subtitle */}
-        <p className="text-[9px] md:text-xs font-bold text-blue-400 uppercase tracking-widest mb-1.5 md:mb-3">
+        <p className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-3">
           {service.subtitle}
         </p>
 
-        {/* Title - 모바일 크기 축소 */}
-        <h3 className="text-sm md:text-2xl lg:text-3xl font-bold text-white mb-2 md:mb-4 group-hover:text-blue-400 transition-colors duration-300">
+        {/* Title */}
+        <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-0 md:mb-4 group-hover:text-blue-400 transition-colors duration-300">
           {service.title}
         </h3>
 
         {/* Description - 모바일 숨김 */}
-        <p className="hidden md:block text-slate-400 group-hover:text-slate-300 leading-relaxed mb-6 md:mb-8 text-base h-[3rem] line-clamp-2 transition-colors duration-300">
+        <p className="hidden md:block text-slate-400 group-hover:text-slate-300 leading-relaxed mb-8 text-base h-[3rem] line-clamp-2 transition-colors duration-300">
           {service.description}
         </p>
 
         {/* Features with Dividers - 모바일 숨김 */}
-        <div className="hidden md:flex items-center gap-3 text-sm text-slate-500 group-hover:text-slate-400 transition-colors duration-300 mb-6">
+        <div className="hidden md:flex items-center gap-3 text-sm text-slate-500 group-hover:text-slate-400 transition-colors duration-300 mb-6 flex-wrap">
           {service.features.map((feature, idx) => (
             <React.Fragment key={idx}>
               <span className="whitespace-nowrap">{feature}</span>
@@ -136,36 +135,12 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 }
 
 export function ServicesAlternate() {
-  // 모바일 카드 스크롤 트리거
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    if (window.innerWidth > 768) return;
-
-    const cards = document.querySelectorAll('.service-card-mobile');
-    if (!cards.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          }
-        });
-      },
-      { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
-    );
-
-    cards.forEach((card) => observer.observe(card));
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section id="solutions" className="py-20 md:py-32 relative bg-slate-950" data-section="SOLUTIONS">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-6 md:px-6">
         
         {/* Dark Theme Section Header */}
-        <div className="mb-12 md:mb-16">
+        <div className="mb-8 md:mb-16">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/20 mb-6">
             <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
@@ -174,7 +149,8 @@ export function ServicesAlternate() {
           
           {/* Title */}
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-            PNA가 제공하는 핵심 마케팅 서비스
+            PNA가 제공하는<br className="md:hidden"/>
+            핵심 마케팅 서비스
           </h2>
           
           {/* Description */}
@@ -183,8 +159,8 @@ export function ServicesAlternate() {
           </p>
         </div>
 
-        {/* Services Grid - 모바일 2x2 */}
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
+        {/* 모바일: 1열 세로 / 데스크톱: 2x2 그리드 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
           {services.map((service, index) => (
             <ServiceCard key={service.id} service={service} index={index} />
           ))}

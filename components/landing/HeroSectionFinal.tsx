@@ -25,19 +25,19 @@ export function HeroSectionFinal() {
     <>
       <section 
         data-section="HERO" 
-        className="sticky top-0 w-full z-0"
+        className="sticky top-0 w-full h-screen z-0 bg-[#0a0f1e]"
       >
         <WavyBackground
           containerClassName="!h-screen !flex !flex-col !items-start !justify-end pb-20 md:pb-24 lg:pb-32"
           className="w-full"
           colors={["#0c1e3d", "#1e3a8a", "#1e40af", "#2563eb", "#1d4ed8"]}
-          waveWidth={280}
+          waveWidth={240}
           backgroundFill="#0a0f1e"
           blur={60}
           speed="fast"
           waveOpacity={0.85}
         >
-          <div className="container relative z-10 mx-auto px-4 md:px-6 max-w-7xl w-full">
+          <div className="container relative z-10 mx-auto px-6 md:px-6 max-w-7xl w-full">
             
             <div className="max-w-3xl">
               {/* Slogan */}

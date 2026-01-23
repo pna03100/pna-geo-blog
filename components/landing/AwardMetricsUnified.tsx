@@ -8,6 +8,7 @@
 import Image from "next/image";
 import { CountUpNumber } from "./CountUpNumber";
 import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
+import { useState, useEffect } from "react";
 
 const clients = [
   { name: "Samsung", logo: "/images/partners/samsung.jpg", font: "serif" },
@@ -20,6 +21,14 @@ const clients = [
 
 export function AwardMetricsUnified() {
   const cardRef = useScrollReveal("active", { threshold: 0.4, once: true });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <div 
@@ -98,51 +107,63 @@ export function AwardMetricsUnified() {
         <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700/50 to-transparent mb-12 md:mb-16 lg:mb-20" />
 
         {/* MIDDLE SECTION: 3 Metrics - 모바일 최적화 */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 mb-12 md:mb-16 lg:mb-20">
+        <div className="grid grid-cols-3 md:grid-cols-3 gap-4 md:gap-12 mb-12 md:mb-16 lg:mb-20">
           
           {/* Metric 1: 광고주 평균 ROAS */}
           <div className="text-center">
-            <p className="text-xs text-blue-400 font-bold uppercase tracking-wider mb-4">광고주 평균 ROAS</p>
-            <div className="flex items-baseline justify-center gap-0 mb-3">
-              <CountUpNumber 
-                end={500} 
-                suffix="" 
-                className="text-7xl font-bold text-white" 
-                style={{ fontWeight: 700, letterSpacing: '-0.02em' }}
-              />
-              <span className="text-5xl font-bold text-white" style={{ fontWeight: 700 }}>%</span>
+            <p className="text-[10px] md:text-xs text-blue-400 font-bold uppercase tracking-wider mb-2 md:mb-4">광고주 평균 ROAS</p>
+            <div className="flex items-baseline justify-center gap-0 mb-2 md:mb-3">
+              {isMobile ? (
+                <span className="text-3xl font-bold text-white" style={{ fontWeight: 700, letterSpacing: '-0.02em' }}>500</span>
+              ) : (
+                <CountUpNumber 
+                  end={500} 
+                  suffix="" 
+                  className="text-7xl font-bold text-white" 
+                  style={{ fontWeight: 700, letterSpacing: '-0.02em' }}
+                />
+              )}
+              <span className={`${isMobile ? 'text-2xl' : 'text-5xl'} font-bold text-white`} style={{ fontWeight: 700 }}>%</span>
             </div>
-            <p className="text-sm text-slate-600" style={{ fontWeight: 400 }}>업계 평균 대비 3.5배 높은 성과</p>
+            <p className="text-[10px] md:text-sm text-slate-600 hidden md:block" style={{ fontWeight: 400 }}>업계 평균 대비 3.5배 높은 성과</p>
           </div>
 
           {/* Metric 2: 누적 광고 집행 금액 */}
           <div className="text-center">
-            <p className="text-xs text-blue-400 font-bold uppercase tracking-wider mb-4">누적 광고 집행 금액</p>
-            <div className="flex items-baseline justify-center gap-0 mb-3">
-              <CountUpNumber 
-                end={470} 
-                suffix="" 
-                className="text-7xl font-bold text-white" 
-                style={{ fontWeight: 700, letterSpacing: '-0.02em' }}
-              />
-              <span className="text-5xl font-bold text-white" style={{ fontWeight: 700 }}>억+</span>
+            <p className="text-[10px] md:text-xs text-blue-400 font-bold uppercase tracking-wider mb-2 md:mb-4">누적 광고 집행 금액</p>
+            <div className="flex items-baseline justify-center gap-0 mb-2 md:mb-3">
+              {isMobile ? (
+                <span className="text-3xl font-bold text-white" style={{ fontWeight: 700, letterSpacing: '-0.02em' }}>470</span>
+              ) : (
+                <CountUpNumber 
+                  end={470} 
+                  suffix="" 
+                  className="text-7xl font-bold text-white" 
+                  style={{ fontWeight: 700, letterSpacing: '-0.02em' }}
+                />
+              )}
+              <span className={`${isMobile ? 'text-2xl' : 'text-5xl'} font-bold text-white`} style={{ fontWeight: 700 }}>억+</span>
             </div>
-            <p className="text-sm text-slate-600" style={{ fontWeight: 400 }}>데이터로 검증된 집행 노하우</p>
+            <p className="text-[10px] md:text-sm text-slate-600 hidden md:block" style={{ fontWeight: 400 }}>데이터로 검증된 집행 노하우</p>
           </div>
 
           {/* Metric 3: 월 구글 애즈 집행 예산 */}
           <div className="text-center">
-            <p className="text-xs text-blue-400 font-bold uppercase tracking-wider mb-4">월 구글 애즈 집행 예산</p>
-            <div className="flex items-baseline justify-center gap-0 mb-3">
-              <CountUpNumber 
-                end={30} 
-                suffix="" 
-                className="text-7xl font-bold text-white" 
-                style={{ fontWeight: 700, letterSpacing: '-0.02em' }}
-              />
-              <span className="text-5xl font-bold text-white" style={{ fontWeight: 700 }}>억</span>
+            <p className="text-[10px] md:text-xs text-blue-400 font-bold uppercase tracking-wider mb-2 md:mb-4">월 구글 애즈 집행 예산</p>
+            <div className="flex items-baseline justify-center gap-0 mb-2 md:mb-3">
+              {isMobile ? (
+                <span className="text-3xl font-bold text-white" style={{ fontWeight: 700, letterSpacing: '-0.02em' }}>30</span>
+              ) : (
+                <CountUpNumber 
+                  end={30} 
+                  suffix="" 
+                  className="text-7xl font-bold text-white" 
+                  style={{ fontWeight: 700, letterSpacing: '-0.02em' }}
+                />
+              )}
+              <span className={`${isMobile ? 'text-2xl' : 'text-5xl'} font-bold text-white`} style={{ fontWeight: 700 }}>억</span>
             </div>
-            <p className="text-sm text-slate-600" style={{ fontWeight: 400 }}>대규모 예산 운영 최적화</p>
+            <p className="text-[10px] md:text-sm text-slate-600 hidden md:block" style={{ fontWeight: 400 }}>대규모 예산 운영 최적화</p>
           </div>
         </div>
 

@@ -60,61 +60,96 @@ export function PostCard({ post, priority = false }: PostCardProps) {
     >
       <article 
         ref={cardRef as React.RefObject<HTMLElement>}
-        className="reveal-insights-card relative h-full rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 hover:border-slate-300 transition-all duration-300 hover:shadow-xl flex flex-col"
+        className="reveal-insights-card relative h-full rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 hover:border-slate-300 transition-all duration-300 hover:shadow-xl flex flex-col md:flex-col"
       >
         
-        {/* Image with overlay */}
-        <div className="relative w-full h-64 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
-          {post.featuredImage?.node?.sourceUrl ? (
-            <>
+        {/* 데스크톱: 세로 레이아웃 */}
+        <div className="hidden md:block">
+          {/* Image with overlay */}
+          <div className="relative w-full h-64 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
+            {post.featuredImage?.node?.sourceUrl ? (
+              <>
+                <Image
+                  src={post.featuredImage.node.sourceUrl}
+                  alt={post.featuredImage.node.altText || post.title || ''}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="33vw"
+                  priority={priority}
+                />
+              </>
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
+                <FileText className="w-16 h-16 text-slate-400" strokeWidth={1.5} />
+              </div>
+            )}
+            
+            {/* Category Badge - Top Left */}
+            {categoryName && (
+              <div className="absolute top-4 left-4 z-10">
+                <span className="px-3 py-1.5 rounded-md bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider border border-blue-200">
+                  {categoryName}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* Content */}
+          <div className="p-6 flex flex-col flex-1">
+            {/* Date + RESEARCH Label */}
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-sm text-slate-500">{date}</span>
+            </div>
+            
+            {/* Title */}
+            <h3 className="text-2xl font-bold text-slate-900 mb-3 leading-tight tracking-tight line-clamp-2 group-hover:text-blue-600 transition-colors">
+              {decodeHTMLEntities(post.title || '')}
+            </h3>
+            
+            {/* Excerpt */}
+            <p className="text-sm text-slate-600 leading-relaxed mb-4 line-clamp-2 flex-1">
+              {excerpt || '내용이 없습니다.'}
+            </p>
+
+            {/* Read More Link */}
+            <div className="flex items-center gap-2 text-blue-600 font-semibold text-sm group-hover:gap-3 transition-all duration-200">
+              <span>Read Insight</span>
+              <ArrowRight className="w-4 h-4" />
+            </div>
+          </div>
+        </div>
+
+        {/* 모바일: 가로 레이아웃 (뉴스 스타일) */}
+        <div className="md:hidden flex gap-3 p-3">
+          {/* 왼쪽: 텍스트 콘텐츠 (75%) */}
+          <div className="flex-1 flex flex-col justify-center">
+            {/* Date */}
+            <div className="mb-1.5">
+              <span className="text-[10px] text-slate-500">{date}</span>
+            </div>
+            
+            {/* Title */}
+            <h3 className="text-sm font-bold text-slate-900 leading-tight line-clamp-3 group-hover:text-blue-600 transition-colors">
+              {decodeHTMLEntities(post.title || '')}
+            </h3>
+          </div>
+
+          {/* 오른쪽: 작은 썸네일 (25%) */}
+          <div className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
+            {post.featuredImage?.node?.sourceUrl ? (
               <Image
                 src={post.featuredImage.node.sourceUrl}
                 alt={post.featuredImage.node.altText || post.title || ''}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 33vw"
+                sizes="80px"
                 priority={priority}
               />
-            </>
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
-              <FileText className="w-16 h-16 text-slate-400" strokeWidth={1.5} />
-            </div>
-          )}
-          
-          {/* Category Badge - Top Left */}
-          {categoryName && (
-            <div className="absolute top-4 left-4 z-10">
-              <span className="px-3 py-1.5 rounded-md bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider border border-blue-200">
-                {categoryName}
-              </span>
-            </div>
-          )}
-        </div>
-
-        {/* Content */}
-        <div className="p-6 flex flex-col flex-1">
-          {/* Date + RESEARCH Label */}
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-sm text-slate-500">{date}</span>
-            <span className="text-slate-300">·</span>
-            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">RESEARCH</span>
-          </div>
-          
-          {/* Title */}
-          <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-3 leading-tight tracking-tight line-clamp-2 group-hover:text-blue-600 transition-colors">
-            {decodeHTMLEntities(post.title || '')}
-          </h3>
-          
-          {/* Excerpt */}
-          <p className="text-sm text-slate-600 leading-relaxed mb-4 line-clamp-2 flex-1">
-            {excerpt || '내용이 없습니다.'}
-          </p>
-
-          {/* Read More Link */}
-          <div className="flex items-center gap-2 text-blue-600 font-semibold text-sm group-hover:gap-3 transition-all duration-200">
-            <span>Read Insight</span>
-            <ArrowRight className="w-4 h-4" />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
+                <FileText className="w-6 h-6 text-slate-400" strokeWidth={1.5} />
+              </div>
+            )}
           </div>
         </div>
       </article>

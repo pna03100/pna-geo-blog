@@ -50,16 +50,61 @@ export const WavyBackground = ({
 
   const init = () => {
     canvas = canvasRef.current;
+    if (!canvas) return;
+    
     ctx = canvas.getContext("2d");
-    w = ctx.canvas.width = window.innerWidth;
-    h = ctx.canvas.height = window.innerHeight;
+    if (!ctx) return;
+    
+    // Get device pixel ratio
+    const dpr = window.devicePixelRatio || 1;
+    
+    // Get parent container size (not window size!)
+    const container = canvas.parentElement;
+    if (!container) return;
+    
+    const displayWidth = container.clientWidth;
+    const displayHeight = container.clientHeight;
+    
+    // Set canvas size in memory (scaled to device pixels)
+    canvas.width = displayWidth * dpr;
+    canvas.height = displayHeight * dpr;
+    
+    // Set canvas display size (CSS pixels)
+    canvas.style.width = `${displayWidth}px`;
+    canvas.style.height = `${displayHeight}px`;
+    
+    // Scale context to match device pixel ratio
+    ctx.scale(dpr, dpr);
+    
+    // Store logical dimensions
+    w = displayWidth;
+    h = displayHeight;
+    
+    // 웹과 동일한 blur 사용
     ctx.filter = `blur(${blur}px)`;
+    
     nt = 0;
+    
     window.onresize = function () {
-      w = ctx.canvas.width = window.innerWidth;
-      h = ctx.canvas.height = window.innerHeight;
+      if (!canvas || !container) return;
+      
+      const dpr = window.devicePixelRatio || 1;
+      const displayWidth = container.clientWidth;
+      const displayHeight = container.clientHeight;
+      
+      canvas.width = displayWidth * dpr;
+      canvas.height = displayHeight * dpr;
+      canvas.style.width = `${displayWidth}px`;
+      canvas.style.height = `${displayHeight}px`;
+      
+      ctx.scale(dpr, dpr);
+      
+      w = displayWidth;
+      h = displayHeight;
+      
       ctx.filter = `blur(${blur}px)`;
     };
+    
     render();
   };
 
@@ -100,6 +145,7 @@ export const WavyBackground = ({
   let animationId: number;
   const render = () => {
     ctx.fillStyle = backgroundFill || "black";
+    // 웹과 동일한 opacity 사용
     ctx.globalAlpha = waveOpacity || 0.5;
     ctx.fillRect(0, 0, w, h);
     drawWave(8);
@@ -137,7 +183,7 @@ export const WavyBackground = ({
   return (
     <div
       className={cn(
-        "h-screen flex flex-col items-center justify-center",
+        "h-screen flex flex-col items-center justify-center bg-[#0a0f1e]",
         containerClassName
       )}
     >
@@ -146,14 +192,18 @@ export const WavyBackground = ({
         ref={canvasRef}
         id="canvas"
         style={{
+          width: '100%',
+          height: '100%',
           ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
         }}
       ></canvas>
       
       {/* Film Grain Overlay - Very Visible */}
       <div 
-        className="absolute inset-0 opacity-90 mix-blend-overlay pointer-events-none z-5"
+        className="absolute inset-0 pointer-events-none z-5"
         style={{
+          opacity: 0.9,
+          mixBlendMode: 'overlay',
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='5.5' numOctaves='7' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           backgroundRepeat: 'repeat',
           backgroundSize: '100px 100px'

@@ -23,7 +23,7 @@ export function CEOSection() {
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-indigo-500 rounded-full blur-[150px]"></div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-6 relative z-10">
         
         {/* 2 Column Layout - 모바일 갭 축소 */}
         <div className="grid grid-cols-1 lg:grid-cols-[0.85fr,1fr] gap-8 md:gap-12 lg:gap-20 items-center">

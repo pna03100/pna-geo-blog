@@ -161,7 +161,7 @@ export default async function HomePage() {
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
           {/* SECTION 3: Unified Award + Metrics + Clients Card              */}
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-          <section className="pt-8 pb-20 md:pt-12 md:pb-32 relative z-10">
+          <section className="py-20 md:pt-12 md:pb-32 relative z-10">
             <div className="max-w-7xl mx-auto px-4 md:px-6">
               <AwardMetricsUnified />
             </div>
