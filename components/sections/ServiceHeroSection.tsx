@@ -35,7 +35,8 @@ export function ServiceHeroSection({
           src={backgroundImage}
           alt={backgroundAlt}
           fill
-          className="object-cover object-top"
+          className="object-cover"
+          style={{ objectPosition: 'center 50%' }}
           quality={100}
           priority
           fetchPriority="high"
@@ -43,10 +44,13 @@ export function ServiceHeroSection({
           sizes="100vw"
         />
         {/* 2. Dark Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/50 to-slate-900/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-900/60 to-slate-900/90" />
         
         {/* 3. Blue Tint Overlay */}
         <div className="absolute inset-0 bg-blue-900/30 mix-blend-multiply" />
+        
+        {/* 4. Bottom Dark Vignette */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
       </div>
 
       {/* 4. Content */}

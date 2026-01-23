@@ -8,7 +8,7 @@
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Cpu, Globe, Layout, RefreshCw } from "lucide-react";
+import { ArrowUp, Cpu, Globe, Layout, RefreshCw } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
 
@@ -64,18 +64,18 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
     <Link 
       ref={cardRef as React.RefObject<HTMLAnchorElement>}
       href={service.link}
-      className="service-card-mobile reveal-insights-card group relative bg-slate-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-800 hover:border-slate-700"
+      className="service-card-mobile reveal-insights-card group relative bg-slate-900/80 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 overflow-hidden border border-slate-700/50 hover:border-blue-500/50"
       style={{ transitionDelay: `${index * 150}ms` }}
     >
       {/* Background Image */}
-      <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+      <div className="absolute inset-0 opacity-15 group-hover:opacity-25 transition-opacity duration-300">
         <Image
           src={service.image}
           alt={service.title}
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-900/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-blue-950/50 to-transparent" />
       </div>
 
       {/* Content - 모바일 패딩 조정 */}
@@ -84,12 +84,17 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         {/* Top: Icon & Arrow - 모바일 크기 조정 */}
         <div className="flex items-start justify-between mb-3 md:mb-6">
           {/* Icon */}
-          <div className="w-8 h-8 md:w-12 md:h-12 rounded-md md:rounded-lg bg-slate-800 group-hover:bg-blue-600 flex items-center justify-center transition-colors duration-300">
-            <IconComponent className="w-4 h-4 md:w-6 md:h-6 text-slate-400 group-hover:text-white transition-colors duration-300" strokeWidth={2} />
+          <div className="w-8 h-8 md:w-12 md:h-12 rounded-md md:rounded-lg bg-slate-800/80 group-hover:bg-blue-600 flex items-center justify-center transition-all duration-300">
+            <IconComponent className="w-4 h-4 md:w-6 md:h-6 text-slate-300 group-hover:text-white transition-colors duration-300" strokeWidth={2} />
           </div>
           
-          {/* Arrow - 모바일 숨김 */}
-          <ArrowUpRight className="hidden md:block w-6 h-6 text-slate-600 group-hover:text-blue-500 transition-colors duration-300" strokeWidth={2} />
+          {/* Arrow in Circle - 모바일 숨김 */}
+          <div className="hidden md:flex w-10 h-10 rounded-full border-2 border-slate-700 group-hover:border-blue-500 items-center justify-center transition-all duration-300">
+            <ArrowUp 
+              className="w-5 h-5 text-slate-500 group-hover:text-blue-400 transition-all duration-300 group-hover:rotate-90" 
+              strokeWidth={2} 
+            />
+          </div>
         </div>
 
         {/* Subtitle */}
@@ -103,12 +108,12 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         </h3>
 
         {/* Description - 모바일 숨김 */}
-        <p className="hidden md:block text-slate-300 leading-relaxed mb-6 md:mb-8 text-base h-[3rem] line-clamp-2">
+        <p className="hidden md:block text-slate-400 group-hover:text-slate-300 leading-relaxed mb-6 md:mb-8 text-base h-[3rem] line-clamp-2 transition-colors duration-300">
           {service.description}
         </p>
 
         {/* Features with Dividers - 모바일 숨김 */}
-        <div className="hidden md:flex items-center gap-3 text-sm text-slate-400 mb-6">
+        <div className="hidden md:flex items-center gap-3 text-sm text-slate-500 group-hover:text-slate-400 transition-colors duration-300 mb-6">
           {service.features.map((feature, idx) => (
             <React.Fragment key={idx}>
               <span className="whitespace-nowrap">{feature}</span>
@@ -120,7 +125,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         </div>
 
         {/* Progress Bar - 모바일 숨김 */}
-        <div className="hidden md:block w-full h-1 bg-slate-800 rounded-full overflow-hidden">
+        <div className="hidden md:block w-full h-1 bg-slate-800/50 rounded-full overflow-hidden">
           <div className="h-full bg-gradient-to-r from-blue-600 to-blue-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out" />
         </div>
       </div>
@@ -154,14 +159,27 @@ export function ServicesAlternate() {
   }, []);
 
   return (
-    <section id="solutions" className="py-20 md:py-32 relative" data-section="SOLUTIONS">
+    <section id="solutions" className="py-20 md:py-32 relative bg-slate-950" data-section="SOLUTIONS">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         
-        <SectionHeader 
-          badge="서비스"
-          title="PNA가 제공하는 핵심 마케팅 서비스"
-          description="구글 광고, SEO & GEO, 워드프레스, 퍼포먼스 마케팅까지 데이터 기반의 통합 솔루션을 제공합니다"
-        />
+        {/* Dark Theme Section Header */}
+        <div className="mb-12 md:mb-16">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/20 mb-6">
+            <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+            <span className="text-sm font-semibold text-blue-400 uppercase tracking-wider">서비스</span>
+          </div>
+          
+          {/* Title */}
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            PNA가 제공하는 핵심 마케팅 서비스
+          </h2>
+          
+          {/* Description */}
+          <p className="text-lg text-slate-400 max-w-3xl leading-relaxed">
+            구글 광고, SEO & GEO, 워드프레스, 퍼포먼스 마케팅까지 데이터 기반의 통합 솔루션을 제공합니다
+          </p>
+        </div>
 
         {/* Services Grid - 모바일 2x2 */}
         <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">

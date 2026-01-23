@@ -156,6 +156,35 @@ const config: Config = {
 				'100%': {
 					transform: 'translate(0px, 0px) scale(1) rotate(0deg)'
 				}
+			},
+			'shake-grow': {
+				'0%': {
+					transform: 'scale(1) rotate(0deg)'
+				},
+				'10%': {
+					transform: 'scale(1.15) rotate(-5deg)'
+				},
+				'20%': {
+					transform: 'scale(1.15) rotate(5deg)'
+				},
+				'30%': {
+					transform: 'scale(1.15) rotate(-5deg)'
+				},
+				'40%': {
+					transform: 'scale(1.15) rotate(5deg)'
+				},
+				'50%': {
+					transform: 'scale(1.15) rotate(-3deg)'
+				},
+				'60%': {
+					transform: 'scale(1.15) rotate(3deg)'
+				},
+				'70%': {
+					transform: 'scale(1.15) rotate(0deg)'
+				},
+				'100%': {
+					transform: 'scale(1.15) rotate(0deg)'
+				}
 			}
 		},
 		animation: {
@@ -164,7 +193,8 @@ const config: Config = {
 			'text-shimmer': 'text-shimmer 3s ease-in-out infinite',
 			'blob': 'blob 7s infinite',
 			'blob-slow': 'blob-slow 7s ease-in-out infinite',
-			'blob-slower': 'blob-slower 8s ease-in-out infinite'
+			'blob-slower': 'blob-slower 8s ease-in-out infinite',
+			'shake-grow': 'shake-grow 0.6s ease-in-out'
 		}
   	}
   },

@@ -1385,3 +1385,287 @@
     transform: none;
   }
 }
+
+/* ============================================
+   Aurora Curtain Animations - Elegant Flow
+   ============================================ */
+
+/* Organic Blob Morphing Animations */
+/* Organic Blob Animations - Each moves in different non-linear patterns */
+
+@keyframes organic-float-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(-8%, 6%) scale(1.1);
+  }
+  50% {
+    transform: translate(5%, -4%) scale(0.95);
+  }
+  75% {
+    transform: translate(-3%, -8%) scale(1.05);
+  }
+}
+
+@keyframes organic-float-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  30% {
+    transform: translate(7%, -5%) scale(1.08) rotate(2deg);
+  }
+  60% {
+    transform: translate(-6%, 8%) scale(0.92) rotate(-2deg);
+  }
+  85% {
+    transform: translate(4%, 3%) scale(1.02) rotate(1deg);
+  }
+}
+
+@keyframes organic-float-3 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  20% {
+    transform: translate(6%, 7%) scale(1.12);
+  }
+  45% {
+    transform: translate(-8%, -3%) scale(0.88);
+  }
+  70% {
+    transform: translate(4%, -6%) scale(1.05);
+  }
+}
+
+@keyframes organic-float-4 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(-9%, 4%) scale(1.06) rotate(-3deg);
+  }
+  66% {
+    transform: translate(7%, -7%) scale(0.94) rotate(3deg);
+  }
+}
+
+@keyframes organic-float-5 {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  28% {
+    transform: translateX(-45%) translateY(8%) scale(1.1);
+  }
+  56% {
+    transform: translateX(-55%) translateY(-5%) scale(0.9);
+  }
+  80% {
+    transform: translateX(-48%) translateY(3%) scale(1.04);
+  }
+}
+
+@keyframes organic-float-6 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  25% {
+    transform: translate(-6%, -8%) scale(1.08) rotate(2deg);
+  }
+  50% {
+    transform: translate(9%, 4%) scale(0.93) rotate(-2deg);
+  }
+  75% {
+    transform: translate(-4%, 6%) scale(1.03) rotate(1deg);
+  }
+}
+
+@keyframes blob-morph-1 {
+  0%, 100% {
+    border-radius: 40% 60% 55% 45% / 45% 50% 50% 55%;
+  }
+  25% {
+    border-radius: 45% 55% 60% 40% / 50% 55% 45% 50%;
+  }
+  50% {
+    border-radius: 55% 45% 50% 50% / 55% 45% 55% 45%;
+  }
+  75% {
+    border-radius: 50% 50% 45% 55% / 50% 55% 45% 50%;
+  }
+}
+
+@keyframes blob-morph-2 {
+  0%, 100% {
+    border-radius: 50% 50% 45% 55% / 55% 45% 55% 45%;
+  }
+  25% {
+    border-radius: 45% 55% 52% 48% / 48% 52% 48% 52%;
+  }
+  50% {
+    border-radius: 52% 48% 55% 45% / 45% 50% 50% 55%;
+  }
+  75% {
+    border-radius: 48% 52% 50% 50% / 52% 48% 52% 48%;
+  }
+}
+
+@keyframes blob-morph-3 {
+  0%, 100% {
+    border-radius: 45% 55% 50% 50% / 50% 48% 52% 50%;
+  }
+  25% {
+    border-radius: 52% 48% 48% 52% / 48% 52% 48% 52%;
+  }
+  50% {
+    border-radius: 48% 52% 55% 45% / 52% 48% 52% 48%;
+  }
+  75% {
+    border-radius: 50% 50% 52% 48% / 48% 50% 50% 52%;
+  }
+}
+
+@keyframes blob-morph-4 {
+  0%, 100% {
+    border-radius: 52% 48% 50% 50% / 48% 52% 48% 52%;
+  }
+  25% {
+    border-radius: 48% 52% 52% 48% / 50% 48% 52% 50%;
+  }
+  50% {
+    border-radius: 50% 50% 48% 52% / 52% 50% 50% 48%;
+  }
+  75% {
+    border-radius: 48% 52% 50% 50% / 48% 52% 48% 52%;
+  }
+}
+
+@keyframes blob-float-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-15px, -20px) scale(1.02);
+  }
+  66% {
+    transform: translate(10px, 15px) scale(0.98);
+  }
+}
+
+@keyframes blob-float-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(20px, -15px) scale(1.03);
+  }
+  66% {
+    transform: translate(-12px, 18px) scale(0.97);
+  }
+}
+
+@keyframes blob-float-3 {
+  0%, 100% {
+    transform: translate(-50%, 0) scale(1);
+  }
+  33% {
+    transform: translate(calc(-50% + 18px), -22px) scale(1.025);
+  }
+  66% {
+    transform: translate(calc(-50% - 15px), 20px) scale(0.975);
+  }
+}
+
+@keyframes blob-float-4 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-18px, 20px) scale(1.02);
+  }
+  66% {
+    transform: translate(15px, -18px) scale(0.98);
+  }
+}
+
+/* Arrow Shake & Grow Animation */
+@keyframes shake-grow {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  10% {
+    transform: scale(1.15) rotate(-5deg);
+  }
+  20% {
+    transform: scale(1.15) rotate(5deg);
+  }
+  30% {
+    transform: scale(1.15) rotate(-5deg);
+  }
+  40% {
+    transform: scale(1.15) rotate(5deg);
+  }
+  50% {
+    transform: scale(1.15) rotate(-3deg);
+  }
+  60% {
+    transform: scale(1.15) rotate(3deg);
+  }
+  70% {
+    transform: scale(1.15) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.15) rotate(0deg);
+  }
+}
+
+/* Mouse-Following Ripple Animations */
+@keyframes ripple-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes ripple-pulse-secondary {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15) rotate(5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+}
+
+/* Rising Light Beam Animation - Fast Shooting */
+@keyframes beam-shoot {
+  0% {
+    transform: translateY(0) scaleY(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(-20vh) scaleY(1);
+  }
+  90% {
+    opacity: 0.8;
+    transform: translateY(-100vh) scaleY(1.2);
+  }
+  100% {
+    transform: translateY(-110vh) scaleY(0.8);
+    opacity: 0;
+  }
+}
