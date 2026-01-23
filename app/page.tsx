@@ -6,16 +6,19 @@
  */
 
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { HeroSectionFinal } from '@/components/landing/HeroSectionFinal';
-import { AwardMetricsUnified } from '@/components/landing/AwardMetricsUnified';
 import { ProblemsSection } from '@/components/landing/ProblemsSection';
-import { ServicesAlternate } from '@/components/landing/ServicesAlternate';
-import { PhilosophyList } from '@/components/landing/PhilosophyList';
-import { CEOSection } from '@/components/landing/CEOSection';
-import { InsightsSection } from '@/components/landing/InsightsSection';
-import { FAQSection } from '@/components/landing/FAQSection';
-import { CTASection } from '@/components/landing/CTASection';
 import { getAllPosts } from '@/lib/api';
+
+// Performance: 초기 뷰포트 밖의 섹션들을 lazy load
+const AwardMetricsUnified = dynamic(() => import('@/components/landing/AwardMetricsUnified').then(mod => mod.AwardMetricsUnified));
+const ServicesAlternate = dynamic(() => import('@/components/landing/ServicesAlternate').then(mod => mod.ServicesAlternate));
+const PhilosophyList = dynamic(() => import('@/components/landing/PhilosophyList').then(mod => mod.PhilosophyList));
+const CEOSection = dynamic(() => import('@/components/landing/CEOSection').then(mod => mod.CEOSection));
+const InsightsSection = dynamic(() => import('@/components/landing/InsightsSection').then(mod => mod.InsightsSection));
+const FAQSection = dynamic(() => import('@/components/landing/FAQSection').then(mod => mod.FAQSection));
+const CTASection = dynamic(() => import('@/components/landing/CTASection').then(mod => mod.CTASection));
 
 // ============================================
 // [GEO] JSON-LD Structured Data

@@ -115,8 +115,17 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        {/* Pretendard 한글 폰트 CDN */}
-        <link rel="stylesheet" as="style" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+        {/* Pretendard 한글 폰트 - Preload 최적화 */}
+        <link 
+          rel="preload" 
+          as="style" 
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" 
+        />
+        <link 
+          rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" 
+          crossOrigin="anonymous"
+        />
       </head>
       <body className={`${manrope.variable} ${cormorant.variable} font-sans text-slate-950 bg-main`}>
         {/* [PNA] Pure White Background */}

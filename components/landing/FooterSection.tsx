@@ -52,6 +52,7 @@ export function FooterSection() {
                   width={140}
                   height={36}
                   className="w-auto h-9 transition-all duration-300 group-hover:opacity-80 brightness-0 invert"
+                  loading="lazy"
                 />
               </Link>
               <h3 className="text-white font-semibold text-base mb-2">주식회사 피앤에이컴퍼니</h3>

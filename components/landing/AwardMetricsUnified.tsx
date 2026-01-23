@@ -71,6 +71,8 @@ export function AwardMetricsUnified() {
                 fill
                 className="object-cover transition-all duration-500 group-hover:scale-105 group-hover:opacity-40"
                 style={{ opacity: 0.3 }}
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 1200px"
               />
               
               {/* Dark Overlay - 호버 시 밝아짐 */}

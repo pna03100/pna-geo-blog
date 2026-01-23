@@ -74,6 +74,8 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
           alt={service.title}
           fill
           className="object-cover"
+          loading="lazy"
+          sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-blue-950/50 to-transparent" />
       </div>

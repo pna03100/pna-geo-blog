@@ -15,14 +15,10 @@ export function HeroSectionFinal() {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 페이지 로드 시 애니메이션 시작
-    const timer = setTimeout(() => {
-      if (contentRef.current) {
-        contentRef.current.classList.add('active');
-      }
-    }, 100);
-
-    return () => clearTimeout(timer);
+    // 페이지 로드 시 애니메이션 즉시 시작 (성능 최적화)
+    if (contentRef.current) {
+      contentRef.current.classList.add('active');
+    }
   }, []);
 
   return (

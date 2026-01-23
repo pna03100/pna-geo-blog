@@ -125,6 +125,8 @@ export function ProblemsSection() {
                         alt={problem.title}
                         fill
                         className="object-cover"
+                        loading="lazy"
+                        sizes="(max-width: 768px) 40vw, 300px"
                       />
                     </div>
                     <div>
@@ -155,6 +157,8 @@ export function ProblemsSection() {
                           alt={problem.title}
                           fill
                           className="object-cover"
+                          loading="lazy"
+                          sizes="(max-width: 768px) 100vw, 300px"
                         />
                       </div>
                     </div>

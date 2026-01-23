@@ -27,6 +27,8 @@ export function CTASection() {
           fill
           className="object-cover"
           quality={90}
+          loading="lazy"
+          sizes="100vw"
         />
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-slate-900/95"></div>
