@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { WordPressClient } from "./WordPressClient";
-import { BlueprintBackground } from "@/components/ui/blueprint-background";
 
 export const metadata: Metadata = {
   title: "워드프레스 제작 | PNA Company",

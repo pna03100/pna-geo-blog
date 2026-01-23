@@ -106,9 +106,3 @@ export interface GraphQLResponse<T> {
   }>;
 }
 
-// Fetch Options (API 호출 설정)
-export interface FetchOptions {
-  revalidate?: number;
-  tags?: string[];
-}
-

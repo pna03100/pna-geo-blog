@@ -10,7 +10,6 @@ import { Manrope, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
 import { NavbarNew } from '@/components/ui/navbar-new';
 import { FooterSection } from '@/components/landing/FooterSection';
-import { HeroBackground } from '@/components/ui/hero-background';
 import dynamicImport from 'next/dynamic';
 
 // Performance: FloatingActions를 lazy load (초기 번들 크기 감소)

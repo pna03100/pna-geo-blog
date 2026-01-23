@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { PerformanceClient } from "./PerformanceClient";
-import { BlueprintBackground } from "@/components/ui/blueprint-background";
 
 export const metadata: Metadata = {
   title: "퍼포먼스 마케팅 | PNA Company",

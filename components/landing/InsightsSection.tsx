@@ -6,9 +6,7 @@
 "use client";
 
 import { SectionWrapper } from "./SectionWrapper";
-import { SectionTitle } from "./SectionTitle";
 import { PostCard } from "@/components/insights/PostCard";
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { WPContent } from "@/lib/types";
