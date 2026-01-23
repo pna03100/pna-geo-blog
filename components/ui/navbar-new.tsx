@@ -46,12 +46,12 @@ export function NavbarNew() {
   // 투명 히어로 페이지에서 스크롤 전: 투명 배경
   const getHeaderStyle = () => {
     if (hasTransparentHero && !isScrolled) {
-      return 'bg-transparent'
+      return 'bg-transparent border-b border-transparent'
     }
     if (isScrolled) {
-      return 'bg-slate-50/90 backdrop-blur-xl shadow-sm border-b border-slate-200'
+      return 'bg-white/60 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border-b border-white/30'
     }
-    return 'bg-slate-50/70 backdrop-blur-lg'
+    return 'bg-white/50 backdrop-blur-xl border-b border-white/20'
   }
 
   // 투명 히어로 페이지에서 스크롤 전: 흰색 텍스트
@@ -72,7 +72,7 @@ export function NavbarNew() {
   return (
     <>
       {/* Clean White Header */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${getHeaderStyle()}`}>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${getHeaderStyle()}`}>
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           
           {/* Desktop Layout */}
