@@ -29,7 +29,7 @@ export function HeroSectionFinal() {
     <>
       <section 
         data-section="HERO" 
-        className="relative w-full min-h-screen flex items-end overflow-hidden pb-20 md:pb-24 lg:pb-32"
+        className="sticky top-0 w-full min-h-screen flex items-end overflow-hidden pb-20 md:pb-24 lg:pb-32 z-0"
       >
         {/* Wave Background */}
         <WaveBackground />

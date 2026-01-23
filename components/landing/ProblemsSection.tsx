@@ -70,7 +70,7 @@ export function ProblemsSection() {
   }, []);
 
   return (
-    <section className="py-20 md:py-32" data-section="PROBLEMS">
+    <section className="relative bg-white pt-20 pb-20 md:pt-32 md:pb-32 rounded-t-[40px] md:rounded-t-[60px] z-10" data-section="PROBLEMS">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         
         {/* Grid Layout for Sticky */}

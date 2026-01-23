@@ -139,13 +139,16 @@ export default async function HomePage() {
 
       {/* 📐 Strategic Content Hierarchy */}
       <main className="relative">
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        {/* SECTION 1: HERO - Performance Architecture                    */}
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <HeroSectionFinal />
+        {/* Sticky Container - Limits sticky effect scope */}
+        <div className="relative" style={{ height: '200vh' }}>
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          {/* SECTION 1: HERO - Performance Architecture                    */}
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          <HeroSectionFinal />
+        </div>
 
-        {/* Content Container */}
-        <div className="relative">
+        {/* Content Container - Overlays hero */}
+        <div className="relative -mt-[100vh]">
           
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
           {/* SECTION 2: PROBLEMS - Structural Issues (Sticky Title)        */}
