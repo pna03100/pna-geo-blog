@@ -55,7 +55,7 @@ export function FAQSection() {
         <div className="grid grid-cols-1 lg:grid-cols-[400px,1fr] gap-4 md:gap-12 lg:gap-16 items-start">
           
           {/* Left: Header (Sticky) - 모바일 가운데 정렬 */}
-          <div className="lg:sticky lg:top-24 text-center lg:text-left mb-0">
+          <div className="lg:sticky lg:top-24 text-center lg:text-left mb-0" style={{ zIndex: 1 }}>
             <SectionHeader 
               badge="FAQ"
               title="자주 묻는 질문"

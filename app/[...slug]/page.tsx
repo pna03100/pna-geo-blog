@@ -27,12 +27,19 @@ export async function generateStaticParams() {
       return [];
     }
 
+    // 🚨 서비스 페이지 제외
+    const excludedRoutes = ['google-ads', 'seo-geo', 'wordpress', 'performance', 'about', 'contact', 'insights'];
+    
     const allPaths = [...posts, ...pages]
       .filter((item) => item && item.uri)
       .map((item) => ({
         slug: item.uri.split('/').filter(Boolean),
       }))
-      .filter((item) => item.slug && item.slug.length > 0);
+      .filter((item) => {
+        if (!item.slug || item.slug.length === 0) return false;
+        // 서비스 페이지 경로 제외
+        return !excludedRoutes.includes(item.slug[0]);
+      });
 
     if (process.env.NODE_ENV === 'development') {
       console.log(`✅ generateStaticParams: ${allPaths.length} paths generated`);
@@ -98,6 +105,12 @@ export default async function DynamicPage({
   params: { slug: string[] };
 }) {
   const uri = `/${params.slug.join('/')}`;
+
+  // 🚨 CRITICAL: Exclude service pages from catch-all
+  const excludedRoutes = ['google-ads', 'seo-geo', 'wordpress', 'performance', 'about', 'contact', 'insights'];
+  if (params.slug && params.slug.length > 0 && excludedRoutes.includes(params.slug[0])) {
+    notFound();
+  }
 
   let content;
 

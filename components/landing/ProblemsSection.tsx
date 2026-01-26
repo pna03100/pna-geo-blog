@@ -22,8 +22,6 @@ function ProblemIcon({ icon: Icon, gradient, className = "" }: ProblemIconProps)
       className={`relative w-full h-full flex items-center justify-center ${className}`}
       style={{
         background: gradient,
-        willChange: 'transform',
-        transform: 'translateZ(0)',
       }}
     >
       {/* Blue glow overlay */}
@@ -47,10 +45,6 @@ function ProblemIcon({ icon: Icon, gradient, className = "" }: ProblemIconProps)
       <Icon 
         className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 text-blue-500" 
         strokeWidth={1.5}
-        style={{
-          willChange: 'transform',
-          transform: 'translateZ(0)',
-        }}
       />
     </div>
   );
@@ -61,7 +55,7 @@ const problems = [
     number: "01",
     title: "비효율적 예산 집행",
     subtitle: "ROAS Stagnation",
-    description: "광고비를 2배로 늘려도 매출은 2배가 되지 않습니다. 성과 한계선(Marginal Utility)을 돌파할 구조 없이 예산만 증액하는 것은 밑 빠진 독에 물 붓기입니다.",
+    description: (<>광고비를 2배로 늘려도 매출은 2배가 되지 않습니다.<br className="hidden md:block" /> 성과 한계선(Marginal Utility)을 돌파할 구조 없이 예산만 증액하는 것은 밑 빠진 독에 물 붓기입니다.</>),
     icon: TrendingDown,
     gradient: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)"
   },
@@ -69,7 +63,7 @@ const problems = [
     number: "02",
     title: "AI 검색 시대의 고립",
     subtitle: "Invisible in AI Search (GEO)",
-    description: "검색의 패러다임이 생성형 AI(ChatGPT, SearchGPT)로 이동했습니다. 기존의 키워드 SEO만으로는 더 이상 고객의 질문에 답변할 수 없습니다.",
+    description: (<>검색의 패러다임이 생성형 AI(ChatGPT, SearchGPT)로 이동했습니다.<br className="hidden md:block" /> 기존의 키워드 SEO만으로는 더 이상 고객의 질문에 답변할 수 없습니다.</>),
     icon: Bot,
     gradient: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)"
   },
@@ -77,7 +71,7 @@ const problems = [
     number: "03",
     title: "전환이 없는 웹사이트",
     subtitle: "Broken Conversion Funnel",
-    description: "유입된 고객이 구매까지 이어지지 않습니다. 심미적인 디자인에 치중해 설득과 전환을 위한 UX/UI 설계가 부재하기 때문입니다.",
+    description: (<>유입된 고객이 구매까지 이어지지 않습니다.<br className="hidden md:block" /> 심미적인 디자인에 치중해 설득과 전환을 위한 UX/UI 설계가 부재하기 때문입니다.</>),
     icon: MousePointerClick,
     gradient: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)"
   },
@@ -85,7 +79,7 @@ const problems = [
     number: "04",
     title: "데이터 결정 장애",
     subtitle: "Data Paralysis",
-    description: "GA4와 광고 관리자에 수많은 데이터가 쌓이지만, 정작 '다음 행동'을 결정하지 못합니다. 인사이트를 추출하는 의사결정 시스템이 없습니다.",
+    description: (<>GA4와 광고 관리자에 수많은 데이터가 쌓이지만, 정작 '다음 행동'을 결정하지 못합니다.<br className="hidden md:block" /> 인사이트를 추출하는 의사결정 시스템이 없습니다.</>),
     icon: Database,
     gradient: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)"
   }
@@ -106,16 +100,13 @@ export function ProblemsSection() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // requestAnimationFrame으로 성능 최적화
-        requestAnimationFrame(() => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('active');
-            }
-          });
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
         });
       },
-      { threshold: 0.15, rootMargin: '0px 0px -5% 0px' }
+      { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
     );
 
     cards.forEach((card) => observer.observe(card));
@@ -140,17 +131,8 @@ export function ProblemsSection() {
             </div>
             
             <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ lineHeight: '1.3' }}>
-              {/* 모바일: 2줄 */}
-              <span className="md:hidden">
-                구글 광고를 운영해도<br/>
-                <span className="text-slate-400">성과가 나지 않는 구조적 이유</span>
-              </span>
-              {/* 웹: 3줄 */}
-              <span className="hidden md:inline">
-                구글 광고를 운영해도<br/>
-                성과가 나지 않는<br/>
-                <span className="text-slate-400">구조적 이유</span>
-              </span>
+              구글 광고를 운영해도<br/>
+              <span className="text-slate-400">성과가 나지 않는<br className="hidden md:block" /></span>구조적 이유
             </h2>
             
             <p className="text-sm md:text-base lg:text-lg text-slate-600 tracking-normal" style={{ lineHeight: '1.7' }}>

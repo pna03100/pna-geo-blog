@@ -78,8 +78,18 @@ export function AwardMetricsUnified() {
           <div className="relative group">
             <div className="relative aspect-[4/3] rounded-2xl md:rounded-3xl overflow-hidden border border-slate-800/50 shadow-2xl transition-all duration-500 group-hover:border-slate-700 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900">
               
+              {/* Background: Google Marketing Live */}
+              <Image
+                src="/images/google/google-marketing-live.jpg"
+                alt="Google Marketing Live 행사"
+                fill
+                className="object-cover opacity-20"
+                priority
+                sizes="50vw"
+              />
+              
               {/* Google Logo - 상단 중앙 */}
-              <div className="absolute inset-0 flex items-start justify-center pt-4 md:pt-6 lg:pt-8">
+              <div className="absolute inset-0 flex items-start justify-center pt-4 md:pt-6 lg:pt-8 z-10">
                 <svg className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 272 92" xmlns="http://www.w3.org/2000/svg" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
                   <path d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="#EA4335"/>
                   <path d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="#FBBC05"/>
@@ -91,7 +101,7 @@ export function AwardMetricsUnified() {
               </div>
               
               {/* Content - 하단 */}
-              <div className="absolute inset-0 flex flex-col items-start justify-end p-6 md:p-8 lg:p-10">
+              <div className="absolute inset-0 flex flex-col items-start justify-end p-6 md:p-8 lg:p-10 z-10">
                 <p className="text-[10px] md:text-xs text-slate-500 font-medium uppercase tracking-widest mb-2 md:mb-3 transition-colors duration-300 group-hover:text-slate-400">
                   Campaign Performance
                 </p>

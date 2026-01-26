@@ -5,11 +5,12 @@
 
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUp, Cpu, Globe, Layout, RefreshCw } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
 
 const services = [
   {
@@ -81,7 +82,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
   return (
     <Link 
       href={service.link}
-      className="group relative bg-slate-900/80 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 overflow-hidden border border-slate-700/50 hover:border-blue-500/50"
+      className="reveal-card group relative bg-slate-900/80 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 overflow-hidden border border-slate-700/50 hover:border-blue-500/50"
       style={{
         willChange: 'transform',
         transform: 'translateZ(0)',
@@ -155,6 +156,8 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 }
 
 export function ServicesAlternate() {
+  const cardsContainerRef = useScrollReveal("active", { threshold: 0.2, once: true });
+
   return (
     <section id="solutions" className="py-20 md:py-32 relative bg-slate-950" data-section="SOLUTIONS">
       <div className="max-w-7xl mx-auto px-6 md:px-6">
@@ -187,7 +190,10 @@ export function ServicesAlternate() {
         </div>
 
         {/* 모바일: 1열 세로 / 데스크톱: 2x2 그리드 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
+        <div 
+          ref={cardsContainerRef as React.RefObject<HTMLDivElement>}
+          className="reveal-cards-container grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8"
+        >
           {services.map((service, index) => (
             <ServiceCard key={service.id} service={service} index={index} />
           ))}

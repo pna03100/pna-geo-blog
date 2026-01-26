@@ -39,7 +39,7 @@ export function ReadingProgress() {
       {isVisible && (
         <div 
           className="fixed top-16 left-0 h-1 bg-blue-600 origin-left z-40 transition-opacity duration-150"
-          style={{ width: `${progress}%` }}
+          style={{ width: `${progress}%`, zIndex: 40 }}
         />
       )}
     </>

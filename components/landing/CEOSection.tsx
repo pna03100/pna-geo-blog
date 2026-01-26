@@ -32,11 +32,11 @@ export function CEOSection() {
           <div className="relative w-full max-w-sm mx-auto lg:max-w-none">
             <div className="relative w-full aspect-[4/5] md:aspect-[1/1] rounded-2xl md:rounded-3xl overflow-hidden bg-slate-800">
               <Image
-                src="/images/hero/company-hero-bg.jpg"
+                src="/images/ceo/ceo-profile.jpg"
                 alt="CEO 안태민"
                 fill
                 className="object-cover"
-                loading="lazy"
+                priority
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
