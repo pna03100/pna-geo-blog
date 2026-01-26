@@ -86,8 +86,17 @@ export function ProblemsSection() {
             </div>
             
             <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ lineHeight: '1.3' }}>
-              구글 광고를 운영해도<br/>
-              <span className="text-slate-400">성과가 나지 않는 구조적 이유</span>
+              {/* 모바일: 2줄 */}
+              <span className="md:hidden">
+                구글 광고를 운영해도<br/>
+                <span className="text-slate-400">성과가 나지 않는 구조적 이유</span>
+              </span>
+              {/* 웹: 3줄 */}
+              <span className="hidden md:inline">
+                구글 광고를 운영해도<br/>
+                성과가 나지 않는<br/>
+                <span className="text-slate-400">구조적 이유</span>
+              </span>
             </h2>
             
             <p className="text-sm md:text-base lg:text-lg text-slate-600 tracking-normal" style={{ lineHeight: '1.7' }}>

@@ -149,8 +149,15 @@ export function ServicesAlternate() {
           
           {/* Title */}
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-            PNA가 제공하는<br className="md:hidden"/>
-            핵심 마케팅 서비스
+            {/* 모바일: 2줄 */}
+            <span className="md:hidden">
+              PNA가 제공하는<br/>
+              핵심 마케팅 서비스
+            </span>
+            {/* 웹: 1줄 (띄어쓰기 추가) */}
+            <span className="hidden md:inline">
+              PNA가 제공하는 핵심 마케팅 서비스
+            </span>
           </h2>
           
           {/* Description */}
