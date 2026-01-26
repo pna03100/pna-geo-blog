@@ -157,21 +157,21 @@ export function InsightsClient({ posts }: InsightsClientProps) {
 
       {/* Magnetic Segmented Controls */}
       <section className="sticky top-16 z-30 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 shadow-sm">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl py-6">
+        <div className="section-container py-6">
           <div className="flex items-center justify-center">
-            <div className="inline-flex bg-slate-100 rounded-full p-1.5">
+            <div className="flex flex-wrap items-center justify-center gap-2 bg-slate-100 rounded-3xl p-2 md:p-1.5 max-w-full">
               {/* All Tab */}
               <button
                 onClick={() => setSelectedCategory('all')}
                 className={`
-                  relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200
+                  relative px-4 md:px-6 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold transition-all duration-200
                   ${selectedCategory === 'all' 
                     ? 'bg-white text-blue-600 shadow-md' 
                     : 'text-slate-600 hover:text-slate-900'
                   }
                 `}
               >
-                <span className="relative z-10">전체 ({posts.length})</span>
+                <span className="relative z-10 whitespace-nowrap">전체 ({posts.length})</span>
               </button>
 
               {/* Category Tabs */}
@@ -180,14 +180,14 @@ export function InsightsClient({ posts }: InsightsClientProps) {
                   key={category.slug}
                   onClick={() => setSelectedCategory(category.slug)}
                   className={`
-                    relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200
+                    relative px-4 md:px-6 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold transition-all duration-200
                     ${selectedCategory === category.slug 
                       ? 'bg-white text-blue-600 shadow-md' 
                       : 'text-slate-600 hover:text-slate-900'
                     }
                   `}
                 >
-                  <span className="relative z-10">{category.name} ({category.count})</span>
+                  <span className="relative z-10 whitespace-nowrap">{category.name} ({category.count})</span>
                 </button>
               ))}
             </div>
@@ -196,7 +196,7 @@ export function InsightsClient({ posts }: InsightsClientProps) {
       </section>
 
       {/* Posts Grid with Glass Cards */}
-      <section className="container mx-auto px-4 md:px-6 max-w-7xl pt-16 pb-32">
+      <section className="section-container pt-16 pb-32">
         {filteredPosts.length === 0 ? (
           // Empty State
           <div className="max-w-2xl mx-auto text-center py-16">

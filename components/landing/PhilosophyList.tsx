@@ -67,7 +67,7 @@ export function PhilosophyList() {
 
   return (
     <section data-section="PHILOSOPHY" className="relative py-20 md:py-32">
-      <div className="container mx-auto px-6 md:px-6 max-w-7xl">
+      <div className="section-container">
         
         <SectionHeader 
           badge="우리의 일하는 방식"
@@ -101,7 +101,7 @@ function PhaseItem({ phase, index }: { phase: typeof phases[0]; index: number })
       className="reveal-timeline philosophy-item-mobile group relative pb-12 md:pb-32 last:pb-0 mb-8 md:mb-0 last:mb-0 border-b md:border-b-0 border-slate-200 last:border-b-0"
     >
       {/* 모바일: Phase Label 상단 배치 */}
-      <div className="md:hidden mb-4 text-right">
+      <div className="md:hidden mb-4 text-left">
         <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-2">PHASE</p>
         <h3 className="text-xl font-bold text-slate-700 font-mono tracking-tight">
           {phase.phase} {phase.subtitle}
@@ -124,7 +124,7 @@ function PhaseItem({ phase, index }: { phase: typeof phases[0]; index: number })
       </div>
 
       {/* Right: Content - 모바일 최적화 */}
-      <div className="flex-1 pt-0 pl-0 md:pl-16 text-right md:text-left">
+      <div className="flex-1 pt-0 pl-0 md:pl-16 text-left">
         <h4 className="text-lg md:text-2xl lg:text-3xl font-bold text-slate-900 mb-3 md:mb-4 leading-tight">
           {phase.title}
         </h4>

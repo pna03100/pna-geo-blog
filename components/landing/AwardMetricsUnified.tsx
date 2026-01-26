@@ -187,12 +187,12 @@ export function AwardMetricsUnified() {
         <div className="text-center">
           <p className="text-xs md:text-sm lg:text-base text-blue-400 font-bold uppercase tracking-[0.15em] mb-10 md:mb-12">주요 클라이언트</p>
           
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-14">
+          <div className="grid grid-cols-4 gap-6 md:flex md:flex-wrap md:gap-12 lg:gap-14 items-center justify-center md:justify-center">
             {clients.map((client) => {
               return (
                 <div 
                   key={client.name} 
-                  className="relative w-24 h-16 md:w-32 md:h-20 lg:w-36 lg:h-24 group cursor-pointer"
+                  className="relative w-16 h-12 md:w-32 md:h-20 lg:w-36 lg:h-24 group cursor-pointer"
                   style={{
                     willChange: 'transform',
                     transform: 'translateZ(0)',

@@ -160,7 +160,7 @@ export function ServicesAlternate() {
 
   return (
     <section id="solutions" className="py-20 md:py-32 relative bg-slate-950" data-section="SOLUTIONS">
-      <div className="max-w-7xl mx-auto px-6 md:px-6">
+      <div className="section-container">
         
         {/* Dark Theme Section Header */}
         <div className="mb-8 md:mb-16">

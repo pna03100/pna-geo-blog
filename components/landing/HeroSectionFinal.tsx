@@ -37,7 +37,7 @@ export function HeroSectionFinal() {
           speed="fast"
           waveOpacity={0.85}
         >
-          <div className="container relative z-10 mx-auto px-6 md:px-6 max-w-7xl w-full">
+          <div className="section-container relative z-10 max-w-7xl w-full">
             
             <div className="max-w-3xl">
               {/* Slogan */}

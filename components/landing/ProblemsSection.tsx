@@ -116,7 +116,7 @@ export function ProblemsSection() {
 
   return (
     <section className="relative bg-white pt-20 pb-20 md:pt-32 md:pb-32 rounded-t-[40px] md:rounded-t-[60px] z-10" data-section="PROBLEMS">
-      <div className="max-w-7xl mx-auto px-6 md:px-6">
+      <div className="section-container">
         
         {/* Grid Layout for Sticky */}
         <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-20">

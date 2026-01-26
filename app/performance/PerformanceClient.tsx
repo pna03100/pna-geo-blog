@@ -219,7 +219,7 @@ export function PerformanceClient() {
       {/* 단일 채널 vs 통합 전략 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
             퍼포먼스 마케팅이란
@@ -285,7 +285,7 @@ export function PerformanceClient() {
       {/* 멀티 채널 전략 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-white/10 bg-[#0B0B0D] py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               멀티 채널 전략
@@ -347,7 +347,7 @@ export function PerformanceClient() {
       {/* 데이터 기반 최적화 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               데이터 기반 최적화
@@ -391,7 +391,7 @@ export function PerformanceClient() {
       {/* 검증된 성과 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-slate-50 py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               검증된 성과
@@ -456,7 +456,7 @@ export function PerformanceClient() {
       {/* 추천 대상 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+        <div className="section-container-narrow">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               추천 대상
@@ -519,7 +519,7 @@ export function PerformanceClient() {
       {/* CTA SECTION */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="relative bg-blue-600 py-16 md:py-20 overflow-hidden">
-        <div className="container relative mx-auto px-4 md:px-6 max-w-4xl text-center text-white">
+        <div className="section-container relative max-w-4xl text-center text-white">
           {/* Icon */}
           <div className="flex justify-center mb-6">
             <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">

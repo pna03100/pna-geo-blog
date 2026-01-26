@@ -140,7 +140,7 @@ export function AboutClient() {
       {/* COMPANY STORY & CEO */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="relative pt-20 pb-20 md:pt-32 md:pb-32 border-b border-slate-300">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-20 items-center">
             {/* Left: Company Story - Typography Focus */}
             <div>
@@ -233,7 +233,7 @@ export function AboutClient() {
       {/* TIMELINE - Vertical Clean List */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="relative bg-[#0B0B0D] py-20 md:py-32 border-b border-white/10 overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               15년간의 성장 여정
@@ -302,7 +302,7 @@ export function AboutClient() {
       {/* WHY PNA - Customer-Friendly Approach */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="relative py-20 md:py-32 border-b border-slate-300">
-        <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+        <div className="section-container-medium">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               왜 피앤에이컴퍼니인가요?
@@ -348,7 +348,7 @@ export function AboutClient() {
       {/* CORE VALUES - Card Grid */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="relative bg-slate-100 py-20 md:py-32 border-b border-slate-300">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               우리가 일하는 방식
@@ -384,7 +384,7 @@ export function AboutClient() {
       {/* PARTNERS & CLIENTS - Split Layout */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="relative py-20 md:py-32 border-b border-slate-300">
-        <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+        <div className="section-container-medium">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-20">
             {/* Left: Trust Indicators */}
             <div>
@@ -480,12 +480,12 @@ export function AboutClient() {
           backgroundSize: '40px 40px'
         }} />
 
-        <div className="container relative mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left: Message */}
             <div className="text-left">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 whitespace-nowrap" style={{ lineHeight: '1.35' }}>
-                다음 성공 프로젝트의 주인공은 당신입니다
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6" style={{ lineHeight: '1.35' }}>
+                다음 성공 프로젝트의 <br className="md:hidden" />주인공은 당신입니다
               </h2>
               <p className="text-lg text-slate-300 leading-relaxed">
                 15년 경력의 전문가가 직접 상담해드립니다.<br />

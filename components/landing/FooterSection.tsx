@@ -39,7 +39,7 @@ export function FooterSection() {
         />
       </div>
 
-      <div className="container relative z-10 mx-auto px-6 md:px-6 max-w-7xl py-16 md:py-20">
+      <div className="section-container relative z-10 max-w-7xl py-16 md:py-20">
         {/* Top Section: Brand */}
         <div className="mb-16 pb-16 border-b border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">

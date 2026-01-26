@@ -35,7 +35,7 @@ export function CTASection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 md:px-6 max-w-5xl">
+      <div className="relative z-10 section-container-narrow">
         <div className="text-center">
           {/* Title */}
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight" style={{ lineHeight: '1.3' }}>

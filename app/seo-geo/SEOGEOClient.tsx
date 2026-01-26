@@ -286,7 +286,7 @@ export function SEOGEOClient() {
       {/* 섹션 2: 광고 vs SEO */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
             광고는 소비, SEO는 투자
@@ -348,7 +348,7 @@ export function SEOGEOClient() {
       {/* 섹션 3: 검증된 성과 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-slate-50 py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               검증된 성과
@@ -435,7 +435,7 @@ export function SEOGEOClient() {
       {/* 섹션 4: 업종별 전략 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-white/10 bg-[#0B0B0D] py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               업종별 전략
@@ -494,7 +494,7 @@ export function SEOGEOClient() {
       {/* 섹션 5: 투자 구조 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-slate-50 py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               투자 구조
@@ -567,7 +567,7 @@ export function SEOGEOClient() {
       {/* 섹션 6: GEO 대응 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               GEO (Generative Engine Optimization)
@@ -624,7 +624,7 @@ export function SEOGEOClient() {
       {/* 섹션 7: 차별화 요소 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-slate-50 py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               차별화 요소
@@ -662,7 +662,7 @@ export function SEOGEOClient() {
       {/* 섹션 8: 성과 타임라인 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-white/10 bg-[#0B0B0D] py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               성과 타임라인
@@ -719,7 +719,7 @@ export function SEOGEOClient() {
       {/* 섹션 9: 추천 대상 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-slate-50 py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+        <div className="section-container-narrow">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               추천 대상
@@ -786,7 +786,7 @@ export function SEOGEOClient() {
       {/* CTA SECTION */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="relative bg-blue-600 py-16 md:py-20 overflow-hidden">
-        <div className="container relative mx-auto px-4 md:px-6 max-w-4xl text-center text-white">
+        <div className="section-container relative max-w-4xl text-center text-white">
           {/* Icon */}
           <div className="flex justify-center mb-6">
             <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">

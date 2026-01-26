@@ -340,7 +340,7 @@ function CampaignTypesSection() {
 
   return (
     <section className="border-t border-slate-200 bg-slate-50 py-20 md:py-32">
-      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+      <div className="section-container">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
             Google Ads 캠페인 유형
@@ -436,7 +436,7 @@ export function GoogleAdsClient() {
       {/* WHY GOOGLE ADS */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
             왜 구글 광고를 해야 하나요?
@@ -466,7 +466,7 @@ export function GoogleAdsClient() {
       {/* PLATFORM COMPARISON */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-white/10 bg-[#0B0B0D] py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               Google Ads vs 타 플랫폼
@@ -534,7 +534,7 @@ export function GoogleAdsClient() {
       {/* SUCCESS CASES */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               실제 광고 성과
@@ -607,7 +607,7 @@ export function GoogleAdsClient() {
       {/* CORE STRATEGY */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               PNA의 광고 전략
@@ -647,7 +647,7 @@ export function GoogleAdsClient() {
       {/* WHY PNA */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-white/10 bg-[#0B0B0D] py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               왜 PNA인가?
@@ -677,7 +677,7 @@ export function GoogleAdsClient() {
       {/* INDUSTRY STRATEGY */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               업종별 맞춤 전략
@@ -721,7 +721,7 @@ export function GoogleAdsClient() {
       {/* TARGET CUSTOMERS */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-slate-50 py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+        <div className="section-container-narrow">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               이런 분들께 추천합니다
@@ -779,7 +779,7 @@ export function GoogleAdsClient() {
       {/* BUDGET GUIDE */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               광고비 가이드
@@ -855,7 +855,7 @@ export function GoogleAdsClient() {
       {/* CTA SECTION (고정) */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="relative bg-blue-600 py-16 md:py-20 overflow-hidden">
-        <div className="container relative mx-auto px-4 md:px-6 max-w-4xl text-center text-white">
+        <div className="section-container relative max-w-4xl text-center text-white">
           {/* Icon */}
           <div className="flex justify-center mb-6">
             <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">

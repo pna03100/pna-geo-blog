@@ -50,7 +50,7 @@ export function FAQSection() {
       {/* SECTION: #FAQ */}
       <section data-section="FAQ" className="relative py-16 md:py-24">
       
-      <div className="container relative mx-auto px-6 md:px-6 max-w-7xl">
+      <div className="section-container relative">
         {/* 2 Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-[400px,1fr] gap-4 md:gap-12 lg:gap-16 items-start">
           

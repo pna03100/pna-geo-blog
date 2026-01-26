@@ -201,7 +201,7 @@ export function WordPressClient() {
       {/* 왜 워드프레스인가 */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
             왜 워드프레스인가
@@ -241,7 +241,7 @@ export function WordPressClient() {
       {/* PLATFORM COMPARISON TABLE */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-white/10 bg-[#0B0B0D] py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ lineHeight: '1.35' }}>
               플랫폼 비교
@@ -303,7 +303,7 @@ export function WordPressClient() {
       {/* CORE SERVICES */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               핵심 서비스
@@ -345,7 +345,7 @@ export function WordPressClient() {
       {/* SUCCESS CASES */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-slate-50 py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               검증된 성과
@@ -409,7 +409,7 @@ export function WordPressClient() {
       {/* PROCESS */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="border-t border-slate-200 bg-white py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+        <div className="section-container">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4" style={{ lineHeight: '1.35' }}>
               제작 프로세스
@@ -465,7 +465,7 @@ export function WordPressClient() {
       {/* CTA SECTION */}
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="relative bg-blue-600 py-16 md:py-20 overflow-hidden">
-        <div className="container relative mx-auto px-4 md:px-6 max-w-4xl text-center text-white">
+        <div className="section-container relative max-w-4xl text-center text-white">
           {/* Icon */}
           <div className="flex justify-center mb-6">
             <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">

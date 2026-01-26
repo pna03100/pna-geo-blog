@@ -168,6 +168,26 @@
   .input-field {
     @apply w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium placeholder:text-slate-400 bg-white focus:bg-white shadow-sm;
   }
+
+  /* ============================================
+     [PNA] 공통 여백 시스템
+     전체 사이트 통일된 좌우 여백 관리
+     ============================================ */
+  .section-padding {
+    @apply px-6 md:px-6;
+  }
+  
+  .section-container {
+    @apply container mx-auto px-6 md:px-6 max-w-7xl;
+  }
+  
+  .section-container-narrow {
+    @apply container mx-auto px-6 md:px-6 max-w-5xl;
+  }
+  
+  .section-container-medium {
+    @apply container mx-auto px-6 md:px-6 max-w-6xl;
+  }
 }
 
 /* ============================================
