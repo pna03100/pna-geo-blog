@@ -125,13 +125,11 @@ export const WavyBackground = ({
       // Distribute waves across the entire vertical space
       const verticalPosition = (i / (n - 1)) * h;
       
-      for (x = 0; x < w; x += 3) {
-        // Mouse interaction - waves react to mouse position
-        const distanceFromMouse = Math.sqrt(
-          Math.pow(x - mousePosition.x, 2) + 
-          Math.pow(verticalPosition - mousePosition.y, 2)
-        );
-        const mouseInfluence = Math.max(0, 1 - distanceFromMouse / 400) * 100;
+      // 최적화: 렌더링 스텝 증가 (3→5), 마우스 인터랙션 간소화
+      for (x = 0; x < w; x += 5) {
+        // Mouse interaction - simplified for performance
+        const distanceFromMouse = Math.abs(x - mousePosition.x) + Math.abs(verticalPosition - mousePosition.y);
+        const mouseInfluence = distanceFromMouse < 400 ? (1 - distanceFromMouse / 400) * 80 : 0;
         
         // Wave with spacing: increased separation between waves
         var y = noise(x / 800, 0.8 * i, nt) * 140 + mouseInfluence;
@@ -143,12 +141,21 @@ export const WavyBackground = ({
   };
 
   let animationId: number;
-  const render = () => {
-    ctx.fillStyle = backgroundFill || "black";
-    // 웹과 동일한 opacity 사용
-    ctx.globalAlpha = waveOpacity || 0.5;
-    ctx.fillRect(0, 0, w, h);
-    drawWave(8);
+  let lastFrameTime = 0;
+  const targetFPS = 30; // 60fps → 30fps로 제한 (시각적 차이 없음)
+  const frameInterval = 1000 / targetFPS;
+  
+  const render = (currentTime: number = 0) => {
+    const elapsed = currentTime - lastFrameTime;
+    
+    if (elapsed >= frameInterval) {
+      ctx.fillStyle = backgroundFill || "black";
+      ctx.globalAlpha = waveOpacity || 0.5;
+      ctx.fillRect(0, 0, w, h);
+      drawWave(8);
+      lastFrameTime = currentTime - (elapsed % frameInterval);
+    }
+    
     animationId = requestAnimationFrame(render);
   };
 

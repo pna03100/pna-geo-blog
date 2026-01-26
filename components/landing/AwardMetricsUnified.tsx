@@ -80,7 +80,7 @@ export function AwardMetricsUnified() {
               
               {/* Google Logo - 상단 중앙 */}
               <div className="absolute inset-0 flex items-start justify-center pt-4 md:pt-6 lg:pt-8">
-                <svg className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 transition-transform duration-500 group-hover:scale-110" viewBox="0 0 272 92" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 272 92" xmlns="http://www.w3.org/2000/svg" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
                   <path d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="#EA4335"/>
                   <path d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="#FBBC05"/>
                   <path d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z" fill="#4285F4"/>
@@ -183,12 +183,16 @@ export function AwardMetricsUnified() {
                 <div 
                   key={client.name} 
                   className="relative w-24 h-16 md:w-32 md:h-20 lg:w-36 lg:h-24 group cursor-pointer"
+                  style={{
+                    willChange: 'transform',
+                    transform: 'translateZ(0)',
+                  }}
                 >
                   <Image
                     src={client.logo}
                     alt={client.name}
                     fill
-                    className="object-contain transition-all duration-300 group-hover:scale-110 group-hover:brightness-125"
+                    className="object-contain transition-all duration-200 group-hover:scale-110 group-hover:opacity-90"
                     style={{
                       filter: 'brightness(0) invert(1)',
                       opacity: 0.6

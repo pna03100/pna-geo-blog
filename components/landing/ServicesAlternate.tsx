@@ -81,7 +81,11 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
   return (
     <Link 
       href={service.link}
-      className="group relative bg-slate-900/80 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 overflow-hidden border border-slate-700/50 hover:border-blue-500/50"
+      className="group relative bg-slate-900/80 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 overflow-hidden border border-slate-700/50 hover:border-blue-500/50"
+      style={{
+        willChange: 'transform',
+        transform: 'translateZ(0)',
+      }}
     >
       {/* Background Image */}
       <div className="absolute inset-0 opacity-15 group-hover:opacity-25 transition-opacity duration-300">
@@ -136,8 +140,12 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
           {/* Arrow Icon with rotation */}
           <div className="w-10 h-10 rounded-full border-2 border-slate-700 group-hover:border-blue-500 flex items-center justify-center transition-all duration-300">
             <ArrowUp 
-              className="w-5 h-5 text-slate-500 group-hover:text-blue-400 transition-all duration-700 group-hover:rotate-90" 
-              strokeWidth={2} 
+              className="w-5 h-5 text-slate-500 group-hover:text-blue-400 transition-all duration-500 group-hover:rotate-90" 
+              strokeWidth={2}
+              style={{
+                willChange: 'transform',
+                transform: 'translateZ(0)',
+              }}
             />
           </div>
         </div>

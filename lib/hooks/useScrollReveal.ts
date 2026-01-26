@@ -32,15 +32,18 @@ export function useScrollReveal(
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            element.classList.add(animationClass);
-            if (once) {
-              observer.unobserve(element);
+        // requestAnimationFrame으로 레이아웃 thrashing 방지
+        requestAnimationFrame(() => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              element.classList.add(animationClass);
+              if (once) {
+                observer.unobserve(element);
+              }
+            } else if (!once) {
+              element.classList.remove(animationClass);
             }
-          } else if (!once) {
-            element.classList.remove(animationClass);
-          }
+          });
         });
       },
       { threshold, rootMargin }

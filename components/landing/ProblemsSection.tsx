@@ -22,6 +22,8 @@ function ProblemIcon({ icon: Icon, gradient, className = "" }: ProblemIconProps)
       className={`relative w-full h-full flex items-center justify-center ${className}`}
       style={{
         background: gradient,
+        willChange: 'transform',
+        transform: 'translateZ(0)',
       }}
     >
       {/* Blue glow overlay */}
@@ -46,7 +48,8 @@ function ProblemIcon({ icon: Icon, gradient, className = "" }: ProblemIconProps)
         className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 text-blue-500" 
         strokeWidth={1.5}
         style={{
-          filter: 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))',
+          willChange: 'transform',
+          transform: 'translateZ(0)',
         }}
       />
     </div>
@@ -103,13 +106,16 @@ export function ProblemsSection() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          }
+        // requestAnimationFrame으로 성능 최적화
+        requestAnimationFrame(() => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            }
+          });
         });
       },
-      { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
+      { threshold: 0.15, rootMargin: '0px 0px -5% 0px' }
     );
 
     cards.forEach((card) => observer.observe(card));
