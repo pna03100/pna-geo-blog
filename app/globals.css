@@ -1669,3 +1669,62 @@
     opacity: 0;
   }
 }
+
+/* ============================================
+   [3D Glass Icons] Floating Animation
+   ============================================ */
+@keyframes float-3d {
+  0%, 100% {
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotateX(3deg) rotateY(-2deg);
+  }
+  50% {
+    transform: translateY(-20px) rotateX(0deg) rotateY(2deg);
+  }
+  75% {
+    transform: translateY(-15px) rotateX(-3deg) rotateY(-2deg);
+  }
+}
+
+.animate-float-3d {
+  animation: float-3d 6s ease-in-out infinite;
+}
+
+/* ============================================
+   [Dark Problem Icons] Glitch Effect
+   ============================================ */
+@keyframes glitch {
+  0%, 90%, 100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  91% {
+    transform: translate(-2px, 2px);
+    opacity: 0.8;
+  }
+  92% {
+    transform: translate(2px, -2px);
+    opacity: 0.9;
+  }
+  93% {
+    transform: translate(-1px, 1px);
+    opacity: 0.85;
+  }
+  94% {
+    transform: translate(1px, -1px);
+    opacity: 1;
+  }
+}
+
+.animate-glitch {
+  animation: glitch 4s ease-in-out infinite;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-glitch {
+    animation: none;
+  }
+}

@@ -75,6 +75,28 @@ const nextConfig = {
   // 5. 리다이렉트 설정 (단일 301, 체인 없음)
   async redirects() {
     return [
+      // WordPress 카테고리 기반 URL -> /insights/ 통합
+      {
+        source: '/ai-marketing-geo/:slug*',
+        destination: '/insights/:slug*',
+        permanent: true, // 301 Permanent Redirect
+      },
+      {
+        source: '/google-ads/:slug*',
+        destination: '/insights/:slug*',
+        permanent: true, // 301 Permanent Redirect
+      },
+      {
+        source: '/wp-seo/:slug*',
+        destination: '/insights/:slug*',
+        permanent: true, // 301 Permanent Redirect
+      },
+      {
+        source: '/uncategorized/:slug*',
+        destination: '/insights/:slug*',
+        permanent: true, // 301 Permanent Redirect
+      },
+      // 기존 리다이렉트
       {
         source: '/blog/:slug*',
         destination: '/insights/:slug*',

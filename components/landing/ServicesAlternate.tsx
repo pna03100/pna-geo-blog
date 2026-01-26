@@ -17,7 +17,12 @@ const services = [
     icon: Cpu,
     title: "구글 광고",
     subtitle: "GOOGLE ADS",
-    description: "AI 스마트 입찰과 정밀 타겟팅으로 광고 효율을 극대화합니다. 실시간 데이터 분석을 통해 광고비 낭비를 최소화하고 최적의 성과를 이끌어냅니다.",
+    description: (
+      <>
+        AI 스마트 입찰과 정밀 타겟팅으로 광고 효율을 극대화합니다.<br className="hidden md:block" />
+        실시간 데이터 분석을 통해 광고비 낭비를 최소화하고 최적의 성과를 이끌어냅니다.
+      </>
+    ),
     features: ["스마트 입찰 최적화", "정밀 타겟팅", "실시간 모니터링"],
     link: "/google-ads",
     image: "/images/hero/google-ads-hero-bg.jpg"
@@ -27,7 +32,12 @@ const services = [
     icon: Globe,
     title: "SEO & GEO",
     subtitle: "SEO & GEO",
-    description: "검색 엔진과 Gemini AI 결과에 동시 상위 노출되는 시맨틱 전략을 구축합니다. 데이터 기반의 정밀한 컨텐츠 최적화로 브랜드 가치를 높입니다.",
+    description: (
+      <>
+        검색 엔진과 Gemini AI 결과에 동시 상위 노출되는 시맨틱 전략을 구축합니다.<br className="hidden md:block" />
+        데이터 기반의 정밀한 컨텐츠 최적화로 브랜드 가치를 높입니다.
+      </>
+    ),
     features: ["시맨틱 SEO", "AI 검색 최적화", "브랜드 노출 확대"],
     link: "/seo-geo",
     image: "/images/hero/seo-hero-bg.jpg"
@@ -37,7 +47,12 @@ const services = [
     icon: Layout,
     title: "워드프레스",
     subtitle: "WORDPRESS",
-    description: "기술적 SEO 최적화와 사용자 경험을 동시에 고려한 웹사이트를 구축합니다. 초고속 퍼포먼스와 완벽한 반응형 디자인으로 비즈니스 성장을 지원합니다.",
+    description: (
+      <>
+        기술적 SEO 최적화와 사용자 경험을 동시에 고려한 웹사이트를 구축합니다.<br className="hidden md:block" />
+        초고속 퍼포먼스와 완벽한 반응형 디자인으로 비즈니스 성장을 지원합니다.
+      </>
+    ),
     features: ["기술적 SEO", "UX 최적화", "고속 퍼포먼스"],
     link: "/wordpress",
     image: "/images/hero/wordpress-hero-bg.jpg"
@@ -47,7 +62,12 @@ const services = [
     icon: RefreshCw,
     title: "퍼포먼스 마케팅",
     subtitle: "PERFORMANCE MARKETING",
-    description: "추측을 배제하고 전 과정 데이터 추적을 통해 마케팅을 최적화합니다. 명확한 성과 지표 분석으로 지속 가능한 ROI 향상을 실현합니다.",
+    description: (
+      <>
+        추측을 배제하고 전 과정 데이터 추적을 통해 마케팅을 최적화합니다.<br className="hidden md:block" />
+        명확한 성과 지표 분석으로 지속 가능한 ROI 향상을 실현합니다.
+      </>
+    ),
     features: ["데이터 추적", "ROI 최적화", "성과 분석"],
     link: "/performance",
     image: "/images/hero/performance-hero-bg.jpg"
@@ -77,34 +97,15 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       </div>
 
       {/* Content */}
-      <div className="relative p-6 md:p-8 lg:p-10 text-center md:text-left">
+      <div className="relative p-6 md:p-8 lg:p-10 text-center">
         
-        {/* Top: Icon & Arrow */}
-        <div className="mb-4 md:mb-6">
-          {/* 모바일: 아이콘 가운데 / 데스크톱: 아이콘 + 화살표 */}
-          <div className="flex items-start justify-center md:justify-between">
-            {/* Icon */}
-            <div className="w-12 h-12 rounded-lg bg-slate-800/80 group-hover:bg-blue-600 flex items-center justify-center transition-all duration-300">
-              <IconComponent className="w-6 h-6 text-slate-300 group-hover:text-white transition-colors duration-300" strokeWidth={2} />
-            </div>
-            
-            {/* Arrow in Circle - 모바일 숨김 */}
-            <div className="hidden md:flex w-10 h-10 rounded-full border-2 border-slate-700 group-hover:border-blue-500 items-center justify-center transition-all duration-300">
-              <ArrowUp 
-                className="w-5 h-5 text-slate-500 group-hover:text-blue-400 transition-all duration-300 group-hover:rotate-90" 
-                strokeWidth={2} 
-              />
-            </div>
-          </div>
-        </div>
-
         {/* Subtitle */}
-        <p className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-3">
+        <p className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-3 mt-2">
           {service.subtitle}
         </p>
 
         {/* Title */}
-        <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-0 md:mb-4 group-hover:text-blue-400 transition-colors duration-300">
+        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-0 md:mb-4 group-hover:text-blue-400 transition-colors duration-300">
           {service.title}
         </h3>
 
@@ -114,7 +115,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         </p>
 
         {/* Features with Dividers - 모바일 숨김 */}
-        <div className="hidden md:flex items-center gap-3 text-sm text-slate-500 group-hover:text-slate-400 transition-colors duration-300 mb-6 flex-wrap">
+        <div className="hidden md:flex items-center justify-center gap-3 text-sm text-slate-500 group-hover:text-slate-400 transition-colors duration-300 mb-6 flex-wrap">
           {service.features.map((feature, idx) => (
             <React.Fragment key={idx}>
               <span className="whitespace-nowrap">{feature}</span>
@@ -125,9 +126,20 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
           ))}
         </div>
 
-        {/* Progress Bar - 모바일 숨김 */}
-        <div className="hidden md:block w-full h-1 bg-slate-800/50 rounded-full overflow-hidden">
-          <div className="h-full bg-gradient-to-r from-blue-600 to-blue-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out" />
+        {/* Progress Bar + Arrow Icon - 모바일 숨김 */}
+        <div className="hidden md:flex items-center justify-center gap-3">
+          {/* Progress Bar */}
+          <div className="flex-1 max-w-[80%] h-1 bg-slate-800/50 rounded-full overflow-hidden">
+            <div className="h-full bg-gradient-to-r from-blue-600 to-blue-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out" />
+          </div>
+          
+          {/* Arrow Icon with rotation */}
+          <div className="w-10 h-10 rounded-full border-2 border-slate-700 group-hover:border-blue-500 flex items-center justify-center transition-all duration-300">
+            <ArrowUp 
+              className="w-5 h-5 text-slate-500 group-hover:text-blue-400 transition-all duration-700 group-hover:rotate-90" 
+              strokeWidth={2} 
+            />
+          </div>
         </div>
       </div>
     </Link>

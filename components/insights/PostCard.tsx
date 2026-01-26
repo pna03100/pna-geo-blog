@@ -54,7 +54,7 @@ export function PostCard({ post, priority = false }: PostCardProps) {
 
   return (
     <Link
-      href={`/insights/${post.slug}${categorySlug ? `?category=${categorySlug}` : ''}`}
+      href={`/insights/${post.slug}`}
       prefetch={true}
       className="group block h-full"
     >

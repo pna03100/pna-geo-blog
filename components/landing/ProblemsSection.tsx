@@ -5,9 +5,53 @@
 
 "use client";
 
-import Image from "next/image";
 import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
 import { useEffect, useRef } from "react";
+import { TrendingDown, Bot, MousePointerClick, Database, AlertCircle, LucideIcon } from "lucide-react";
+
+// ProblemIcon Component - Blue icon with warning badge
+interface ProblemIconProps {
+  icon: LucideIcon;
+  gradient: string;
+  className?: string;
+}
+
+function ProblemIcon({ icon: Icon, gradient, className = "" }: ProblemIconProps) {
+  return (
+    <div 
+      className={`relative w-full h-full flex items-center justify-center ${className}`}
+      style={{
+        background: gradient,
+      }}
+    >
+      {/* Blue glow overlay */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(59, 130, 246, 0.15), transparent)',
+        }}
+      />
+      
+      {/* Warning Badge - Red (Box 우측 상단) */}
+      <div className="absolute top-2 right-2 md:top-4 md:right-4 lg:top-6 lg:right-6">
+        <AlertCircle 
+          className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-red-400" 
+          strokeWidth={2.5}
+          fill="rgba(248, 113, 113, 0.15)"
+        />
+      </div>
+      
+      {/* Main Icon - Blue */}
+      <Icon 
+        className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 text-blue-500" 
+        strokeWidth={1.5}
+        style={{
+          filter: 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))',
+        }}
+      />
+    </div>
+  );
+}
 
 const problems = [
   {
@@ -15,28 +59,32 @@ const problems = [
     title: "비효율적 예산 집행",
     subtitle: "ROAS Stagnation",
     description: "광고비를 2배로 늘려도 매출은 2배가 되지 않습니다. 성과 한계선(Marginal Utility)을 돌파할 구조 없이 예산만 증액하는 것은 밑 빠진 독에 물 붓기입니다.",
-    image: "/images/hero/performance-hero-bg.jpg"
+    icon: TrendingDown,
+    gradient: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)"
   },
   {
     number: "02",
     title: "AI 검색 시대의 고립",
     subtitle: "Invisible in AI Search (GEO)",
     description: "검색의 패러다임이 생성형 AI(ChatGPT, SearchGPT)로 이동했습니다. 기존의 키워드 SEO만으로는 더 이상 고객의 질문에 답변할 수 없습니다.",
-    image: "/images/hero/seo-hero-bg.jpg"
+    icon: Bot,
+    gradient: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)"
   },
   {
     number: "03",
     title: "전환이 없는 웹사이트",
     subtitle: "Broken Conversion Funnel",
     description: "유입된 고객이 구매까지 이어지지 않습니다. 심미적인 디자인에 치중해 설득과 전환을 위한 UX/UI 설계가 부재하기 때문입니다.",
-    image: "/images/hero/wordpress-hero-bg.jpg"
+    icon: MousePointerClick,
+    gradient: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)"
   },
   {
     number: "04",
     title: "데이터 결정 장애",
     subtitle: "Data Paralysis",
     description: "GA4와 광고 관리자에 수많은 데이터가 쌓이지만, 정작 '다음 행동'을 결정하지 못합니다. 인사이트를 추출하는 의사결정 시스템이 없습니다.",
-    image: "/images/hero/company-hero-bg.jpg"
+    icon: Database,
+    gradient: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)"
   }
 ];
 
@@ -127,14 +175,10 @@ export function ProblemsSection() {
                     }`}
                     style={{ transitionDelay: `${index * 150}ms` }}
                   >
-                    <div className="relative aspect-square rounded-xl overflow-hidden bg-slate-100 shadow-sm">
-                      <Image
-                        src={problem.image}
-                        alt={problem.title}
-                        fill
-                        className="object-cover"
-                        loading="lazy"
-                        sizes="(max-width: 768px) 40vw, 300px"
+                    <div className="relative aspect-square rounded-xl overflow-hidden shadow-lg group">
+                      <ProblemIcon 
+                        icon={problem.icon}
+                        gradient={problem.gradient}
                       />
                     </div>
                     <div>
@@ -159,14 +203,10 @@ export function ProblemsSection() {
                           {problem.description}
                         </p>
                       </div>
-                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 shadow-sm">
-                        <Image
-                          src={problem.image}
-                          alt={problem.title}
-                          fill
-                          className="object-cover"
-                          loading="lazy"
-                          sizes="(max-width: 768px) 100vw, 300px"
+                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl group">
+                        <ProblemIcon 
+                          icon={problem.icon}
+                          gradient={problem.gradient}
                         />
                       </div>
                     </div>

@@ -63,7 +63,19 @@ export async function generateStaticParams() {
 // ============================================
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getContentByURI(`/${slug}/`);
+  
+  // [Fix] Find post by slug from all posts
+  const allPosts = await getAllPosts();
+  const matchedPost = allPosts.find(p => p.slug === slug);
+  
+  if (!matchedPost) {
+    return {
+      title: '포스트를 찾을 수 없습니다',
+    };
+  }
+  
+  // [Performance] Fetch full content by URI
+  const post = await getContentByURI(matchedPost.uri);
 
   if (!post) {
     return {
@@ -102,45 +114,46 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
   const { slug } = await params;
   const { category } = await searchParams;
   
-  // [Performance] Parallel data fetching for faster load time
-  const [post, allPosts] = await Promise.all([
-    getContentByURI(`/${slug}/`),
-    getAllPosts(), // Fetch in parallel instead of in Suspense
-  ]);
+  // [Performance] Fetch all posts first
+  const allPosts = await getAllPosts();
+  
+  // [Fix] Find post by slug (works regardless of WordPress permalink structure)
+  const post = allPosts.find(p => p.slug === slug);
 
   // [Security] 404 Handling
   if (!post) {
     notFound();
   }
+  
+  // [Performance] Fetch full content by URI for the matched post
+  const fullPost = await getContentByURI(post.uri);
+  
+  if (!fullPost) {
+    notFound();
+  }
 
   // [Security] Safe Fallbacks
-  const title = post.title || '제목 없음';
-  const rawContent = post.content || '<p>내용이 없습니다.</p>';
+  const title = fullPost.title || '제목 없음';
+  const rawContent = fullPost.content || '<p>내용이 없습니다.</p>';
   const content = sanitizeWordPressHTML(rawContent);
-  const categories = post.categories?.nodes || [];
-  const author = post.author?.node;
-  const featuredImageUrl = post.featuredImage?.node?.sourceUrl || null;
-  const date = post.date ? new Date(post.date).toLocaleDateString('ko-KR', {
+  const categories = fullPost.categories?.nodes || [];
+  const author = fullPost.author?.node;
+  const featuredImageUrl = fullPost.featuredImage?.node?.sourceUrl || null;
+  const date = fullPost.date ? new Date(fullPost.date).toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   }) : '';
-  const isoDate = post.date || new Date().toISOString();
+  const isoDate = fullPost.date || new Date().toISOString();
 
   // Calculate reading time (rough estimate: 200 words per minute in Korean)
   const wordCount = content.replace(/<[^>]*>/g, '').length;
   const readingTime = Math.ceil(wordCount / 400); // Approximate for Korean
 
-  // [Performance] Calculate prev/next posts (no Suspense needed)
-  let postsForNavigation = allPosts;
-  if (category) {
-    postsForNavigation = allPosts.filter(p => 
-      p.categories?.nodes?.some(cat => cat.slug === category)
-    );
-  }
-  const currentIndex = postsForNavigation.findIndex(p => p.databaseId === post.databaseId);
-  const prevPost = currentIndex > 0 ? postsForNavigation[currentIndex - 1] : null;
-  const nextPost = currentIndex < postsForNavigation.length - 1 ? postsForNavigation[currentIndex + 1] : null;
+  // [Performance] Calculate prev/next posts from all posts
+  const currentIndex = allPosts.findIndex(p => p.databaseId === fullPost.databaseId);
+  const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 
   return (
     <>
@@ -154,7 +167,7 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
             schema={{
               type: 'Article',
               headline: title,
-              description: stripHtmlTags(post.excerpt || ''),
+              description: stripHtmlTags(fullPost.excerpt || ''),
               author: author?.name,
               datePublished: isoDate,
               dateModified: isoDate,
@@ -270,7 +283,7 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
                 {/* Previous Post */}
                 {prevPost ? (
                   <Link
-                    href={`/insights/${prevPost.slug}${category ? `?category=${category}` : ''}`}
+                    href={`/insights/${prevPost.slug}`}
                     prefetch={true}
                     className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-md"
                     style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
@@ -294,7 +307,7 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
                 {/* Next Post */}
                 {nextPost ? (
                   <Link
-                    href={`/insights/${nextPost.slug}${category ? `?category=${category}` : ''}`}
+                    href={`/insights/${nextPost.slug}`}
                     prefetch={true}
                     className="group flex items-center gap-4 p-6 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-md"
                     style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
@@ -319,7 +332,7 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
               {/* Back to List Button */}
               <div className="mt-6">
                 <Link
-                  href={`/insights${category ? `?category=${category}` : ''}`}
+                  href="/insights"
                   className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-2xl bg-white border-2 border-slate-300 text-slate-900 font-semibold hover:bg-slate-50 hover:border-blue-600 hover:text-blue-600 shadow-sm"
                   style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}
                 >
@@ -336,16 +349,16 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
                 <CTACard />
 
                 {/* Popular Posts */}
-                <PopularPosts posts={allPosts} currentPostId={post.databaseId} />
+                <PopularPosts posts={allPosts} currentPostId={fullPost.databaseId} />
               </div>
             </aside>
           </div>
 
           {/* [GEO] JSON-LD Schema (if available from RankMath) */}
-          {post.seo?.schema?.raw && (
+          {fullPost.seo?.schema?.raw && (
             <script
               type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: post.seo.schema.raw }}
+              dangerouslySetInnerHTML={{ __html: fullPost.seo.schema.raw }}
             />
           )}
         </article>
