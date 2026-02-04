@@ -1,0 +1,233 @@
+﻿/**
+ * [Section] Problems - Sticky Title Layout
+ * [Design] Left sticky title + Right scrolling cards
+ */
+
+"use client";
+
+import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
+import { useEffect, useRef } from "react";
+import { TrendingDown, Bot, MousePointerClick, Database, AlertCircle, LucideIcon } from "lucide-react";
+
+// ProblemIcon Component - Blue icon with warning badge
+interface ProblemIconProps {
+  icon: LucideIcon;
+  gradient: string;
+  className?: string;
+}
+
+function ProblemIcon({ icon: Icon, gradient, className = "" }: ProblemIconProps) {
+  return (
+    <div 
+      className={`relative w-full h-full flex items-center justify-center ${className}`}
+      style={{
+        background: gradient,
+        willChange: 'transform',
+        transform: 'translateZ(0)',
+      }}
+    >
+      {/* Blue glow overlay */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(59, 130, 246, 0.15), transparent)',
+        }}
+      />
+      
+      {/* Warning Badge - Red (Box ?곗륫 ?곷떒) */}
+      <div className="absolute top-2 right-2 md:top-4 md:right-4 lg:top-6 lg:right-6">
+        <AlertCircle 
+          className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-red-400" 
+          strokeWidth={2.5}
+          fill="rgba(248, 113, 113, 0.15)"
+        />
+      </div>
+      
+      {/* Main Icon - Blue */}
+      <Icon 
+        className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 text-blue-500" 
+        strokeWidth={1.5}
+        style={{
+          willChange: 'transform',
+          transform: 'translateZ(0)',
+        }}
+      />
+    </div>
+  );
+}
+
+const problems = [
+  {
+    number: "01",
+    title: "鍮꾪슚?⑥쟻 ?덉궛 吏묓뻾",
+    subtitle: "ROAS Stagnation",
+    description: "愿묎퀬鍮꾨? 2諛곕줈 ?섎젮??留ㅼ텧? 2諛곌? ?섏? ?딆뒿?덈떎. ?깃낵 ?쒓퀎??Marginal Utility)???뚰뙆??援ъ“ ?놁씠 ?덉궛留?利앹븸?섎뒗 寃껋? 諛?鍮좎쭊 ?낆뿉 臾?遺볤린?낅땲??",
+    icon: TrendingDown,
+    gradient: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)"
+  },
+  {
+    number: "02",
+    title: "AI 寃???쒕???怨좊┰",
+    subtitle: "Invisible in AI Search (GEO)",
+    description: "寃?됱쓽 ?⑤윭?ㅼ엫???앹꽦??AI(ChatGPT, SearchGPT)濡??대룞?덉뒿?덈떎. 湲곗〈???ㅼ썙??SEO留뚯쑝濡쒕뒗 ???댁긽 怨좉컼??吏덈Ц???듬??????놁뒿?덈떎.",
+    icon: Bot,
+    gradient: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)"
+  },
+  {
+    number: "03",
+    title: "?꾪솚???녿뒗 ?뱀궗?댄듃",
+    subtitle: "Broken Conversion Funnel",
+    description: "?좎엯??怨좉컼??援щℓ源뚯? ?댁뼱吏吏 ?딆뒿?덈떎. ?щ??곸씤 ?붿옄?몄뿉 移섏쨷???ㅻ뱷怨??꾪솚???꾪븳 UX/UI ?ㅺ퀎媛 遺?ы븯湲??뚮Ц?낅땲??",
+    icon: MousePointerClick,
+    gradient: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)"
+  },
+  {
+    number: "04",
+    title: "?곗씠??寃곗젙 ?μ븷",
+    subtitle: "Data Paralysis",
+    description: "GA4? 愿묎퀬 愿由ъ옄???섎쭖? ?곗씠?곌? ?볦씠吏留? ?뺤옉 '?ㅼ쓬 ?됰룞'??寃곗젙?섏? 紐삵빀?덈떎. ?몄궗?댄듃瑜?異붿텧?섎뒗 ?섏궗寃곗젙 ?쒖뒪?쒖씠 ?놁뒿?덈떎.",
+    icon: Database,
+    gradient: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)"
+  }
+];
+
+export function ProblemsSection() {
+  const leftRef = useScrollReveal("active", { threshold: 0.35, once: true });
+  const rightRef = useScrollReveal("active", { threshold: 0.35, once: true });
+  const mobileCardsRef = useRef<HTMLDivElement>(null);
+
+  // 紐⑤컮??移대뱶 ?ㅽ겕濡??몃━嫄?  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (window.innerWidth > 768) return; // 紐⑤컮?쇰쭔
+
+    const cards = mobileCardsRef.current?.querySelectorAll('.problem-card-mobile');
+    if (!cards) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // requestAnimationFrame?쇰줈 ?깅뒫 理쒖쟻??        requestAnimationFrame(() => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            }
+          });
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -5% 0px' }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section className="relative bg-white pt-20 pb-20 md:pt-32 md:pb-32 rounded-t-[40px] md:rounded-t-[60px] z-10" data-section="PROBLEMS">
+      <div className="max-w-7xl mx-auto px-6 md:px-6">
+        
+        {/* Grid Layout for Sticky */}
+        <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-8 md:gap-12 lg:gap-20">
+          
+          {/* Left Column: Sticky Title (紐⑤컮?쇱뿉?쒕뒗 sticky ?쒓굅) - 紐⑤컮??理쒖쟻??*/}
+          <div 
+            ref={leftRef as React.RefObject<HTMLDivElement>}
+            className="reveal-depth-left lg:sticky lg:top-36 lg:self-start lg:h-fit mb-8 md:mb-0"
+          >
+            <div className="badge-dot mb-4 md:mb-6 text-xs md:text-sm">
+              The Structural Problem
+            </div>
+            
+            <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight" style={{ lineHeight: '1.3' }}>
+              {/* 紐⑤컮?? 2以?*/}
+              <span className="md:hidden">
+                援ш? 愿묎퀬瑜??댁쁺?대룄<br/>
+                <span className="text-slate-400">?깃낵媛 ?섏? ?딅뒗 援ъ“???댁쑀</span>
+              </span>
+              {/* ?? 3以?*/}
+              <span className="hidden md:inline">
+                援ш? 愿묎퀬瑜??댁쁺?대룄<br/>
+                ?깃낵媛 ?섏? ?딅뒗<br/>
+                <span className="text-slate-400">援ъ“???댁쑀</span>
+              </span>
+            </h2>
+            
+            <p className="text-sm md:text-base lg:text-lg text-slate-600 tracking-normal" style={{ lineHeight: '1.7' }}>
+              留덉????덉궛???섎젮???⑥쑉? ?쒖옄由ш구?뚯엯?덈떎. ?닿쾬? ?⑥닚???댁쁺??臾몄젣媛 ?꾨땲?? 鍮꾩쫰?덉뒪瑜?吏?깊븯??'援ъ“'??寃고븿?낅땲??
+            </p>
+          </div>
+
+          {/* Right Column: Scrolling Problem Cards - 紐⑤컮??2x2 洹몃━??*/}
+          <div 
+            ref={(el) => {
+              if (rightRef && 'current' in rightRef) {
+                (rightRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+              }
+              if (mobileCardsRef) {
+                mobileCardsRef.current = el;
+              }
+            }}
+            className="reveal-depth-right"
+          >
+            {/* 紐⑤컮?? 2x2 洹몃━??/ ?곗뒪?ы넲: ?몃줈 由ъ뒪??*/}
+            <div className="grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-0 md:space-y-20 lg:space-y-24">
+              {problems.map((problem, index) => (
+                <div key={index} className="md:contents">
+                  {/* 紐⑤컮?? 移대뱶 ?뺥깭 */}
+                  <div 
+                    className={`md:hidden flex flex-col gap-3 problem-card-mobile ${
+                      index % 2 === 0 ? 'reveal-fade-up-mobile-left' : 'reveal-fade-up-mobile-right'
+                    }`}
+                    style={{ transitionDelay: `${index * 150}ms` }}
+                  >
+                    <div className="relative aspect-square rounded-xl overflow-hidden shadow-lg group">
+                      <ProblemIcon 
+                        icon={problem.icon}
+                        gradient={problem.gradient}
+                      />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-blue-600 font-bold mb-1 tracking-widest">{problem.number}</p>
+                      <h3 className="text-sm font-bold text-slate-900 mb-1 tracking-tight leading-tight">
+                        {problem.title}
+                      </h3>
+                      <p className="text-xs text-blue-600 font-semibold tracking-wide">{problem.subtitle}</p>
+                    </div>
+                  </div>
+
+                  {/* ?곗뒪?ы넲: 湲곗〈 ?덉씠?꾩썐 */}
+                  <div className="hidden md:block">
+                    <div className="grid grid-cols-[1fr,300px] gap-8 items-start">
+                      <div>
+                        <p className="text-sm text-blue-600 font-bold mb-3 tracking-widest">{problem.number}</p>
+                        <h3 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-3 tracking-tight leading-tight">
+                          {problem.title}
+                        </h3>
+                        <p className="text-base text-blue-600 font-semibold mb-4 tracking-wide">{problem.subtitle}</p>
+                        <p className="text-base text-slate-600 leading-relaxed">
+                          {problem.description}
+                        </p>
+                      </div>
+                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl group">
+                        <ProblemIcon 
+                          icon={problem.icon}
+                          gradient={problem.gradient}
+                        />
+                      </div>
+                    </div>
+                    
+                    {index < problems.length - 1 && (
+                      <div className="mt-20 lg:mt-24">
+                        <div className="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
