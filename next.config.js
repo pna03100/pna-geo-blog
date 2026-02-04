@@ -54,17 +54,19 @@ const nextConfig = {
   // 3. 타임아웃 방지
   staticPageGenerationTimeout: 180,
 
-  // 4. 리라이트 설정 (SEO 파일 및 WP 리소스 프록시)
+  // 4. 리라이트 설정 (WP 리소스 프록시만)
+  // ============================================
+  // [CRITICAL CHANGE] SEO 파일 제거
+  // [Frontend-Driven Architecture]
+  // - robots.txt: app/robots.ts 사용 (프론트엔드)
+  // - sitemap.xml: app/sitemap.ts 사용 (프론트엔드)
+  // - WordPress 백엔드 주소 완전 숨김 (보안 강화)
+  // ============================================
   async rewrites() {
     const WP_URL = 'https://cms.pnamarketing.co.kr';
     return {
       beforeFiles: [
-        // SEO 파일
-        { source: '/robots.txt', destination: `${WP_URL}/robots.txt` },
-        { source: '/sitemap_index.xml', destination: `${WP_URL}/sitemap_index.xml` },
-        { source: '/sitemap.xml', destination: `${WP_URL}/sitemap.xml` },
-        { source: '/:path*-sitemap.xml', destination: `${WP_URL}/:path*-sitemap.xml` },
-        // WP 리소스
+        // WP 리소스만 프록시 (이미지, 스타일 등)
         { source: '/wp-content/:path*', destination: `${WP_URL}/wp-content/:path*` },
         { source: '/wp-includes/:path*', destination: `${WP_URL}/wp-includes/:path*` },
         { source: '/wp-json/:path*', destination: `${WP_URL}/wp-json/:path*` },

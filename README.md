@@ -96,10 +96,13 @@ const post = await getContentByURI('/blog/my-post');
 ```
 
 ### ✅ SEO 최적화
+- **프론트엔드 주도형 사이트맵** (백엔드 주소 숨김)
 - Dynamic Metadata (RankMath/Yoast 통합)
 - JSON-LD Structured Data
 - Semantic HTML
 - Open Graph & Twitter Cards
+- 자동 사이트맵 생성 (`/sitemap.xml`)
+- Robots.txt 최적화
 
 ### ✅ 보안
 - XSS 방어 (HTML Sanitization)
@@ -161,6 +164,75 @@ import { MouseTextEffectSimple } from '@/components/ui/mouse-text-effect-simple'
 자세한 내용은 다음 문서를 참고하세요:
 
 - **[ARCHITECTURE.md](./docs/ARCHITECTURE.md)** - 아키텍처 상세 문서
+
+---
+
+## 🗺️ 사이트맵 & SEO 설정
+
+### 프론트엔드 주도형 사이트맵 (Headless 아키텍처)
+
+이 프로젝트는 **백엔드(WordPress) 주소를 완전히 숨긴 상태**로 프론트엔드(Next.js)에서 사이트맵을 생성합니다.
+
+#### 아키텍처 원칙
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ 🤖 Googlebot (구글봇)                                        │
+│    ↓ 크롤링 요청                                             │
+│    https://pnamarketing.co.kr/sitemap.xml                   │
+└─────────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────────┐
+│ 🎯 Next.js Frontend (프론트엔드)                             │
+│    • app/sitemap.ts → 동적 XML 생성                          │
+│    • WordPress API에서 포스트 목록 가져오기                   │
+│    • 백엔드 URL → 프론트엔드 URL 자동 치환                    │
+└─────────────────────────────────────────────────────────────┘
+                          ↑ GraphQL API 호출 (내부)
+┌─────────────────────────────────────────────────────────────┐
+│ 🔒 WordPress Backend (백엔드)                                │
+│    • cms.pnamarketing.co.kr (숨겨진 주소)                    │
+│    • Headless CMS 역할만 수행                                │
+│    • 구글봇 접근 차단 (프론트엔드만 노출)                      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+#### 핵심 로직
+
+`app/sitemap.ts`가 자동으로:
+
+1. **WordPress에서 포스트 목록 가져오기** (GraphQL API 호출)
+2. **백엔드 URL을 프론트엔드 URL로 치환**
+   - 예: `cms.pnamarketing.co.kr/insights/post` → `pnamarketing.co.kr/insights/post`
+3. **실제 수정 날짜 반영** (SEO 최적화)
+4. **1시간마다 자동 재생성** (신규 포스트 자동 반영)
+
+#### 검증 방법
+
+1. **로컬 테스트**
+   ```bash
+   npm run dev
+   # 브라우저에서 http://localhost:3000/sitemap.xml 접속
+   # → XML 코드가 나오면 성공 (HTML 아님)
+   ```
+
+2. **프로덕션 확인**
+   ```
+   https://pnamarketing.co.kr/sitemap.xml
+   ```
+   - ✅ 모든 URL이 `pnamarketing.co.kr`로 시작
+   - ✅ XML 형식 (HTML 아님)
+   - ✅ WordPress 포스트가 자동으로 포함됨
+
+3. **구글 서치 콘솔 등록**
+   - 기존 WordPress 사이트맵 삭제
+   - 새 사이트맵 등록: `https://pnamarketing.co.kr/sitemap.xml`
+
+#### 보안 이점
+
+- ✅ 백엔드 주소(`cms.pnamarketing.co.kr`) 완전 숨김
+- ✅ 구글봇이 프론트엔드만 크롤링
+- ✅ 백엔드 보안 강화 (외부 노출 차단)
 
 ---
 
