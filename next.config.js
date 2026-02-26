@@ -54,7 +54,28 @@ const nextConfig = {
   // 3. 타임아웃 방지
   staticPageGenerationTimeout: 180,
 
-  // 4. 리라이트 설정 (WP 리소스 프록시만)
+  // 4. 보안 헤더 (AG-STANDARD 2단계)
+  // ============================================
+  // [Security] HTTP 보안 헤더 설정
+  // 구글 품질 신호 강화 + OWASP 보안 기준 충족
+  // ============================================
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
+          { key: 'X-DNS-Prefetch-Control', value: 'on' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+        ],
+      },
+    ];
+  },
+
+  // 5. 리라이트 설정 (WP 리소스 프록시만)
   // ============================================
   // [CRITICAL CHANGE] SEO 파일 제거
   // [Frontend-Driven Architecture]

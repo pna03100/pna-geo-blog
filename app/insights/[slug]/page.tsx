@@ -47,7 +47,7 @@ export const dynamicParams = true; // 새 slug도 동적으로 생성 허용
 export async function generateStaticParams() {
   try {
     const posts = await getAllPosts();
-    
+
     // 모든 포스트의 slug를 반환하여 빌드 시점에 페이지 생성
     return posts.map((post) => ({
       slug: post.slug,
@@ -63,17 +63,17 @@ export async function generateStaticParams() {
 // ============================================
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  
+
   // [Fix] Find post by slug from all posts
   const allPosts = await getAllPosts();
   const matchedPost = allPosts.find(p => p.slug === slug);
-  
+
   if (!matchedPost) {
     return {
       title: '포스트를 찾을 수 없습니다',
     };
   }
-  
+
   // [Performance] Fetch full content by URI
   const post = await getContentByURI(matchedPost.uri);
 
@@ -87,8 +87,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const seoTitle = post.seo?.title || post.title || '제목 없음';
   const rawDescription = post.seo?.metaDesc || post.excerpt || '';
   const seoDescription = truncateText(stripHtmlTags(rawDescription), 160);
-  const ogImage = post.seo?.opengraphImage?.sourceUrl || 
-                  post.featuredImage?.node?.sourceUrl;
+  const ogImage = post.seo?.opengraphImage?.sourceUrl ||
+    post.featuredImage?.node?.sourceUrl;
 
   return {
     title: seoTitle,
@@ -113,10 +113,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function InsightsPostPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
   const { category } = await searchParams;
-  
+
   // [Performance] Fetch all posts first
   const allPosts = await getAllPosts();
-  
+
   // [Fix] Find post by slug (works regardless of WordPress permalink structure)
   const post = allPosts.find(p => p.slug === slug);
 
@@ -124,10 +124,10 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
   if (!post) {
     notFound();
   }
-  
+
   // [Performance] Fetch full content by URI for the matched post
   const fullPost = await getContentByURI(post.uri);
-  
+
   if (!fullPost) {
     notFound();
   }
@@ -175,6 +175,18 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
             }}
           />
 
+          {/* [GEO] BreadcrumbList Schema (AG-STANDARD 8단계) */}
+          <StructuredData
+            schema={{
+              type: 'BreadcrumbList',
+              items: [
+                { name: '홈', url: 'https://pnamarketing.co.kr' },
+                { name: '인사이트', url: 'https://pnamarketing.co.kr/insights' },
+                { name: title, url: `https://pnamarketing.co.kr/insights/${slug}` },
+              ],
+            }}
+          />
+
           {/* 2-Column Layout: Main Content + Sidebar */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Main Content (Left Column) */}
@@ -195,15 +207,15 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
                     <div className="absolute inset-0 bg-gradient-to-b from-white/75 via-white/80 to-white/85 backdrop-blur-sm" />
                   </div>
                 )}
-                
+
                 {/* Content (위로 올리기) */}
                 <div className="relative z-10">
                   {/* Categories */}
                   {categories.length > 0 && (
                     <div className="flex flex-wrap gap-2 mb-6">
                       {categories.map((category) => (
-                        <Badge 
-                          key={category.slug} 
+                        <Badge
+                          key={category.slug}
                           className="bg-blue-50 text-blue-600 hover:bg-blue-100 border-0"
                         >
                           {category.name}
@@ -256,7 +268,7 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
 
               {/* Article Content */}
               <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-slate-200">
-                <section 
+                <section
                   className="prose prose-slate prose-lg max-w-none
                     prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-slate-900
                     prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-3 prose-h2:border-b prose-h2:border-slate-200

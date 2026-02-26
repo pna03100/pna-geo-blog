@@ -25,10 +25,10 @@ const CTASection = dynamic(() => import('@/components/landing/CTASection').then(
 // ============================================
 function generateJsonLd() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://pnamarketing.co.kr';
-  
+
   // [Security] env.ts에서 필수 검증 - env 없으면 빌드 실패
   const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL!; // Non-null assertion (env.ts 검증됨)
-  
+
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -58,6 +58,9 @@ function generateJsonLd() {
           "addressRegion": "고양시",
           "addressCountry": "KR"
         },
+        "sameAs": [
+          "https://www.threads.com/@since_1985_love"
+        ],
       },
       {
         "@type": "WebSite",
@@ -128,7 +131,7 @@ export const metadata: Metadata = {
 // ============================================
 export default async function HomePage() {
   const jsonLd = generateJsonLd();
-  
+
   // Fetch latest posts from WordPress
   let posts = await getAllPosts();
 
@@ -152,7 +155,7 @@ export default async function HomePage() {
 
         {/* Content Container - Overlays hero */}
         <div className="relative -mt-[100vh]">
-          
+
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
           {/* SECTION 2: PROBLEMS - Structural Issues (Sticky Title)        */}
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
@@ -172,30 +175,30 @@ export default async function HomePage() {
           {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
           <ServicesAlternate />
 
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        {/* SECTION 4: PHILOSOPHY - How We Work (Simple List)             */}
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <PhilosophyList />
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          {/* SECTION 4: PHILOSOPHY - How We Work (Simple List)             */}
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          <PhilosophyList />
 
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        {/* SECTION 5: CEO - Expert Leadership                            */}
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <CEOSection />
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          {/* SECTION 5: CEO - Expert Leadership                            */}
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          <CEOSection />
 
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        {/* SECTION 6: INSIGHTS - Thought Leadership                      */}
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <InsightsSection posts={posts} />
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          {/* SECTION 6: INSIGHTS - Thought Leadership                      */}
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          <InsightsSection posts={posts} />
 
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        {/* SECTION 7: FAQ - Objection Handling (Minimalist Accordion)    */}
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <FAQSection />
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          {/* SECTION 7: FAQ - Objection Handling (Minimalist Accordion)    */}
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          <FAQSection />
 
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        {/* SECTION 8: CONTACT - Conversion (Split Panel)                 */}
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <CTASection />
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          {/* SECTION 8: CONTACT - Conversion (Split Panel)                 */}
+          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          <CTASection />
         </div>
       </main>
     </>
