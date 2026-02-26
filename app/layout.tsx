@@ -11,6 +11,7 @@ import './globals.css';
 import { NavbarNew } from '@/components/ui/navbar-new';
 import { FooterSection } from '@/components/landing/FooterSection';
 import dynamicImport from 'next/dynamic';
+import Script from 'next/script';
 
 // Performance: FloatingActions를 lazy load (초기 번들 크기 감소)
 const FloatingActions = dynamicImport(
@@ -19,8 +20,8 @@ const FloatingActions = dynamicImport(
 );
 
 // 메인 폰트: Manrope (영문/숫자)
-const manrope = Manrope({ 
-  subsets: ['latin'], 
+const manrope = Manrope({
+  subsets: ['latin'],
   variable: '--font-manrope',
   display: 'swap',
   preload: true,
@@ -40,21 +41,21 @@ const cormorant = Cormorant_Garamond({
 // ============================================
 export const metadata: Metadata = {
   metadataBase: new URL('https://pnamarketing.co.kr'), // [중요] 기본 도메인 설정
-  
+
   // [GEO 핵심] Title Template 설정
   title: {
     template: '%s | 피앤에이컴퍼니',
     default: '구글 광고 대행사 피앤에이컴퍼니 | 데이터 & GEO 마케팅',
   },
-  
+
   description: '데이터 기반 성과 마케팅 전문 - Google Ads, SEO, GEO 최적화로 ROI 200% 달성',
-  
+
   // [GEO 핵심] Canonical URL 설정
   // 모든 페이지가 자신의 주소를 'https://pnamarketing.co.kr/...'로 가리키게 함
   alternates: {
     canonical: './',
   },
-  
+
   // [GEO] 검색 엔진 크롤링 허용
   robots: {
     index: true,
@@ -67,7 +68,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  
+
   // [GEO] Open Graph (소셜 미디어 공유)
   openGraph: {
     title: '구글 광고 대행사 피앤에이컴퍼니 | 데이터 & GEO 마케팅',
@@ -85,14 +86,14 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
+
   // [GEO] Twitter Card
   twitter: {
     card: 'summary_large_image',
     title: '구글 광고 대행사 피앤에이컴퍼니',
     description: '데이터 기반 성과 마케팅 전문',
   },
-  
+
   // [GEO] 검증 태그 (Search Console)
   verification: {
     google: 'TMMrqXsSdFTx9VvORpwrCeJziGW-QQC4ukms0YfrNWo',
@@ -115,20 +116,40 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         {/* Pretendard 한글 폰트 - Preload 최적화 */}
-        <link 
-          rel="preload" 
-          as="style" 
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" 
+        <link
+          rel="preload"
+          as="style"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
         />
-        <link 
-          rel="stylesheet" 
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" 
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
           crossOrigin="anonymous"
         />
+
+        {/* [AG-STANDARD 10단계] GA4 Tracking (환경변수로 제어) */}
+        {process.env.NEXT_PUBLIC_GA4_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA4_ID}', {
+                  page_path: window.location.pathname,
+                });
+              `}
+            </Script>
+          </>
+        )}
       </head>
       <body className={`${manrope.variable} ${cormorant.variable} font-sans text-slate-950 bg-main`}>
         {/* [PNA] Pure White Background */}
-        
+
         <NavbarNew />
         {children}
         <FloatingActions />

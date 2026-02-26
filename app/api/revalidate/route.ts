@@ -5,6 +5,7 @@
 // @ts-nocheck
 import { revalidateTag, revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
+import { notifyGoogleIndexing } from '@/lib/google-indexing';
 
 export async function POST(request: NextRequest) {
   try {
@@ -31,8 +32,16 @@ export async function POST(request: NextRequest) {
       if (process.env.NODE_ENV === 'development') {
         console.log(`✅ 경로 재검증 완료: ${path}`);
       }
+
+      // [AG-STANDARD 10단계] Google Indexing API 즉시 호출
+      const fullUrl = `https://pnamarketing.co.kr${path}`;
+      const indexResult = await notifyGoogleIndexing(fullUrl);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('🔍 [Indexing API]', indexResult.success ? '✅ 성공' : '⚠️ 건너뜀', fullUrl);
+      }
+
       // @ts-ignore
-      return NextResponse.json({ revalidated: true, path });
+      return NextResponse.json({ revalidated: true, path, indexed: indexResult.success });
     }
 
     // 전체 WordPress 캐시 재검증

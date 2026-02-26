@@ -19,6 +19,7 @@ import { sanitizeWordPressHTML, stripHtmlTags, truncateText } from '@/lib/saniti
 import { ReadingProgress } from '@/components/insights/ReadingProgress';
 import { PopularPosts } from '@/components/insights/PopularPosts';
 import { CTACard } from '@/components/insights/CTACard';
+import { ArticleTLDR } from '@/components/insights/ArticleTLDR';
 import { Calendar, Clock, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 
 // ============================================
@@ -146,6 +147,9 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
   }) : '';
   const isoDate = fullPost.date || new Date().toISOString();
 
+  // [GEO] TL;DR 요약 생성 (excerpt 기반)
+  const tldrSummary = stripHtmlTags(fullPost.excerpt || '').trim();
+
   // Calculate reading time (rough estimate: 200 words per minute in Korean)
   const wordCount = content.replace(/<[^>]*>/g, '').length;
   const readingTime = Math.ceil(wordCount / 400); // Approximate for Korean
@@ -265,6 +269,9 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
                   </div>
                 </div>
               </header>
+
+              {/* [GEO] TL;DR 요약 블록 (AG-STANDARD 7단계) */}
+              <ArticleTLDR summary={tldrSummary} />
 
               {/* Article Content */}
               <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-slate-200">

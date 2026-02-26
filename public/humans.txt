@@ -1,0 +1,15 @@
+/* TEAM */
+Company: 피앤에이컴퍼니 (PNA Company)
+Contact: info [at] pnamarketing.co.kr
+Location: 고양시 일산동구, 대한민국
+
+/* TECHNOLOGY */
+Framework: Next.js 14 (App Router)
+CMS: WordPress (Headless, WPGraphQL)
+Hosting: Vercel
+Language: TypeScript, React 18
+
+/* STANDARDS */
+SEO: AG-STANDARD 14-Step Compliance
+GEO: AI Answer Optimization
+Schema: Organization, Article, BreadcrumbList, FAQPage

@@ -1,0 +1,714 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Headless WordPress 구축 가이드</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3047fac1-64dc-80d2-b19e-ca3af2474f20" class="page sans"><header><h1 class="page-title" dir="auto">Headless WordPress 구축 가이드</h1><p class="page-description" dir="auto"></p><table class="properties"><tbody></tbody></table></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-808a-85dd-d7acea1700c4" class="">[1단계] 사이트 정체성 정의</h2></div><div style="display:contents" dir="auto"><p id="3047fac1-64dc-80e6-a835-c42aa92da8d1" class=""><strong>목표:</strong> 사이트의 정체성·전문 분야·AI 인식 기준을 최초로 고정</p></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-80e7-b571-e4ff78702d31" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8087-b15d-f84f0b1a579c"><th id="&gt;ijg" class="simple-table-header-color simple-table-header">산출물</th><th id="bRV`" class="simple-table-header-color simple-table-header">기술 역할</th><th id="a^Vs" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id="^;~i" class="simple-table-header-color simple-table-header">필요성</th><th id="cjS`" class="simple-table-header-color simple-table-header">SEO · GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8093-958a-db176222dbe4"><td id="&gt;ijg" class="">site-config.ts</td><td id="bRV`" class="">사이트 전역에서 참조하는 단일 설정 소스</td><td id="a^Vs" class="">□ 공식 SITE_URL이 확정되었는가?□ 브랜드 설명을 한 문장으로 정의했는가?□ 핵심 주제/엔티티가 확정되었는가?</td><td id="^;~i" class="">기준이 없으면 페이지·스키마·AI 요약이 모두 달라짐</td><td id="cjS`" class="">사이트를 하나의 <strong>주제 엔티티</strong>로 인식</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80c0-9c9a-dc04ded2825d"><td id="&gt;ijg" class="">접속 정책</td><td id="bRV`" class="">리다이렉트·캐노니컬 기준 설정</td><td id="a^Vs" class="">□ www / non-www 중 하나로 확정했는가?□ https 강제를 적용했는가?</td><td id="^;~i" class="">주소 분산 시 평가 분산</td><td id="cjS`" class="">도메인 권위 보호</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-809e-a9ac-e35f5f3fb95b"><td id="&gt;ijg" class="">GEO 운영 모드</td><td id="bRV`" class="">지역 전략 변수 제공</td><td id="a^Vs" class="">□ 지역 기반인가?□ 전국 단위 서비스인가?□ 기준 지역이 명확한가?</td><td id="^;~i" class="">서비스 포지션 혼선 방지</td><td id="cjS`" class="">지역/전국 AI 판단 기준</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80b6-a860-eada2a4e79d1"><td id="&gt;ijg" class="">브랜드 에셋</td><td id="bRV`" class="">전역 시각 자산 기준</td><td id="a^Vs" class="">□ 공식 로고가 확정되었는가?□ 브랜드 컬러가 고정되었는가?□ 기본 OG 이미지가 있는가?</td><td id="^;~i" class="">시각 기준 부재 시 신뢰 하락</td><td id="cjS`" class="">브랜드 신뢰 신호</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-80b0-9df2-df1c4e1420fa"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-8019-8a33-f9ffd7d8230e" class="">[2단계] 검색 로봇 접근 구조</h2></div><div style="display:contents" dir="auto"><p id="3047fac1-64dc-80ff-a9fe-ffa45e027bfa" class=""><strong>목표:</strong> 검색 로봇이 사이트를 정확히 읽고 렌더링하도록 보장</p></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-809a-ad9e-fede1431c993" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-805d-85b9-d53f4e9abd84"><th id="CNS}" class="simple-table-header-color simple-table-header">산출물</th><th id="w}wN" class="simple-table-header-color simple-table-header">기술 역할</th><th id="T[HK" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id="TLC[" class="simple-table-header-color simple-table-header">필요성</th><th id="ORr@" class="simple-table-header-color simple-table-header">SEO · GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80f2-b248-f5370bedbdba"><td id="CNS}" class="">robots.ts</td><td id="w}wN" class="">크롤러 접근 경로 제어</td><td id="T[HK" class="">□ 공개/비공개 경로가 구분되었는가?□ 렌더링 리소스를 차단하지 않았는가?</td><td id="TLC[" class="">잘못 차단되면 색인 실패</td><td id="ORr@" class="">렌더링 오류 방지</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8069-8f3e-c27b4319d3de"><td id="CNS}" class="">sitemap.ts</td><td id="w}wN" class="">URL 구조 공식 제공</td><td id="T[HK" class="">□ 색인 대상 페이지가 모두 포함되었는가?□ 자동 갱신 구조인가?</td><td id="TLC[" class="">페이지 발견 지연 방지</td><td id="ORr@" class="">빠른 색인</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8081-99ba-c1bb1691751e"><td id="CNS}" class=""><strong>보안 헤더</strong></td><td id="w}wN" class="">HTTP 보안 신호</td><td id="T[HK" class="">□ CSP / X-Frame / HSTS가 적용되었는가?</td><td id="TLC[" class="">기본 신뢰</td><td id="ORr@" class="">품질 신호</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-806e-ba00-ebe734e1c51f"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-808f-a39f-e7f4b9952c7e" class="">[3단계] 콘텐츠 공급 경로</h2></div><div style="display:contents" dir="auto"><p id="3047fac1-64dc-8094-a8b5-c2344f88abd8" class=""><strong>목표:</strong> 워드프레스 데이터가 <strong>Next.js에 실제로 출력되는 상태를 가장 먼저 확보</strong></p></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-80ad-8fcc-cdcf90368af5" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80d8-b68f-e4e811b4c7cc"><th id="te[T" class="simple-table-header-color simple-table-header">산출물</th><th id="CpLx" class="simple-table-header-color simple-table-header">기술 역할</th><th id="Avlh" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id="XJfN" class="simple-table-header-color simple-table-header">필요성</th><th id="CGdv" class="simple-table-header-color simple-table-header">SEO · GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80cc-b0ba-da1241e1d2f3"><td id="te[T" class="">wordpress.ts</td><td id="CpLx" class="">콘텐츠 데이터 API 연결</td><td id="Avlh" class="">□ 데이터가 실제 화면에 출력되는가?□ 디자인 없이 확인 가능한가?</td><td id="XJfN" class="">모든 후속 작업의 기준</td><td id="CGdv" class="">색인 대상 확보</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8012-82ac-caa94d6a2685"><td id="te[T" class="">sanitize.ts</td><td id="CpLx" class="">HTML 정제 필터</td><td id="Avlh" class="">□ 허용 HTML 기준이 정해졌는가?</td><td id="XJfN" class="">마크업 안정성</td><td id="CGdv" class="">클린 SEO</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80b8-8247-e90ac2c2ad12"><td id="te[T" class="">next.config.mjs</td><td id="CpLx" class="">외부 이미지 리소스 허용</td><td id="Avlh" class="">□ 이미지 서버 도메인이 등록되었는가?</td><td id="XJfN" class="">이미지 미노출 방지</td><td id="CGdv" class="">이미지 SEO</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-808e-aba5-f31ea3388f39"><td id="te[T" class="">ISR 전략</td><td id="CpLx" class="">캐시·재검증 제어</td><td id="Avlh" class="">□ 갱신 주기가 확정되었는가?</td><td id="XJfN" class="">최신성·속도 균형</td><td id="CGdv" class="">Core Web Vitals</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-802c-9ba5-d8aa4d17cc1f"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-8056-9b5a-e525c8edee52" class="">[4단계] 검색어 · 질문 설계</h2></div><div style="display:contents" dir="auto"><p id="3047fac1-64dc-802f-8d49-fc953d554e67" class=""><strong>목표:</strong> “검색하면 다 걸리는” 쿼리 구조를 사전에 장악</p></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-80f5-991b-f015d4faba45" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80bd-87d6-cda6d472c216"><th id="eCmU" class="simple-table-header-color simple-table-header">산출물</th><th id="eqzS" class="simple-table-header-color simple-table-header">기술 역할</th><th id="^jfZ" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id="YJ^]" class="simple-table-header-color simple-table-header">필요성</th><th id="EoFn" class="simple-table-header-color simple-table-header">SEO · GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80f9-8321-c52c85ac3210"><td id="eCmU" class="">키워드 맵</td><td id="eqzS" class="">검색 수요 구조 정의</td><td id="^jfZ" class="">□ Primary 키워드가 확정되었는가?□ Secondary/Long-tail이 분류되었는가?</td><td id="YJ^]" class="">노출 분산 방지</td><td id="EoFn" class="">쿼리 장악</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8066-837e-ee9ea43f944d"><td id="eCmU" class="">질문형 쿼리</td><td id="eqzS" class="">AI 질문 대응 설계</td><td id="^jfZ" class="">□ ‘~하는 법 / 비용 / 비교 / 추천’이 포함되었는가?</td><td id="YJ^]" class="">AI 질문 대응</td><td id="EoFn" class="">GEO 핵심</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-804d-b793-fdd6c1370846"><td id="eCmU" class="">페이지 매핑표</td><td id="eqzS" class="">쿼리-페이지 1:1 연결</td><td id="^jfZ" class="">□ 한 쿼리당 한 페이지 원칙</td><td id="YJ^]" class="">카니발라이징 방지</td><td id="EoFn" class="">평가 집중</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-808e-ae46-c6c11b58f3c5"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-8093-a524-f127972acaa9" class="">[5단계] 구조적 디자인 시스템</h2></div><div style="display:contents" dir="auto"><p id="3047fac1-64dc-80b7-9854-eb73d0b63ba3" class=""><strong>목표:</strong> 디자인이 바뀌어도 문서 의미 구조는 유지</p></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-80d2-aa50-eafd8dcc57b5" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80bc-8809-c30a34da3956"><th id="m=M[" class="simple-table-header-color simple-table-header">산출물</th><th id="M&lt;oW" class="simple-table-header-color simple-table-header">기술 역할</th><th id="i}pA" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id="QQ}s" class="simple-table-header-color simple-table-header">필요성</th><th id="aYU^" class="simple-table-header-color simple-table-header">SEO · GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8011-9680-e386016b4e47"><td id="m=M[" class="">Tailwind 설정</td><td id="M&lt;oW" class="">전역 스타일 변수화</td><td id="i}pA" class="">□ 브랜드 컬러가 변수로 고정되었는가?</td><td id="QQ}s" class="">전체 일관성 유지</td><td id="aYU^" class="">시각 신뢰</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8052-aa55-c437e7527252"><td id="m=M[" class="">Global CSS</td><td id="M&lt;oW" class="">타이포·위계 규격화</td><td id="i}pA" class="">□ H1~H4 위계가 고정되었는가?□ 공통 규칙인가?</td><td id="QQ}s" class="">구조 혼선 방지</td><td id="aYU^" class="">시맨틱 SEO</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8088-a392-ede15bf8c6a0"><td id="m=M[" class="">UI 컴포넌트</td><td id="M&lt;oW" class="">반복 UI 표준화</td><td id="i}pA" class="">□ 재사용 UI가 부품화되었는가?</td><td id="QQ}s" class="">패턴 불일치 방지</td><td id="aYU^" class="">AI 패턴 인식</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8011-8df7-db4095c6af29"><td id="m=M[" class="">Error UI</td><td id="M&lt;oW" class="">오류 페이지 구조</td><td id="i}pA" class="">□ 404/500 안내와 이동 경로가 있는가?</td><td id="QQ}s" class="">오류도 품질 평가 대상</td><td id="aYU^" class="">부정 신호 차단</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-80cc-9bd4-eef04f9baca5"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-80f8-978f-e84b61eadd03" class="">[6단계] 실제 디자인 제작: 비주얼 디자인 작업</h2></div><div style="display:contents" dir="auto"><p id="3047fac1-64dc-8012-b165-f7804a51dc78" class=""><strong>목표:</strong> 실제 디자인 산출물을 만들되 SEO·GEO 구조를 훼손하지 않음</p></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-80e8-87aa-c43f964764fc" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-809e-b86a-d350b51cde25"><th id="GV&lt;g" class="simple-table-header-color simple-table-header">산출물</th><th id="LCP_" class="simple-table-header-color simple-table-header">기술 역할</th><th id="&lt;l@d" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id="UG{B" class="simple-table-header-color simple-table-header">필요성</th><th id="M?cd" class="simple-table-header-color simple-table-header">SEO · GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8079-9668-dcb01ee3e997"><td id="GV&lt;g" class="">Figma 컴포넌트 키트</td><td id="LCP_" class="">실제 UI 제작 기반</td><td id="&lt;l@d" class="">□ 섹션/카드/리스트가 디자인되었는가?</td><td id="UG{B" class="">구현 속도</td><td id="M?cd" class="">일관성</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8034-b2e9-d71b7da8d214"><td id="GV&lt;g" class="">페이지 컴프</td><td id="LCP_" class="">실제 화면 디자인</td><td id="&lt;l@d" class="">□ H1/H2 위계 유지□ TL;DR 확보</td><td id="UG{B" class="">디자인 완성</td><td id="M?cd" class="">AI 발췌</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8002-b9e5-cdc75a99edc3"><td id="GV&lt;g" class="">비주얼 시스템</td><td id="LCP_" class="">이미지/아이콘 톤</td><td id="&lt;l@d" class="">□ OG/썸네일 방향 고정</td><td id="UG{B" class="">브랜드</td><td id="M?cd" class="">CTR</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80a0-9e0c-d0db7ad2a967"><td id="GV&lt;g" class="">모션 가이드</td><td id="LCP_" class="">성능 제어</td><td id="&lt;l@d" class="">□ LCP/CLS 악영향 없음</td><td id="UG{B" class="">성능</td><td id="M?cd" class="">랭킹</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80a4-beb4-e33995682241"><td id="GV&lt;g" class="">반응형 규격</td><td id="LCP_" class="">디바이스 대응</td><td id="&lt;l@d" class="">□ 모바일 구조 유지</td><td id="UG{B" class="">UX</td><td id="M?cd" class="">신호</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-8035-810f-e3af15c3cd36"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-8055-aa0b-c9e946a61d22" class="">[7단계] AI 답변 · GEO 인용 최적화</h2></div><div style="display:contents" dir="auto"><p id="3047fac1-64dc-8094-825e-f719182df02d" class=""><strong>목표:</strong> AI가 <strong>직접 인용 가능한 구조</strong> 완성</p></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-8099-a97d-fc26162ec8c7" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80da-ad74-ff4c27cb5e81"><th id="_bg{" class="simple-table-header-color simple-table-header">산출물</th><th id="dFkU" class="simple-table-header-color simple-table-header">기술 역할</th><th id="qk|I" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id="~{KQ" class="simple-table-header-color simple-table-header">필요성</th><th id="TlIz" class="simple-table-header-color simple-table-header">SEO · GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8030-8565-f95c4928204c"><td id="_bg{" class="">Answer Block</td><td id="dFkU" class="">질문 즉답 문단</td><td id="qk|I" class="">□ 문단 첫 줄이 답변인가?□ <strong>Article/FAQ 스키마와 의미적으로 연결되는가?</strong></td><td id="~{KQ" class="">AI 발췌</td><td id="TlIz" class="">GEO 핵심</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-806b-9b41-f0b8909d7d6a"><td id="_bg{" class="">TL;DR 컴포넌트</td><td id="dFkU" class="">상단 요약</td><td id="qk|I" class="">□ 3~5줄 요약</td><td id="~{KQ" class="">AI 요약</td><td id="TlIz" class="">인용률</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8070-ab8b-feb54ff3f3ca"><td id="_bg{" class="">정의형 문단</td><td id="dFkU" class="">개념 고정</td><td id="qk|I" class="">□ “~이다” 구조</td><td id="~{KQ" class="">명확성</td><td id="TlIz" class="">엔티티</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80ab-8793-fc0e24a4b9de"><td id="_bg{" class="">비교·단계 표</td><td id="dFkU" class="">요약 구조</td><td id="qk|I" class="">□ 표/리스트</td><td id="~{KQ" class="">스캔</td><td id="TlIz" class="">AI</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80c2-abfb-ec84753ad38a"><td id="_bg{" class="">시맨틱 내부 링크</td><td id="dFkU" class="">의미 연결</td><td id="qk|I" class="">□ 자동 연결</td><td id="~{KQ" class="">문맥</td><td id="TlIz" class="">GEO</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-8074-97bf-e7123a1daa92"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-8069-a2c5-c91a37d16dc5" class="">[8단계] 엔티티 권위 · AI 연결 강화</h2></div><div style="display:contents" dir="auto"><p id="3047fac1-64dc-805f-8629-d851252e456b" class=""><strong>목표:</strong> AI가 <strong>공식 출처로 인식</strong></p></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-8026-912b-d409211e005f" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80fa-bdbc-c132c9e0dbd0"><th id="GkQS" class="simple-table-header-color simple-table-header">산출물</th><th id="C_UB" class="simple-table-header-color simple-table-header">기술 역할</th><th id="&gt;&gt;TF" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id="|ICe" class="simple-table-header-color simple-table-header">필요성</th><th id="kly^" class="simple-table-header-color simple-table-header">SEO · GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-802a-833c-c783c30e9bb8"><td id="GkQS" class="">Organization</td><td id="C_UB" class="">조직 엔티티</td><td id="&gt;&gt;TF" class="">□ 공식 정보 확정</td><td id="|ICe" class="">혼선 방지</td><td id="kly^" class="">고정</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8013-bc38-ec4787f903f6"><td id="GkQS" class="">SameAs</td><td id="C_UB" class="">외부 연결</td><td id="&gt;&gt;TF" class="">□ SNS/프로필 연결</td><td id="|ICe" class="">AI 신뢰</td><td id="kly^" class="">Authority</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80d6-8595-d4bb012c8101"><td id="GkQS" class="">Topic Cluster</td><td id="C_UB" class="">주제군</td><td id="&gt;&gt;TF" class="">□ 메인–서브 명확</td><td id="|ICe" class="">깊이</td><td id="kly^" class="">권위</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80d8-bc6d-c46bc29cff0c"><td id="GkQS" class="">내부 링크 규칙</td><td id="C_UB" class="">네트워크</td><td id="&gt;&gt;TF" class="">□ 상호 연결</td><td id="|ICe" class="">고립 방지</td><td id="kly^" class="">문맥</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-80c7-b61d-f9f7b7ae006a"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-8015-ab54-c7c719a79773" class="">[9단계] 페이지 조립: 신뢰 신호 배치</h2></div><div style="display:contents" dir="auto"><p id="3047fac1-64dc-806e-8c8f-f3090c4b1cd0" class=""><strong>목표:</strong> 사용자·검색·AI 신뢰 확보</p></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-8027-ad6a-d7e2e04df746" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80ff-a2fa-d0f07f0e1ef3"><th id="IfqH" class="simple-table-header-color simple-table-header">산출물</th><th id="L^Bu" class="simple-table-header-color simple-table-header">기술 역할</th><th id="TP}I" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id="DtYZ" class="simple-table-header-color simple-table-header">필요성</th><th id="~MOS" class="simple-table-header-color simple-table-header">SEO · GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-800a-8774-d10308377c6d"><td id="IfqH" class="">홈 페이지</td><td id="L^Bu" class="">핵심 전달</td><td id="TP}I" class="">□ 가치·CTA 명확</td><td id="DtYZ" class="">이탈 방지</td><td id="~MOS" class="">평가</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80f9-b9e7-e7e196d2dc03"><td id="IfqH" class="">Author</td><td id="L^Bu" class="">작성자</td><td id="TP}I" class="">□ 실명·경력</td><td id="DtYZ" class="">전문성</td><td id="~MOS" class="">E-E-A-T</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8032-beb4-e7d179f64e44"><td id="IfqH" class="">404 / 500</td><td id="L^Bu" class="">오류 대응</td><td id="TP}I" class="">□ 안내·링크</td><td id="DtYZ" class="">UX</td><td id="~MOS" class="">품질</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80ed-9eaa-e9787abec75c"><td id="IfqH" class="">내부 링크</td><td id="L^Bu" class="">연결 로직</td><td id="TP}I" class="">□ 기준 존재</td><td id="DtYZ" class="">고립 방지</td><td id="~MOS" class="">의미</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8030-89ba-fbf92cd61fc6"><td id="IfqH" class="">법적 페이지</td><td id="L^Bu" class="">고지</td><td id="TP}I" class="">□ 필수 완료</td><td id="DtYZ" class="">신뢰</td><td id="~MOS" class="">비즈니스</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-808f-acd4-d62660f86ab1"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-80ab-a10b-cd38a688aa84" class="">[10단계] 운영 설정: 노출 가속 · 보호</h2></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-80a5-949d-e0a4ef47a495" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-801c-a74c-d750beedd3ea"><th id="DcO[" class="simple-table-header-color simple-table-header">산출물</th><th id="pmm:" class="simple-table-header-color simple-table-header">기술 역할</th><th id="E@&lt;D" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id=";Ql:" class="simple-table-header-color simple-table-header">필요성</th><th id="s&lt;~d" class="simple-table-header-color simple-table-header">SEO · GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80cc-baa7-f9d859a09817"><td id="DcO[" class="">Google Indexing API</td><td id="pmm:" class="">즉시 색인</td><td id="E@&lt;D" class="">□ 1분 내 성공</td><td id=";Ql:" class="">가속</td><td id="s&lt;~d" class="">GEO</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80e0-b031-fd387ab53d1c"><td id="DcO[" class="">/feed</td><td id="pmm:" class="">RSS</td><td id="E@&lt;D" class="">□ 자동 갱신</td><td id=";Ql:" class="">신선도</td><td id="s&lt;~d" class="">Fresh</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80a0-98b9-d09fd23824f3"><td id="DcO[" class="">humans.txt</td><td id="pmm:" class="">운영 주체</td><td id="E@&lt;D" class="">□ 명확</td><td id=";Ql:" class="">투명성</td><td id="s&lt;~d" class="">신뢰</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8023-934d-c0def4854bc0"><td id="DcO[" class="">GA4</td><td id="pmm:" class="">추적</td><td id="E@&lt;D" class="">□ 전환 정의</td><td id=";Ql:" class="">ROI</td><td id="s&lt;~d" class="">SEO</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-809b-97dc-da780d717439"><td id="DcO[" class="">OG</td><td id="pmm:" class="">공유 메타</td><td id="E@&lt;D" class="">□ 정상</td><td id=";Ql:" class="">CTR</td><td id="s&lt;~d" class="">노출</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8031-99e2-e3e9284fc712"><td id="DcO[" class="">GSC / Naver</td><td id="pmm:" class="">인증</td><td id="E@&lt;D" class="">□ 완료</td><td id=";Ql:" class="">색인</td><td id="s&lt;~d" class="">등록</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-803f-885a-f324e3588732"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-8054-beb8-cba69cdece58" class="">[11단계] 성능 · 차세대 기술 최적화</h2></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-804a-a741-fdc2136783ee" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8076-8035-eca848b4a9e0"><th id="}Mw]" class="simple-table-header-color simple-table-header">산출물</th><th id="PExb" class="simple-table-header-color simple-table-header">기술 역할</th><th id="D_t}" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id="uzYk" class="simple-table-header-color simple-table-header">필요성</th><th id="Q&lt;vU" class="simple-table-header-color simple-table-header">SEO · GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80ba-9b32-e3b766699bdc"><td id="}Mw]" class="">AVIF</td><td id="PExb" class="">이미지</td><td id="D_t}" class="">□ AVIF 우선</td><td id="uzYk" class="">용량</td><td id="Q&lt;vU" class="">랭킹</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80f0-bd61-d1957721ab40"><td id="}Mw]" class="">Image CDN</td><td id="PExb" class="">캐시</td><td id="D_t}" class="">□ 지역 적용</td><td id="uzYk" class="">LCP</td><td id="Q&lt;vU" class="">UX</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8037-a442-f96775883b2e"><td id="}Mw]" class="">렌더링 전략</td><td id="PExb" class="">SSR/ISR</td><td id="D_t}" class="">□ CWV 통과</td><td id="uzYk" class="">신뢰</td><td id="Q&lt;vU" class="">SEO</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-8061-9308-f7e9443c7665"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-8086-a1b1-c8f6271d7402" class="">[12단계] 최종 검증: 출시 판단</h2></div><div style="display:contents" dir="auto"><p id="3047fac1-64dc-80e8-b68a-c8cbb5167f83" class=""><strong>목표:</strong> 기술·검색·AI 전 항목 합격</p></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-8014-9f69-f0f6889b0145" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8069-a861-c7a437d4e85a"><th id="lhqs" class="simple-table-header-color simple-table-header">산출물</th><th id="d:WM" class="simple-table-header-color simple-table-header">기술 역할</th><th id="^gS[" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id="x=Lb" class="simple-table-header-color simple-table-header">필요성</th><th id="|ksB" class="simple-table-header-color simple-table-header">SEO · GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80a7-a82f-c896fa460acb"><td id="lhqs" class="">Build</td><td id="d:WM" class="">빌드</td><td id="^gS[" class="">□ 에러 0건</td><td id="x=Lb" class="">안정성</td><td id="|ksB" class="">신뢰</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80c0-bf0c-c12d5df9e509"><td id="lhqs" class="">스키마</td><td id="d:WM" class="">구조</td><td id="^gS[" class="">□ 오류 0건</td><td id="x=Lb" class="">AI 오해 방지</td><td id="|ksB" class="">인용</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8016-bc7f-e94246748a4c"><td id="lhqs" class="">성능</td><td id="d:WM" class="">CWV</td><td id="^gS[" class="">□ 기준 충족</td><td id="x=Lb" class="">UX</td><td id="|ksB" class="">랭킹</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-80e1-86b4-e7b2e494e214"><td id="lhqs" class=""><strong>HTTP 상태</strong></td><td id="d:WM" class="">응답 무결성</td><td id="^gS[" class="">□ 200/404/500 상태 코드가 실제로 일치하는가?</td><td id="x=Lb" class="">색인 안정성</td><td id="|ksB" class="">품질</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-802a-9d5b-c403ec0352e3"><td id="lhqs" class="">색인</td><td id="d:WM" class="">노출</td><td id="^gS[" class="">□ 실제 검색 노출</td><td id="x=Lb" class="">성공</td><td id="|ksB" class="">완료</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-8043-8f8c-c953922936ab"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-8009-88b5-c1abeb6ddaac" class="">[13단계] 검색 행태 피드백 루프</h2></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-806c-8b9b-d9967c81d9b1" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-808b-a9b9-fc9eb3430836"><th id="{v}:" class="simple-table-header-color simple-table-header">산출물</th><th id="SshD" class="simple-table-header-color simple-table-header">기술 역할</th><th id="VEji" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id="HghM" class="simple-table-header-color simple-table-header">필요성</th><th id="@b&lt;x" class="simple-table-header-color simple-table-header">SEO · GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8027-8e8a-ee569f36250b"><td id="{v}:" class="">GSC 쿼리</td><td id="SshD" class="">분석</td><td id="VEji" class="">□ 의도 키워드 노출</td><td id="HghM" class="">착시 제거</td><td id="@b&lt;x" class="">유지</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-804b-9b16-f937b1c397d2"><td id="{v}:" class="">재매핑</td><td id="SshD" class="">구조 보정</td><td id="VEji" class="">□ 카니발 없음</td><td id="HghM" class="">집중</td><td id="@b&lt;x" class="">랭킹</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8098-8167-d8ed33d07e59"><td id="{v}:" class="">제목/Answer</td><td id="SshD" class="">수정</td><td id="VEji" class="">□ CTR·인용 개선</td><td id="HghM" class="">조정</td><td id="@b&lt;x" class="">점유</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-8014-a3b9-ea8026613411"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-80c7-bd5c-f3ab0929a271" class="">[14단계] AI 응답 모니터링 · 점유율 관리</h2></div><div style="display:contents" dir="ltr"><table id="3047fac1-64dc-80db-9ecd-fa6ffa1a3bd2" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8076-b583-f6168a10d239"><th id="MNfX" class="simple-table-header-color simple-table-header">산출물</th><th id="hKc^" class="simple-table-header-color simple-table-header">기술 역할</th><th id="uRJ^" class="simple-table-header-color simple-table-header">확인 · 결정사항</th><th id="{Zpu" class="simple-table-header-color simple-table-header">필요성</th><th id="=E[v" class="simple-table-header-color simple-table-header">GEO 필요성</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8024-a866-c2175b0cc785"><td id="MNfX" class="">AI 질의</td><td id="hKc^" class="">테스트</td><td id="uRJ^" class="">□ 답변 포함</td><td id="{Zpu" class="">검증</td><td id="=E[v" class="">점유</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-802a-b78c-eba2ed461b1d"><td id="MNfX" class="">인용 추적</td><td id="hKc^" class="">위치</td><td id="uRJ^" class="">□ 문장 확인</td><td id="{Zpu" class="">최적화</td><td id="=E[v" class="">인용</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-801b-b837-e972fc1acd38"><td id="MNfX" class="">문단 보정</td><td id="hKc^" class="">개선</td><td id="uRJ^" class="">□ 빈도 상승</td><td id="{Zpu" class="">우위</td><td id="=E[v" class="">지배</td></tr></div><div style="display:contents" dir="ltr"><tr id="3047fac1-64dc-8019-94b1-f812e0d8ed95"><td id="MNfX" class="">경쟁 분석</td><td id="hKc^" class="">비교</td><td id="uRJ^" class="">□ 이유 파악</td><td id="{Zpu" class="">전략</td><td id="=E[v" class="">대응</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-8028-a393-e8bbac3353aa"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-8014-a15f-c911e72fc0e9" class=""><strong>✅최종 체크리스트</strong></h2></div><div style="display:contents" dir="auto"><h3 id="3047fac1-64dc-802c-af2f-dbdf012a3351" class="">( 출시 직전 / 작업 완료 후 확인용)</h3></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-80aa-bb67-f80881d40208"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-8058-887c-dd7077e2cac8" class="">⬜ 1. 실시간 색인 (Indexing API)</h2></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-8012-9aac-eba4e75edec9" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">글 발행과 동시에 Google Indexing API가 호출되는가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-808a-873f-fb50903cdaf8" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">발행 후 <strong>1분 이내</strong> 구글 검색에서 URL이 노출되는가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-80ae-8457-e8eb9b8edd86" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">GSC 색인 상태가 “발견됨/색인됨”으로 정상 표시되는가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-80d1-a167-df0038ab33df"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-801f-ba70-e028bc4e90a6" class="">⬜ 2. AI 인용 구조 (Answer Block &amp; TL;DR)</h2></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-80db-a959-ec892d6492e0" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">본문 <strong>최상단에 TL;DR 요약 블록</strong>이 존재하는가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-802c-be54-ef6f980325ec" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">각 주요 문단의 <strong>첫 문장이 질문에 바로 답하는 문장</strong>인가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-80fc-8639-da73cf6360e5" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">TL;DR과 Answer Block만 읽어도 글의 핵심이 전달되는가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-8099-930c-d97a36be8407"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-8037-ac01-fe546753c630" class="">⬜ 3. 엔티티 연결 (SameAs 스키마)</h2></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-80fa-a5e1-f141da4d32d1" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Organization / Person 스키마가 정상 출력되는가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-8004-9fcb-db75b034fb5a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">sameAs에 <strong>공식 SNS / 프로필 링크</strong>가 연결되어 있는가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-807e-b2b4-dd0b8bbd21c1" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">리치 결과 테스트에서 스키마 오류가 0건인가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-8089-8434-e16e4c033ee2"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-80d5-b60b-d599e5c5e33c" class="">⬜ 4. 성능 극대화 (속도 &amp; 이미지)</h2></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-80ca-a760-c73998de596b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">모바일 PageSpeed 점수가 <strong>95점 이상</strong>인가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-809e-9ef3-c12e5f025334" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">주요 이미지가 <strong>AVIF 포맷</strong>으로 제공되는가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-8028-8004-e03d3e7bbb0f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">LCP 요소가 불필요한 이미지/모션에 의해 지연되지 않는가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><hr id="3047fac1-64dc-80a5-a44a-d4a189fdf3d5"/></div><div style="display:contents" dir="auto"><h2 id="3047fac1-64dc-80d3-898e-dcac93f400b2" class="">⬜ 5. 데이터 통로 무결성 (Data-First)</h2></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-80f0-aa2d-d8d6476c50d0" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">디자인 작업 전에 <strong>WordPress 데이터가 실제 화면에 출력</strong>되는 것을 확인했는가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-800f-ac94-d84878192aec" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">데이터 깨짐/누락 없이 제목·본문·이미지가 정상 표시되는가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="3047fac1-64dc-806a-aee2-ef4a729801cc" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">임시 더미 데이터로 디자인하지 않았는가?</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><p id="3047fac1-64dc-80fa-92f7-fb684ea6d820" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
