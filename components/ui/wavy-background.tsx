@@ -1,7 +1,22 @@
 "use client";
 import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { createNoise3D } from "simplex-noise";
+
+// Throttle 함수: 마우스 이벤트 성능 최적화
+function throttle<T extends (...args: unknown[]) => void>(
+  func: T,
+  limit: number
+): T {
+  let inThrottle = false;
+  return ((...args: unknown[]) => {
+    if (!inThrottle) {
+      func(...args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  }) as T;
+}
 
 export const WavyBackground = ({
   children,
@@ -167,9 +182,10 @@ export const WavyBackground = ({
   }, []);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    // Throttle: 100ms 간격으로 마우스 위치 업데이트 (성능 최적화)
+    const handleMouseMove = throttle((e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-    };
+    }, 100);
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => {

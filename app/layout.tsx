@@ -115,16 +115,31 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        {/* Pretendard 한글 폰트 - Preload 최적화 */}
+        {/* Pretendard 한글 폰트 - Variable Font 최적화 (3MB → 200KB) */}
         <link
-          rel="preload"
-          as="style"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+          rel="preconnect"
+          href="https://cdn.jsdelivr.net"
+          crossOrigin="anonymous"
         />
         <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.woff2"
           crossOrigin="anonymous"
+        />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              @font-face {
+                font-family: 'Pretendard';
+                src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.woff2') format('woff2-variations');
+                font-weight: 100 900;
+                font-style: normal;
+                font-display: swap;
+              }
+            `,
+          }}
         />
 
         {/* [AG-STANDARD 10단계] GA4 Tracking (환경변수로 제어) */}
