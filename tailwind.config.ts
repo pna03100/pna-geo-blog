@@ -17,7 +17,7 @@ const config: Config = {
   	},
   	extend: {
 		fontFamily: {
-			sans: ['var(--font-manrope)', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+			sans: ['var(--font-manrope)', 'Pretendard Variable', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
 			serif: ['var(--font-cormorant)', 'Georgia', 'serif'],
 			mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
 		},

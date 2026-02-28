@@ -3,9 +3,7 @@
 // Trinity Core: Type-Safe Server Component
 // ============================================
 
-export const dynamic = 'force-dynamic';
-
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Manrope, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
 import { NavbarNew } from '@/components/ui/navbar-new';
@@ -34,6 +32,15 @@ const cormorant = Cormorant_Garamond({
   variable: '--font-cormorant',
   display: 'swap',
 });
+
+// ============================================
+// [GEO] Viewport Configuration (Mobile-First Indexing)
+// ============================================
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 // ============================================
 // [GEO] Metadata Configuration
@@ -115,17 +122,35 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        {/* Pretendard 한글 폰트 - Preload 최적화 */}
+        {/* [GEO] RSS Feed Discovery - AI 크롤러 피드 발견용 */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="피앤에이컴퍼니 - 마케팅 인사이트 RSS"
+          href="https://pnamarketing.co.kr/feed.xml"
+        />
+
+        {/* Pretendard 한글 폰트 - Non-render-blocking Dynamic Subset Variable */}
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
         <link
           rel="preload"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
           as="style"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
           crossOrigin="anonymous"
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: '(function(){var l=document.createElement("link");l.rel="stylesheet";l.href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css";l.crossOrigin="anonymous";document.head.appendChild(l)})()',
+          }}
+        />
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+            crossOrigin="anonymous"
+          />
+        </noscript>
 
         {/* [AG-STANDARD 10단계] GA4 Tracking (환경변수로 제어) */}
         {process.env.NEXT_PUBLIC_GA4_ID && (
