@@ -15,7 +15,8 @@
 .reveal-hero-content .hero-item-4 {
   opacity: 0;
   transform: translateY(20px);
-  transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-hero-content.active .hero-item-1 {
@@ -205,24 +206,24 @@
   }
 }
 
-/* 2. Authority: 3D Card Lift - 쫀득하게 */
+/* 2. Authority: Card Lift — perspective/rotateX 제거 (Style&Layout 절감) */
 .reveal-3d-lift {
   opacity: 0;
-  transform: perspective(1200px) rotateX(15deg) translateY(50px) scale(0.95);
-  transition: all 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
-  will-change: transform, opacity;
+  transform: translateY(50px) scale(0.95);
+  transition: opacity 900ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .reveal-3d-lift.active {
   opacity: 1;
-  transform: perspective(1200px) rotateX(0deg) translateY(0) scale(1);
+  transform: translateY(0) scale(1);
 }
 
 /* 모바일: 단순한 페이드업으로 변경 */
 @media (max-width: 768px) {
   .reveal-3d-lift {
     transform: translateY(30px);
-    transition: all 600ms ease-out;
+    transition: opacity 600ms ease-out, transform 600ms ease-out;
   }
 
   .reveal-3d-lift.active {
@@ -230,27 +231,29 @@
   }
 }
 
-/* 3. Problems/Services: Depth Slide */
+/* 3. Problems/Services: Depth Slide — translateZ 제거 (compositing 절감) */
 .reveal-depth-left {
   opacity: 0;
-  transform: translateX(-60px) translateZ(-50px) scale(0.95);
-  transition: all 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-60px) scale(0.95);
+  transition: opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-depth-left.active {
   opacity: 1;
-  transform: translateX(0) translateZ(0) scale(1);
+  transform: translateX(0) scale(1);
 }
 
 .reveal-depth-right {
   opacity: 0;
-  transform: translateX(60px) translateZ(-50px) scale(0.95);
-  transition: all 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(60px) scale(0.95);
+  transition: opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-depth-right.active {
   opacity: 1;
-  transform: translateX(0) translateZ(0) scale(1);
+  transform: translateX(0) scale(1);
 }
 
 /* 4. Cards: Staggered Scale from Depth */
@@ -284,17 +287,16 @@
   }
 }
 
-/* 5. CEO: 블러 포커스 (영화 같은 느낌) */
+/* 5. CEO: 페이드 인 (filter:blur 제거 — Style&Layout 2,006ms 원인) */
 .reveal-blur-focus {
   opacity: 0;
-  filter: blur(20px) brightness(0.8);
   transform: scale(1.02);
-  transition: all 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-blur-focus.active {
   opacity: 1;
-  filter: blur(0) brightness(1);
   transform: scale(1);
 }
 
@@ -302,7 +304,8 @@
 .reveal-timeline {
   opacity: 0;
   transform: translateX(-30px) scale(0.95);
-  transition: all 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: opacity 900ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .reveal-timeline.active {
@@ -314,7 +317,8 @@
 .reveal-zoom-push {
   opacity: 0;
   transform: scale(0.92);
-  transition: all 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: opacity 800ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .reveal-zoom-push.active {
@@ -326,7 +330,8 @@
 .reveal-fade-up-mobile-left {
   opacity: 0;
   transform: translateX(-30px) translateY(20px);
-  transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-fade-up-mobile-left.active {
@@ -337,7 +342,8 @@
 .reveal-fade-up-mobile-right {
   opacity: 0;
   transform: translateX(30px) translateY(20px);
-  transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-fade-up-mobile-right.active {

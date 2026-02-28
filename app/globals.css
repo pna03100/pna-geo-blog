@@ -285,7 +285,6 @@
     @apply ease-premium;
     transition-property: transform, box-shadow, background-color, border-color, color;
     transition-duration: 200ms;
-    will-change: transform;
   }
 
   .btn-premium-secondary {
@@ -296,7 +295,7 @@
     @apply ease-premium;
     transition-property: transform, box-shadow, background-color, border-color, color;
     transition-duration: 200ms;
-    will-change: transform;
+    /* will-change 제거: 불필요한 합성 레이어 방지 */
   }
 
   .btn-premium-small {
@@ -307,7 +306,7 @@
     @apply ease-premium;
     transition-property: transform, box-shadow, background-color, border-color, color;
     transition-duration: 200ms;
-    will-change: transform;
+    /* will-change 제거: 불필요한 합성 레이어 방지 */
   }
 
   /* Premium Card Hover - Primary (핵심 카드) */
@@ -317,7 +316,7 @@
     @apply ease-premium;
     transition-property: transform, box-shadow, border-color;
     transition-duration: 200ms;
-    will-change: transform;
+    /* will-change 제거: 불필요한 합성 레이어 방지 */
   }
 
   /* Secondary Card - 일반 카드 (1px, will-change 없음) */
@@ -428,4 +427,15 @@
 
 .animate-tab-fade-in {
   animation: tab-fade-in 0.15s ease-out forwards;
+}
+
+/* ScrollIndicator: 3초 후 자동 페이드아웃 (JS scroll 이벤트 불필요) */
+@keyframes scroll-indicator-fade {
+  0% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.animate-scroll-indicator-fade {
+  animation: scroll-indicator-fade 4s ease-out forwards;
 }

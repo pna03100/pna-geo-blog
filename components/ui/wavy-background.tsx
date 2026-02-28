@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef } from "react";
 import { createNoise3D } from "simplex-noise";
 
 export const WavyBackground = ({
@@ -31,18 +31,6 @@ export const WavyBackground = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const animationIdRef = useRef<number>(0);
   const isVisibleRef = useRef(true);
-  const [isMobile, setIsMobile] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  // 모바일 감지 (768px 미만)
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const getSpeed = () => {
     switch (speed) {
@@ -76,8 +64,8 @@ export const WavyBackground = ({
   }, []);
 
   useEffect(() => {
-    // 모바일: 캔버스 렌더링 완전 생략
-    if (isMobile) return;
+    // 모바일: 캔버스 렌더링 완전 생략 (즉시 체크로 불필요한 초기화 방지)
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -88,7 +76,8 @@ export const WavyBackground = ({
     const noise = noiseRef.current;
     let w: number, h: number, nt = 0;
 
-    const dpr = window.devicePixelRatio || 1;
+    // [Performance] DPR을 절반으로 제한 — blur 처리로 차이 불가시
+    const dpr = Math.min(window.devicePixelRatio || 1, 1);
     const container = canvas.parentElement;
     if (!container) return;
 
@@ -105,7 +94,7 @@ export const WavyBackground = ({
       ctx.scale(dpr, dpr);
       w = displayWidth;
       h = displayHeight;
-      ctx.filter = `blur(${blur}px)`;
+      // [Performance] ctx.filter 제거 — CSS filter로 대체 (GPU 가속)
     };
 
     setup();
@@ -122,11 +111,9 @@ export const WavyBackground = ({
 
         const verticalPosition = (i / (n - 1)) * h;
 
-        for (let x = 0; x < w; x += 5) {
-          const distanceFromMouse = Math.abs(x - mousePosition.x) + Math.abs(verticalPosition - mousePosition.y);
-          const mouseInfluence = distanceFromMouse < 400 ? (1 - distanceFromMouse / 400) * 80 : 0;
-
-          const y = noise(x / 800, 0.8 * i, nt) * 140 + mouseInfluence;
+        // [Performance] step 5→10px (blur로 차이 불가시)
+        for (let x = 0; x < w; x += 10) {
+          const y = noise(x / 800, 0.8 * i, nt) * 140;
           ctx.lineTo(x, y + verticalPosition);
         }
         ctx.stroke();
@@ -135,7 +122,7 @@ export const WavyBackground = ({
     };
 
     let lastFrameTime = 0;
-    const targetFPS = 30;
+    const targetFPS = 24; // [Performance] 30→24 FPS (blur로 차이 불가시)
     const frameInterval = 1000 / targetFPS;
 
     const render = (currentTime: number = 0) => {
@@ -164,29 +151,6 @@ export const WavyBackground = ({
       cancelAnimationFrame(animationIdRef.current);
       window.removeEventListener('resize', handleResize);
     };
-  }, [isMobile]);
-
-  // 마우스 트래킹: 데스크톱에서만 활성화
-  useEffect(() => {
-    if (isMobile) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, [isMobile]);
-
-  const [isSafari, setIsSafari] = useState(false);
-  useEffect(() => {
-    setIsSafari(
-      typeof window !== "undefined" &&
-        navigator.userAgent.includes("Safari") &&
-        !navigator.userAgent.includes("Chrome")
-    );
   }, []);
 
   return (
@@ -197,26 +161,24 @@ export const WavyBackground = ({
         containerClassName
       )}
     >
+      {/* 데스크톱: Canvas + CSS blur (GPU 가속) / 모바일: CSS gradient */}
+      <canvas
+        className="absolute inset-0 z-0 hidden md:block"
+        ref={canvasRef}
+        id="canvas"
+        style={{
+          width: '100%',
+          height: '100%',
+          filter: `blur(${blur}px)`,
+        }}
+      />
       {/* 모바일: CSS 그라디언트 대체 (캔버스 없음) */}
-      {isMobile ? (
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            background: 'linear-gradient(180deg, #0a0f1e 0%, #0d1530 30%, #111a3a 60%, #0a0f1e 100%)',
-          }}
-        />
-      ) : (
-        <canvas
-          className="absolute inset-0 z-0"
-          ref={canvasRef}
-          id="canvas"
-          style={{
-            width: '100%',
-            height: '100%',
-            ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
-          }}
-        />
-      )}
+      <div
+        className="absolute inset-0 z-0 md:hidden"
+        style={{
+          background: 'linear-gradient(180deg, #0a0f1e 0%, #0d1530 30%, #111a3a 60%, #0a0f1e 100%)',
+        }}
+      />
 
       {/* Film Grain Overlay - Very Visible */}
       <div
