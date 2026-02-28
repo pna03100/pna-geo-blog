@@ -126,8 +126,8 @@ async function fetchAPI<T>(
         'Accept': 'application/json',
       },
       body: requestBody,
-      // [Security] Next.js 캐싱 옵션 제거 (디버깅 중)
-      cache: 'no-store',
+      // [Performance] ISR - 1시간 캐싱
+      next: { revalidate: 3600 },
     });
 
     if (process.env.NODE_ENV === 'development') {
@@ -336,6 +336,7 @@ export const getAllPosts = cache(async (): Promise<WPContent[]> => {
           title
           date
           excerpt
+          content
           featuredImage {
             node {
               sourceUrl
@@ -346,6 +347,11 @@ export const getAllPosts = cache(async (): Promise<WPContent[]> => {
             nodes {
               name
               slug
+            }
+          }
+          author {
+            node {
+              name
             }
           }
         }

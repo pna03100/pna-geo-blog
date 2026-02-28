@@ -202,8 +202,9 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
                   <div className="absolute inset-0 z-0">
                     <Image
                       src={featuredImageUrl}
-                      alt=""
+                      alt={`${title} - 피앤에이컴퍼니 인사이트`}
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 800px"
                       className="object-cover opacity-60"
                       priority
                     />
@@ -257,7 +258,7 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
                     {date && (
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4 text-slate-400" />
-                        <span>{date}</span>
+                        <time dateTime={isoDate}>{date}</time>
                       </div>
                     )}
 

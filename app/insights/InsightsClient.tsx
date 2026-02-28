@@ -241,8 +241,16 @@ export function InsightsClient({ posts }: InsightsClientProps) {
             blogPost: posts.map((post) => ({
               '@type': 'BlogPosting',
               headline: post.title,
+              description: post.excerpt ? post.excerpt.replace(/<[^>]*>/g, '').slice(0, 160) : '',
               datePublished: post.date,
               url: `https://pnamarketing.co.kr/insights/${post.slug}`,
+              ...(post.featuredImage?.node?.sourceUrl && {
+                image: post.featuredImage.node.sourceUrl,
+              }),
+              author: {
+                '@type': 'Person',
+                name: post.author?.node?.name || '피앤에이컴퍼니',
+              },
             })),
           }),
         }}

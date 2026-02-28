@@ -9,11 +9,7 @@
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-
-interface FAQItem {
-  question: string;
-  answer: string;
-}
+import type { FAQItem } from "@/lib/types";
 
 const faqs: FAQItem[] = [
   {

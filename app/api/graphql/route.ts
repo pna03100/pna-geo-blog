@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     const validation = GraphQLRequestSchema.safeParse(body);
     
     if (!validation.success) {
-      console.error('❌ [GraphQL Proxy] Invalid request:', validation.error);
+      if (process.env.NODE_ENV === 'development') console.error('❌ [GraphQL Proxy] Invalid request:', validation.error);
       return NextResponse.json(
         { 
           errors: [{ 
@@ -53,8 +53,10 @@ export async function POST(request: NextRequest) {
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     // Step 2: [Implementation] WordPress로 프록시 요청
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    console.log('🚀 [GraphQL Proxy] Forwarding request to:', WORDPRESS_GRAPHQL_URL);
-    console.log('📝 [GraphQL Proxy] Operation:', operationName || 'Anonymous');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🚀 [GraphQL Proxy] Forwarding request to:', WORDPRESS_GRAPHQL_URL);
+      console.log('📝 [GraphQL Proxy] Operation:', operationName || 'Anonymous');
+    }
 
     const response = await fetch(WORDPRESS_GRAPHQL_URL, {
       method: 'POST',
@@ -77,7 +79,7 @@ export async function POST(request: NextRequest) {
     // Step 3: [Security] WordPress 응답 처리
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     if (!response.ok) {
-      console.error('❌ [GraphQL Proxy] WordPress returned error:', response.status);
+      if (process.env.NODE_ENV === 'development') console.error('❌ [GraphQL Proxy] WordPress returned error:', response.status);
       
       // [Security] 내부 에러 정보 노출 방지
       return NextResponse.json(
@@ -99,7 +101,7 @@ export async function POST(request: NextRequest) {
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     // Step 4: [GEO Strategy] CORS 헤더 추가 & 응답 반환
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    console.log('✅ [GraphQL Proxy] Request successful');
+    if (process.env.NODE_ENV === 'development') console.log('✅ [GraphQL Proxy] Request successful');
 
     return NextResponse.json(data, {
       status: 200,
@@ -117,7 +119,7 @@ export async function POST(request: NextRequest) {
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     // [Security] 예외 처리 (내부 정보 노출 방지)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    console.error('💥 [GraphQL Proxy] Unexpected error:', error);
+    if (process.env.NODE_ENV === 'development') console.error('💥 [GraphQL Proxy] Unexpected error:', error);
     
     return NextResponse.json(
       { 

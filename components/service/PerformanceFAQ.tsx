@@ -8,11 +8,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-interface FAQItem {
-  question: string;
-  answer: string;
-}
+import type { FAQItem } from "@/lib/types";
 
 const faqs: FAQItem[] = [
   {
@@ -68,22 +64,24 @@ export function PerformanceFAQ() {
               {/* Question */}
               <button
                 onClick={() => toggleFAQ(index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`performance-faq-answer-${index}`}
                 className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-blue-50/50 transition-colors group"
               >
-                <span className="text-lg font-bold text-slate-900 pr-4 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-lg font-bold text-slate-900 pr-4 group-hover:text-blue-600 transition-colors">
                   {faq.question}
-            </span>
-            <ChevronDown 
+            </h3>
+            <ChevronDown
               className={cn(
                 "w-5 h-5 flex-shrink-0 transition-all duration-200",
                 openIndex === index ? "text-blue-600 rotate-180" : "text-slate-400"
-              )} 
+              )}
             />
           </button>
 
           {/* Answer */}
           {openIndex === index && (
-            <div className="overflow-hidden">
+            <div id={`performance-faq-answer-${index}`} className="overflow-hidden">
               <div className="px-6 pb-5 pt-2">
                 <p className="text-slate-600 leading-relaxed">
                   {faq.answer}

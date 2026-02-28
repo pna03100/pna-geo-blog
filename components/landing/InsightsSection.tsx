@@ -6,6 +6,7 @@
 "use client";
 
 import { SectionWrapper } from "./SectionWrapper";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { PostCard } from "@/components/insights/PostCard";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";

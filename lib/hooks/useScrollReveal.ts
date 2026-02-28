@@ -19,16 +19,11 @@ export function useScrollReveal(
   options: ScrollRevealOptions = {}
 ) {
   const ref = useRef<HTMLElement>(null);
+  const { threshold = 0.3, rootMargin = "0px 0px -10% 0px", once = true } = options;
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
-
-    const {
-      threshold = 0.3,
-      rootMargin = "0px 0px -10% 0px",
-      once = true,
-    } = options;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -52,7 +47,7 @@ export function useScrollReveal(
     observer.observe(element);
 
     return () => observer.disconnect();
-  }, [animationClass, options]);
+  }, [animationClass, threshold, rootMargin, once]);
 
   return ref;
 }

@@ -7,6 +7,9 @@
 
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
+
+// [Performance] ISR - 1시간마다 재생성
+export const revalidate = 3600;
 import { HeroSectionFinal } from '@/components/landing/HeroSectionFinal';
 import { ProblemsSection } from '@/components/landing/ProblemsSection';
 import { getAllPosts } from '@/lib/api';
@@ -26,8 +29,7 @@ const CTASection = dynamic(() => import('@/components/landing/CTASection').then(
 function generateJsonLd() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://pnamarketing.co.kr';
 
-  // [Security] env.ts에서 필수 검증 - env 없으면 빌드 실패
-  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL!; // Non-null assertion (env.ts 검증됨)
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'contact@pnamarketing.co.kr';
 
   return {
     "@context": "https://schema.org",
@@ -80,6 +82,84 @@ function generateJsonLd() {
         },
         "areaServed": "KR",
         "serviceType": ["Google Ads", "SEO", "GEO", "WordPress", "Performance Marketing"],
+      },
+      {
+        "@type": "Person",
+        "@id": `${baseUrl}/#ceo`,
+        "name": "안태민",
+        "jobTitle": "대표이사 / Google Ads 전문가",
+        "worksFor": { "@id": `${baseUrl}/#organization` },
+        "knowsAbout": ["Google Ads", "SEO", "GEO", "퍼포먼스 마케팅", "데이터 분석"],
+        "description": "15년 실전 경력의 디지털 마케팅 전문가. Google TOP 100 캠페인 선정.",
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${baseUrl}/#webpage`,
+        "url": baseUrl,
+        "name": "구글 광고 대행사 피앤에이컴퍼니 | 데이터 & GEO 마케팅",
+        "isPartOf": { "@id": `${baseUrl}/#website` },
+        "about": { "@id": `${baseUrl}/#organization` },
+        "description": "15년 실전 데이터로 무장한 구글 공식 파트너. ROAS 500%를 지향하는 전략적 구글 광고 대행, SEO/GEO 최적화, 워드프레스 제작 전문.",
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "@id": `${baseUrl}/#navigation`,
+        "name": "메인 네비게이션",
+        "hasPart": [
+          { "@type": "WebPage", "name": "회사소개", "url": `${baseUrl}/about` },
+          { "@type": "WebPage", "name": "구글 애즈 광고 대행", "url": `${baseUrl}/google-ads` },
+          { "@type": "WebPage", "name": "SEO & GEO 최적화", "url": `${baseUrl}/seo-geo` },
+          { "@type": "WebPage", "name": "워드프레스 제작", "url": `${baseUrl}/wordpress` },
+          { "@type": "WebPage", "name": "퍼포먼스 마케팅", "url": `${baseUrl}/performance` },
+          { "@type": "WebPage", "name": "마케팅 인사이트", "url": `${baseUrl}/insights` },
+          { "@type": "WebPage", "name": "프로젝트 문의", "url": `${baseUrl}/contact` },
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${baseUrl}/#faq`,
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "피앤에이컴퍼니의 차별점은 무엇인가요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "15년 실전 경험과 구글 TOP 100 선정 이력이 증명하는 전문성입니다. 담당자가 수시로 바뀌지 않는 전문가 직접 관리 시스템을 지향합니다. 영업 사원이 아닌 15년 차 전문가가 귀사의 비즈니스 본질에 집중한 전략을 직접 리딩합니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "SEO와 GEO 전략은 어떻게 진행되나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "기존 검색 결과 상위 노출(SEO)과 AI 검색 결과(GEO)를 동시에 분석하여, 브랜드가 최상단에 노출될 수 있는 시맨틱 구조를 설계합니다. Gemini AI와 Google 검색 엔진 모두에서 상위 노출되는 통합 전략을 제공합니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "대행 비용과 계약 방식이 궁금합니다.",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "투명한 수수료 체계를 지향하며, 비즈니스 규모와 목표에 최적화된 맞춤형 견적을 제안드립니다. 월 광고비의 15~20%로 책정되며, 초기 셋업 비용은 별도 협의 가능합니다. 무료 성과 진단을 통해 정확한 견적을 받아보세요."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "효율 개선 시점은 언제부터인가요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "셋팅 직후부터 실시간 모니터링이 시작됩니다. 정교한 AI 학습 과정을 거쳐 점진적이고 지속적인 성과 향상을 도모합니다. 일반적으로 2~4주 내에 초기 최적화 효과가 나타나며, 3개월 후부터 안정적인 성과를 확인하실 수 있습니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "성과 분석 리포트는 어떻게 제공되나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "GA4 기반의 객관적 데이터를 바탕으로 분석 보고서를 제공하며, 대시보드를 통해 모든 지표를 투명하게 공유합니다. 주간 성과 요약과 월간 상세 리포트를 통해 캠페인 성과를 실시간으로 확인하실 수 있습니다."
+            }
+          }
+        ]
       },
     ]
   };

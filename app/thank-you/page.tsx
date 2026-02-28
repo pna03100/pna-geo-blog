@@ -4,8 +4,18 @@
  * [UX] Reassures user, provides next actions
  */
 
+import { Metadata } from "next";
 import { CheckCircle, Home, Lightbulb } from "lucide-react";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "문의 접수 완료",
+  description: "피앤에이컴퍼니에 문의가 성공적으로 접수되었습니다. 24시간 이내에 연락드리겠습니다.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function ThankYouPage() {
   return (

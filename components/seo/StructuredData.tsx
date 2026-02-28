@@ -93,6 +93,11 @@ function generateArticleSchema(data: ArticleSchema) {
       author: {
         '@type': 'Person',
         name: data.author,
+        jobTitle: '마케팅 전문가',
+        worksFor: {
+          '@type': 'Organization',
+          name: '피앤에이컴퍼니',
+        },
       },
     }),
     ...(data.datePublished && { datePublished: data.datePublished }),

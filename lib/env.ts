@@ -27,10 +27,11 @@ const envSchema = z.object({
     .string()
     .default('pnamarketing.co.kr'),
 
-  // 공식 연락처 이메일 (Anti-scraping) - 필수
+  // 공식 연락처 이메일 (Anti-scraping) - 기본값 제공
   NEXT_PUBLIC_CONTACT_EMAIL: z
     .string()
-    .email('NEXT_PUBLIC_CONTACT_EMAIL must be a valid email'),
+    .email('NEXT_PUBLIC_CONTACT_EMAIL must be a valid email')
+    .default('contact@pnamarketing.co.kr'),
 
   // Node Environment
   NODE_ENV: z
@@ -52,10 +53,12 @@ function validateEnv() {
       NODE_ENV: process.env.NODE_ENV,
     });
 
-    console.log('✅ [Env Validated]');
-    console.log('  - WordPress URL:', parsed.WORDPRESS_API_URL);
-    console.log('  - Frontend Domain:', parsed.NEXT_PUBLIC_FRONTEND_DOMAIN);
-    console.log('  - Contact Email:', parsed.NEXT_PUBLIC_CONTACT_EMAIL);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('✅ [Env Validated]');
+      console.log('  - WordPress URL:', parsed.WORDPRESS_API_URL);
+      console.log('  - Frontend Domain:', parsed.NEXT_PUBLIC_FRONTEND_DOMAIN);
+      console.log('  - Contact Email:', parsed.NEXT_PUBLIC_CONTACT_EMAIL);
+    }
     return parsed;
   } catch (error) {
     if (error instanceof z.ZodError) {

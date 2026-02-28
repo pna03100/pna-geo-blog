@@ -24,7 +24,7 @@ export async function GET() {
 
     // Generate RSS 2.0 XML
     const rss = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>${wrapCDATA('피앤에이컴퍼니 - 마케팅 인사이트')}</title>
     <link>${baseUrl}/insights</link>
@@ -74,6 +74,8 @@ export async function GET() {
       <description>${wrapCDATA(description)}</description>
       <pubDate>${pubDate}</pubDate>
       ${post.categories?.nodes?.map((cat) => `<category>${wrapCDATA(cat.name)}</category>`).join('\n      ') || ''}
+      ${post.content ? `<content:encoded>${wrapCDATA(post.content)}</content:encoded>` : ''}
+      ${post.author?.node?.name ? `<author>${wrapCDATA(post.author.node.name)}</author>` : ''}
     </item>`;
       })
       .join('\n')}
