@@ -36,8 +36,8 @@ export function CEOSection() {
                 alt="CEO 안태민"
                 fill
                 className="object-cover"
-                priority
                 sizes="(max-width: 768px) 384px, 500px"
+                quality={60}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
             </div>

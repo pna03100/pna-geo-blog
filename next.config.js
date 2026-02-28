@@ -17,6 +17,11 @@ const nextConfig = {
     ignoreDuringBuilds: true, // TODO: 프로덕션 배포 전 false로 변경
   },
 
+  // [Performance] Critical CSS 인라이닝 — render-blocking CSS 제거
+  experimental: {
+    optimizeCss: true,
+  },
+
   // 2. 이미지 도메인 허용 (워드프레스 이미지 로드)
   images: {
     remotePatterns: [
