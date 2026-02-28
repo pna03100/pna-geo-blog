@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { createNoise3D } from "simplex-noise";
 
 export const WavyBackground = ({
@@ -26,17 +26,24 @@ export const WavyBackground = ({
   waveOpacity?: number;
   [key: string]: any;
 }) => {
-  const noise = createNoise3D();
-  let w: number,
-    h: number,
-    nt: number,
-    i: number,
-    x: number,
-    ctx: any,
-    canvas: any;
+  const noiseRef = useRef(createNoise3D());
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const animationIdRef = useRef<number>(0);
+  const isVisibleRef = useRef(true);
+  const [isMobile, setIsMobile] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  
+
+  // 모바일 감지 (768px 미만)
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const getSpeed = () => {
     switch (speed) {
       case "slow":
@@ -48,66 +55,6 @@ export const WavyBackground = ({
     }
   };
 
-  const init = () => {
-    canvas = canvasRef.current;
-    if (!canvas) return;
-    
-    ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    
-    // Get device pixel ratio
-    const dpr = window.devicePixelRatio || 1;
-    
-    // Get parent container size (not window size!)
-    const container = canvas.parentElement;
-    if (!container) return;
-    
-    const displayWidth = container.clientWidth;
-    const displayHeight = container.clientHeight;
-    
-    // Set canvas size in memory (scaled to device pixels)
-    canvas.width = displayWidth * dpr;
-    canvas.height = displayHeight * dpr;
-    
-    // Set canvas display size (CSS pixels)
-    canvas.style.width = `${displayWidth}px`;
-    canvas.style.height = `${displayHeight}px`;
-    
-    // Scale context to match device pixel ratio
-    ctx.scale(dpr, dpr);
-    
-    // Store logical dimensions
-    w = displayWidth;
-    h = displayHeight;
-    
-    // 웹과 동일한 blur 사용
-    ctx.filter = `blur(${blur}px)`;
-    
-    nt = 0;
-    
-    window.onresize = function () {
-      if (!canvas || !container) return;
-      
-      const dpr = window.devicePixelRatio || 1;
-      const displayWidth = container.clientWidth;
-      const displayHeight = container.clientHeight;
-      
-      canvas.width = displayWidth * dpr;
-      canvas.height = displayHeight * dpr;
-      canvas.style.width = `${displayWidth}px`;
-      canvas.style.height = `${displayHeight}px`;
-      
-      ctx.scale(dpr, dpr);
-      
-      w = displayWidth;
-      h = displayHeight;
-      
-      ctx.filter = `blur(${blur}px)`;
-    };
-    
-    render();
-  };
-
   const waveColors = colors ?? [
     "#38bdf8",
     "#818cf8",
@@ -115,58 +62,114 @@ export const WavyBackground = ({
     "#e879f9",
     "#22d3ee",
   ];
-  const drawWave = (n: number) => {
-    nt += getSpeed();
-    for (i = 0; i < n; i++) {
-      ctx.beginPath();
-      ctx.lineWidth = waveWidth || 50;
-      ctx.strokeStyle = waveColors[i % waveColors.length];
-      
-      // Distribute waves across the entire vertical space
-      const verticalPosition = (i / (n - 1)) * h;
-      
-      // 최적화: 렌더링 스텝 증가 (3→5), 마우스 인터랙션 간소화
-      for (x = 0; x < w; x += 5) {
-        // Mouse interaction - simplified for performance
-        const distanceFromMouse = Math.abs(x - mousePosition.x) + Math.abs(verticalPosition - mousePosition.y);
-        const mouseInfluence = distanceFromMouse < 400 ? (1 - distanceFromMouse / 400) * 80 : 0;
-        
-        // Wave with spacing: increased separation between waves
-        var y = noise(x / 800, 0.8 * i, nt) * 140 + mouseInfluence;
-        ctx.lineTo(x, y + verticalPosition);
-      }
-      ctx.stroke();
-      ctx.closePath();
-    }
-  };
 
-  let animationId: number;
-  let lastFrameTime = 0;
-  const targetFPS = 30; // 60fps → 30fps로 제한 (시각적 차이 없음)
-  const frameInterval = 1000 / targetFPS;
-  
-  const render = (currentTime: number = 0) => {
-    const elapsed = currentTime - lastFrameTime;
-    
-    if (elapsed >= frameInterval) {
-      ctx.fillStyle = backgroundFill || "black";
-      ctx.globalAlpha = waveOpacity || 0.5;
-      ctx.fillRect(0, 0, w, h);
-      drawWave(8);
-      lastFrameTime = currentTime - (elapsed % frameInterval);
-    }
-    
-    animationId = requestAnimationFrame(render);
-  };
-
+  // IntersectionObserver: 뷰포트 밖이면 canvas 애니메이션 정지
   useEffect(() => {
-    init();
-    return () => {
-      cancelAnimationFrame(animationId);
-    };
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
+    // 모바일: 캔버스 렌더링 완전 생략
+    if (isMobile) return;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const noise = noiseRef.current;
+    let w: number, h: number, nt = 0;
+
+    const dpr = window.devicePixelRatio || 1;
+    const container = canvas.parentElement;
+    if (!container) return;
+
+    const setup = () => {
+      if (!container) return;
+      const displayWidth = container.clientWidth;
+      const displayHeight = container.clientHeight;
+
+      canvas.width = displayWidth * dpr;
+      canvas.height = displayHeight * dpr;
+      canvas.style.width = `${displayWidth}px`;
+      canvas.style.height = `${displayHeight}px`;
+
+      ctx.scale(dpr, dpr);
+      w = displayWidth;
+      h = displayHeight;
+      ctx.filter = `blur(${blur}px)`;
+    };
+
+    setup();
+
+    const handleResize = () => setup();
+    window.addEventListener('resize', handleResize);
+
+    const drawWave = (n: number) => {
+      nt += getSpeed();
+      for (let i = 0; i < n; i++) {
+        ctx.beginPath();
+        ctx.lineWidth = waveWidth || 50;
+        ctx.strokeStyle = waveColors[i % waveColors.length];
+
+        const verticalPosition = (i / (n - 1)) * h;
+
+        for (let x = 0; x < w; x += 5) {
+          const distanceFromMouse = Math.abs(x - mousePosition.x) + Math.abs(verticalPosition - mousePosition.y);
+          const mouseInfluence = distanceFromMouse < 400 ? (1 - distanceFromMouse / 400) * 80 : 0;
+
+          const y = noise(x / 800, 0.8 * i, nt) * 140 + mouseInfluence;
+          ctx.lineTo(x, y + verticalPosition);
+        }
+        ctx.stroke();
+        ctx.closePath();
+      }
+    };
+
+    let lastFrameTime = 0;
+    const targetFPS = 30;
+    const frameInterval = 1000 / targetFPS;
+
+    const render = (currentTime: number = 0) => {
+      // 뷰포트 밖이면 프레임 스킵 (메인 스레드 절약)
+      if (!isVisibleRef.current) {
+        animationIdRef.current = requestAnimationFrame(render);
+        return;
+      }
+
+      const elapsed = currentTime - lastFrameTime;
+
+      if (elapsed >= frameInterval) {
+        ctx.fillStyle = backgroundFill || "black";
+        ctx.globalAlpha = waveOpacity || 0.5;
+        ctx.fillRect(0, 0, w, h);
+        drawWave(8);
+        lastFrameTime = currentTime - (elapsed % frameInterval);
+      }
+
+      animationIdRef.current = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      cancelAnimationFrame(animationIdRef.current);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMobile]);
+
+  // 마우스 트래킹: 데스크톱에서만 활성화
+  useEffect(() => {
+    if (isMobile) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -175,11 +178,10 @@ export const WavyBackground = ({
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [isMobile]);
 
   const [isSafari, setIsSafari] = useState(false);
   useEffect(() => {
-    // I'm sorry but i have got to support it on safari.
     setIsSafari(
       typeof window !== "undefined" &&
         navigator.userAgent.includes("Safari") &&
@@ -189,34 +191,45 @@ export const WavyBackground = ({
 
   return (
     <div
+      ref={containerRef}
       className={cn(
         "h-screen flex flex-col items-center justify-center bg-[#0a0f1e]",
         containerClassName
       )}
     >
-      <canvas
-        className="absolute inset-0 z-0"
-        ref={canvasRef}
-        id="canvas"
-        style={{
-          width: '100%',
-          height: '100%',
-          ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
-        }}
-      ></canvas>
-      
+      {/* 모바일: CSS 그라디언트 대체 (캔버스 없음) */}
+      {isMobile ? (
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            background: 'linear-gradient(180deg, #0a0f1e 0%, #0d1530 30%, #111a3a 60%, #0a0f1e 100%)',
+          }}
+        />
+      ) : (
+        <canvas
+          className="absolute inset-0 z-0"
+          ref={canvasRef}
+          id="canvas"
+          style={{
+            width: '100%',
+            height: '100%',
+            ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
+          }}
+        />
+      )}
+
       {/* Film Grain Overlay - Very Visible */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none z-5"
         style={{
           opacity: 0.9,
           mixBlendMode: 'overlay',
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='5.5' numOctaves='7' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='5.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           backgroundRepeat: 'repeat',
           backgroundSize: '100px 100px'
         }}
       />
-      
+
       <div className={cn("relative z-10", className)} {...props}>
         {children}
       </div>

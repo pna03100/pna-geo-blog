@@ -49,9 +49,9 @@ export function NavbarNew() {
       return 'bg-transparent border-b border-transparent'
     }
     if (isScrolled) {
-      return 'bg-white/60 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border-b border-white/30'
+      return 'bg-white/60 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border-b border-white/30 will-change-[backdrop-filter]'
     }
-    return 'bg-white/50 backdrop-blur-xl border-b border-white/20'
+    return 'bg-white/50 backdrop-blur-xl border-b border-white/20 will-change-[backdrop-filter]'
   }
 
   // 투명 히어로 페이지에서 스크롤 전: 흰색 텍스트
@@ -108,6 +108,7 @@ export function NavbarNew() {
                       }}
                       href={item.href}
                       onMouseEnter={() => setHoveredIndex(index)}
+                      aria-current={isActive ? "page" : undefined}
                       className={`relative text-base font-medium transition-colors duration-200 ${getTextColor(isActive)}`}
                     >
                       {item.name}
@@ -211,9 +212,10 @@ export function NavbarNew() {
                     key={item.name}
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
+                    aria-current={isActive ? "page" : undefined}
                     className={`block text-lg font-medium transition-colors ${
-                      isActive 
-                        ? 'text-blue-600' 
+                      isActive
+                        ? 'text-blue-600'
                         : 'text-slate-700 hover:text-blue-600'
                     }`}
                   >
