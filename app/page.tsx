@@ -7,6 +7,7 @@
 
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
+import './styles/home-animations.css';
 
 // [Performance] ISR - 1시간마다 재생성
 export const revalidate = 3600;

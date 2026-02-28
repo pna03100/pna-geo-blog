@@ -6,6 +6,7 @@
  */
 
 import { Metadata } from 'next';
+import '../../styles/prose.css';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';

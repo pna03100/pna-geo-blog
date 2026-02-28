@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import '../styles/about-animations.css';
 import { AboutClient } from './AboutClient';
 
 export const metadata: Metadata = {

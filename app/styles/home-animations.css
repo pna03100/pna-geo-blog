@@ -1,0 +1,377 @@
+/* ============================================
+   [Home Page] Cinematic Scroll Reveal Animations
+   GPU-accelerated, Transform-only
+   ============================================ */
+
+/* 1. Hero: Title은 처음부터, 나머지만 부드럽게 올라옴 */
+.reveal-hero-content {
+  opacity: 1;
+}
+
+/* 히어로 내부 요소 순차 등장 (Stagger) - 데스크톱 */
+.reveal-hero-content .hero-item-1,
+.reveal-hero-content .hero-item-2,
+.reveal-hero-content .hero-item-3,
+.reveal-hero-content .hero-item-4 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-hero-content.active .hero-item-1 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 100ms;
+}
+
+.reveal-hero-content.active .hero-item-2 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 300ms;
+}
+
+.reveal-hero-content.active .hero-item-3 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 500ms;
+}
+
+.reveal-hero-content.active .hero-item-4 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 700ms;
+}
+
+/* 모바일: 애니메이션 최적화 (히어로만 활성화) */
+@media (max-width: 768px) {
+  /* 히어로 제외 모든 애니메이션 제거 */
+  .reveal-3d-lift,
+  .reveal-depth-left,
+  .reveal-depth-right,
+  .reveal-timeline,
+  .reveal-blur-focus,
+  .reveal-zoom-push {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  .reveal-3d-lift.active,
+  .reveal-depth-left.active,
+  .reveal-depth-right.active,
+  .reveal-timeline.active,
+  .reveal-blur-focus.active,
+  .reveal-zoom-push.active {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  /* 히어로 섹션: 고급스러운 등장 효과 (GPU 합성 레이어만 사용) */
+  .reveal-hero-content {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-hero-content.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 히어로 내부 요소 순차 등장 (Stagger) - filter 제거, 합성 레이어만 */
+  .reveal-hero-content .hero-item-1,
+  .reveal-hero-content .hero-item-2,
+  .reveal-hero-content .hero-item-3,
+  .reveal-hero-content .hero-item-4 {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: none;
+  }
+
+  .reveal-hero-content.active .hero-item-1 {
+    animation: hero-fade-in 900ms cubic-bezier(0.16, 1, 0.3, 1) 200ms forwards;
+  }
+
+  .reveal-hero-content.active .hero-item-2 {
+    animation: hero-fade-in 900ms cubic-bezier(0.16, 1, 0.3, 1) 350ms forwards;
+  }
+
+  .reveal-hero-content.active .hero-item-3 {
+    animation: hero-fade-in 900ms cubic-bezier(0.16, 1, 0.3, 1) 500ms forwards;
+  }
+
+  .reveal-hero-content.active .hero-item-4 {
+    animation: hero-fade-in 900ms cubic-bezier(0.16, 1, 0.3, 1) 650ms forwards;
+  }
+
+  @keyframes hero-fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* 모바일: 프라블럼 카드 양옆에서 등장 (스크롤 트리거) */
+  .problem-card-mobile {
+    opacity: 0;
+  }
+
+  .problem-card-mobile:nth-child(2n+1) {
+    transform: translateX(-40px);
+  }
+
+  .problem-card-mobile:nth-child(2n) {
+    transform: translateX(40px);
+  }
+
+  .problem-card-mobile.active {
+    animation: slide-in-mobile 700ms ease-out forwards;
+  }
+
+  .problem-card-mobile.active:nth-child(1) {
+    animation-delay: 0ms;
+  }
+
+  .problem-card-mobile.active:nth-child(2) {
+    animation-delay: 150ms;
+  }
+
+  .problem-card-mobile.active:nth-child(3) {
+    animation-delay: 300ms;
+  }
+
+  .problem-card-mobile.active:nth-child(4) {
+    animation-delay: 450ms;
+  }
+
+  @keyframes slide-in-mobile {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* 모바일: 성공 섹션 양옆에서 등장 (스크롤 트리거) */
+  .philosophy-item-mobile {
+    opacity: 0;
+  }
+
+  .philosophy-item-mobile:nth-child(odd) {
+    transform: translateX(-40px);
+  }
+
+  .philosophy-item-mobile:nth-child(even) {
+    transform: translateX(40px);
+  }
+
+  .philosophy-item-mobile.active {
+    animation: slide-in-philosophy 700ms ease-out forwards;
+  }
+
+  .philosophy-item-mobile.active:nth-child(1) {
+    animation-delay: 0ms;
+  }
+
+  .philosophy-item-mobile.active:nth-child(2) {
+    animation-delay: 150ms;
+  }
+
+  .philosophy-item-mobile.active:nth-child(3) {
+    animation-delay: 300ms;
+  }
+
+  .philosophy-item-mobile.active:nth-child(4) {
+    animation-delay: 450ms;
+  }
+
+  @keyframes slide-in-philosophy {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+/* 2. Authority: 3D Card Lift - 쫀득하게 */
+.reveal-3d-lift {
+  opacity: 0;
+  transform: perspective(1200px) rotateX(15deg) translateY(50px) scale(0.95);
+  transition: all 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-3d-lift.active {
+  opacity: 1;
+  transform: perspective(1200px) rotateX(0deg) translateY(0) scale(1);
+}
+
+/* 모바일: 단순한 페이드업으로 변경 */
+@media (max-width: 768px) {
+  .reveal-3d-lift {
+    transform: translateY(30px);
+    transition: all 600ms ease-out;
+  }
+
+  .reveal-3d-lift.active {
+    transform: translateY(0);
+  }
+}
+
+/* 3. Problems/Services: Depth Slide */
+.reveal-depth-left {
+  opacity: 0;
+  transform: translateX(-60px) translateZ(-50px) scale(0.95);
+  transition: all 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-depth-left.active {
+  opacity: 1;
+  transform: translateX(0) translateZ(0) scale(1);
+}
+
+.reveal-depth-right {
+  opacity: 0;
+  transform: translateX(60px) translateZ(-50px) scale(0.95);
+  transition: all 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-depth-right.active {
+  opacity: 1;
+  transform: translateX(0) translateZ(0) scale(1);
+}
+
+/* 4. Cards: Staggered Scale from Depth */
+.reveal-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* When parent section becomes active, trigger cards */
+.reveal-cards-container {
+  opacity: 1;
+}
+
+.reveal-cards-container.active .reveal-card {
+  animation: revealCard 1000ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.reveal-cards-container.active .reveal-card:nth-child(1) { animation-delay: 0ms; }
+.reveal-cards-container.active .reveal-card:nth-child(2) { animation-delay: 150ms; }
+.reveal-cards-container.active .reveal-card:nth-child(3) { animation-delay: 300ms; }
+.reveal-cards-container.active .reveal-card:nth-child(4) { animation-delay: 450ms; }
+
+@keyframes revealCard {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 5. CEO: 블러 포커스 (영화 같은 느낌) */
+.reveal-blur-focus {
+  opacity: 0;
+  filter: blur(20px) brightness(0.8);
+  transform: scale(1.02);
+  transition: all 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-blur-focus.active {
+  opacity: 1;
+  filter: blur(0) brightness(1);
+  transform: scale(1);
+}
+
+/* 6. Timeline: Progressive Reveal - 스크롤마다 하나씩 등장 */
+.reveal-timeline {
+  opacity: 0;
+  transform: translateX(-30px) scale(0.95);
+  transition: all 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reveal-timeline.active {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+/* 7. CTA: 빠르고 쫀득하게 (하단 여백 없음) */
+.reveal-zoom-push {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: all 800ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reveal-zoom-push.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 8. Mobile: 양옆 등장 애니메이션 (프라블럼, 서비스, 성공 섹션) */
+.reveal-fade-up-mobile-left {
+  opacity: 0;
+  transform: translateX(-30px) translateY(20px);
+  transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-fade-up-mobile-left.active {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+.reveal-fade-up-mobile-right {
+  opacity: 0;
+  transform: translateX(30px) translateY(20px);
+  transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-fade-up-mobile-right.active {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+/* 9. Simple Fade Up (for text-heavy sections) */
+.reveal-fade-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade Up Container with Stagger - 완전히 안보이다가 등장 */
+.reveal-fade-up-container {
+  opacity: 1;
+}
+
+.reveal-fade-up-container.active .reveal-fade-up {
+  animation: revealFadeUp 1600ms cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+
+.reveal-fade-up-container.active .reveal-fade-up:nth-child(1) { animation-delay: 0ms; }
+.reveal-fade-up-container.active .reveal-fade-up:nth-child(2) { animation-delay: 250ms; }
+.reveal-fade-up-container.active .reveal-fade-up:nth-child(3) { animation-delay: 500ms; }
+.reveal-fade-up-container.active .reveal-fade-up:nth-child(4) { animation-delay: 750ms; }
+
+@keyframes revealFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

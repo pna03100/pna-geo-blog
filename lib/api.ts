@@ -34,7 +34,7 @@ const WPContentSchema = z.object({
       name: z.string(),
       avatar: z.object({
         url: z.string(),
-      }).nullable(),
+      }).nullable().optional(),
     }),
   }).optional(),
   featuredImage: z.object({

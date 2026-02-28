@@ -1,0 +1,88 @@
+/* ============================================
+   [About Page] Timeline & Scroll Animations
+   ============================================ */
+
+/* Timeline Animations - Lightweight CSS */
+@keyframes timeline-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes timeline-fade-right {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.timeline-item {
+  animation: timeline-fade-up 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.timeline-item-mobile {
+  animation: timeline-fade-right 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* Stagger delays */
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.25s; }
+.timeline-item:nth-child(3) { animation-delay: 0.4s; }
+.timeline-item:nth-child(4) { animation-delay: 0.55s; }
+.timeline-item:nth-child(5) { animation-delay: 0.7s; }
+
+.timeline-item-mobile:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item-mobile:nth-child(2) { animation-delay: 0.2s; }
+.timeline-item-mobile:nth-child(3) { animation-delay: 0.3s; }
+.timeline-item-mobile:nth-child(4) { animation-delay: 0.4s; }
+.timeline-item-mobile:nth-child(5) { animation-delay: 0.5s; }
+
+/* About Page - CEO Card & Stats (Scroll-triggered) */
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-slide-up-small {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  animation: fade-slide-up 1.2s ease-out forwards;
+}
+
+.animate-on-scroll-small {
+  opacity: 0;
+  animation: fade-slide-up-small 0.6s ease-out forwards;
+}
+
+/* Stagger delays for stats */
+.animate-on-scroll-small:nth-child(1) { animation-delay: 0s; }
+.animate-on-scroll-small:nth-child(2) { animation-delay: 0.1s; }
+.animate-on-scroll-small:nth-child(3) { animation-delay: 0.2s; }
+.animate-on-scroll-small:nth-child(4) { animation-delay: 0.3s; }

@@ -1,0 +1,60 @@
+/* ============================================
+   [Blog] Typography (GEO 최적화 - Light Mode)
+   ============================================ */
+
+.prose {
+  @apply text-slate-700;
+  line-height: 1.8;
+}
+
+.prose h2 {
+  @apply mt-8 mb-4 text-3xl font-bold text-slate-950;
+}
+
+.prose h3 {
+  @apply mt-6 mb-3 text-2xl font-semibold text-slate-900;
+}
+
+.prose p {
+  @apply mb-5;
+}
+
+.prose img {
+  @apply rounded-lg my-6;
+}
+
+.prose a {
+  @apply text-blue-600 underline decoration-blue-600/30 transition-colors;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.prose a:hover {
+  @apply text-blue-700 decoration-blue-700/50;
+}
+
+/* ============================================
+   [WordPress] Table Styles
+   가로폭 100% 고정, WordPress 스타일 존중
+   ============================================ */
+.prose table {
+  width: 100% !important;
+  max-width: 100%;
+  border-collapse: unset;
+  margin: 1.5rem 0;
+}
+
+.prose th,
+.prose td {
+  border-collapse: unset;
+  padding: unset;
+  text-align: unset;
+  background-color: unset;
+  border: unset;
+}
+
+.prose table a {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}

@@ -14,7 +14,6 @@ import Script from 'next/script';
 // Performance: FloatingActions를 lazy load (초기 번들 크기 감소)
 const FloatingActions = dynamicImport(
   () => import('@/components/insights/FloatingActions').then((mod) => mod.FloatingActions),
-  { ssr: false } // 서버 사이드 렌더링 불필요
 );
 
 // 메인 폰트: Manrope (영문/숫자)
