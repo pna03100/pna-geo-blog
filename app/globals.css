@@ -334,6 +334,7 @@
   .reveal-hero-content .hero-item-4 {
     opacity: 0;
     transform: translateY(30px);
+    transition: none;
   }
   
   .reveal-hero-content.active .hero-item-1 {
@@ -1054,46 +1055,6 @@
    Pure CSS for instant rendering + smooth transitions
    ============================================ */
 
-/* Hero Content Container - No Animation */
-.hero-content-animate {
-  /* No entrance animation */
-}
-
-/* Hero Title Shine Effect - "피앤에이컴퍼니는" only */
-.hero-title-shine {
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-title-shine::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.4) 50%,
-    transparent 100%
-  );
-  animation: shine 5s ease-in-out infinite;
-  animation-delay: 2s;
-}
-
-@keyframes shine {
-  0% {
-    left: -100%;
-  }
-  30% {
-    left: 100%;
-  }
-  100% {
-    left: 100%;
-  }
-}
-
 /* ============================================
    [Performance] Scroll-Triggered Animations
    GPU-accelerated with transform & opacity only
@@ -1331,7 +1292,6 @@
 
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  .hero-title-shine::before,
   .hero-description,
   .hero-buttons,
   .hero-stats,
