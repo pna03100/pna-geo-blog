@@ -3,28 +3,21 @@
 @tailwind utilities;
 
 /* ============================================
-   [GEO] Dark Mode Design System (Linear/Vercel Style)
-   Trinity Core: Performance + Aesthetics + AI Visibility
+   [GEO] Design System
    ============================================ */
 
 @layer base {
   :root {
-    /* [Careons] Light Mode - Emerald Green + Clean White */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    
-    /* [Careons] Primary - Emerald Green */
     --primary: 160 84% 39%;
     --primary-foreground: 0 0% 100%;
-    
-    /* [PNA] Secondary - Blue (Keep for backward compatibility) */
     --secondary: 221.2 83.2% 53.3%;
     --secondary-foreground: 210 40% 98%;
-    
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96.1%;
@@ -35,8 +28,6 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 160 84% 39%;
     --radius: 1rem;
-    
-    /* [Careons] Custom Gradient Variables */
     --gradient-emerald-start: 160 84% 39%;
     --gradient-emerald-end: 158 64% 52%;
   }
@@ -46,70 +37,53 @@
   * {
     @apply border-border;
   }
-  
+
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
     overflow-x: hidden;
     @apply antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
-    line-height: 1.5; /* 기본 행간 */
+    line-height: 1.5;
   }
-  
-  /* ============================================
-     [PNA] Background System
-     ============================================ */
-  
-  /* 기본 배경: 순백색 (에디토리얼 무드) */
+
   .bg-main {
     background-color: #ffffff;
   }
-  
-  /* Authority 섹션: 다크 네이비 (프리미엄 권위감) */
+
   .bg-authority {
-    @apply bg-slate-950; /* #020617 */
+    @apply bg-slate-950;
   }
 
-  /* ============================================
-     Typography: Letter-spacing & Line Height
-     제목/숫자: 자간 좁게(tight), 행간 좁게(tight) → 임팩트
-     본문: 자간 보통, 행간 넓게(relaxed) → 가독성
-     라벨: 자간 넓게(widest) → 장식적 효과
-     ============================================ */
-  
-  /* 큰 제목 - 자간 좁게, 행간 적당히 */
   h1 {
     @apply tracking-tight;
     line-height: 1.2;
   }
-  
+
   h2, h3 {
     @apply tracking-tight;
     line-height: 1.3;
   }
-  
+
   h4, h5, h6 {
     @apply tracking-tight leading-snug;
   }
-  
-  /* 본문 - 자간 기본, 행간 넓게 */
+
   p {
     @apply tracking-normal leading-relaxed;
   }
-  
-  /* 작은 라벨/배지 - 자간 매우 넓게 */
+
   .badge, .label, .uppercase {
     @apply tracking-widest;
   }
 }
 
 /* ============================================
-   [PNA] Reusable Component Styles
+   [PNA] Component Styles
    ============================================ */
 @layer components {
-  /* Buttons */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full bg-blue-600 text-white font-semibold text-sm md:text-base hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30 transition-all duration-200 active:scale-[0.98];
     min-height: 44px;
@@ -121,115 +95,69 @@
     min-height: 44px;
     touch-action: manipulation;
   }
-  
-  .btn-outline {
-    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-slate-900 border-2 border-slate-300 hover:bg-slate-50 hover:border-slate-400 transition-all duration-200;
-  }
 
-  /* Badges */
-  .badge-primary {
-    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-blue-600/10 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-widest;
-  }
-  
-  .badge-secondary {
-    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider border border-blue-200;
-  }
-  
   .badge-dot {
     @apply inline-flex items-center gap-2 text-blue-600 font-semibold text-sm;
   }
-  
+
   .badge-dot::before {
     content: '';
     @apply w-2 h-2 rounded-full bg-blue-600;
   }
 
-  /* Cards */
-  .card-white {
-    @apply bg-slate-50 rounded-2xl border border-slate-200 hover:border-slate-300 transition-all duration-300 shadow-sm;
-  }
-  
-  .card-dark {
-    @apply bg-slate-900 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all duration-300;
-  }
-
-  /* Section Headers */
   .section-title {
     @apply text-3xl md:text-5xl font-bold text-slate-900 tracking-tight;
     line-height: 1.3;
   }
-  
+
   .section-description {
     @apply text-base md:text-lg text-slate-600 tracking-normal;
     line-height: 1.7;
   }
 
-  /* Form Inputs */
   .input-field {
     @apply w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none transition-all text-slate-900 font-medium placeholder:text-slate-400 bg-white focus:bg-white shadow-sm;
   }
 
-  /* ============================================
-     [PNA] 공통 여백 시스템
-     전체 사이트 통일된 좌우 여백 관리
-     ============================================ */
-  .section-padding {
-    @apply px-6 md:px-6;
-  }
-  
   .section-container {
     @apply container mx-auto px-6 md:px-6 max-w-7xl;
   }
-  
+
   .section-container-narrow {
     @apply container mx-auto px-6 md:px-6 max-w-5xl;
   }
-  
+
   .section-container-medium {
     @apply container mx-auto px-6 md:px-6 max-w-6xl;
   }
 }
 
-
-/* Hero Badge Entrance Animation */
 @keyframes badge-entrance {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .animate-badge-entrance {
   animation: badge-entrance 0.5s ease-out forwards;
 }
 
-/* ============================================
-   [Premium Motion] Apple/Tesla Style Animations
-   Performance: 160-220ms, transform/opacity only
-   ============================================ */
-
-/* Premium Easing Utility - 전체 통일 */
 @layer utilities {
   .ease-premium {
     transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
-  /* Hide scrollbar but keep functionality */
   .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
-/* Insights & Services: 카드 페이드 업 - 쫀득하게 (홈+인사이트 공유) */
+/* Insights & Services: 카드 페이드 업 (홈+인사이트 공유) */
 .reveal-insights-card {
   opacity: 0;
   transform: translateY(40px) scale(0.95);
-  transition: all 1000ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: opacity 1000ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 1000ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .reveal-insights-card.active {
@@ -237,19 +165,12 @@
   transform: translateY(0) scale(1);
 }
 
-/* 모바일: reveal-insights-card 애니메이션 비활성화 */
 @media (max-width: 768px) {
-  .reveal-insights-card {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-    transition: none !important;
-  }
-
+  .reveal-insights-card,
   .reveal-insights-card.active {
     opacity: 1 !important;
     transform: none !important;
-    filter: none !important;
+    transition: none !important;
   }
 }
 
@@ -259,177 +180,56 @@
   .reveal-3d-lift,
   .reveal-depth-left,
   .reveal-depth-right,
-  .reveal-card,
   .reveal-focus,
   .reveal-timeline,
-  .reveal-zoom-push,
-  .reveal-fade-up {
+  .reveal-zoom-push {
     transition: opacity 300ms ease !important;
     transform: none !important;
-    filter: none !important;
   }
-  
+
   .scrollbar-hide::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari and Opera */
-  }
-}
-
-/* Premium Button Styles - 일괄 관리 */
-@layer components {
-  /* Primary - 중요한 CTA (2px, will-change 유지) */
-  .btn-premium-primary {
-    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base cursor-pointer;
-    @apply bg-blue-600 text-white border border-blue-400/50;
-    @apply hover:border-blue-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/20;
-    @apply active:scale-[0.98];
-    @apply ease-premium;
-    transition-property: transform, box-shadow, background-color, border-color, color;
-    transition-duration: 200ms;
+    display: none;
   }
 
-  .btn-premium-secondary {
-    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base cursor-pointer;
-    @apply bg-white text-slate-900 border border-slate-200;
-    @apply hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5 hover:shadow-md;
-    @apply active:scale-[0.98];
-    @apply ease-premium;
-    transition-property: transform, box-shadow, background-color, border-color, color;
-    transition-duration: 200ms;
-    /* will-change 제거: 불필요한 합성 레이어 방지 */
-  }
-
-  .btn-premium-small {
-    @apply inline-flex items-center gap-2 px-6 py-2 rounded-md font-bold text-sm cursor-pointer;
-    @apply bg-blue-600 text-white shadow-md shadow-blue-600/15;
-    @apply hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/20;
-    @apply active:scale-[0.98];
-    @apply ease-premium;
-    transition-property: transform, box-shadow, background-color, border-color, color;
-    transition-duration: 200ms;
-    /* will-change 제거: 불필요한 합성 레이어 방지 */
-  }
-
-  /* Premium Card Hover - Primary (핵심 카드) */
-  .card-premium {
-    @apply bg-white border-2 rounded-xl md:rounded-2xl shadow-sm;
-    @apply hover:shadow-lg hover:-translate-y-0.5;
-    @apply ease-premium;
-    transition-property: transform, box-shadow, border-color;
-    transition-duration: 200ms;
-    /* will-change 제거: 불필요한 합성 레이어 방지 */
-  }
-
-  /* Secondary Card - 일반 카드 (1px, will-change 없음) */
-  .card-secondary {
-    @apply bg-white border-2 rounded-xl md:rounded-2xl shadow-sm;
-    @apply hover:shadow-md hover:-translate-y-px;
-    @apply ease-premium;
-    transition-property: transform, box-shadow, border-color;
-    transition-duration: 200ms;
-  }
-
-  .card-premium-border {
-    @apply border-slate-200 hover:border-blue-300;
-  }
-
-  .card-premium-border-featured {
-    @apply border-blue-200 hover:border-blue-400;
-  }
-
-  /* Premium Arrow Animation */
-  .arrow-premium {
-    @apply ease-premium;
-    transition-property: transform;
-    transition-duration: 200ms;
-  }
-  
-  .group:hover .arrow-premium {
-    @apply translate-x-0.5;
-  }
-
-  /* Premium Metric Hover */
-  .metric-premium {
-    @apply cursor-default;
-  }
-
-  .metric-premium .metric-label {
-    @apply text-slate-400 ease-premium;
-    transition-property: color;
-    transition-duration: 200ms;
-  }
-
-  .metric-premium .metric-number {
-    @apply ease-premium;
-    transition-property: color;
-    transition-duration: 200ms;
-  }
-
-  .metric-premium .metric-badge {
-    @apply ease-premium;
-    transition-property: background-color, border-color;
-    transition-duration: 200ms;
-  }
-
-  .metric-premium .metric-badge-text {
-    @apply ease-premium;
-    transition-property: color;
-    transition-duration: 200ms;
-  }
-  
-  /* Group hover states - must be in parent context */
-  .metric-premium:hover .metric-label {
-    @apply text-slate-100;
-  }
-
-  .metric-premium:hover .metric-number {
-    @apply text-[#93C5FD];
-  }
-
-  .metric-premium:hover .metric-badge {
-    @apply bg-blue-600/25 border-blue-500/60;
-  }
-
-  .metric-premium:hover .metric-badge-text {
-    @apply text-blue-200;
-  }
-}
-
-/* Respect user's motion preferences */
-@media (prefers-reduced-motion: reduce) {
   .animate-badge-entrance {
     animation: none;
     opacity: 1;
     transform: scale(1);
   }
-  
-  /* Remove will-change for better mobile performance */
-  * {
-    will-change: auto !important;
+}
+
+/* Premium Button & Arrow Styles */
+@layer components {
+  .btn-premium-primary {
+    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base cursor-pointer;
+    @apply bg-blue-600 text-white border border-blue-400/50;
+    @apply hover:border-blue-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/20;
+    @apply active:scale-[0.98] ease-premium;
+    transition-property: transform, box-shadow, background-color, border-color, color;
+    transition-duration: 200ms;
+  }
+
+  .arrow-premium {
+    @apply ease-premium;
+    transition-property: transform;
+    transition-duration: 200ms;
+  }
+
+  .group:hover .arrow-premium {
+    @apply translate-x-0.5;
   }
 }
 
-/* Mobile optimization - simpler transitions */
-@media (max-width: 768px) {
-  .will-change-transform {
-    will-change: auto;
-  }
-}
-
-/* Tab Transition - Lightweight CSS */
 @keyframes tab-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .animate-tab-fade-in {
   animation: tab-fade-in 0.15s ease-out forwards;
 }
 
-/* ScrollIndicator: 3초 후 자동 페이드아웃 (JS scroll 이벤트 불필요) */
+/* ScrollIndicator: CSS-only 페이드아웃 */
 @keyframes scroll-indicator-fade {
   0% { opacity: 1; }
   70% { opacity: 1; }

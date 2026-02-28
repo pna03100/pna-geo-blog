@@ -11,8 +11,7 @@
 /* 히어로 내부 요소 순차 등장 (Stagger) - 데스크톱 */
 .reveal-hero-content .hero-item-1,
 .reveal-hero-content .hero-item-2,
-.reveal-hero-content .hero-item-3,
-.reveal-hero-content .hero-item-4 {
+.reveal-hero-content .hero-item-3 {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -35,12 +34,6 @@
   opacity: 1;
   transform: translateY(0);
   transition-delay: 500ms;
-}
-
-.reveal-hero-content.active .hero-item-4 {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 700ms;
 }
 
 /* 모바일: 애니메이션 최적화 (히어로만 활성화) */
@@ -85,8 +78,7 @@
   /* 히어로 내부 요소 순차 등장 (Stagger) - filter 제거, 합성 레이어만 */
   .reveal-hero-content .hero-item-1,
   .reveal-hero-content .hero-item-2,
-  .reveal-hero-content .hero-item-3,
-  .reveal-hero-content .hero-item-4 {
+  .reveal-hero-content .hero-item-3 {
     opacity: 0;
     transform: translateY(30px);
     transition: none;
@@ -102,10 +94,6 @@
 
   .reveal-hero-content.active .hero-item-3 {
     animation: hero-fade-in 900ms cubic-bezier(0.16, 1, 0.3, 1) 500ms forwards;
-  }
-
-  .reveal-hero-content.active .hero-item-4 {
-    animation: hero-fade-in 900ms cubic-bezier(0.16, 1, 0.3, 1) 650ms forwards;
   }
 
   @keyframes hero-fade-in {
@@ -256,37 +244,6 @@
   transform: translateX(0) scale(1);
 }
 
-/* 4. Cards: Staggered Scale from Depth */
-.reveal-card {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* When parent section becomes active, trigger cards */
-.reveal-cards-container {
-  opacity: 1;
-}
-
-.reveal-cards-container.active .reveal-card {
-  animation: revealCard 1000ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.reveal-cards-container.active .reveal-card:nth-child(1) { animation-delay: 0ms; }
-.reveal-cards-container.active .reveal-card:nth-child(2) { animation-delay: 150ms; }
-.reveal-cards-container.active .reveal-card:nth-child(3) { animation-delay: 300ms; }
-.reveal-cards-container.active .reveal-card:nth-child(4) { animation-delay: 450ms; }
-
-@keyframes revealCard {
-  from {
-    opacity: 0;
-    transform: translateY(50px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 /* 5. CEO: 페이드 인 (filter:blur 제거 — Style&Layout 2,006ms 원인) */
 .reveal-blur-focus {
   opacity: 0;
@@ -351,33 +308,3 @@
   transform: translateX(0) translateY(0);
 }
 
-/* 9. Simple Fade Up (for text-heavy sections) */
-.reveal-fade-up {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Fade Up Container with Stagger - 완전히 안보이다가 등장 */
-.reveal-fade-up-container {
-  opacity: 1;
-}
-
-.reveal-fade-up-container.active .reveal-fade-up {
-  animation: revealFadeUp 1600ms cubic-bezier(0.33, 1, 0.68, 1) both;
-}
-
-.reveal-fade-up-container.active .reveal-fade-up:nth-child(1) { animation-delay: 0ms; }
-.reveal-fade-up-container.active .reveal-fade-up:nth-child(2) { animation-delay: 250ms; }
-.reveal-fade-up-container.active .reveal-fade-up:nth-child(3) { animation-delay: 500ms; }
-.reveal-fade-up-container.active .reveal-fade-up:nth-child(4) { animation-delay: 750ms; }
-
-@keyframes revealFadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
