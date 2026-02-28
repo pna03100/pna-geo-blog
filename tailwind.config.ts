@@ -1,9 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: ["class"],
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
@@ -55,14 +53,7 @@ const config: Config = {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
   			},
-  			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
-  			},
-  			// [Careons] Emerald Green Palette
+  			// Emerald Green Palette
   			emerald: {
   				50: '#ecfdf5',
   				100: '#d1fae5',
@@ -98,103 +89,10 @@ const config: Config = {
 					height: '0'
 				}
 			},
-			'text-shimmer': {
-				'0%, 100%': {
-					'background-position': '0% 50%'
-				},
-				'50%': {
-					'background-position': '100% 50%'
-				}
 			},
-			'blob': {
-				'0%': {
-					transform: 'translate(0px, 0px) scale(1)'
-				},
-				'33%': {
-					transform: 'translate(30px, -50px) scale(1.1)'
-				},
-				'66%': {
-					transform: 'translate(-20px, 20px) scale(0.9)'
-				},
-				'100%': {
-					transform: 'translate(0px, 0px) scale(1)'
-				}
-			},
-			'blob-slow': {
-				'0%': {
-					transform: 'translate(0px, 0px) scale(1) rotate(0deg)'
-				},
-				'25%': {
-					transform: 'translate(80px, -100px) scale(1.3) rotate(10deg)'
-				},
-				'50%': {
-					transform: 'translate(-60px, 80px) scale(0.7) rotate(-8deg)'
-				},
-				'75%': {
-					transform: 'translate(50px, 60px) scale(1.2) rotate(12deg)'
-				},
-				'100%': {
-					transform: 'translate(0px, 0px) scale(1) rotate(0deg)'
-				}
-			},
-			'blob-slower': {
-				'0%': {
-					transform: 'translate(0px, 0px) scale(1) rotate(0deg)'
-				},
-				'20%': {
-					transform: 'translate(-70px, -90px) scale(1.4) rotate(-10deg)'
-				},
-				'40%': {
-					transform: 'translate(100px, 40px) scale(0.6) rotate(15deg)'
-				},
-				'60%': {
-					transform: 'translate(-50px, 110px) scale(1.25) rotate(-12deg)'
-				},
-				'80%': {
-					transform: 'translate(60px, -60px) scale(0.75) rotate(8deg)'
-				},
-				'100%': {
-					transform: 'translate(0px, 0px) scale(1) rotate(0deg)'
-				}
-			},
-			'shake-grow': {
-				'0%': {
-					transform: 'scale(1) rotate(0deg)'
-				},
-				'10%': {
-					transform: 'scale(1.15) rotate(-5deg)'
-				},
-				'20%': {
-					transform: 'scale(1.15) rotate(5deg)'
-				},
-				'30%': {
-					transform: 'scale(1.15) rotate(-5deg)'
-				},
-				'40%': {
-					transform: 'scale(1.15) rotate(5deg)'
-				},
-				'50%': {
-					transform: 'scale(1.15) rotate(-3deg)'
-				},
-				'60%': {
-					transform: 'scale(1.15) rotate(3deg)'
-				},
-				'70%': {
-					transform: 'scale(1.15) rotate(0deg)'
-				},
-				'100%': {
-					transform: 'scale(1.15) rotate(0deg)'
-				}
-			}
-		},
 		animation: {
 			'accordion-down': 'accordion-down 0.2s ease-out',
 			'accordion-up': 'accordion-up 0.2s ease-out',
-			'text-shimmer': 'text-shimmer 3s ease-in-out infinite',
-			'blob': 'blob 7s infinite',
-			'blob-slow': 'blob-slow 7s ease-in-out infinite',
-			'blob-slower': 'blob-slower 8s ease-in-out infinite',
-			'shake-grow': 'shake-grow 0.6s ease-in-out'
 		}
   	}
   },
