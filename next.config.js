@@ -17,11 +17,8 @@ const nextConfig = {
     ignoreDuringBuilds: true, // TODO: 프로덕션 배포 전 false로 변경
   },
 
-  // [Performance] Critical CSS 인라이닝 — render-blocking CSS 제거
-  // optimizeCss(critters)는 App Router 스트리밍과 비호환 → inlineCss 사용
-  experimental: {
-    inlineCss: true,
-  },
+  // [Note] optimizeCss(critters)는 App Router 비호환, inlineCss는 느린 4G에서 역효과
+  // CSS는 외부 파일로 로딩 (병렬 다운로드가 slow 4G에서 더 빠름)
 
   // 2. 이미지 도메인 허용 (워드프레스 이미지 로드)
   images: {
