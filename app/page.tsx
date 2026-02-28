@@ -12,10 +12,10 @@ import './styles/home-animations.css';
 // [Performance] ISR - 1시간마다 재생성
 export const revalidate = 3600;
 import { HeroSectionFinal } from '@/components/landing/HeroSectionFinal';
-import { ProblemsSection } from '@/components/landing/ProblemsSection';
 import { getAllPosts } from '@/lib/api';
 
 // Performance: 초기 뷰포트 밖의 섹션들을 lazy load
+const ProblemsSection = dynamic(() => import('@/components/landing/ProblemsSection').then(mod => mod.ProblemsSection));
 const AwardMetricsUnified = dynamic(() => import('@/components/landing/AwardMetricsUnified').then(mod => mod.AwardMetricsUnified));
 const ServicesAlternate = dynamic(() => import('@/components/landing/ServicesAlternate').then(mod => mod.ServicesAlternate));
 const PhilosophyList = dynamic(() => import('@/components/landing/PhilosophyList').then(mod => mod.PhilosophyList));
