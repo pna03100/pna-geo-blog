@@ -18,8 +18,9 @@ const nextConfig = {
   },
 
   // [Performance] Critical CSS 인라이닝 — render-blocking CSS 제거
+  // optimizeCss(critters)는 App Router 스트리밍과 비호환 → inlineCss 사용
   experimental: {
-    optimizeCss: true,
+    inlineCss: true,
   },
 
   // 2. 이미지 도메인 허용 (워드프레스 이미지 로드)
