@@ -48,9 +48,9 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     // [Performance] 이미지 최적화 설정
     formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 60,
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 2592000, // 30일 — CDN 캐시 히트율 극대화
+    deviceSizes: [640, 828, 1200, 1920], // variant 축소 → 캐시 히트율 증가
+    imageSizes: [16, 32, 64, 128, 256],
     // [Hero Images] 로딩 최적화
     unoptimized: false,
     loader: 'default',
@@ -75,6 +75,33 @@ const nextConfig = {
           { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
           { key: 'X-DNS-Prefetch-Control', value: 'on' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+        ],
+      },
+      // [Performance] 해시된 정적 에셋 — 1년 캐시 (immutable)
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      // [Performance] 정적 이미지 — 1일 + SWR 7일
+      {
+        source: '/images/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=86400, stale-while-revalidate=604800' },
+        ],
+      },
+      {
+        source: '/logo.png',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=86400, stale-while-revalidate=604800' },
+        ],
+      },
+      // [Performance] OG 이미지 — 1시간 + SWR 1일
+      {
+        source: '/opengraph-image.png',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=3600, stale-while-revalidate=86400' },
         ],
       },
     ];

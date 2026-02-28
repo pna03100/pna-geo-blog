@@ -132,6 +132,10 @@ export default function RootLayout({
         {/* Pretendard 한글 폰트 - Non-render-blocking Dynamic Subset Variable */}
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
+
+        {/* [Performance] CMS 도메인 선행 연결 — WordPress 이미지 DNS+TLS ~100-300ms 절감 */}
+        <link rel="dns-prefetch" href="https://cms.pnamarketing.co.kr" />
+        <link rel="preconnect" href="https://cms.pnamarketing.co.kr" crossOrigin="anonymous" />
         <link
           rel="preload"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
