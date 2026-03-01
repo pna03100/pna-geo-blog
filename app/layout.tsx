@@ -130,12 +130,14 @@ export default function RootLayout({
           href="https://pnamarketing.co.kr/feed.xml"
         />
 
-        {/* Pretendard 한글 폰트 - Non-render-blocking Dynamic Subset Variable */}
+        {/* Pretendard 한글 폰트 — load 이벤트 이후 로딩 (LCP 측정 창 밖으로 이동)
+             느린 4G에서 11개 폰트 subset(~300KB)이 critical CSS와 대역폭 경쟁 방지
+             + 폰트 swap이 LCP 측정 이후 발생 → LCP ≈ FCP */}
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
         <script
           dangerouslySetInnerHTML={{
-            __html: '(function(){var l=document.createElement("link");l.rel="stylesheet";l.href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css";l.crossOrigin="anonymous";document.head.appendChild(l)})()',
+            __html: 'window.addEventListener("load",function(){var l=document.createElement("link");l.rel="stylesheet";l.href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css";l.crossOrigin="anonymous";document.head.appendChild(l)})',
           }}
         />
         <noscript>
