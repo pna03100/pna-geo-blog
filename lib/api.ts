@@ -5,6 +5,7 @@
 // [Performance] React cache() for request deduplication
 // ============================================
 
+import 'server-only';
 import { cache } from 'react';
 import { z } from 'zod';
 import { env } from './env';

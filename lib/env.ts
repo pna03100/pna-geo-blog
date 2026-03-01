@@ -4,6 +4,7 @@
 // Trinity Core: Fail Fast, Never Trust Env Vars
 // ============================================
 
+import 'server-only';
 import { z } from 'zod';
 
 // 환경변수 스키마 정의
