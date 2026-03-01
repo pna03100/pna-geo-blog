@@ -283,7 +283,18 @@
   transform: scale(1);
 }
 
-/* 8. Mobile: 양옆 등장 애니메이션 (프라블럼, 서비스, 성공 섹션) */
+/* 8. ScrollIndicator: CSS-only 페이드아웃 (홈페이지 전용) */
+@keyframes scroll-indicator-fade {
+  0% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.animate-scroll-indicator-fade {
+  animation: scroll-indicator-fade 4s ease-out forwards;
+}
+
+/* 9. Mobile: 양옆 등장 애니메이션 (프라블럼, 서비스, 성공 섹션) */
 .reveal-fade-up-mobile-left {
   opacity: 0;
   transform: translateX(-30px) translateY(20px);

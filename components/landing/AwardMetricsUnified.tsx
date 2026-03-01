@@ -84,7 +84,6 @@ export function AwardMetricsUnified() {
                 alt="Google Marketing Live 행사"
                 fill
                 className="object-cover opacity-20"
-                priority
                 sizes="50vw"
               />
               
@@ -102,13 +101,13 @@ export function AwardMetricsUnified() {
               
               {/* Content - 하단 */}
               <div className="absolute inset-0 flex flex-col items-start justify-end p-6 md:p-8 lg:p-10 z-10">
-                <p className="text-[10px] md:text-xs text-slate-500 font-medium uppercase tracking-widest mb-2 md:mb-3 transition-colors duration-300 group-hover:text-slate-400">
+                <p className="text-xs text-slate-500 font-medium uppercase tracking-widest mb-2 md:mb-3 transition-colors duration-300 group-hover:text-slate-400">
                   Campaign Performance
                 </p>
                 <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-white mb-4 md:mb-6 transition-all duration-300 group-hover:text-white">
                   Verified by Google Korea
                 </h3>
-                <div className="inline-flex px-4 md:px-5 py-1.5 md:py-2 rounded-lg bg-blue-600/90 backdrop-blur-sm text-white text-[10px] md:text-xs font-bold uppercase tracking-wider transition-all duration-300 group-hover:bg-blue-600 group-hover:shadow-lg group-hover:shadow-blue-600/50">
+                <div className="inline-flex px-4 md:px-5 py-1.5 md:py-2 rounded-lg bg-blue-600/90 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 group-hover:bg-blue-600 group-hover:shadow-lg group-hover:shadow-blue-600/50">
                   Official Partner
                 </div>
               </div>

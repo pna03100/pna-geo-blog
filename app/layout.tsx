@@ -30,6 +30,7 @@ const cormorant = Cormorant_Garamond({
   weight: ['400', '600', '700'],
   variable: '--font-cormorant',
   display: 'swap',
+  preload: false,   // 미사용 폰트 preload 제거 → critical CSS 대역폭 확보
 });
 
 // ============================================
@@ -132,12 +133,6 @@ export default function RootLayout({
         {/* Pretendard 한글 폰트 - Non-render-blocking Dynamic Subset Variable */}
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
-        <link
-          rel="preload"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
-          as="style"
-          crossOrigin="anonymous"
-        />
         <script
           dangerouslySetInnerHTML={{
             __html: '(function(){var l=document.createElement("link");l.rel="stylesheet";l.href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css";l.crossOrigin="anonymous";document.head.appendChild(l)})()',

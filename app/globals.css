@@ -227,13 +227,3 @@
   animation: tab-fade-in 0.15s ease-out forwards;
 }
 
-/* ScrollIndicator: CSS-only 페이드아웃 */
-@keyframes scroll-indicator-fade {
-  0% { opacity: 1; }
-  70% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-.animate-scroll-indicator-fade {
-  animation: scroll-indicator-fade 4s ease-out forwards;
-}
