@@ -194,6 +194,9 @@ export const metadata: Metadata = {
     title: '피앤에이컴퍼니 - 구글 광고 대행사',
     description: 'Google 공식 파트너 | 평균 ROAS 500% 달성',
   },
+  alternates: {
+    canonical: 'https://pnamarketing.co.kr',
+  },
   robots: {
     index: true,
     follow: true,

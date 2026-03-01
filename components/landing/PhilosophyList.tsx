@@ -102,7 +102,7 @@ function PhaseItem({ phase, index }: { phase: typeof phases[0]; index: number })
     >
       {/* 모바일: Phase Label 상단 배치 */}
       <div className="md:hidden mb-4 text-left">
-        <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-2">PHASE</p>
+        <p className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">PHASE</p>
         <h3 className="text-xl font-bold text-slate-700 font-mono tracking-tight">
           {phase.phase} {phase.subtitle}
         </h3>

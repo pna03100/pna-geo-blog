@@ -52,7 +52,7 @@ export function CEOSection() {
             {/* Bottom Badge - Outside Image - 모바일 최적화 */}
             <div className="absolute -bottom-2 -right-2 md:-bottom-3 md:-right-3">
               <div className="px-4 py-3 md:px-6 md:py-4 rounded-xl md:rounded-2xl bg-blue-600 text-white shadow-2xl">
-                <p className="text-[10px] md:text-xs text-blue-200 font-semibold mb-0.5 md:mb-1">경력</p>
+                <p className="text-xs text-blue-200 font-semibold mb-0.5 md:mb-1">경력</p>
                 <p className="text-2xl md:text-3xl font-bold">15년+</p>
               </div>
             </div>

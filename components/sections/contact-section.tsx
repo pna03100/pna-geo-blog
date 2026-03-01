@@ -336,6 +336,7 @@ export function ContactSection() {
                     <a
                       href="/privacy"
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="underline hover:text-blue-600 font-semibold"
                     >
                       개인정보 처리방침

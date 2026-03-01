@@ -125,7 +125,7 @@ export function PostCard({ post, priority = false }: PostCardProps) {
           <div className="flex-1 flex flex-col justify-center">
             {/* Date */}
             <div className="mb-1.5">
-              <span className="text-[10px] text-slate-500">{date}</span>
+              <span className="text-xs text-slate-500">{date}</span>
             </div>
             
             {/* Title */}

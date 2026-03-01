@@ -170,7 +170,7 @@ export function ProblemsSection() {
                       />
                     </div>
                     <div>
-                      <p className="text-[10px] text-blue-600 font-bold mb-1 tracking-widest">{problem.number}</p>
+                      <p className="text-xs text-blue-600 font-bold mb-1 tracking-widest">{problem.number}</p>
                       <h3 className="text-sm font-bold text-slate-900 mb-1 tracking-tight leading-tight">
                         {problem.title}
                       </h3>
