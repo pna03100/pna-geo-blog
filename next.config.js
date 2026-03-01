@@ -18,9 +18,8 @@ const nextConfig = {
   },
 
   // [Performance] 실험적 최적화
+  // ⚠️ inlineCss/optimizeCss 금지: HTML 186KB로 불어나 느린 4G에서 FCP 4.2s 악화 (2회 검증 완료)
   experimental: {
-    // CSS를 HTML에 인라인 → 렌더링 차단 외부 CSS 제거
-    inlineCss: true,
     // 패키지 트리쉐이킹 강화
     optimizePackageImports: ['lucide-react', 'zod'],
   },
