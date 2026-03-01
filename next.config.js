@@ -17,8 +17,13 @@ const nextConfig = {
     ignoreDuringBuilds: true, // TODO: 프로덕션 배포 전 false로 변경
   },
 
-  // [Note] optimizeCss(critters)는 App Router 비호환, inlineCss는 느린 4G에서 역효과
-  // CSS는 외부 파일로 로딩 (병렬 다운로드가 slow 4G에서 더 빠름)
+  // [Performance] 실험적 최적화
+  experimental: {
+    // CSS를 HTML에 인라인 → 렌더링 차단 외부 CSS 제거
+    inlineCss: true,
+    // 패키지 트리쉐이킹 강화
+    optimizePackageImports: ['lucide-react', 'zod'],
+  },
 
   // 2. 이미지 도메인 허용 (워드프레스 이미지 로드)
   images: {

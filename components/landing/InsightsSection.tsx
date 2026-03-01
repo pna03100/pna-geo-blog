@@ -75,7 +75,7 @@ export function InsightsSection({ posts }: InsightsSectionProps) {
       {/* 모바일: 1열 (뉴스 스타일), 데스크톱: 3열 */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 mb-6 md:mb-0">
         {latestPosts.map((post, index) => (
-          <PostCard key={post.slug || index} post={post} priority={index === 0} />
+          <PostCard key={post.slug || index} post={post} />
         ))}
       </div>
 
