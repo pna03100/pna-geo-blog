@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+
+# Build output
+.next/
+out/
+
+# Vercel
+.vercel/
+
+# Environment secrets
+.env
+.env.local
+.env.production
+.env.production.local
+
+# Lock files (large, not useful for code understanding)
+package-lock.json
+
+# Git
+.git/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Test & analysis artifacts
+lighthouse-result.json
+coverage/
+
+# Large binary assets (read only when explicitly needed)
+public/hero-background.mp4
+public/images/hero/
+public/images/partners/
+public/images/ceo/
+public/images/google/
+
+# Generated files
+*.tsbuildinfo
+next-env.d.ts

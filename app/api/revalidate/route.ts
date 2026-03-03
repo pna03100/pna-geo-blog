@@ -29,8 +29,11 @@ export async function POST(request: NextRequest) {
     if (path) {
       // @ts-ignore
       await revalidatePath(path);
+      // 목록 페이지도 함께 재검증 (신규 글이 리스트에 반영되도록)
+      await revalidatePath('/insights');
+      await revalidatePath('/');
       if (process.env.NODE_ENV === 'development') {
-        console.log(`✅ 경로 재검증 완료: ${path}`);
+        console.log(`✅ 경로 재검증 완료: ${path}, /insights, /`);
       }
 
       // [AG-STANDARD 10단계] Google Indexing API 즉시 호출
@@ -41,7 +44,7 @@ export async function POST(request: NextRequest) {
       }
 
       // @ts-ignore
-      return NextResponse.json({ revalidated: true, path, indexed: indexResult.success });
+      return NextResponse.json({ revalidated: true, path, paths: [path, '/insights', '/'], indexed: indexResult.success });
     }
 
     // 전체 WordPress 캐시 재검증

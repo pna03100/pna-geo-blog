@@ -127,8 +127,8 @@ async function fetchAPI<T>(
         'Accept': 'application/json',
       },
       body: requestBody,
-      // [Performance] ISR - 1시간 캐싱
-      next: { revalidate: 3600 },
+      // [Performance] ISR - 1시간 캐싱 + 태그 기반 on-demand revalidation
+      next: { revalidate: 3600, tags: ['wordpress'] },
     });
 
     if (process.env.NODE_ENV === 'development') {
