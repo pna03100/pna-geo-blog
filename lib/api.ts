@@ -360,19 +360,6 @@ export const getPostBySlug = cache(async (slug: string): Promise<WPContent | nul
             slug
           }
         }
-        seo {
-          title
-          metaDesc
-          opengraphTitle
-          opengraphDescription
-          opengraphImage {
-            sourceUrl
-          }
-          canonical
-          schema {
-            raw
-          }
-        }
       }
     }
   `;
