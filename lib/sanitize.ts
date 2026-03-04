@@ -79,13 +79,15 @@ export function stripHtmlTags(html: string): string {
 
   return html
     .replace(/<[^>]*>/g, '') // HTML 태그 제거
-    .replace(/&nbsp;/g, ' ') // &nbsp; 변환
-    .replace(/&amp;/g, '&') // &amp; 변환
-    .replace(/&lt;/g, '<') // &lt; 변환
-    .replace(/&gt;/g, '>') // &gt; 변환
-    .replace(/&quot;/g, '"') // &quot; 변환
-    .replace(/&#039;/g, "'") // &#039; 변환
-    .replace(/\s+/g, ' ') // 연속된 공백 정리
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(parseInt(code, 10))) // 숫자형 엔티티 (&#8220; 등)
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, code) => String.fromCharCode(parseInt(code, 16))) // 16진수 엔티티
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/\s+/g, ' ')
     .trim();
 }
 
