@@ -27,6 +27,8 @@ export async function POST(request: NextRequest) {
     // 특정 경로 재검증
     // @ts-ignore
     if (path) {
+      // Data Cache 무효화 (fetchAPI의 tags: ['wordpress'] 캐시 제거)
+      await revalidateTag('wordpress');
       // @ts-ignore
       await revalidatePath(path);
       // 목록 페이지도 함께 재검증 (신규 글이 리스트에 반영되도록)

@@ -322,6 +322,88 @@ export const getContentByURI = cache(async (uri: string): Promise<WPContent | nu
 });
 
 // ============================================
+// Get Post by Slug (for Individual Post Page)
+// ============================================
+export const getPostBySlug = cache(async (slug: string): Promise<WPContent | null> => {
+  const query = `
+    query GetPostBySlug($slug: ID!) {
+      post(id: $slug, idType: SLUG) {
+        __typename
+        uri
+        slug
+        databaseId
+        title
+        content
+        date
+        excerpt
+        author {
+          node {
+            name
+            avatar {
+              url
+            }
+          }
+        }
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+            mediaDetails {
+              width
+              height
+            }
+          }
+        }
+        categories {
+          nodes {
+            name
+            slug
+          }
+        }
+        seo {
+          title
+          metaDesc
+          opengraphTitle
+          opengraphDescription
+          opengraphImage {
+            sourceUrl
+          }
+          canonical
+          schema {
+            raw
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await fetchAPI<{ post: unknown }>(query, { slug });
+
+    if (!data || !data.post) {
+      return null;
+    }
+
+    const validated = WPContentSchema.safeParse(data.post);
+
+    if (!validated.success) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error('❌ [Validation Failed] getPostBySlug:', slug);
+        console.error('Errors:', JSON.stringify(validated.error.errors, null, 2));
+      }
+      return null;
+    }
+
+    return validated.data;
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error('💥 getPostBySlug Error:', error);
+    }
+    return null;
+  }
+});
+
+// ============================================
 // Get All Posts (for Sitemap / Homepage)
 // ============================================
 // [Performance] Cached to prevent duplicate requests during SSR

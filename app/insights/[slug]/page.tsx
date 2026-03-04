@@ -10,7 +10,7 @@ import '../../styles/prose.css';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getContentByURI, getAllPosts } from '@/lib/api';
+import { getPostBySlug, getAllPosts } from '@/lib/api';
 import { WPContent } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -66,18 +66,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
 
-  // [Fix] Find post by slug from all posts
-  const allPosts = await getAllPosts();
-  const matchedPost = allPosts.find(p => p.slug === slug);
-
-  if (!matchedPost) {
-    return {
-      title: '포스트를 찾을 수 없습니다',
-    };
-  }
-
-  // [Performance] Fetch full content by URI
-  const post = await getContentByURI(matchedPost.uri);
+  // slug로 직접 조회 (getAllPosts 캐시 의존 제거)
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return {
@@ -116,19 +106,11 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
   const { slug } = await params;
   const { category } = await searchParams;
 
-  // [Performance] Fetch all posts first
-  const allPosts = await getAllPosts();
-
-  // [Fix] Find post by slug (works regardless of WordPress permalink structure)
-  const post = allPosts.find(p => p.slug === slug);
-
-  // [Security] 404 Handling
-  if (!post) {
-    notFound();
-  }
-
-  // [Performance] Fetch full content by URI for the matched post
-  const fullPost = await getContentByURI(post.uri);
+  // slug로 직접 조회 + 목록은 네비게이션/사이드바용
+  const [fullPost, allPosts] = await Promise.all([
+    getPostBySlug(slug),
+    getAllPosts(),
+  ]);
 
   if (!fullPost) {
     notFound();
