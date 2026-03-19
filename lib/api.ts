@@ -415,6 +415,13 @@ export const getAllPosts = cache(async (): Promise<WPContent[]> => {
     }
   `;
 
+  interface PostsResponse {
+    posts: {
+      pageInfo: { hasNextPage: boolean; endCursor: string | null };
+      nodes: unknown[];
+    };
+  }
+
   try {
     const allNodes: unknown[] = [];
     let hasNextPage = true;
@@ -422,12 +429,7 @@ export const getAllPosts = cache(async (): Promise<WPContent[]> => {
 
     // 커서 기반 페이지네이션: 100개씩 반복 조회
     while (hasNextPage) {
-      const data = await fetchAPI<{
-        posts: {
-          pageInfo: { hasNextPage: boolean; endCursor: string | null };
-          nodes: unknown[];
-        };
-      }>(query, { first: 100, after });
+      const data: PostsResponse | null = await fetchAPI<PostsResponse>(query, { first: 100, after });
 
       if (!data?.posts?.nodes) break;
 
