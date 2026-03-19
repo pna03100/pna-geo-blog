@@ -22,6 +22,7 @@ const GraphQLRequestSchema = z.object({
 // [Configuration] WordPress GraphQL Endpoint
 // ============================================
 const WORDPRESS_GRAPHQL_URL = 'https://cms.pnamarketing.co.kr/graphql';
+const ALLOWED_ORIGIN = process.env.NEXT_PUBLIC_SITE_URL || 'https://pnamarketing.co.kr';
 
 // ============================================
 // POST /api/graphql - GraphQL Proxy Handler
@@ -106,8 +107,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(data, {
       status: 200,
       headers: {
-        // [CORS] 모든 오리진 허용 (프록시이므로 안전)
-        'Access-Control-Allow-Origin': '*',
+        // [CORS] 프론트엔드 도메인만 허용
+        'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
         'Access-Control-Allow-Methods': 'POST, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         // [Performance] 캐싱 제어
@@ -140,7 +141,7 @@ export async function OPTIONS() {
   return new NextResponse(null, {
     status: 204,
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization',
       'Access-Control-Max-Age': '86400', // 24시간 캐싱

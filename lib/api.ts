@@ -8,6 +8,7 @@
 import 'server-only';
 import { cache } from 'react';
 import { z } from 'zod';
+import './env'; // [Security] 환경변수 Zod 검증 (빌드 시점 side-effect)
 import {
   WPContent,
   MenuItem,
@@ -220,6 +221,7 @@ export const getContentByURI = cache(async (uri: string): Promise<WPContent | nu
           title
           content
           date
+          excerpt
           author {
             node {
               name
@@ -376,8 +378,12 @@ export const getPostBySlug = cache(async (slug: string): Promise<WPContent | nul
 // [Performance] Cached to prevent duplicate requests during SSR
 export const getAllPosts = cache(async (): Promise<WPContent[]> => {
   const query = `
-    query GetAllPosts {
-      posts(first: 100, where: { status: PUBLISH }) {
+    query GetAllPosts($first: Int!, $after: String) {
+      posts(first: $first, after: $after, where: { status: PUBLISH }) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
         nodes {
           __typename
           uri
@@ -410,9 +416,27 @@ export const getAllPosts = cache(async (): Promise<WPContent[]> => {
   `;
 
   try {
-    const data = await fetchAPI<{ posts: { nodes: unknown[] } }>(query);
+    const allNodes: unknown[] = [];
+    let hasNextPage = true;
+    let after: string | null = null;
 
-    if (!data || !data.posts || !data.posts.nodes) {
+    // 커서 기반 페이지네이션: 100개씩 반복 조회
+    while (hasNextPage) {
+      const data = await fetchAPI<{
+        posts: {
+          pageInfo: { hasNextPage: boolean; endCursor: string | null };
+          nodes: unknown[];
+        };
+      }>(query, { first: 100, after });
+
+      if (!data?.posts?.nodes) break;
+
+      allNodes.push(...data.posts.nodes);
+      hasNextPage = data.posts.pageInfo.hasNextPage;
+      after = data.posts.pageInfo.endCursor ?? null;
+    }
+
+    if (allNodes.length === 0) {
       if (process.env.NODE_ENV === 'development') {
         console.warn('⚠️ No posts found. Returning empty array.');
       }
@@ -420,7 +444,7 @@ export const getAllPosts = cache(async (): Promise<WPContent[]> => {
     }
 
     // [Security] 배열의 각 아이템을 Zod로 검증
-    const validated = data.posts.nodes
+    const validated = allNodes
       .map((node, index) => {
         const result = WPContentSchema.safeParse(node);
         if (!result.success && process.env.NODE_ENV === 'development') {

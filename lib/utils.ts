@@ -30,7 +30,7 @@ export function replaceCmsUrl(content: string | null | undefined): string {
   );
 
   // [Debug] 치환 발생 시 로그
-  if (result !== content && typeof window === 'undefined') {
+  if (result !== content && typeof window === 'undefined' && process.env.NODE_ENV === 'development') {
     const count = (content.match(/cms\.pnamarketing\.co\.kr/g) || []).length;
     console.log(`🔒 [CMS URL Hidden] ${count} occurrence(s) replaced`);
   }

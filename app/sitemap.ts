@@ -46,14 +46,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // [GEO Logic] 백엔드 URL을 프론트엔드 URL로 치환
   // ============================================
   const postEntries: MetadataRoute.Sitemap = (posts || [])
-    .filter((post) => post && post.uri) // [Defense] null 체크
+    .filter((post) => post && post.slug) // [Defense] null 체크
     .map((post) => {
       try {
-        // WordPress URI를 프론트엔드 경로로 변환
-        // 예: /insights/post-slug -> https://pnamarketing.co.kr/insights/post-slug
-        const frontendUrl = post.uri.startsWith('/') 
-          ? `${baseUrl}${post.uri}`
-          : `${baseUrl}/${post.uri}`;
+        // slug 기반으로 정규 URL 생성 (WordPress URI는 카테고리 접두사 포함 가능 → 301 발생)
+        const frontendUrl = `${baseUrl}/insights/${post.slug}`;
 
         // [Trinity] 실제 수정 날짜 활용 (SEO 최적화)
         const lastModified = post.date ? new Date(post.date) : currentDate;

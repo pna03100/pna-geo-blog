@@ -8,39 +8,48 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { z } from 'zod';
 
+// [Security] HTML 이스케이프 — 이메일 HTML 인젝션 방지
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // ============================================
 // [Security] Rate Limiting (In-Memory Store)
+// Best-effort: 서버리스 환경에서는 warm instance 내에서만 유효
 // ============================================
 const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+let lastCleanup = Date.now();
 
 function checkRateLimit(ip: string): boolean {
   const now = Date.now();
+
+  // 인라인 정리: 5분마다 만료된 항목 제거 (setInterval 대체)
+  if (now - lastCleanup > 300000) {
+    lastCleanup = now;
+    for (const [key, data] of rateLimitStore.entries()) {
+      if (now > data.resetAt) rateLimitStore.delete(key);
+    }
+  }
+
   const limit = rateLimitStore.get(ip);
 
   if (!limit || now > limit.resetAt) {
-    // New window or expired
     rateLimitStore.set(ip, { count: 1, resetAt: now + 60000 }); // 1 minute
     return true;
   }
 
   if (limit.count >= 3) {
-    // Exceeded limit (3 requests per minute)
     return false;
   }
 
   limit.count++;
   return true;
 }
-
-// Clean up old entries every 5 minutes
-setInterval(() => {
-  const now = Date.now();
-  for (const [ip, data] of rateLimitStore.entries()) {
-    if (now > data.resetAt) {
-      rateLimitStore.delete(ip);
-    }
-  }
-}, 300000);
 
 // ============================================
 // [Security] Zod Validation Schema
@@ -166,7 +175,9 @@ export async function POST(request: Request) {
 
     // [Security] Honeypot check
     if (data.website && data.website.length > 0) {
-      console.warn(`[Honeypot] Bot detected from IP: ${ip}`);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn(`[Honeypot] Bot detected from IP: ${ip}`);
+      }
       // Return success to fool bots, but don't send email
       return NextResponse.json(
         { success: true, message: '문의가 접수되었습니다.' },
@@ -198,35 +209,35 @@ export async function POST(request: Request) {
     const mailOptions = {
       from: process.env.GMAIL_USER,
       to: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'pna0310@naver.com',
-      subject: `[PNA 문의] ${data.company} - ${data.serviceType}`,
+      subject: `[PNA 문의] ${escapeHtml(data.company)} - ${data.serviceType}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #2563EB; border-bottom: 2px solid #2563EB; padding-bottom: 10px;">
             새로운 프로젝트 문의
           </h2>
-          
+
           <div style="margin: 20px 0;">
             <h3 style="color: #334155; margin-bottom: 10px;">기본 정보</h3>
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 8px; background: #F1F5F9; font-weight: bold; width: 120px;">회사명/성함</td>
-                <td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${data.company}</td>
+                <td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${escapeHtml(data.company)}</td>
               </tr>
               <tr>
                 <td style="padding: 8px; background: #F1F5F9; font-weight: bold;">연락처</td>
-                <td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${data.contact}</td>
+                <td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${escapeHtml(data.contact)}</td>
               </tr>
               <tr>
                 <td style="padding: 8px; background: #F1F5F9; font-weight: bold;">이메일</td>
-                <td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${data.email}</td>
+                <td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${escapeHtml(data.email)}</td>
               </tr>
               <tr>
                 <td style="padding: 8px; background: #F1F5F9; font-weight: bold;">서비스 유형</td>
-                <td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${data.serviceType}</td>
+                <td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${escapeHtml(data.serviceType)}</td>
               </tr>
               <tr>
                 <td style="padding: 8px; background: #F1F5F9; font-weight: bold;">예산 범위</td>
-                <td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${data.budget}</td>
+                <td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${escapeHtml(data.budget)}</td>
               </tr>
             </table>
           </div>
@@ -234,14 +245,14 @@ export async function POST(request: Request) {
           <div style="margin: 20px 0;">
             <h3 style="color: #334155; margin-bottom: 10px;">문의 내용</h3>
             <div style="background: #F8FAFC; padding: 15px; border-left: 4px solid #2563EB; white-space: pre-wrap;">
-${data.message}
+${escapeHtml(data.message)}
             </div>
           </div>
 
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #E2E8F0; color: #64748B; font-size: 12px;">
             <p>이 메일은 PNA Company 웹사이트 문의 폼에서 자동 발송되었습니다.</p>
             <p>접수 시간: ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}</p>
-            <p>IP: ${ip}</p>
+            <p>IP: ${escapeHtml(ip)}</p>
           </div>
         </div>
       `,

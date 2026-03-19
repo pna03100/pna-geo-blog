@@ -6,6 +6,8 @@
 // Google Cloud Console에서 서비스 계정 생성 후 JSON 키를 Base64로 인코딩하여 설정
 // ============================================
 
+import 'server-only';
+
 interface IndexingResult {
     success: boolean;
     url: string;
@@ -24,7 +26,9 @@ export async function notifyGoogleIndexing(
     const keyJson = process.env.GOOGLE_INDEXING_KEY_JSON;
 
     if (!keyJson) {
-        console.warn('⚠️ [Indexing API] GOOGLE_INDEXING_KEY_JSON 환경변수가 설정되지 않았습니다. 건너뜁니다.');
+        if (process.env.NODE_ENV === 'development') {
+            console.warn('⚠️ [Indexing API] GOOGLE_INDEXING_KEY_JSON 환경변수가 설정되지 않았습니다. 건너뜁니다.');
+        }
         return { success: false, url, error: 'Missing GOOGLE_INDEXING_KEY_JSON' };
     }
 
@@ -48,16 +52,22 @@ export async function notifyGoogleIndexing(
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error(`❌ [Indexing API] Error ${response.status}:`, errorText);
+            if (process.env.NODE_ENV === 'development') {
+                console.error(`❌ [Indexing API] Error ${response.status}:`, errorText);
+            }
             return { success: false, url, error: `HTTP ${response.status}: ${errorText}` };
         }
 
         await response.json();
-        console.log(`✅ [Indexing API] ${type} 성공:`, url);
+        if (process.env.NODE_ENV === 'development') {
+            console.log(`✅ [Indexing API] ${type} 성공:`, url);
+        }
         return { success: true, url };
     } catch (error) {
         const message = error instanceof Error ? error.message : 'Unknown error';
-        console.error('❌ [Indexing API] Exception:', message);
+        if (process.env.NODE_ENV === 'development') {
+            console.error('❌ [Indexing API] Exception:', message);
+        }
         return { success: false, url, error: message };
     }
 }

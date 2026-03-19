@@ -68,7 +68,7 @@ export async function generateMetadata({
   try {
     const content = await getContentByURI(uri);
 
-    if (!content || !content.seo) {
+    if (!content) {
       return {
         title: '페이지를 찾을 수 없습니다',
       };
@@ -77,17 +77,17 @@ export async function generateMetadata({
     const seo = content.seo;
 
     return {
-      title: replaceCmsUrl(seo.title || content.title) || '제목 없음',
-      description: replaceCmsUrl(seo.metaDesc) || '',
+      title: replaceCmsUrl(seo?.title || content.title) || '제목 없음',
+      description: replaceCmsUrl(seo?.metaDesc) || '',
       openGraph: {
-        title: replaceCmsUrl(seo.opengraphTitle || seo.title) || '',
-        description: replaceCmsUrl(seo.opengraphDescription || seo.metaDesc) || '',
-        images: seo.opengraphImage?.sourceUrl
+        title: replaceCmsUrl(seo?.opengraphTitle || seo?.title || content.title) || '',
+        description: replaceCmsUrl(seo?.opengraphDescription || seo?.metaDesc) || '',
+        images: seo?.opengraphImage?.sourceUrl
           ? [{ url: replaceCmsUrl(seo.opengraphImage.sourceUrl) }]
           : [],
       },
       alternates: {
-        canonical: replaceCmsUrl(seo.canonical) || uri,
+        canonical: replaceCmsUrl(seo?.canonical) || uri,
       },
     };
   } catch (error) {

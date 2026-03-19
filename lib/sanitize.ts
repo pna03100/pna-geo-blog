@@ -24,8 +24,16 @@ export function sanitizeWordPressHTML(html: string): string {
     return '';
   }
 
-  // [Security] 위험한 프로토콜 제거
+  // [Security] 위험한 태그 완전 제거 (콘텐츠 포함)
   let sanitized = html
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
+    .replace(/<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi, '')
+    .replace(/<embed\b[^>]*\/?>/gi, '')
+    .replace(/<form\b[^<]*(?:(?!<\/form>)<[^<]*)*<\/form>/gi, '');
+
+  // [Security] 위험한 프로토콜 제거
+  sanitized = sanitized
     .replace(/javascript:/gi, '')
     .replace(/data:text\/html/gi, '')
     .replace(/vbscript:/gi, '');
@@ -54,13 +62,17 @@ export function validateImageUrl(url: string | null | undefined): string | null 
     
     // [Security] HTTP/HTTPS만 허용
     if (!['http:', 'https:'].includes(parsed.protocol)) {
-      console.warn('[Security] Invalid image protocol:', parsed.protocol);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('[Security] Invalid image protocol:', parsed.protocol);
+      }
       return null;
     }
 
     return url;
-  } catch (error) {
-    console.warn('[Security] Invalid image URL:', url);
+  } catch {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('[Security] Invalid image URL:', url);
+    }
     return null;
   }
 }
@@ -104,4 +116,22 @@ export function truncateText(text: string, maxLength: number = 160): string {
   }
 
   return text.substring(0, maxLength).trim() + '...';
+}
+
+/**
+ * HTML 엔티티를 유니코드 문자로 디코딩합니다.
+ * (WordPress 제목, 발췌문 등에 포함된 스마트 따옴표, 말줄임표 등 처리)
+ */
+export function decodeHTMLEntities(text: string): string {
+  if (!text) return '';
+  return text
+    .replace(/&#8220;/g, '\u201C')
+    .replace(/&#8221;/g, '\u201D')
+    .replace(/&#8216;/g, '\u2018')
+    .replace(/&#8217;/g, '\u2019')
+    .replace(/&#8230;/g, '\u2026')
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
 }

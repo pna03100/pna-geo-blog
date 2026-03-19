@@ -8,26 +8,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { WPContent } from '@/lib/types';
 import { FileText } from 'lucide-react';
-import { stripHtmlTags } from '@/lib/sanitize';
+import { stripHtmlTags, decodeHTMLEntities } from '@/lib/sanitize';
 
 interface RelatedPostsProps {
   currentPost: WPContent;
   allPosts: WPContent[];
   maxPosts?: number;
-}
-
-function decodeHTMLEntities(text: string): string {
-  if (!text) return '';
-  return text
-    .replace(/&#8220;/g, '\u201C')
-    .replace(/&#8221;/g, '\u201D')
-    .replace(/&#8216;/g, '\u2018')
-    .replace(/&#8217;/g, '\u2019')
-    .replace(/&quot;/g, '"')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&#8230;/g, '\u2026');
 }
 
 export function RelatedPosts({ currentPost, allPosts, maxPosts = 3 }: RelatedPostsProps) {

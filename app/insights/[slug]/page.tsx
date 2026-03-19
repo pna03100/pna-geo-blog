@@ -30,9 +30,6 @@ interface PageProps {
   params: Promise<{
     slug: string;
   }>;
-  searchParams: Promise<{
-    category?: string;
-  }>;
 }
 
 
@@ -360,12 +357,20 @@ export default async function InsightsPostPage({ params }: PageProps) {
           </div>
 
           {/* [GEO] JSON-LD Schema (if available from RankMath) */}
-          {fullPost.seo?.schema?.raw && (
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: fullPost.seo.schema.raw }}
-            />
-          )}
+          {fullPost.seo?.schema?.raw && (() => {
+            try {
+              // [Security] JSON 파싱 후 재직렬화 — 임의 스크립트 주입 방지
+              const parsed = JSON.parse(fullPost.seo.schema.raw);
+              return (
+                <script
+                  type="application/ld+json"
+                  dangerouslySetInnerHTML={{ __html: JSON.stringify(parsed) }}
+                />
+              );
+            } catch {
+              return null;
+            }
+          })()}
         </article>
       </div>
     </>

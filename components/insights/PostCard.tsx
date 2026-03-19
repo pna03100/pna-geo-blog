@@ -11,25 +11,11 @@ import Image from 'next/image';
 import { WPContent } from '@/lib/types';
 import { ArrowRight, FileText } from 'lucide-react';
 import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
+import { decodeHTMLEntities } from '@/lib/sanitize';
 
 interface PostCardProps {
   post: WPContent;
   priority?: boolean;
-}
-
-function decodeHTMLEntities(text: string): string {
-  if (!text) return '';
-  
-  return text
-    .replace(/&#8220;/g, '"')
-    .replace(/&#8221;/g, '"')
-    .replace(/&#8216;/g, "'")
-    .replace(/&#8217;/g, "'")
-    .replace(/&quot;/g, '"')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&#8230;/g, '…');
 }
 
 export function PostCard({ post, priority = false }: PostCardProps) {
