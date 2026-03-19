@@ -7,8 +7,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { AnimatedBadge } from "@/components/ui/animated-badge";
 import { 
   ArrowRight, Target, Award, CheckCircle2, X, 
   BarChart3, Clock, Rocket, Brain

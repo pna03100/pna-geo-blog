@@ -16,6 +16,7 @@ interface CountUpNumberProps {
   suffix?: string;
   prefix?: string;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export function CountUpNumber({
@@ -24,6 +25,7 @@ export function CountUpNumber({
   suffix = "",
   prefix = "",
   className = "",
+  style,
 }: CountUpNumberProps) {
   // Visual animation count (0 → end)
   const [visualCount, setVisualCount] = useState(0);
@@ -31,7 +33,7 @@ export function CountUpNumber({
   const [hasAnimated, setHasAnimated] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
 
   // Client-side only detection
   useEffect(() => {
@@ -112,7 +114,7 @@ export function CountUpNumber({
   const showAnimation = isMounted && !hasAnimated;
 
   return (
-    <span ref={ref} className={`relative inline-block ${className}`}>
+    <span ref={ref} className={`relative inline-block ${className}`} style={style}>
       {/* SEO/HTML Layer: Always final value (for crawlers/screen readers) */}
       <span 
         className={showAnimation ? "invisible" : ""}

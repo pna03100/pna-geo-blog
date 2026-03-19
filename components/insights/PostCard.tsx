@@ -44,10 +44,6 @@ export function PostCard({ post, priority = false }: PostCardProps) {
     ? decodeHTMLEntities(post.excerpt.replace(/<[^>]*>/g, '')).substring(0, 100) + '...'
     : '';
 
-  const categorySlug = post.categories?.nodes && post.categories.nodes.length > 0
-    ? post.categories.nodes[0].slug
-    : '';
-
   const categoryName = post.categories?.nodes && post.categories.nodes.length > 0
     ? post.categories.nodes[0].name
     : '';

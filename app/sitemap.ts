@@ -15,7 +15,6 @@ import { MetadataRoute } from 'next';
 import { getAllPosts } from '@/lib/api';
 
 const baseUrl = 'https://pnamarketing.co.kr';
-const backendUrl = 'https://cms.pnamarketing.co.kr'; // 백엔드 주소 (치환용)
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const currentDate = new Date();

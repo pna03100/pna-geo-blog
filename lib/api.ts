@@ -8,7 +8,6 @@
 import 'server-only';
 import { cache } from 'react';
 import { z } from 'zod';
-import { env } from './env';
 import {
   WPContent,
   MenuItem,
@@ -27,7 +26,7 @@ const WPContentSchema = z.object({
   slug: z.string(),
   databaseId: z.number(),
   title: z.string().nullable(),
-  content: z.string().nullable().optional(),
+  content: z.string().nullable(),
   date: z.string().optional(),
   excerpt: z.string().optional(),
   author: z.object({
@@ -35,7 +34,7 @@ const WPContentSchema = z.object({
       name: z.string(),
       avatar: z.object({
         url: z.string(),
-      }).nullable().optional(),
+      }).nullable(),
     }),
   }).optional(),
   featuredImage: z.object({
@@ -45,7 +44,7 @@ const WPContentSchema = z.object({
       mediaDetails: z.object({
         width: z.number(),
         height: z.number(),
-      }).nullable().optional(),
+      }).nullable(),
     }),
   }).nullable().optional(),
   categories: z.object({
@@ -195,25 +194,6 @@ async function fetchAPI<T>(
     return null;
   }
 }
-
-// ============================================
-// [Security] Dummy Data (Fallback)
-// ============================================
-const DUMMY_POST: WPContent = {
-  __typename: 'Post',
-  uri: '/api-connection-failed',
-  slug: 'api-connection-failed',
-  databaseId: 0,
-  title: '⚠️ WordPress API 연결 실패',
-  content: '<p>환경변수를 확인하세요. WORDPRESS_API_URL이 올바르게 설정되어 있는지 확인하세요.</p>',
-  date: new Date().toISOString(),
-  author: {
-    node: {
-      name: 'System',
-      avatar: null,
-    },
-  },
-};
 
 const DUMMY_MENU_ITEMS: MenuItem[] = [
   { id: '1', label: '홈', url: '/', path: '/' },

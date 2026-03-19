@@ -11,10 +11,7 @@ const nextConfig = {
   // 3. npm run build 성공 확인
   // ============================================
   typescript: {
-    ignoreBuildErrors: true, // TODO: 프로덕션 배포 전 false로 변경
-  },
-  eslint: {
-    ignoreDuringBuilds: true, // TODO: 프로덕션 배포 전 false로 변경
+    ignoreBuildErrors: false,
   },
 
   // [Performance] 실험적 최적화

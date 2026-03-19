@@ -8,8 +8,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { AnimatedBadge } from "@/components/ui/animated-badge";
 import { 
   Target, TrendingUp, Zap, ArrowRight, Sparkles, 
   BarChart3, Users, Award, CheckCircle2, X,

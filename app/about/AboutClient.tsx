@@ -8,8 +8,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { AnimatedBadge } from "@/components/ui/animated-badge";
 import { ServiceHeroSection } from "@/components/sections/ServiceHeroSection";
 import { 
   Users, 
@@ -250,7 +248,7 @@ export function AboutClient() {
               <div className="absolute top-[50px] left-0 right-0 h-0.5 bg-white/10" />
 
               <div className="flex justify-between items-start">
-                {timeline.map((item, index) => (
+                {timeline.map((item) => (
                   <div
                     key={item.year}
                     className={`relative flex flex-col items-center group ${timelineVisible ? 'timeline-item' : 'opacity-0'}`}
@@ -276,7 +274,7 @@ export function AboutClient() {
 
             {/* Mobile: Vertical Timeline */}
             <div className="md:hidden space-y-6">
-              {timeline.map((item, index) => (
+              {timeline.map((item) => (
                 <div
                   key={item.year}
                   className={`flex items-center gap-4 group ${timelineVisible ? 'timeline-item-mobile' : 'opacity-0'}`}
@@ -329,7 +327,7 @@ export function AboutClient() {
                 title: "빠른 실행력",
                 desc: "시장은 빠르게 변합니다. 신속한 의사결정과 즉각적인 최적화로 기회를 놓치지 않습니다."
               }
-            ].map((item, idx) => (
+            ].map((item) => (
               <div key={item.title} className="p-8 rounded-2xl bg-white border-2 border-slate-200 hover:border-blue-400 hover:shadow-lg transition-all text-center">
                 <div className="text-5xl mb-6">{item.emoji}</div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3">
@@ -359,7 +357,7 @@ export function AboutClient() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-slate-300 max-w-6xl mx-auto">
-            {coreValues.map((value, index) => {
+            {coreValues.map((value) => {
               const Icon = value.icon;
               return (
                 <div key={value.title} className="bg-slate-100 p-8 md:p-10 hover:bg-white hover:shadow-sm" style={{ transition: 'all 200ms cubic-bezier(0.2, 0.8, 0.2, 1)' }}>
@@ -452,7 +450,7 @@ export function AboutClient() {
                     { category: "교육", examples: "에듀테크, 온라인 강의" },
                     { category: "의료/헬스케어", examples: "병원, 건강 서비스" },
                     { category: "금융/핀테크", examples: "금융 서비스, 결제 솔루션" }
-                  ].map((item, idx) => (
+                  ].map((item) => (
                     <div
                       key={item.category}
                       className={statsVisible ? 'animate-on-scroll-small p-4 rounded-lg hover:bg-slate-50 transition-colors' : 'opacity-0 p-4 rounded-lg hover:bg-slate-50 transition-colors'}

@@ -82,7 +82,7 @@ export function PhilosophyList() {
           <div className="hidden md:block absolute left-0 top-0 bottom-0 w-px bg-slate-200" style={{ left: '256px' }}></div>
 
           {phases.map((phase, index) => (
-            <PhaseItem key={index} phase={phase} index={index} />
+            <PhaseItem key={index} phase={phase} />
           ))}
           </div>
         </div>
@@ -92,7 +92,7 @@ export function PhilosophyList() {
 }
 
 // Phase Item Component with Individual Scroll Reveal
-function PhaseItem({ phase, index }: { phase: typeof phases[0]; index: number }) {
+function PhaseItem({ phase }: { phase: typeof phases[0] }) {
   const itemRef = useScrollReveal("active", { threshold: 0.5, once: true });
 
   return (

@@ -82,7 +82,6 @@ export function ContactSection() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
   });

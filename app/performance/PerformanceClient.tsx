@@ -7,11 +7,9 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { AnimatedBadge } from "@/components/ui/animated-badge";
-import { 
-  TrendingUp, Target, BarChart3, Zap, CheckCircle2, ArrowRight, 
-  Sparkles, Search, Share2, Award, X 
+import {
+  TrendingUp, Target, BarChart3, CheckCircle2, ArrowRight,
+  Sparkles, Search, Share2, Award, X
 } from "lucide-react";
 import { PerformanceFAQ } from "@/components/service/PerformanceFAQ";
 import { ServiceHeroSection } from "@/components/sections/ServiceHeroSection";
@@ -439,7 +437,7 @@ export function PerformanceClient() {
                   <div className="pt-4 border-t border-slate-200">
                     <div className="text-xs font-bold text-slate-500 uppercase mb-3">성과</div>
                     <div className="space-y-2 text-sm">
-                      {Object.entries(project.results).map(([key, value], idx) => (
+                      {Object.entries(project.results).map(([, value], idx) => (
                         <p key={idx} className="text-slate-700">
                           <span className="font-bold text-blue-600">{value}</span>
                         </p>

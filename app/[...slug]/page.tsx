@@ -60,9 +60,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string[] };
+  params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
-  const uri = `/${params.slug.join('/')}`;
+  const { slug } = await params;
+  const uri = `/${slug.join('/')}`;
 
   try {
     const content = await getContentByURI(uri);
@@ -103,13 +104,14 @@ export async function generateMetadata({
 export default async function DynamicPage({
   params,
 }: {
-  params: { slug: string[] };
+  params: Promise<{ slug: string[] }>;
 }) {
-  const uri = `/${params.slug.join('/')}`;
+  const { slug } = await params;
+  const uri = `/${slug.join('/')}`;
 
   // 🚨 CRITICAL: Exclude service pages from catch-all
   const excludedRoutes = ['google-ads', 'seo-geo', 'wordpress', 'performance', 'about', 'contact', 'insights'];
-  if (params.slug && params.slug.length > 0 && excludedRoutes.includes(params.slug[0])) {
+  if (slug.length > 0 && excludedRoutes.includes(slug[0])) {
     notFound();
   }
 

@@ -11,7 +11,6 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getPostBySlug, getAllPosts } from '@/lib/api';
-import { WPContent } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
@@ -19,6 +18,7 @@ import { StructuredData } from '@/components/seo/StructuredData';
 import { sanitizeWordPressHTML, stripHtmlTags, truncateText } from '@/lib/sanitize';
 import { ReadingProgress } from '@/components/insights/ReadingProgress';
 import { PopularPosts } from '@/components/insights/PopularPosts';
+import { RelatedPosts } from '@/components/insights/RelatedPosts';
 import { CTACard } from '@/components/insights/CTACard';
 import { ArticleTLDR } from '@/components/insights/ArticleTLDR';
 import { Calendar, Clock, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
@@ -102,9 +102,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 // ============================================
 // [Implementation] Insights Post Page (A Design)
 // ============================================
-export default async function InsightsPostPage({ params, searchParams }: PageProps) {
+export default async function InsightsPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const { category } = await searchParams;
 
   // slug로 직접 조회 + 목록은 네비게이션/사이드바용
   const [fullPost, allPosts] = await Promise.all([
@@ -280,6 +279,9 @@ export default async function InsightsPostPage({ params, searchParams }: PagePro
                   dangerouslySetInnerHTML={{ __html: content }}
                 />
               </div>
+
+              {/* [GEO] Related Posts (AG-STANDARD 7단계: 시맨틱 내부 링크) */}
+              <RelatedPosts currentPost={fullPost} allPosts={allPosts} />
 
               {/* Previous/Next Post Navigation */}
               <nav className="mt-6 mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">

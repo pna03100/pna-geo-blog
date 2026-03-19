@@ -7,9 +7,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { AnimatedBadge } from "@/components/ui/animated-badge";
-import { Code, Palette, Zap, Shield, ArrowRight, Sparkles, Settings, TrendingUp, CheckCircle2 } from "lucide-react";
+import { Code, Palette, Zap, Shield, ArrowRight, Sparkles, Settings, TrendingUp } from "lucide-react";
 import { WordPressFAQ } from "@/components/service/WordPressFAQ";
 import { ServiceHeroSection } from "@/components/sections/ServiceHeroSection";
 
@@ -48,10 +46,10 @@ const whyWordPress = [
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 const platformComparison = {
   criteria: [
-    { label: "초기 구축 비용", key: "cost" },
-    { label: "속도 (Lighthouse)", key: "speed" },
-    { label: "확장성", key: "scalability" },
-    { label: "데이터 소유권", key: "ownership" }
+    { label: "초기 구축 비용", key: "cost" as const },
+    { label: "속도 (Lighthouse)", key: "speed" as const },
+    { label: "확장성", key: "scalability" as const },
+    { label: "데이터 소유권", key: "ownership" as const }
   ],
   platforms: [
     {

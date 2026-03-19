@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import { getAllPosts, getContentByURI } from '@/lib/api';
+import { getAllPosts } from '@/lib/api';
 
 export const runtime = 'edge';
 export const alt = '피앤에이컴퍼니 인사이트';

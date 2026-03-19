@@ -8,8 +8,6 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import Image from "next/image";
-import { AnimatedBadge } from "@/components/ui/animated-badge";
 import { WPContent } from "@/lib/types";
 import { PostCard } from "@/components/insights/PostCard";
 import { Sparkles, ArrowRight } from "lucide-react";

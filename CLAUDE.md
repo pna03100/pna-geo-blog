@@ -158,6 +158,7 @@ config/
 | `NEXT_PUBLIC_GA4_ID` | GA4 추적 ID | (선택) |
 | `GMAIL_USER` / `GMAIL_APP_PASSWORD` | 문의 메일 발송 | (필수, contact 폼용) |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare CAPTCHA | (선택) |
+| `GOOGLE_INDEXING_KEY_JSON` | Google Indexing API 서비스 계정 키 (Base64) | (선택) |
 
 ---
 
