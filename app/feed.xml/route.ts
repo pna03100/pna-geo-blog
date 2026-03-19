@@ -6,6 +6,7 @@
 
 import { getAllPosts } from '@/lib/api';
 import { NextResponse } from 'next/server';
+import { stripHtmlTags, decodeHTMLEntities } from '@/lib/sanitize';
 
 // [Performance] Revalidate every 30 minutes
 export const revalidate = 1800;
@@ -34,34 +35,8 @@ export async function GET() {
     <atom:link href="${baseUrl}/feed.xml" rel="self" type="application/rss+xml" />
     ${posts
       .map((post) => {
-        // Remove HTML tags and decode HTML entities from excerpt
-        let description = post.excerpt || post.title || '';
-        
-        // Step 1: Remove HTML tags
-        description = description.replace(/<[^>]*>/g, '');
-        
-        // Step 2: Decode common HTML entities
-        description = description
-          .replace(/&nbsp;/g, ' ')
-          .replace(/&amp;/g, '&')
-          .replace(/&lt;/g, '<')
-          .replace(/&gt;/g, '>')
-          .replace(/&quot;/g, '"')
-          .replace(/&#039;/g, "'")
-          .replace(/&ldquo;/g, '"')
-          .replace(/&rdquo;/g, '"')
-          .replace(/&lsquo;/g, "'")
-          .replace(/&rsquo;/g, "'")
-          .replace(/&#8220;/g, '"')
-          .replace(/&#8221;/g, '"')
-          .replace(/&#8216;/g, "'")
-          .replace(/&#8217;/g, "'");
-        
-        // Step 3: Remove any remaining entities
-        description = description.replace(/&[#a-zA-Z0-9]+;/g, '');
-        
-        // Step 4: Clean up whitespace
-        description = description.replace(/\s+/g, ' ').trim();
+        // 공용 함수로 HTML 태그 제거 + 엔티티 디코딩
+        const description = decodeHTMLEntities(stripHtmlTags(post.excerpt || post.title || '')).trim();
 
         const pubDate = post.date ? new Date(post.date).toUTCString() : new Date().toUTCString();
         const postUrl = `${baseUrl}/insights/${post.slug}`;

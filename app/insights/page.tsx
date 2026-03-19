@@ -24,16 +24,52 @@ export const metadata: Metadata = {
 // [Performance] ISR
 export const revalidate = 1800; // 30분마다 재검증
 
+// [GEO] JSON-LD: CollectionPage + BreadcrumbList
+function generateJsonLd() {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://pnamarketing.co.kr';
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "@id": `${baseUrl}/insights/#webpage`,
+      "name": "마케팅 인사이트 블로그",
+      "description": "Google Ads, SEO, GEO 최적화에 대한 전문가의 인사이트와 최신 마케팅 트렌드.",
+      "url": `${baseUrl}/insights`,
+      "isPartOf": { "@type": "WebSite", "@id": `${baseUrl}/#website` },
+      "publisher": { "@type": "Organization", "@id": `${baseUrl}/#organization`, "name": "피앤에이컴퍼니" },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "홈", "item": baseUrl },
+        { "@type": "ListItem", "position": 2, "name": "인사이트", "item": `${baseUrl}/insights` },
+      ],
+    },
+  ];
+}
+
 // ============================================
 // [Trinity] Insights List Page Component
 // ============================================
 export default async function InsightsPage() {
   const posts = await getAllPosts();
+  const jsonLd = generateJsonLd();
 
   return (
-    <Suspense fallback={<div className="min-h-screen pt-[73px]" />}>
-      <InsightsClient posts={posts} />
-    </Suspense>
+    <>
+      {jsonLd.map((schema, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+      <Suspense fallback={<div className="min-h-screen pt-[73px]" />}>
+        <InsightsClient posts={posts} />
+      </Suspense>
+    </>
   );
 }
 
