@@ -6,7 +6,7 @@
 // Author Node (완전 타입 안전)
 export interface WPAuthorNode {
   name: string;
-  avatar: {
+  avatar?: {
     url: string;
   } | null;
 }
@@ -15,7 +15,7 @@ export interface WPAuthorNode {
 export interface WPFeaturedImageNode {
   sourceUrl: string;
   altText: string | null;
-  mediaDetails: {
+  mediaDetails?: {
     width: number;
     height: number;
   } | null;
